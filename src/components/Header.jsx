@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from '../styles/header.module.scss';
-import logo from '../images/1.png';
-import search from '../images/Search.png';
-import cart from '../images/Cart.png';
-import logout from '../images/Logout.png'
+import logo from '../images/header/1.png';
+import search from '../images/header/Search.png';
+import cart from '../images/header/Cart.png';
+import logout from '../images/header/Logout.png'
 
 function Header() {
 
