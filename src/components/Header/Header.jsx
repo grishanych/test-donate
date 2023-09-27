@@ -19,7 +19,7 @@ function Header() {
             <div className={styles.navRightSideMenu}>
                 <SearchInHeader />
                 <a href="#"><img className={styles.navCart} src={cart} alt="" /></a>
-                <a href=""><button className={styles.navButton}><img src={logout} alt="" />Login</button></a>
+                <a href=""><button className={styles.navButton}><img src={logout} alt="" />Увійти</button></a>
                 
             </div>
 
