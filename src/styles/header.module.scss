@@ -73,6 +73,30 @@ a{
     height: 20px;
 }
 
+.searching{
+    display: flex;
+    gap: 10px;
+}
+
+.searchBtn{
+    background-color: #5b7e62;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.searchBtn:hover{
+    background-color: #446b4c;
+    transition: 0.5s;
+}
+
+.closeSearchBtn:hover{
+    background-color: #ff0000;
+    transition: 0.5s;
+}
+
 .navCart {
     height: 24px;
 }
@@ -83,7 +107,7 @@ a{
     align-items: center;
     gap: 5px;
     width: 100px;
-    height: 35px;
+    height: 30px;
     color: #fff;
     background-color: #5b7e62;
     border: none;

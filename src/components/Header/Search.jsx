@@ -23,7 +23,11 @@ function SearchInHeader() {
                     <img className={styles.navSearch} src={search} alt="" />
                 </a>
             ) : (
-                <input type="text" placeholder="Пошук..." onDoubleClick={handleInputDoubleClick} />
+                <div className={styles.searching}>
+                    <input type="text" placeholder="Пошук..." onDoubleClick={handleInputDoubleClick} />
+                    <input type="submit" name="find" value='Знайти' id="" className={styles.searchBtn} />
+                    <button onClick={handleInputDoubleClick} className={`${styles.searchBtn} ${styles.closeSearchBtn}`}>&#x2715;</button>
+                </div>
             )}
         </div>
     )
