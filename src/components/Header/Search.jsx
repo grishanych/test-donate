@@ -11,7 +11,7 @@ function SearchInHeader() {
         setIsLinkVisible(false)
     };
 
-    const handleInputDoubleClick = () => {
+    const handleInputDoubleClick = (event) => {
         setIsLinkVisible(true);
     };
 

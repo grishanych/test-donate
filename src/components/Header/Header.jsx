@@ -8,6 +8,10 @@ import { Link } from 'react-router-dom';
 
 function Header() {
 
+    const handleLogin = (e) =>{
+        e.preventDefault()
+    }
+
     return (
         <div className={styles.header}>
             <Link to="/" className={styles.logo}><img src={logo} alt="" width={70} height={70} /></Link>
@@ -23,7 +27,7 @@ function Header() {
             <div className={styles.navRightSideMenu}>
                 <SearchInHeader />
                 <Link to="/cart"><img className={styles.navCart} src={cart} alt="" /></Link>
-                <a href="/"><button className={styles.navButton}><img src={logout} alt="" />Увійти</button></a>
+                <a href="/"><button className={styles.navButton} onClick={handleLogin}><img src={logout} alt="" />Увійти</button></a>
 
             </div>
 
