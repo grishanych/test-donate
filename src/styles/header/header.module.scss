@@ -123,6 +123,36 @@ a {
     transition: 0.7s;
 }
 
+.burgerButton {
+    display: none;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  
+  .burgerBar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+    transition: 0.4s;
+  }
+  
+  .burgerBar.crossBar1 {
+    transform: rotate(-45deg) translate(-5px, 4px);
+  }
+  
+  .burgerBar.crossBar2 {
+    opacity: 0;
+  }
+  
+  .burgerBar.crossBar3 {
+    transform: rotate(45deg) translate(-6px, -5px);
+  }
+  
+  .navItem.active {
+    max-height: 500px;
+  }
+
 @media screen and (min-width: 1024px) {
     .header {
         width: 100%;
@@ -195,4 +225,16 @@ a {
         justify-content: center;
         gap: 10px;
     }
+    .burgerButton {
+        display: block;
+      }
+    
+      .navItem {
+        display: none;
+      }
+    
+      .navItem.active {
+        display: flex;
+        flex-direction: column;
+      }
 }
