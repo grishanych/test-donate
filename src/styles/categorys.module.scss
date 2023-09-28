@@ -1,0 +1,55 @@
+.wrapperCategorys{
+    width: 95%;
+    margin: 5px auto;
+    box-sizing: border-box;
+}
+
+.listCategorys{
+    list-style: none;
+}
+
+.iteamCategorys{
+    margin-top: 5px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #fff;
+    transition: transform 0.5s;
+    border: 2px solid rgba(70, 163, 88, 1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.iteamCategorys:hover {
+    background-color: #dddddd;
+}
+
+.nameCategorys{
+    font-size: 16px;
+    font-weight: 600;
+    color: #3D3D3D;
+    padding: 20px 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@media(min-width: 768px) {
+
+
+    .listCategorys{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .iteamCategorys{
+        width: 45%;
+        margin: 5px;
+    }
+
+}
+
+
+@media(min-width: 1024px) {
+    .iteamCategorys{
+        width: 32%;
+        margin: 5px;
+    }
+}
