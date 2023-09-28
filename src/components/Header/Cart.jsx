@@ -4,7 +4,7 @@ import Header from "./Header";
 function Cart(){
 
     return(
-        <Header />
+       <div>cart</div>
     )
 }
 
