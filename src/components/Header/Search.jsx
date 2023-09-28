@@ -1,6 +1,6 @@
 import { useState } from "react";
 import search from '../../images/header/Search.png';
-import styles from '../../styles/header.module.scss'
+import styles from '../../styles/header/header.module.scss';
 
 
 function SearchInHeader() {
@@ -17,7 +17,7 @@ function SearchInHeader() {
 
 
     return (
-        <div>
+        <div className={styles.hiddenSearchMenu}>
             {isLinkVisible ? (
                 <a href="#" onClick={handleClick}>
                     <img className={styles.navSearch} src={search} alt="" />
@@ -25,8 +25,10 @@ function SearchInHeader() {
             ) : (
                 <div className={styles.searching}>
                     <input type="text" placeholder="Пошук..." onDoubleClick={handleInputDoubleClick} />
+                    <div className={styles.searchButtons}>
                     <input type="submit" name="find" value='Знайти' id="" className={styles.searchBtn} />
                     <button onClick={handleInputDoubleClick} className={`${styles.searchBtn} ${styles.closeSearchBtn}`}>&#x2715;</button>
+                </div>
                 </div>
             )}
         </div>
