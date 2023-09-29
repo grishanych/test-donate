@@ -1,0 +1,13 @@
+@mixin devices($breakpoint) {
+  @if $breakpoint == tablet {
+    @media screen and (min-width: 320px) and (max-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == mobile {
+    @media screen and (max-width: 320px) {
+      @content;
+    }
+  }
+}
