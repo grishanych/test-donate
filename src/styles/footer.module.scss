@@ -1,0 +1,251 @@
+@import "../styles/footerMediaqueries\ ";
+
+@font-face {
+  font-family: "CeraProRegular";
+  src: url("../styles/fonts/CeraProRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "CeraProBold";
+  src: url("../styles/fonts/CeraProBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+$defaultColor: #46a358;
+@mixin font-family-regular {
+  font-family: "CeraProRegular";
+  font-weight: 400;
+}
+@mixin font-family-bold {
+  font-family: "CeraProBold";
+  font-weight: 700;
+  font-size: 18px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.footer {
+  width: 1200px;
+  margin: 0 auto;
+  @include devices(tablet) {
+    max-width: fit-content;
+  }
+  @include devices(mobile) {
+    max-width: 100%;
+  }
+}
+
+.footerMobileVersion {
+  display: none;
+  @include devices(mobile) {
+    border-radius: 25px;
+    background-color: rgb(248, 247, 247);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 35px;
+  }
+}
+
+.mobileIcons {
+  @include devices(mobile) {
+    padding: 25px;
+  }
+}
+
+.footerContainer {
+  @include devices(mobile) {
+    display: none;
+  }
+}
+.footerSubscribeWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fbfbfb;
+  padding: 25px;
+}
+
+.footerSubscribeHeader {
+  @include font-family-bold;
+  line-height: 16px;
+  margin-bottom: 18px;
+  @include devices(tablet) {
+    font-size: clamp(16px, 15.29750336px + 0.2197802198vw, 18px);
+    text-align: center;
+  }
+}
+.footerInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.emailInput {
+  @include font-family-regular;
+  font-size: 14px;
+  line-height: 16px;
+  color: #acacac;
+  padding: 12px 86px 12px 12px;
+  border-radius: 6px;
+  border-color: #ffffff;
+  border: none;
+  outline: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  @include devices(tablet) {
+    padding: 12px;
+  }
+}
+.joinBtn {
+  @include font-family-bold;
+  line-height: 16px;
+  padding: 12px 25px;
+  border-radius: 0px 6px 6px 0px;
+  background-color: $defaultColor;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  @include devices(tablet) {
+    font-size: 14px;
+  }
+}
+
+.footerSubscribeInfo {
+  @include font-family-regular;
+  font-size: 13px;
+  line-height: 22px;
+  color: rgba(114, 114, 114, 1);
+  margin-top: 17px;
+  max-width: 410px;
+  text-align: center;
+  @include devices(tablet) {
+    max-width: fit-content;
+  }
+}
+.contactsContainer {
+  padding: 25px 15px;
+  border-width: 1px 0;
+  border-style: solid;
+  border-color: rgba(70, 163, 89, 0.1);
+  background-color: rgba(70, 163, 88, 0.1);
+  @include devices(tablet) {
+    position: relative;
+  }
+}
+.contactsInner {
+  @include devices(tablet) {
+    padding-top: 40px;
+  }
+}
+
+.contactsList {
+  display: flex;
+  gap: 20px 80px;
+  align-items: center;
+  flex-wrap: wrap;
+  @include devices(tablet) {
+    justify-content: center;
+    gap: 20px;
+  }
+}
+
+.contactsItem {
+  @include font-family-regular;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  a {
+    text-decoration: none;
+    color: rgba(61, 61, 61, 1);
+    padding-left: 10px;
+  }
+  @include devices(tablet) {
+    &:first-child {
+      position: absolute;
+      top: 15px;
+    }
+  }
+}
+.footerNavigationContainer {
+  padding: 30px 25px;
+  border-bottom: 1px solid rgba(70, 163, 88, 0.2);
+}
+.bottomInner {
+  display: grid;
+  gap: 25px 15px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 230px));
+  @include devices(tablet) {
+    text-align: center;
+    justify-content: center;
+  }
+}
+.bottomTitle {
+  color: #3d3d3d;
+  @include font-family-bold;
+  line-height: 16px;
+  margin-bottom: 8px;
+}
+
+.bottomListItem {
+  list-style: none;
+}
+.bottomLink {
+  text-decoration: none;
+  color: inherit;
+  @include font-family-regular;
+  font-size: 14px;
+  line-height: 30px;
+}
+.bottomSocialMedia {
+  display: flex;
+  padding-top: 12px;
+  margin-bottom: 2.0625rem;
+  @include devices(tablet) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.bottomSocialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: rgba(70, 163, 88, 0.6);
+  border: 1px solid rgba(70, 163, 88, 0.2);
+  border-radius: 4px;
+  font-size: 14px;
+}
+.bottomSocialLink:not(:last-child) {
+  margin-right: 10px;
+}
+.bottomPaymentMethods {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @include devices(tablet) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.rightsReserved {
+  @include font-family-regular;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  color: #3d3d3d;
+  margin-top: 6px;
+}
