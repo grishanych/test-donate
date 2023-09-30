@@ -1,41 +1,8 @@
+@use "../../styles/mixins";
+@use "../../styles/variables";
 @import "../../styles/mediaqueries ";
 
-// !!! to index.scss
-@font-face {
-  font-family: "CeraProRegular";
-  src: url("../../fonts/CeraProRegular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-}
-@font-face {
-  font-family: "CeraProBold";
-  src: url("../../fonts/CeraProBold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 700;
-}
 
-// !!! to variables.scss
-$defaultColor: #46a358;
-@mixin font-family-regular {
-  font-family: "CeraProRegular";
-  font-weight: 400;
-}
-@mixin font-family-bold {
-  font-family: "CeraProBold";
-  font-weight: 700;
-  font-size: 18px;
-}
-
-// !!! to index.scss
-* {
-  padding: 0;
-  margin: 0;
-  border: 0;
-  box-sizing: border-box;
-}
-
-// 
-// 
 .footer {
   width: 1200px;
   margin: 0 auto;
@@ -84,7 +51,7 @@ $defaultColor: #46a358;
 }
 
 .footerSubscribeHeader {
-  @include font-family-bold;
+  @include mixins.font-family-bold;
   line-height: 16px;
   margin-bottom: 18px;
 
@@ -101,7 +68,7 @@ $defaultColor: #46a358;
 }
 
 .emailInput {
-  @include font-family-regular;
+  @include mixins.font-family-regular;
   font-size: 14px;
   line-height: 16px;
   color: #acacac;
@@ -119,11 +86,11 @@ $defaultColor: #46a358;
 }
 
 .joinBtn {
-  @include font-family-bold;
+  @include mixins.font-family-bold;
   line-height: 16px;
   padding: 12px 25px;
   border-radius: 0px 6px 6px 0px;
-  background-color: $defaultColor;
+  background-color: variables.$bgc-main;
   color: #ffffff;
   border: none;
   cursor: pointer;
@@ -134,7 +101,7 @@ $defaultColor: #46a358;
 }
 
 .footerSubscribeInfo {
-  @include font-family-regular;
+  @include mixins.font-family-regular;
   font-size: 13px;
   line-height: 22px;
   color: rgba(114, 114, 114, 1);
@@ -178,7 +145,7 @@ $defaultColor: #46a358;
 }
 
 .contactsItem {
-  @include font-family-regular;
+  @include mixins.font-family-regular;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -216,7 +183,7 @@ $defaultColor: #46a358;
 
 .bottomTitle {
   color: #3d3d3d;
-  @include font-family-bold;
+  @include mixins.font-family-bold;
   line-height: 16px;
   margin-bottom: 8px;
 }
@@ -228,7 +195,7 @@ $defaultColor: #46a358;
 .bottomLink {
   text-decoration: none;
   color: inherit;
-  @include font-family-regular;
+  @include mixins.font-family-regular;
   font-size: 14px;
   line-height: 30px;
 }
@@ -275,7 +242,7 @@ $defaultColor: #46a358;
 }
 
 .rightsReserved {
-  @include font-family-regular;
+  @include mixins.font-family-regular;
   font-size: 14px;
   line-height: 30px;
   text-align: center;

@@ -1,13 +1,20 @@
 @use "./reset";
 
-// @font-face {
-//   font-family: "Montserrat";
-//   src: url(../fonts/Montserrat-Regular.woff),
-//     url(../fonts/Montserrat-Regular.woff2);
-//   font-weight: 400;
-// }
-// @font-face {
-//   font-family: "Montserrat";
-//   src: url(../fonts/Montserrat-Bold.woff), url(../fonts/Montserrat-Bold.woff2);
-//   font-weight: 700;
-// }
+@font-face {
+    font-family: "CeraProRegular";
+    src: url("../fonts/CeraProRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "CeraProBold";
+    src: url("../fonts/CeraProBold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 700;
+}
+
+// styles
+* {
+    font-family: "CeraProRegular";
+}
