@@ -1,15 +1,18 @@
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Main from "./main/Main"
+// styles
 // import styles from "./App.module.scss"
+// routs
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CardList from "./cardlist/CardList"
 import AboutUs from "./header/AboutUs"
-import Categories from "./header/Categories"
 import Cart from "./header/Cart"
 import Reports from "./header/Reports"
 import Blog from "./header/Blog"
 import Contacts from "./header/Contacts"
+import Home from "./header/Home"
+import Categorys from "./header/Categories"
 
 
 function App() {
@@ -21,9 +24,9 @@ function App() {
         <Header />
         <Main>
           <Routes>
-              <Route path="/" element={<CardList />}/>
+              <Route path="/" element={<Home />}/>
               <Route path="/about-us" element={<AboutUs/>}/>
-              <Route path="/categories" element={<Categories/>}/>
+              <Route path="/categories" element={<Categorys/>}/>
               <Route path="/cart" element={<Cart/>}/>
               <Route path="/reports" element={<Reports/>}/>
               <Route path="/blog" element={<Blog/>}/>
