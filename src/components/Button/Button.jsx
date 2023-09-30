@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import styles from './button.module.scss'
 const Button = ({ text, color, image, imageSize }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -17,22 +17,11 @@ const Button = ({ text, color, image, imageSize }) => {
 
   const buttonStyle = {
     backgroundColor: color,
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#fff',
-    fontWeight: '700',
-    fontFamily: 'font-family: Verdana, Geneva, Tahoma, sans-serif',
   };
 
   const imgStyle = {
     maxWidth: imageSize,
     maxHeight: imageSize,
-    marginLeft: '10px',
   };
 
   if(windowWidth < 768) {
@@ -41,9 +30,9 @@ const Button = ({ text, color, image, imageSize }) => {
     buttonStyle.padding = "20px 60px"
   }
 
-  return  <button style={buttonStyle}>
+  return  <button className={styles.button} style={buttonStyle}>
           {text}
-      {image && <img src={image} alt="Button Icon" style={imgStyle} />}
+      {image && <img src={image} alt="Button Icon" className={styles.imgButton} style={imgStyle} />}
     </button>
 
 };

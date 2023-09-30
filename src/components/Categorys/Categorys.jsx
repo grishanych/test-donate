@@ -1,4 +1,4 @@
-import styles from "../../styles/categorys.module.scss"
+import styles from "./categorys.module.scss"
 
 
 const Categorys = () => {

@@ -1,4 +1,4 @@
-import styles from '../../styles/subcategory.module.scss'
+import styles from './subcategory.module.scss'
 
 const Subcategory = () => {
 
