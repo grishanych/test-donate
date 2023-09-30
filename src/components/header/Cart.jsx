@@ -1,6 +1,3 @@
-import Header from "./Header";
-
-
 function Cart(){
 
     return(

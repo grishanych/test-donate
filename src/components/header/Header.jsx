@@ -29,29 +29,25 @@ function Header() {
                 <div className={`${styles.burgerBar} ${menuVisible ? styles.crossBar2 : ''}`}></div>
                 <div className={`${styles.burgerBar} ${menuVisible ? styles.crossBar3 : ''}`}></div>
             </div>
-            <ul className={`${styles.navItem} ${menuVisible ? styles.active : ''}`}>
-                <Link to="/" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>головна</Link>
-                <Link to="/about_us" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>про нас</Link>
-                <Link to="/categories" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>категорії</Link>
-                <Link to="/cart" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>корзина</Link>
-                <Link to="/report" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>звіти</Link>
-                <Link to="/blog" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>блог</Link>
-                <Link to="/contacts" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>контакти</Link>
-            </ul>
+            <nav>
+                <ul className={`${styles.navItem} ${menuVisible ? styles.active : ''}`}>
+                    <Link to="/" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>головна</Link>
+                    <Link to="/about-us" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>про нас</Link>
+                    <Link to="/categories" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>категорії</Link>
+                    <Link to="/cart" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>корзина</Link>
+                    <Link to="/reports" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>звіти</Link>
+                    <Link to="/blog" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>блог</Link>
+                    <Link to="/contacts" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>контакти</Link>
+                </ul>
+            </nav>
             <div className={styles.navRightSideMenu}>
                 <SearchInHeader />
-                <Link to="/cart">
-                    <img
-                        className={styles.navCart}
-                        // src={cart} 
-                        alt="" />
-                    </Link>
-                <a href="/">
-                    <button className={styles.navButton} onClick={handleLogin}>
-                        {/* <img src={logout} alt="" /> */}
-                        Увійти
-                    </button>
-                </a>
+                <Link to="/cart"><img className={styles.navCart}
+                // src={cart}
+                alt="" /></Link>
+                <a href="/"><button className={styles.navButton} onClick={handleLogin}><img
+                // src={logout}
+                alt="" />Увійти</button></a>
             </div>
         </header>
     )

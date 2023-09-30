@@ -1,11 +1,10 @@
-import { CardList } from "../cardlist/CardList"
 import styles from "./Main.module.scss"
 
-export default function Main() {
+export default function Main( {children} ) {
 
     return (
         <main className={styles.container}>
-            <CardList />
+            {children}
         </main>
     )
 }

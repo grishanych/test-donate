@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./CardList.module.scss"
 import { Card } from "../card/Card"
 
-export function CardList() {
+export default function CardList() {
 
     // for mixing cards
     function shuffleArray(array) {
