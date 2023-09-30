@@ -1,17 +1,20 @@
-@import "../../styles/footer/footerMediaqueries ";
+@import "../../styles/footerMediaqueries ";
 
+// !!! to index.scss
 @font-face {
   font-family: "CeraProRegular";
-  src: url("../fonts/CeraProRegular.ttf") format("truetype");
+  src: url("../../fonts/CeraProRegular.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
 }
 @font-face {
   font-family: "CeraProBold";
-  src: url("../fonts/CeraProBold.ttf") format("truetype");
+  src: url("../../fonts/CeraProBold.ttf") format("truetype");
   font-style: normal;
   font-weight: 700;
 }
+
+// !!! to variables.scss
 $defaultColor: #46a358;
 @mixin font-family-regular {
   font-family: "CeraProRegular";
@@ -23,6 +26,7 @@ $defaultColor: #46a358;
   font-size: 18px;
 }
 
+// !!! to index.scss
 * {
   padding: 0;
   margin: 0;
@@ -30,9 +34,12 @@ $defaultColor: #46a358;
   box-sizing: border-box;
 }
 
+// 
+// 
 .footer {
   width: 1200px;
   margin: 0 auto;
+
   @include devices(tablet) {
     max-width: fit-content;
   }
@@ -43,6 +50,7 @@ $defaultColor: #46a358;
 
 .footerMobileVersion {
   display: none;
+
   @include devices(mobile) {
     border-radius: 25px;
     background-color: rgb(248, 247, 247);
@@ -65,6 +73,7 @@ $defaultColor: #46a358;
     display: none;
   }
 }
+
 .footerSubscribeWrapper {
   display: flex;
   align-items: center;
@@ -78,16 +87,19 @@ $defaultColor: #46a358;
   @include font-family-bold;
   line-height: 16px;
   margin-bottom: 18px;
+
   @include devices(tablet) {
     font-size: clamp(16px, 15.29750336px + 0.2197802198vw, 18px);
     text-align: center;
   }
 }
+
 .footerInput {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .emailInput {
   @include font-family-regular;
   font-size: 14px;
@@ -100,10 +112,12 @@ $defaultColor: #46a358;
   outline: none;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.06);
   width: 100%;
+
   @include devices(tablet) {
     padding: 12px;
   }
 }
+
 .joinBtn {
   @include font-family-bold;
   line-height: 16px;
@@ -113,6 +127,7 @@ $defaultColor: #46a358;
   color: #ffffff;
   border: none;
   cursor: pointer;
+
   @include devices(tablet) {
     font-size: 14px;
   }
@@ -126,20 +141,24 @@ $defaultColor: #46a358;
   margin-top: 17px;
   max-width: 410px;
   text-align: center;
+
   @include devices(tablet) {
     max-width: fit-content;
   }
 }
+
 .contactsContainer {
   padding: 25px 15px;
   border-width: 1px 0;
   border-style: solid;
   border-color: rgba(70, 163, 89, 0.1);
   background-color: rgba(70, 163, 88, 0.1);
+
   @include devices(tablet) {
     position: relative;
   }
 }
+
 .contactsInner {
   @include devices(tablet) {
     padding-top: 40px;
@@ -151,6 +170,7 @@ $defaultColor: #46a358;
   gap: 20px 80px;
   align-items: center;
   flex-wrap: wrap;
+
   @include devices(tablet) {
     justify-content: center;
     gap: 20px;
@@ -163,11 +183,13 @@ $defaultColor: #46a358;
   justify-content: center;
   align-items: center;
   list-style: none;
+
   a {
     text-decoration: none;
     color: rgba(61, 61, 61, 1);
     padding-left: 10px;
   }
+
   @include devices(tablet) {
     &:first-child {
       position: absolute;
@@ -175,19 +197,23 @@ $defaultColor: #46a358;
     }
   }
 }
+
 .footerNavigationContainer {
   padding: 30px 25px;
   border-bottom: 1px solid rgba(70, 163, 88, 0.2);
 }
+
 .bottomInner {
   display: grid;
   gap: 25px 15px;
   grid-template-columns: repeat(auto-fit, minmax(230px, 230px));
+
   @include devices(tablet) {
     text-align: center;
     justify-content: center;
   }
 }
+
 .bottomTitle {
   color: #3d3d3d;
   @include font-family-bold;
@@ -198,6 +224,7 @@ $defaultColor: #46a358;
 .bottomListItem {
   list-style: none;
 }
+
 .bottomLink {
   text-decoration: none;
   color: inherit;
@@ -205,16 +232,19 @@ $defaultColor: #46a358;
   font-size: 14px;
   line-height: 30px;
 }
+
 .bottomSocialMedia {
   display: flex;
   padding-top: 12px;
   margin-bottom: 2.0625rem;
+
   @include devices(tablet) {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 }
+
 .bottomSocialLink {
   display: flex;
   align-items: center;
@@ -226,13 +256,16 @@ $defaultColor: #46a358;
   border-radius: 4px;
   font-size: 14px;
 }
+
 .bottomSocialLink:not(:last-child) {
   margin-right: 10px;
 }
+
 .bottomPaymentMethods {
   display: flex;
   align-items: center;
   gap: 10px;
+  
   @include devices(tablet) {
     display: flex;
     justify-content: center;

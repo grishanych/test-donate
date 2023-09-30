@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import search from '../../images/header/Search.png';
-import styles from '../../styles/header/header.module.scss';
+import styles from './header.module.scss';
 
 
 function SearchInHeader() {

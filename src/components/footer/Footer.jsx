@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/footer/footer.module.scss";
+import styles from "./footer.module.scss";
 import Logo from "../../images/footer/Logo.svg";
 import paypal from "../../images/footer/paypal.png";
 import mastercard from "../../images/footer/mastercard.png";
