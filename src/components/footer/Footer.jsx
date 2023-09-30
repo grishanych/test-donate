@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./footer.module.scss";
+import styles from "./Footer.module.scss";
 import Logo from "../../images/footer/Logo.svg";
 import paypal from "../../images/footer/paypal.png";
 import mastercard from "../../images/footer/mastercard.png";
@@ -12,7 +12,7 @@ import UserIcon from "../../images/footer/User.svg";
 
 function Footer() {
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <div className={styles.footerMobileVersion}>
         <div className={styles.mobileIconsContainer}>
           <a href="##" className={styles.mobileIcons}>
@@ -372,7 +372,7 @@ function Footer() {
           © 2023 GreenShop. Усі права захищені.
         </p>
       </div>
-    </div>
+    </footer>
   );
 }
 

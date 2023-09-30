@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './header.module.scss';
+import styles from './Header.module.scss';
 import logo from '../../images/header/Logo.png';
 // import cart from '../../images/header/Cart.png';
 // import logout from '../../images/header/Logout.png'
@@ -22,7 +22,7 @@ function Header() {
     };
 
     return (
-        <div className={styles.header}>
+        <header className={styles.header}>
             <Link to="/" className={styles.logo}><img src={logo} alt="" width={70} height={70} /></Link>
             <div className={`${styles.burgerButton} ${menuVisible ? styles.active : ''}`} onClick={toggleMenu}>
                 <div className={`${styles.burgerBar} ${menuVisible ? styles.crossBar1 : ''}`}></div>
@@ -53,7 +53,7 @@ function Header() {
                     </button>
                 </a>
             </div>
-        </div>
+        </header>
     )
 }
 
