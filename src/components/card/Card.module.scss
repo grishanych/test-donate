@@ -2,7 +2,12 @@
 
 
 .cardItemWrapper {
-    height: 300px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
+    position: relative;
 
     @media only screen and (min-width: 320px) {
         width: 140px; // ! container
@@ -14,12 +19,17 @@
         // width: 1200px; // ! container
     }
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 25px;
-    position: relative;
+    &:hover .cardItemDecor {
+        display: block;
+    }
+
+    &:hover .cardItemIconsWrapper {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-15px);
+    }
 }
+
 
 .decorLot,
 .decorDonat {
@@ -46,10 +56,6 @@
     border-radius: 25px;
 }
 
-// .cardItemImageWrapper:hover {
-//     border-color: variables.$bgc-main;
-// } 
-
 .cardItemImage {
     width: 140px;
     height: 168px;
@@ -65,7 +71,6 @@
 }
 
 .cardItemHeadline {
-    // !!!
     font-size: variables.$fs-m; 
     font-weight: 400;
     padding-top: 9px;
@@ -75,28 +80,23 @@
 
 .cardItemPrice {
     padding-top: 4px;
-    // font-size: 16px;
     font-weight: 700;
     color: variables.$fc-main;
 }
 
 .cardItemDecor {
     position: absolute;
-    top: 300px;
+    top: 280px;
     width: 100%;
     height: 1px;
     display: none;
     background-color: variables.$fc-main;
 }
 
-.cardItemWrapper:hover .cardItemDecor {
-    display: block;
-}
-
 .cardItemIconsWrapper {
     position: absolute;
     width: 100%;
-    top: 185px;
+    top: 155px;
     height: 40px;
     opacity: 0;
     visibility: hidden;
@@ -118,10 +118,4 @@
 .cardItemIcon {
     padding-top: 5px;
     width: 25px;
-}
-
-.cardItemWrapper:hover .cardItemIconsWrapper {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(-15px);
 }
