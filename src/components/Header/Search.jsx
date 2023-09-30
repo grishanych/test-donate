@@ -1,5 +1,5 @@
 import { useState } from "react";
-import search from '../../images/header/Search.png';
+// import search from '../../images/header/Search.png';
 import styles from '../../styles/header/header.module.scss';
 
 
@@ -19,8 +19,11 @@ function SearchInHeader() {
     return (
         <div className={styles.hiddenSearchMenu}>
             {isLinkVisible ? (
-                <a href="#" onClick={handleClick}>
-                    <img className={styles.navSearch} src={search} alt="" />
+                <a href="#1" onClick={handleClick}>
+                    <img
+                        className={styles.navSearch}
+                        // src={search}
+                        alt="" />
                 </a>
             ) : (
                 <div className={styles.searching}>
