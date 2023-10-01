@@ -14,7 +14,6 @@ function SearchInHeader() {
     const handleInputDoubleClick = (event) => {
         setIsLinkVisible(true);
     };
-
     return (
         <div className={styles.hiddenSearchMenu}>
             {isLinkVisible ? (
