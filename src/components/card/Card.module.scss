@@ -1,5 +1,5 @@
 @use "../../styles/variables";
-@import "../../styles/mediaqueries ";
+@import "../../styles/mediaqueries";
 
 
 .cardItemWrapper {
@@ -44,7 +44,7 @@
 }
 
 .cardItemImageWrapper {
-    border: 5px solid variables.$border-color-decor;
+    border: 5px solid variables.$bgc-second;;
     border-radius: 25px;
 }
 

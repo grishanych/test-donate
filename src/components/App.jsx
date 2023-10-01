@@ -1,39 +1,42 @@
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Context from "../components/Context";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Main from "./main/Main"
-// styles
-// import styles from "./App.module.scss"
-// routs
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import CardList from "./cardlist/CardList"
-import AboutUs from "./header/AboutUs"
-import Cart from "./header/Cart"
-import Reports from "./header/Reports"
-import Blog from "./header/Blog"
-import Contacts from "./header/Contacts"
-import Home from "./header/Home"
-import Categorys from "./header/Categories"
+import AboutUs from "../components/routs/AboutUs"
+import Cart from "../components/routs/Cart"
+import Reports from "../components/routs/Reports"
+import Blog from "../components/routs/Blog"
+import Contacts from "../components/routs/Contacts"
+import Home from "../components/routs/Home"
+import Categorys from "../components/routs/Categories"
 
 
 function App() {
+
+  const [isLinkVisible, setIsLinkVisible] = useState(true);
+  const contextData = { isLinkVisible, setIsLinkVisible };
 
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
-        <Main>
-          <Routes>
-              <Route path="/" element={<Home />}/>
-              <Route path="/about-us" element={<AboutUs/>}/>
-              <Route path="/categories" element={<Categorys/>}/>
-              <Route path="/cart" element={<Cart/>}/>
-              <Route path="/reports" element={<Reports/>}/>
-              <Route path="/blog" element={<Blog/>}/>
-              <Route path="/contacts" element={<Contacts/>}/>
-          </Routes>
-        </Main>
-        <Footer />
+        <Context.Provider value={contextData}>
+          <Header />
+          <Main>
+            <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="/about-us" element={<AboutUs/>}/>
+                <Route path="/categories" element={<Categorys/>}/>
+                <Route path="/cart" element={<Cart/>}/>
+                <Route path="/reports" element={<Reports/>}/>
+                <Route path="/blog" element={<Blog/>}/>
+                <Route path="/contacts" element={<Contacts/>}/>
+            </Routes>
+          </Main>
+          <Footer />
+        </Context.Provider>
       </BrowserRouter>
     </div>
 

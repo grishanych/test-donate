@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Footer.module.scss";
+import stylesApp from "../App.module.scss"
 import Logo from "../../images/footer/Logo.svg";
 import paypal from "../../images/footer/paypal.png";
 import mastercard from "../../images/footer/mastercard.png";
@@ -12,7 +13,7 @@ import UserIcon from "../../images/footer/User.svg";
 
 function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer className={`${stylesApp.container}`}>
       <div className={styles.footerMobileVersion}>
         <div className={styles.mobileIconsContainer}>
           <a href="##" className={styles.mobileIcons}>
@@ -204,7 +205,7 @@ function Footer() {
                 </li>
                 <li className={styles.bottomListItem}>
                   <a href="##" className={styles.bottomLink}>
-                    Новини
+                    Звіти
                   </a>
                 </li>
               </ul>
@@ -360,10 +361,18 @@ function Footer() {
                 </a>
               </div>
               <div className={styles.bottomPaymentMethods}>
-                <img src={paypal} alt="paypal" />
-                <img src={mastercard} alt="mastercard" />
-                <img src={visa} alt="visa" />
-                <img src={liqpay} alt="liqpay" />
+                <a href="#1">
+                  <img src={paypal} alt="paypal" className={styles.bottomPaymentMethodsIconOne}/>
+                </a>
+                <a href="#1">
+                  <img src={mastercard} alt="mastercard" className={styles.bottomPaymentMethodsIconTwo}/>
+                </a>
+                <a href="#1">
+                  <img src={visa} alt="visa" className={styles.bottomPaymentMethodsIconTwo}/>
+                </a>
+                <a href="#1">
+                  <img src={liqpay} alt="liqpay" className={styles.bottomPaymentMethodsIconOne}/>
+                </a>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import styles from "./Button.module.scss"
 import { Link } from 'react-router-dom';
 
-function Button({ text, color, image="", imageSize="", to="" }) {
+function Button({ text, color, image="", imageSize="", to="", onClick=null, children}) {
 
   const buttonStyle = {
     backgroundColor: color,
@@ -9,7 +9,8 @@ function Button({ text, color, image="", imageSize="", to="" }) {
 
 
   return  (
-    <button style={buttonStyle} className={styles.buttonStyle}>
+    <button style={buttonStyle} className={styles.buttonStyle} onClick={onClick}>
+      {children}
       <Link to="/categories" >{text}</Link>
     </button>
   )

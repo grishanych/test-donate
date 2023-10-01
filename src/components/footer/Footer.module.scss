@@ -1,19 +1,16 @@
 @use "../../styles/mixins";
 @use "../../styles/variables";
-@import "../../styles/mediaqueries ";
+@import "../../styles/mediaqueries";
 
 
-.footer {
-  width: 1200px;
-  margin: 0 auto;
-
-  @include devices(tablet) {
-    max-width: fit-content;
-  }
-  @include devices(mobile) {
-    max-width: 100%;
-  }
-}
+// .footer {
+//   @include devices(tablet) {
+//     max-width: fit-content;
+//   }
+//   @include devices(mobile) {
+//     max-width: 100%;
+//   }
+// }
 
 .footerMobileVersion {
   display: none;
@@ -200,6 +197,10 @@
   line-height: 30px;
 }
 
+.bottomItem {
+  width: 280px;
+}
+
 .bottomSocialMedia {
   display: flex;
   padding-top: 12px;
@@ -229,6 +230,7 @@
 }
 
 .bottomPaymentMethods {
+  // width:50px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -239,6 +241,14 @@
     align-items: center;
     flex-direction: column;
   }
+}
+
+.bottomPaymentMethodsIconOne {
+  width: 70px;
+}
+
+.bottomPaymentMethodsIconTwo {
+  width: 45px;
 }
 
 .rightsReserved {

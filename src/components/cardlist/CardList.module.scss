@@ -1,18 +1,19 @@
 @use "../../styles/variables";
-@import "../../styles/mediaqueries ";
+@import "../../styles/mediaqueries";
 
 .cardsSectionWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    padding: 50px 0px 50px 0px;
+    padding: 50px 15px;
 
     @include devices(mobile) {
         width: 95%;
     }
     @include devices(laptop) {
         width: 700px;
+        margin: 0 auto;
     }
     @media only screen and (min-width: 1201px) {
         width: 1200px;

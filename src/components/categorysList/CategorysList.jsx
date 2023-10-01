@@ -1,15 +1,19 @@
-import styles from "./CategorysList.module.scss"
 import Button from "../button/Button";
+import styles from "./CategorysList.module.scss"
+import stylesApp from "../App.module.scss"
+import Donate from "./icons/donates/Donate"
+import Buy from "./icons/goods/Buy"
+import Auction from "./icons/lots/Auction"
 
 
 const Categorys = () => {
 
 return (
-  <section className={styles.categorysWrapper}>
+  <section className={`${stylesApp.container} ${styles.categorysWrapper}`}>
     <ul className={styles.categorysList}>
       <li className={styles.categorysIteam}>
         <div className={styles.categorysImageWrapper}>
-          <img src="" alt="alt" className={styles.categorysImage}/>
+          <Donate/>
         </div>
         <div className={styles.textWrapper}>
           <h3 className={styles.categorysHeadline}> Донати на ЗСУ </h3>
@@ -18,7 +22,7 @@ return (
       </li>
       <li className={styles.categorysIteam}>
         <div className={styles.categorysImageWrapper}>
-          <img src="" alt="alt" className={styles.categorysImage}/>
+          <Auction/>
         </div>
         <div className={styles.textWrapper}>
           <h3 className={styles.categorysHeadline}> Лоти аукціону доброчинності </h3>
@@ -27,7 +31,7 @@ return (
       </li>
       <li className={styles.categorysIteam}>
         <div className={styles.categorysImageWrapper}>
-          <img src="" alt="alt" className={styles.categorysImage}/>
+          <Buy/>
         </div>
         <div className={styles.textWrapper}>
           <h3 className={styles.categorysHeadline}> Продаж військового одягу </h3>
@@ -37,7 +41,7 @@ return (
     </ul>
     <div className={styles.buttonWrapper}>
       <Button 
-          text="Всі категорії"
+          text="Переглянути всі"
           color="rgba(70, 163, 88, 1)"
           toPage="/categories"
       />

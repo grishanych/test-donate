@@ -1,0 +1,9 @@
+@import "../styles/mediaqueries";
+
+.container {
+  margin: 0 auto;
+  // padding: 0px 20px;
+  // @include devices(laptop) {
+      max-width: 1200px;
+  // }
+}
