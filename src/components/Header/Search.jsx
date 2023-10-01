@@ -15,7 +15,6 @@ function SearchInHeader() {
         setIsLinkVisible(true);
     };
 
-
     return (
         <div className={styles.hiddenSearchMenu}>
             {isLinkVisible ? (
