@@ -12,11 +12,11 @@
         width: 95%;
     }
     @include devices(laptop) {
-        width: 700px;
+        width: 830px;
         margin: 0 auto;
     }
     @media only screen and (min-width: 1201px) {
-        width: 1200px;
+        // width: 1200px;
     }
 }
 
@@ -24,12 +24,16 @@
     padding-top: 20px;
     display: flex;
     width: 100%;
-    padding-left: 10px;
     flex-direction: column;
     align-items: flex-start;
+    width: 95%;
 
+    @include devices(tablet) {
+        width: 700px;
+    }
     @include devices(laptop) {
         width: 800px;
+        margin: 0 auto;
     }
 }
 
@@ -57,7 +61,7 @@
 }
 
 .cardsSectionHeadline {
-    font-size: variables.$fs-l;
+    font-size: variables.$fs-x;
     font-weight: 700;
     text-transform: uppercase;
     color: variables.$fc-main;

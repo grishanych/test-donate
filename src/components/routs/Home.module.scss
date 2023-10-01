@@ -1,0 +1,16 @@
+@use "../../styles/variables";
+
+.homeTextSection {
+  padding: 0px 15px;
+}
+
+.call {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: variables.$bgc-main;
+}
+
+.headline {
+  padding: 20px 0px 5px;
+}
