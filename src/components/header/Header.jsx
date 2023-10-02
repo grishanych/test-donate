@@ -56,11 +56,9 @@ function Header() {
                     <Link to="/cart">
                         <Cart />
                     </Link>
-                    <a href="/">
                         <Button text="" width="50px" onClick={handleLogin} jc="center">
                             <IconEnter/>
                         </Button>
-                    </a>
                 </div>
             </div>
             {/* change if we build mobile menu vers.1 */}
