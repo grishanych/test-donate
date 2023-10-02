@@ -1,0 +1,215 @@
+@use "../../styles/variables";
+@import "../../styles/mediaqueries";
+
+.headerMobile {
+    padding: 25px 15px;
+
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
+}
+
+.XXX {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.YYY {
+    width: 100px;
+    height: 100px;
+    background-color: variables.$bgc-main;
+}
+
+.headerLaptop {
+    padding: 25px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
+    @include devices(tablet) {
+        padding: 20px;
+        justify-content: space-between;
+    }
+}
+
+.navWrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.navItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    list-style-type: none;
+
+    @include devices(mobile) {
+        height: 200px;
+        display: none;
+
+        &.active {
+            display: flex;
+            flex-direction: column;
+            max-height: 500px;
+          }
+    }
+
+    @include devices(tablet) {
+        gap: 10px;
+        font-size: 18px;
+    }
+    @media only screen and (min-width: 800px) {
+        display: flex;
+        font-size: 18px;
+    }
+}
+
+.navList {
+    text-decoration: none;
+    text-transform: capitalize;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+
+    &:hover {
+        border-color: variables.$bgc-main;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    @include devices(tablet) {
+        border-bottom: 1px solid transparent;
+    }
+}
+
+.navLink {
+    text-decoration: none;
+    color: inherit;
+    box-sizing: border-box;
+    transition: text-shadow 0.2s;
+}
+
+.navRightSideMenu {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+
+    @include devices(mobile) {
+        flex-direction: column;
+    }
+    @include devices(tablet) {
+        gap: 10px;
+    }
+}
+
+.navSearch {
+    height: 20px;
+}
+
+.searching {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+
+    // ! ???
+    @include devices(mobile) {
+        flex-direction: column;
+    }
+}
+
+.input {
+    border: 1px solid variables.$border-color-main;
+    border-radius: 15px;
+    background-color: variables.$bgc-second;
+    padding: 0px 10px; 
+}
+
+input:focus {
+    border: none;
+    outline: none;
+    border: 1px solid variables.$border-color-main;
+}
+
+
+.iconSearch {
+    width: 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.searchButtons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.searchBtn {
+    background-color: variables.$bgc-main;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.navCart {
+    height: 24px;
+}
+
+.navButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100px;
+    height: 30px;
+    color: #fff;
+    background-color: variables.$bgc-main;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.burgerButton {
+    display: none;
+    cursor: pointer;
+    transition: 0.4s;
+
+    @media only screen and (max-width: 799px) {
+        display: block;
+    }
+  }
+  
+.burgerBar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+    transition: 0.4s;
+
+    &.crossBar1 {
+        transform: rotate(-45deg) translate(-5px, 4px);
+    }
+    &.crossBar2 {
+        opacity: 0;
+    }
+    &.crossBar3 {
+        transform: rotate(45deg) translate(-6px, -5px);
+    }
+}
