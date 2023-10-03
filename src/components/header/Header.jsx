@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Context from "../Context";
-import logo from '../../images/header/logo.png';
+import logo from '../../images/header/Logo.png';
 import Cart from "./icons/cart/IconCart";
 import IconEnter from "./icons/enter/IconEnter";
 import SearchInHeader from './Search';
