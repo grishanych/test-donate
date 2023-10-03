@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useSelector , useDispatch } from "react-redux"
 import Context from "../components/Context";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
@@ -13,11 +14,11 @@ import Home from "../components/routs/Home"
 import Categorys from "../components/routs/Categories"
 
 
+
 function App() {
 
   const [isLinkVisible, setIsLinkVisible] = useState(true);
   const contextData = { isLinkVisible, setIsLinkVisible };
-
 
   return (
     <div className="App">
