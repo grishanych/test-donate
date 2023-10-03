@@ -3,8 +3,15 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import Basket from "./icons/basket/Basket"
 import Heart from "./icons/heart/Heart"
 import styles from "./Card.module.scss"
+import { useDispatch } from "react-redux";
+import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
+import { addToCart } from "../../redux/actions/cartActions";
 
 export function Card({ name, price, nameCloudinary, isLot }) {
+    
+    const dispatch = useDispatch();
+
+    
 
     // for working with Cloudinary
     const cld = new Cloudinary({
@@ -14,6 +21,19 @@ export function Card({ name, price, nameCloudinary, isLot }) {
     const myImage = cld.image(`${nameCloudinary}`);
     const imageURL = myImage.toURL();
 
+
+
+    const handleAddToCard = () => {
+        dispatch(counterIncrement())
+      
+        const product = {
+            name,
+            price,
+            imageURL,
+            isLot,
+        };
+        dispatch(addToCart(product))
+    }
 
 
     return(
@@ -40,7 +60,7 @@ export function Card({ name, price, nameCloudinary, isLot }) {
                         </div>
                     </a>
                 <div className={styles.cardItemIconsWrapper}>
-                    <a className={styles.cardItemIconWrapper} href="#1">
+                    <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddToCard}>
                         <Basket />
                     </a>
                     <a className={styles.cardItemIconWrapper} href="#1">

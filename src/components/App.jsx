@@ -5,7 +5,7 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Main from "./main/Main"
 import AboutUs from "../components/routs/AboutUs"
-import Cart from "../components/routs/Cart"
+import Cart from "./routs/Cart/Cart"
 import Reports from "../components/routs/Reports"
 import Blog from "../components/routs/Blog"
 import Contacts from "../components/routs/Contacts"

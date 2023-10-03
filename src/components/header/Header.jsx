@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Context from "../Context";
-import logo from '../../images/header/Logo.png';
-import Cart from "./icons/cart/IconCart"
-import IconEnter from "./icons/enter/IconEnter"
+import logo from '../../images/header/logo.png';
+import Cart from "./icons/cart/IconCart";
+import IconEnter from "./icons/enter/IconEnter";
 import SearchInHeader from './Search';
-import Button from "../button/Button"
-import stylesApp from "../App.module.scss"
+import Button from "../button/Button";
+import stylesApp from "../App.module.scss";
 import styles from './Header.module.scss';
+import { useSelector } from 'react-redux';
 
 function Header() {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -29,6 +30,8 @@ function Header() {
     const style = {
         display: isLinkVisible ?  'flex' : 'none'
     };
+
+    const cartCount = useSelector((state) => state.counter)
 
     return (
         <header>
@@ -56,6 +59,8 @@ function Header() {
                     <Link to="/cart">
                         <Cart />
                     </Link>
+                    {cartCount == 0 ? null :
+                    <span >{cartCount}</span>}
                     <a href="/">
                         <Button text="" width="50px" onClick={handleLogin} jc="center">
                             <IconEnter/>
