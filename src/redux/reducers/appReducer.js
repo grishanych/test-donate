@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-
+import counterReducer from "./counterReducer";
+import cartReducer from "./cartReducer";
 
 const appReducer = combineReducers({
-    // це обєкт який приймає в себе ключ із функцією 
+    counter: counterReducer,
+    cart: cartReducer,
 });
 
 export default appReducer;
