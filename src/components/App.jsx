@@ -12,16 +12,13 @@ import Blog from "../components/routs/Blog"
 import Contacts from "../components/routs/Contacts"
 import Home from "../components/routs/Home"
 import Categorys from "../components/routs/Categories"
-import { counterIncrement, counterDecrement, counterReset } from "../redux/actionsCreators/counterActionsCreators";
+
 
 
 function App() {
 
   const [isLinkVisible, setIsLinkVisible] = useState(true);
   const contextData = { isLinkVisible, setIsLinkVisible };
-
-  const counter = useSelector((state) => state.counter);
-  const dispatch = useDispatch()
 
   return (
     <div className="App">
@@ -40,10 +37,6 @@ function App() {
             </Routes>
           </Main>
           <Footer />
-          <p>Counter : {counter}</p>
-        <button onClick={() => dispatch(counterIncrement())}>+</button>
-        <button onClick={() => dispatch(counterDecrement())}>-</button>
-        <button onClick={() => dispatch(counterReset())}>Скинути</button>
         </Context.Provider>
       </BrowserRouter>
     </div>
