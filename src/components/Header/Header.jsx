@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../../styles/header/header.module.scss';
-import logo from '../../images/header/logo.png';
+import logo from '../../images/header/Logo.png';
 import cart from '../../images/header/Cart.png';
 import logout from '../../images/header/Logout.png'
 import SearchInHeader from './Search';
