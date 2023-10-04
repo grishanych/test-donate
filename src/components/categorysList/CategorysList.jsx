@@ -4,9 +4,71 @@ import stylesApp from "../App.module.scss"
 import Donate from "./icons/donates/Donate"
 import Buy from "./icons/goods/Buy"
 import Auction from "./icons/lots/Auction"
+import axios from 'axios';
 
 
 const Categorys = () => {
+
+
+  const doit = async () => {
+    const updatedProduct = {
+      name : "Форма зимова Momentum" 
+   }; 
+    // ! 1
+    // const newCustomer = {
+    //   firstName: "Customer",
+    //   lastName: "Newone",
+    //   login: "Customer",
+    //   email: "customer@gmail.com",
+    //   password: "1111111",
+    //   telephone: "+380630000000",
+    //   gender: "male",
+    //   avatarUrl: "img/customers/023648.png",
+    //   isAdmin: true
+    // }
+    
+    // axios.post("http://localhost:4000/api/customers", newCustomer)
+    //   .then(savedCustomer => {console.log(savedCustomer)})
+    //   .catch(err => {console.log(err)})
+
+    //  ! 2
+    // const userData = {
+    //   loginOrEmail: "customer@gmail.com",
+    //   password: "1111111"
+    // };
+    
+    // axios
+    //   .post("http://localhost:4000/api/customers/login", userData)
+    //   .then(loginResult => {
+    //     console.log(loginResult)
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   });
+
+    // ! 3
+  //   const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MWM0MzhjZjc4Mjc2NThhYmIyZTczYiIsImZpcnN0TmFtZSI6IkN1c3RvbWVyIiwibGFzdE5hbWUiOiJOZXdvbmUiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2OTYzNTIxMzQsImV4cCI6MTY5NjM4ODEzNH0.cMBdz3rU3IwoVDOzwu541WLtHSCRPLqOjq_G-_N-hKE"
+  //   const setAuthToken = token => {
+  //     if (token) {
+  //       // Apply to every request
+  //       axios.defaults.headers.common['Authorization'] = token;
+  //     } else {
+  //       // Delete auth header
+  //       delete axios.defaults.headers.common['Authorization'];
+  //     }
+  //   };
+  //   setAuthToken(token);
+
+  //   axios
+  // .put("http://localhost:4000/api/products/651c15b46533f503f0e1b79e", updatedProduct)
+  // .then(updatedProduct => {
+  //   console.log(updatedProduct);
+  // })
+  // .catch(err => {
+  //   console.log(err);
+  // });
+  };
+
 
 return (
   <section className={`${stylesApp.container} ${styles.categorysWrapper}`}>
@@ -44,6 +106,8 @@ return (
           text="Переглянути всі"
           color="rgba(70, 163, 88, 1)"
           toPage="/categories"
+          // !!!
+          onClick={doit}
       />
     </div>
   </section>
