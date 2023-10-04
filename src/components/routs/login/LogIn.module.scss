@@ -1,0 +1,40 @@
+@use "../../../styles/variables";
+@import "../../../styles/mediaqueries";
+
+.windowWrapper {
+  padding: 50px;
+}
+  
+.window {
+  padding: 50px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  border: 2px solid variables.$border-color-decor;
+  row-gap: 20px;
+}
+
+input {
+  border: 1px solid variables.$border-color-main;
+  border-radius: 15px;
+  background-color: variables.$bgc-second;
+  padding: 2px 10px; 
+}
+
+input:focus {
+  border: none;
+  outline: none;
+  border: 1px solid variables.$border-color-main;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.text:hover {
+  font-size: 14px;
+  text-decoration: underline;
+  color: variables.$fc-main;
+}

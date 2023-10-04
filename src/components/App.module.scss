@@ -2,8 +2,22 @@
 
 .container {
   margin: 0 auto;
-  // padding: 0px 20px;
-  // @include devices(laptop) {
-      max-width: 1200px;
-  // }
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+header {
+  display: flex;
+
+  flex-shrink: 0;
+}
+
+main {
+  flex-grow: 1;
+}
+
+footer {
+  flex-shrink: 0;
 }

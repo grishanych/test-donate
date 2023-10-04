@@ -13,9 +13,9 @@ function Header() {
     const [menuVisible, setMenuVisible] = useState(false);
     const { isLinkVisible } = useContext(Context);
 
-    const handleLogin = (e) => {
-        e.preventDefault()
-    }
+    // const handleLogin = (e) => {
+    //     e.preventDefault()
+    // }
 
     // const toggleMenu = () => {
     //     setMenuVisible(!menuVisible);
@@ -31,8 +31,8 @@ function Header() {
     };
 
     return (
-        <header>
-            <div className={`${styles.headerLaptop} ${stylesApp.container}`}>
+        <header className={styles.header}>
+            <div className={`${styles.headerLaptop}`}>
                 <Link to="/" className={styles.logo}><img src={logo} alt="" width={70} height={70} /></Link>
                 {/* make it beter if we build mobile menu vers.1 */}
                 {/* <div className={`${styles.burgerButton} ${menuVisible ? styles.active : ''}`} onClick={toggleMenu}>
@@ -56,9 +56,9 @@ function Header() {
                     <Link to="/cart">
                         <Cart />
                     </Link>
-                        <Button text="" width="50px" onClick={handleLogin} jc="center">
-                            <IconEnter/>
-                        </Button>
+                    <Button toPage="/log-in" width="50px" jc="center"   >
+                        <IconEnter/>
+                    </Button>
                 </div>
             </div>
             {/* change if we build mobile menu vers.1 */}

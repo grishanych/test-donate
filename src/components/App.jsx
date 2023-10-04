@@ -9,8 +9,10 @@ import Cart from "../components/routs/Cart"
 import Reports from "../components/routs/Reports"
 import Blog from "../components/routs/Blog"
 import Contacts from "../components/routs/Contacts"
-import Home from "../components/routs/Home"
+import Home from "./routs/home/Home"
 import Categorys from "../components/routs/Categories"
+import LogIn from "./routs/login/LogIn"
+import styles from "./App.module.scss"
 
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className={styles.container}>
       <BrowserRouter>
         <Context.Provider value={contextData}>
           <Header />
@@ -33,6 +35,7 @@ function App() {
                 <Route path="/reports" element={<Reports/>}/>
                 <Route path="/blog" element={<Blog/>}/>
                 <Route path="/contacts" element={<Contacts/>}/>
+                <Route path="/log-in" element={<LogIn/>}/>
             </Routes>
           </Main>
           <Footer />

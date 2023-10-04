@@ -13,7 +13,7 @@ import UserIcon from "../../images/footer/User.svg";
 
 function Footer() {
   return (
-    <footer className={`${stylesApp.container}`}>
+    <footer>
       <div className={styles.footerMobileVersion}>
         <div className={styles.mobileIconsContainer}>
           <a href="##" className={styles.mobileIcons}>
