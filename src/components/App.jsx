@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Context from "../components/Context";
 import Header from "./header/Header";
@@ -15,6 +16,23 @@ import DeliveryPayment from "../components/routs/DeliveryPayment";
 import Returns from "../components/routs/Returns";
 import PrivacyPolicy from "../components/routs/PrivacyPolicy";
 import ProductPage from "../components/routs/ProductPage";
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useSelector , useDispatch } from "react-redux"
+import Context from "../components/Context";
+import Header from "./header/Header";
+import Footer from "./footer/Footer";
+import Main from "./main/Main"
+import AboutUs from "../components/routs/AboutUs"
+import Cart from "./routs/Cart/Cart"
+import Reports from "../components/routs/Reports"
+import Blog from "../components/routs/Blog"
+import Contacts from "../components/routs/Contacts"
+import Home from "../components/routs/Home"
+import Categorys from "../components/routs/Categories"
+
+
+
 
 function App() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
