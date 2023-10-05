@@ -2,7 +2,6 @@
 @use "../../styles/variables";
 @import "../../styles/mediaqueries";
 
-
 // .footer {
 //   @include devices(tablet) {
 //     max-width: fit-content;
@@ -18,17 +17,24 @@
   @include devices(mobile) {
     border-radius: 25px;
     background-color: rgb(248, 247, 247);
+    display: block;
+    position: fixed;
+    bottom: 0;
+    min-width: 100%;
+  }
+}
+
+.mobileIconsContainer {
+  @include devices(mobile) {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 40px;
-    padding-bottom: 35px;
   }
 }
 
 .mobileIcons {
   @include devices(mobile) {
-    padding: 25px;
+    margin: 20px 25px;
   }
 }
 
@@ -116,7 +122,7 @@
   border-width: 1px 0;
   border-style: solid;
   border-color: rgba(70, 163, 89, 0.1);
-  background-color: rgba(70, 163, 88, 0.1);
+  background-color: variables.$bgc-second;
 
   @include devices(tablet) {
     position: relative;
@@ -230,11 +236,9 @@
 }
 
 .bottomPaymentMethods {
-  // width:50px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  
+
   @include devices(tablet) {
     display: flex;
     justify-content: center;
@@ -243,13 +247,13 @@
   }
 }
 
-.bottomPaymentMethodsIconOne {
-  width: 70px;
-}
+// .bottomPaymentMethodsIconOne {
+//   width: 70px;
+// }
 
-.bottomPaymentMethodsIconTwo {
-  width: 45px;
-}
+// .bottomPaymentMethodsIconTwo {
+//   width: 45px;
+// }
 
 .rightsReserved {
   @include mixins.font-family-regular;
