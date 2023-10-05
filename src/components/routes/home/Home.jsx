@@ -1,7 +1,7 @@
 import CategorysList from "../../categorysList/CategorysList"
 import CardList from "../../cardlist/CardList"
 import styles from "./Home.module.scss"
-import stylesApp from "../../App.module.scss"
+// import stylesApp from "../../App.module.scss"
 
 
 function MainPage(){

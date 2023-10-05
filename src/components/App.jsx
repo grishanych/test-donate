@@ -4,14 +4,19 @@ import Context from "../components/Context";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Main from "./main/Main"
-import AboutUs from "../components/routs/AboutUs"
-import Cart from "../components/routs/Cart"
-import Reports from "../components/routs/Reports"
-import Blog from "../components/routs/Blog"
-import Contacts from "../components/routs/Contacts"
-import Home from "./routs/home/Home"
-import Categorys from "../components/routs/Categories"
-import LogIn from "./routs/login/LogIn"
+import AboutUs from "./routes/AboutUs"
+import Cart from "./routes/Cart"
+import Reports from "./routes/Reports"
+import Blog from "./routes/Blog"
+import Contacts from "./routes/Contacts"
+import Home from "./routes/home/Home"
+import Categorys from "./routes/Categories"
+import CustomerLogIn from "./routes/adminRoutes/customerLogin/CustomerLogIn"
+import AdminLogIn from "../components/routes/adminRoutes/adminLogin/AdminLogIn"
+import AdminPage from "./routes/adminRoutes/adminPage/AdminPage"
+import CustomerPage from "./routes/adminRoutes/customerPage/CustomerPage"
+import CustomerRegistration from './routes/adminRoutes/customerRegistration/CustomerRegistration';
+import AdminRegistration from './routes/adminRoutes/adminRegistration/AdminRegistration';
 import styles from "./App.module.scss"
 
 
@@ -35,7 +40,12 @@ function App() {
                 <Route path="/reports" element={<Reports/>}/>
                 <Route path="/blog" element={<Blog/>}/>
                 <Route path="/contacts" element={<Contacts/>}/>
-                <Route path="/log-in" element={<LogIn/>}/>
+                <Route path="/log-in" element={<CustomerLogIn/>}/>
+                <Route path="/account" element={<CustomerPage/>}/>
+                <Route path="/admin" element={<AdminLogIn/>}/>
+                <Route path="/adm-page" element={<AdminPage/>}/>
+                <Route path="/registration" element={<CustomerRegistration/>}/>
+                <Route path="/adm-registration" element={<AdminRegistration/>}/>
             </Routes>
           </Main>
           <Footer />

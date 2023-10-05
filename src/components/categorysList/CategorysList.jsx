@@ -1,10 +1,10 @@
 import Button from "../button/Button";
 import styles from "./CategorysList.module.scss"
-import stylesApp from "../App.module.scss"
+// import stylesApp from "../App.module.scss"
 import Donate from "./icons/donates/Donate"
 import Buy from "./icons/goods/Buy"
 import Auction from "./icons/lots/Auction"
-import axios from 'axios';
+// import axios from 'axios';
 
 
 const Categorys = () => {
