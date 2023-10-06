@@ -1,40 +1,44 @@
 @use "./reset";
 
 @font-face {
-    font-family: "CeraProRegular";
-    src: url("../fonts/CeraProRegular.ttf") format("truetype");
-    font-style: normal;
-    font-weight: 400;
+  font-family: "CeraProRegular";
+  src: url("../fonts/CeraProRegular.ttf") format("truetype"),
+    url("../fonts/CeraProRegular.woff") format("woff"),
+    url("../fonts/CeraProRegular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
 }
 
 @font-face {
-    font-family: "CeraProBold";
-    src: url("../fonts/CeraProBold.ttf") format("truetype");
-    font-style: normal;
-    font-weight: 700;
+  font-family: "CeraProBold";
+  src: url("../fonts/CeraProBold.ttf") format("truetype"),
+    url("../fonts/CeraProBold.woff") format("woff"),
+    url("../fonts/CeraProBold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
 }
 
 // styles
 * {
-    font-family: "CeraProRegular";
+  font-family: "CeraProRegular";
 }
 
 h2 {
-    font-size: 20px;
-    font-weight: 700;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 h3 {
-    font-size: 18px;
-    font-weight: 700;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 h4 {
-    font-size: 16px;
-    font-weight: 700;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 p {
-    font-size: 14px;
-    font-weight: 400;
+  font-size: 14px;
+  font-weight: 400;
 }
