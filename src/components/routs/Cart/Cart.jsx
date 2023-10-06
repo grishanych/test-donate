@@ -1,18 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import styles from "./Cart.module.scss";
-import { removeFromCart } from "../../../redux/actions/cartActions";
-import CartItem from "./CartItem"; // Додавання нового компонента
+import CartItem from "./CartItem"; 
 
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
-  const dispatch = useDispatch();
 
-  const handleRemoveFromCart = (productId) => {
-    // Викликаємо дію removeFromCart для видалення товару зі списку кошика
-    // console.log(productId)
-    // dispatch(removeFromCart(productId));
-  };
 
   return (
     <div className={styles.cardsSectionWrapper}>
@@ -23,7 +16,6 @@ function Cart() {
           <CartItem
             key={item.id}
             item={item}
-            onRemoveFromCart={handleRemoveFromCart}
           />
         ))}
       </ul>
