@@ -1,15 +1,17 @@
 import { useDispatch } from "react-redux";
 import styles from "./Cart.module.scss";
 import { removeFromCart } from "../../../redux/actions/cartActions";
+import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
+import Button from "../../button/Button";
 
 function CartItem({ item }) {
 
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (productId) => {
-   
+    dispatch(counterDecrement())
     dispatch(removeFromCart(productId));
-    console.log(productId)
+
   };
   
   return (
@@ -24,7 +26,7 @@ function CartItem({ item }) {
       ) : item.isLot === "Донат" ? (
         <p className={styles.decorDonat}>ДОНАТ</p>
       ) : null}
-<button onClick={() => handleRemoveFromCart(item.name)}>Видалити товар</button>
+      <Button className={styles.buttonDelete} onClick={() => handleRemoveFromCart(item.name)} text="Видалити"/>
     </li>
   );
 }
