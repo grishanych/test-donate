@@ -24,7 +24,7 @@ function CartItem({ item }) {
       ) : item.isLot === "Донат" ? (
         <p className={styles.decorDonat}>ДОНАТ</p>
       ) : null}
-<button onClick={() => handleRemoveFromCart(item.name)}>Видалити</button>
+<button onClick={() => handleRemoveFromCart(item.name)}>Видалити товар</button>
     </li>
   );
 }

@@ -6,7 +6,6 @@ import CartItem from "./CartItem";
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
 
-
   return (
     <div className={styles.cardsSectionWrapper}>
       <h2>Кошик</h2>
