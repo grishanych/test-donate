@@ -23,10 +23,9 @@ function LogIn({ headline, to }){
       .max(16, "Логін повинен мати не більше 16 символів"),
     password: string()
       .required("Поле пароля є обов'язковим для заповнення")
-      .min(7, "Пароль повинен мати не менше 7 знаків (літер латинського алфавіту та спеціальних символів)")
-      .max(30, "Пароль повинен мати не більше 30 знаків")
-      .matches(/[a-zA-Z]/, "Пароль може складатися виключно з літер латинського алфавіту у нижньому чи верхньому регістрі та спеціальних символів")
-      .matches(/\d/, "Пароль повинен мати хоча б одну цифру")
+      .min(7, "Пароль має містити від 7 до 30 символів")
+      .max(30, "Пароль має містити від 7 до 30 символів")
+      .matches(/[a-zA-Z0-9]/, "Дозволені символи для пароля: a-z, A-Z, 0-9")
   })
 
   const sendData = (login, password) => {
@@ -45,6 +44,7 @@ function LogIn({ headline, to }){
       }
     })
     .catch(err => {
+      // ! add the way for another errors
       if(err.response.data.loginOrEmail === "Customer not found") {
         setShowError(true);
       }
@@ -57,7 +57,7 @@ function LogIn({ headline, to }){
       <div className={styles.window}>
         <h1>{headline}</h1>
         <Formik 
-          initialValues={{login: '', password: ""}}
+          initialValues={{login: "", password: ""}}
           onSubmit={(values, { setSubmitting }) => {
             sendData(values.login, values.password);
             setSubmitting(false);
@@ -67,31 +67,29 @@ function LogIn({ headline, to }){
           <Form className={styles.form}>
           <Field name="login">
               {({ field, meta }) => (
-                <div>
+                <label htmlFor="login" className={styles.label}>Логін:
                   <input
                     {...field}
-                    placeholder="Логін"
+                    id="login"
                     className={
                       meta.touched && meta.error
                         ? styles.inputAttention
-                        : null
+                        : styles.input
                     }
                   />
-                </div>
+                </label>
               )}
             </Field>
-            <div className={styles.passwordWrapper}>
-              <Field name="password">
+            <Field name="password">
               {({ field, meta }) => (
-                <div className={styles.passwordWrapper}>
+                <label htmlFor="login" className={`${styles.passwordWrapper} ${styles.label}`}>Пароль:
                   <input
                     {...field}
-                    placeholder="Пароль"
                     type={showPassword ? 'text' : 'password'}
                     className={
                       meta.touched && meta.error
                         ? styles.inputAttention
-                        : null
+                        : styles.input
                     }
                   />
                   <div
@@ -101,14 +99,13 @@ function LogIn({ headline, to }){
                   >
                     {showPassword === false ? <EyeClosed /> : <EyeOpen />}
                   </div>
-                </div>
+                </label>
               )}
             </Field>
-            </div>
             <button type='submit' className={styles.buttonStyle}
             >Увійти
             </button>
-            {showError && <p className={showError && styles.textAttention}>Спершу зареєструйтесь</p>}
+            {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
             <div className={styles.errorsWrapper}>
               <ErrorMessage name='login' component="p"/>
               <ErrorMessage name='password' component="p"/>

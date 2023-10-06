@@ -11,13 +11,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  width: 600px;
   border: 2px solid variables.$border-color-decor;
   row-gap: 20px;
 }
 
 .form {
-  width: 300px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,8 +30,38 @@
   justify-content: space-between;
 }
 
+.labelTextWrapper {
+  display: flex;
+  // align-items: center;
+}
+
+.iconWrapper {
+  display: flex;
+  // align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.iconWrapper:hover .infoText {
+  visibility: visible;
+}
+
+.infoText {
+  visibility: hidden;
+  position: absolute;
+  bottom: 42px;
+  left: 20px;
+  color: variables.$fc-info-hidden;
+  font-size: variables.$fs-sx;
+}
+
+.labelText {
+  padding-left: 5px;
+}
+
 .input,
 .inputAttention {
+  width: 60%;
   border: 1px solid variables.$border-color-main;
   border-radius: 15px;
   background-color: variables.$bgc-second;
@@ -40,15 +70,14 @@
 }
 
 .passwordWrapper {
-  width: 100%;
   position: relative;
 }
 
 .iconButton {
   position: absolute;
   cursor: pointer;
-  top:2px;
-  left: 270px;
+  top: 2px;
+  left: 470px;
 }
 
 .inputAttention {
@@ -82,12 +111,16 @@ input:focus {
 }
 
 .textAttention {
-  text-align: center;
   color: red;
+  text-align: center;
 }
 
 .text:hover {
   font-size: 14px;
   text-decoration: underline;
   color: variables.$fc-main;
+}
+
+.remark {
+  color: rgb(173, 173, 173);
 }
