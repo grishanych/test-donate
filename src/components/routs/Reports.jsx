@@ -1,5 +1,8 @@
-function Report() {
-  return <div>Звіти</div>;
+function Report(){
+
+    return(
+        <div>report</div>
+    )
 }
 
-export default Report;
+export default Report
