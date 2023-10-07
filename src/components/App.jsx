@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from "react-router-dom";
 import Context from "../components/Context";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
-import Main from "./main/Main"
+import Main from "./main/Main";
 import AppRoutes from "./routes/AppRoutes";
-import styles from "./App.module.scss"
+import styles from "./App.module.scss";
 
 
 function App() {

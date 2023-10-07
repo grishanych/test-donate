@@ -2,6 +2,7 @@
 @import "../../../styles/mediaqueries";
 
 .filtrationWrapper {
+  width: 100%;
   align-self: self-start;
   // display: flex;
   // flex-direction: column;
@@ -28,4 +29,14 @@
   bottom: 10px;
   background: #ccc;
   height: 5px;
+}
+
+.filtration {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filtrationSliderWrapper {
+  width: 150px;
 }

@@ -8,7 +8,7 @@ export function Card({ name, price, nameCloudinary, isLot }) {
 
     // for working with Cloudinary
     const cld = new Cloudinary({
-        cloud: { cloudName: 'dzaxltnel' },
+        cloud: { cloudName: "dzaxltnel" },
         url: { secure: true }
     });
     const myImage = cld.image(`${nameCloudinary}`);

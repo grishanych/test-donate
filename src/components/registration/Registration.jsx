@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Form, Field, ErrorMessage, Formik } from 'formik'
-import { object, string } from 'yup'
-import EyeClosed from '../routes/adminRoutes/adminLogin/eye/EyeClosed';
-import EyeOpen from '../routes/adminRoutes/adminLogin/eye/EyeOpen';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Form, Field, ErrorMessage, Formik } from "formik"
+import { object, string } from "yup"
+import EyeClosed from "../routes/adminRoutes/adminLogin/eye/EyeClosed";
+import EyeOpen from "../routes/adminRoutes/adminLogin/eye/EyeOpen";
 import Info from "./icons/Info";
 import styles from "./Registration.module.scss"
 
@@ -186,7 +186,7 @@ function Registration({ headline, to }){
                     </div>
                     <input
                       {...field}
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
                       id="password"
                       className={ meta.touched && meta.error ? styles.inputAttention : styles.input }
                     />
@@ -233,19 +233,19 @@ function Registration({ headline, to }){
               </Field>
 
               <button
-                type='submit'
+                type="submit"
                 className={styles.buttonStyle}
                 disabled={isSubmitting}>
                 Зареєструватися
               </button>
               <div className={styles.errorsWrapper}>
                 {showError ? <p className={showError && styles.textAttention}>Такий логін чи пароль вже існує</p> : null}
-                <ErrorMessage name='firstName' component="p" className={styles.textAttention}/>
-                <ErrorMessage name='lastName' component="p" className={styles.textAttention}/>
-                <ErrorMessage name='login' component="p" className={styles.textAttention}/>
-                <ErrorMessage name='email' component="p" className={styles.textAttention}/>
-                <ErrorMessage name='password' component="p" className={styles.textAttention}/>
-                <ErrorMessage name='telephone' component="p" className={styles.textAttention}/>
+                <ErrorMessage name="firstName" component="p" className={styles.textAttention}/>
+                <ErrorMessage name="lastName" component="p" className={styles.textAttention}/>
+                <ErrorMessage name="login" component="p" className={styles.textAttention}/>
+                <ErrorMessage name="email" component="p" className={styles.textAttention}/>
+                <ErrorMessage name="password" component="p" className={styles.textAttention}/>
+                <ErrorMessage name="telephone" component="p" className={styles.textAttention}/>
               </div>
             </Form>
           )}

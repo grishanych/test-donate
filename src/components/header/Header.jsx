@@ -1,13 +1,13 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import Context from "../Context";
-import logo from '../../images/header/Logo.png';
+import logo from "../../images/header/Logo.png";
 import Cart from "./icons/cart/IconCart"
 import IconEnter from "./icons/enter/IconEnter"
-import SearchInHeader from './Search';
+import SearchInHeader from "./Search";
 import Button from "../button/Button"
 import stylesApp from "../App.module.scss"
-import styles from './Header.module.scss';
+import styles from "./Header.module.scss";
 
 function Header() {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -27,7 +27,7 @@ function Header() {
 
     // for useContext
     const style = {
-        display: isLinkVisible ?  'flex' : 'none'
+        display: isLinkVisible ?  "flex" : "none"
     };
 
     return (
@@ -42,7 +42,7 @@ function Header() {
                 </div> */}
                 <div className={styles.navWrapper}>
                     <nav style={style} className={styles.nav}>
-                        <ul className={`${styles.navItem} ${menuVisible ? styles.active : ''}`}>
+                        <ul className={`${styles.navItem} ${menuVisible ? styles.active : ""}`}>
                             <Link to="/" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>головна</Link>
                             <Link to="/about-us" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>про нас</Link>
                             <Link to="/categories" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>категорії</Link>

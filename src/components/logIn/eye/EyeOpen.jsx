@@ -1,4 +1,4 @@
-import { ReactComponent as IconSVG } from './eye-open.svg';
+import { ReactComponent as IconSVG } from "./eye-open.svg";
 
 const EyeOpen = () => {
     return <IconSVG />;

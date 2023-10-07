@@ -15,7 +15,6 @@ function MainPage(){
         "justifyContent": "center",
         "fontSize": "50px",
         "color": "white",
-        // "backgroundImage": "url('https://res.cloudinary.com/dzaxltnel/image/upload/v1696186408/logo_bgxjco.jpg')",
         "backgroundSize": "contain",
         "backgroundRepeat": "no-repeat",
     }

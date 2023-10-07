@@ -1,4 +1,4 @@
-import styles from './Subcategory.module.scss'
+import styles from "./Subcategory.module.scss";
 
 function Subcategory() {
 

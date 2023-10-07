@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import Context from "../Context";
-import IconSearch from './icons/search/IconSearch';
+import IconSearch from "./icons/search/IconSearch";
 import Button from "../button/Button"
-import styles from './Header.module.scss';
+import styles from "./Header.module.scss";
 
 
 function SearchInHeader() {

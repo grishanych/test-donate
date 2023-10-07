@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Form, Field, ErrorMessage, Formik } from 'formik'
-import { object, string } from 'yup'
-import EyeClosed from './eye/EyeClosed';
-import EyeOpen from './eye/EyeOpen';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Form, Field, ErrorMessage, Formik } from "formik";
+import { object, string } from "yup";
+import EyeClosed from "./eye/EyeClosed";
+import EyeOpen from "./eye/EyeOpen";
 import styles from "./LogIn.module.scss"
 
 
@@ -39,7 +39,7 @@ function LogIn({ headline, to }){
     .then(loginResult => {
       console.log(loginResult);
       if(loginResult.data.success === true) {
-        navigate('/adm-page');
+        navigate("/adm-page");
         // const token = loginResult.data.token;
       }
     })
@@ -85,7 +85,7 @@ function LogIn({ headline, to }){
                 <label htmlFor="login" className={`${styles.passwordWrapper} ${styles.label}`}>Пароль:
                   <input
                     {...field}
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     className={
                       meta.touched && meta.error
                         ? styles.inputAttention
@@ -102,13 +102,13 @@ function LogIn({ headline, to }){
                 </label>
               )}
             </Field>
-            <button type='submit' className={styles.buttonStyle}
+            <button type="submit" className={styles.buttonStyle}
             >Увійти
             </button>
             {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
             <div className={styles.errorsWrapper}>
-              <ErrorMessage name='login' component="p"/>
-              <ErrorMessage name='password' component="p"/>
+              <ErrorMessage name="login" component="p"/>
+              <ErrorMessage name="password" component="p"/>
             </div>
           </Form>
         </Formik>

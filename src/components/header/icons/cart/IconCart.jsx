@@ -1,5 +1,5 @@
-import { ReactComponent as CartEmpty } from './cart-empty.svg';
-// import { ReactComponent as CartFull } from './cart-full.svg';
+import { ReactComponent as CartEmpty } from "./cart-empty.svg";
+// import { ReactComponent as CartFull } from ""./cart-full.svg";
 
 const Cart = () => {
 

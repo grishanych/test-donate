@@ -16,7 +16,7 @@ export default function CardList() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:4000/api/products')
+        fetch("http://localhost:4000/api/products")
           .then(response => response.json())
           .then(data => {
             let newData = [];
@@ -28,7 +28,7 @@ export default function CardList() {
             let mixedData = shuffleArray([...newData]);
             setItems(mixedData)
           })
-          .catch(error => console.error('There was an error!', error));
+          .catch(error => console.error("There was an error!", error));
     }, []);
     
 
