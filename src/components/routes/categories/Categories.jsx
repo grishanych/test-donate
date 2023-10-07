@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slider";
 import { Card } from "../../card/Card"
+import Button from "../../button/Button"
 import styles from "./Categories.module.scss"
 import stylesCardList from "../../cardlist/CardList.module.scss"
 
 export default function Categories() {
   const [items, setItems] = useState([]);
   const [selectedValue, setSelectedValue] = useState("all");
-  const [sliderValue, setSliderValue] = useState([1, 10000]);
-  const [tempSliderValue, setTempSliderValue] = useState([1, 10000]);
+  const [sliderValue, setSliderValue] = useState([0, 10000]);
+  const [tempSliderValue, setTempSliderValue] = useState([0, 10000]);
 
 
   const handleChange = (e) => {
@@ -19,7 +20,7 @@ export default function Categories() {
       setSliderValue(tempSliderValue);
     }
 
-  // for mixing cards
+      // for mixing cards
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -27,6 +28,7 @@ export default function Categories() {
     }
     return array;
   }
+
     
   useEffect(() => {
     fetch('http://localhost:4000/api/products')
@@ -38,8 +40,7 @@ export default function Categories() {
           if (selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])) {
             if (selectedValue === "all") {
               newData.push(item);
-            } else
-            if (selectedValue === "donation" && item.category === "Донат") {
+            } else if (selectedValue === "donation" && item.category === "Донат") {
               newData.push(item);
             } else if (selectedValue === "lots" && item.category === "Благодійний лот") {
               newData.push(item);
@@ -70,34 +71,35 @@ export default function Categories() {
         <h2 className={styles.filtrationHeadline}>Оберіть, що вам потрібно:</h2>
         <div className={styles.filtration}>
           <div className={styles.filtrationSelectWrapper}>
-            <p>Категорії:</p>
-            <select name="categories" value={selectedValue} onChange={handleChange}>
-              <option value="all">Всі</option>
-              <option value="donation">Донати</option>
-              <option value="lots">Лоти</option>
-              <option value="setswear">Комплекти форми</option>
-              <option value="outerwear">Одяг верхній</option>
-              <option value="footwear">Взуття</option>
+            <select name="categories" value={selectedValue} onChange={handleChange} className={styles.select}>
+              <option value="all" className={styles.option}>Всі</option>
+              <option value="donation" className={styles.option}>Донати</option>
+              <option value="lots" className={styles.option}>Лоти</option>
+              <option value="setswear" className={styles.option}>Комплекти форми</option>
+              <option value="outerwear" className={styles.option}>Одяг верхній</option>
+              <option value="footwear" className={styles.option}>Взуття</option>
             </select>
           </div>
           {selectedValue !== "all" && selectedValue !== "donation" && selectedValue !== "lots" && (
-            <div className={styles.filtrationSliderWrapper}>
-              <p>Оберіть ціну:</p>
-              <Slider 
-                className={styles.reactSlider}
-                thumbClassName={styles.thumb}
-                trackClassName={styles.track}
-                value={tempSliderValue}
-                onChange={value => setTempSliderValue(value)}
-                min={1}
-                max={10000}
-                pearling
-                minDistance={5}
-              />
-              <div>
-                {`Обраний діапазон: ${tempSliderValue[0]} - ${tempSliderValue[1]}`}
+            <div className={styles.filtrationSliderSection}>
+              <div className={styles.filtrationSliderWrapper}>
+                <p className={styles.filtrationSliderText}>Оберіть ціну:</p>
+                <Slider 
+                  className={styles.slider}
+                  thumbClassName={styles.thumb}
+                  trackClassName={styles.track}
+                  value={tempSliderValue}
+                  onChange={value => setTempSliderValue(value)}
+                  min={0}
+                  max={10000}
+                  pearling
+                  minDistance={5}
+                />
+                <div className={styles.filtrationSliderText}>
+                  {`${tempSliderValue[0]} - ${tempSliderValue[1]}`}
+                </div>
               </div>
-              <button onClick={applyFilter}>Фільтрувати</button>
+              <Button onClick={applyFilter} text="Фільтрувати"/>
             </div>
           )}
         </div>

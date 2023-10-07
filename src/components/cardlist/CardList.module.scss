@@ -50,7 +50,7 @@
         align-items: center;
     }
     @media only screen and (min-width: 1201px) {
-        width: 800px;
+        // width: 800px;
         column-gap: 50px;
     }
 
@@ -61,7 +61,6 @@
 }
 
 .cardsSectionHeadline {
-    font-size: variables.$fs-x;
     font-weight: 700;
     text-transform: uppercase;
     color: variables.$fc-main;
