@@ -9,6 +9,7 @@ import Button from "../button/Button";
 import stylesApp from "../App.module.scss";
 import styles from './Header.module.scss';
 import { useSelector } from 'react-redux';
+import HeartFavorite from './icons/favorites/Heart';
 
 function Header() {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -31,7 +32,10 @@ function Header() {
         display: isLinkVisible ?  'flex' : 'none'
     };
 
-    const cartCount = useSelector((state) => state.counter)
+    const cartCount = useSelector((state) => state.cart.itemCount);
+    const favoriteCount = useSelector((state) => state.favorites.itemCount);
+    
+    
 
     return (
         <header>
@@ -53,8 +57,14 @@ function Header() {
                             <Link to="/contacts" onClick={closeMenu} className={`${styles.navList} ${styles.navLink}`}>контакти</Link>
                         </ul>
                     </nav>
+                   
                     <SearchInHeader />
                 </div>
+                <Link to="/favorites">
+                        <HeartFavorite  />
+                    </Link>
+                {favoriteCount === 0 ? null : <span >{favoriteCount}</span>}
+                
                 <div className={styles.navRightSideMenu}>
                     <Link to="/cart">
                         <Cart />

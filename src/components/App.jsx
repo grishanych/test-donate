@@ -12,6 +12,7 @@ import Blog from "../components/routs/Blog"
 import Contacts from "../components/routs/Contacts"
 import Home from "../components/routs/Home"
 import Categorys from "../components/routs/Categories"
+import Favorites from "./routs/Favorites/Favorites";
 
 
 
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/reports" element={<Reports/>}/>
                 <Route path="/blog" element={<Blog/>}/>
                 <Route path="/contacts" element={<Contacts/>}/>
+                <Route path="/favorites" element={<Favorites />}/>
             </Routes>
           </Main>
           <Footer />

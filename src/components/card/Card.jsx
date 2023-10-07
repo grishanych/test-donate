@@ -5,7 +5,7 @@ import Heart from "./icons/heart/Heart"
 import styles from "./Card.module.scss"
 import { useDispatch } from "react-redux";
 import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
-import { addToCart } from "../../redux/actions/cartActions";
+import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 
 export function Card({ name, price, nameCloudinary, isLot }) {
     
@@ -23,18 +23,28 @@ export function Card({ name, price, nameCloudinary, isLot }) {
 
 
 
-    const handleAddToCard = () => {
+    const handleAddToCart = () => {
         dispatch(counterIncrement())
-      
         const product = {
             name,
             price,
             imageURL,
             isLot,
         };
-        dispatch(addToCart(product))
+        dispatch(addToCart(product)) 
     }
 
+
+    const handleAddFavorites = () => {
+        dispatch(counterIncrement());
+        const prod= {
+            name,
+            price,
+            imageURL,
+            isLot,
+        };
+        dispatch(addFavorites(prod))
+    }
 
     return(
         // <a href="#">
@@ -60,10 +70,10 @@ export function Card({ name, price, nameCloudinary, isLot }) {
                         </div>
                     </a>
                 <div className={styles.cardItemIconsWrapper}>
-                    <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddToCard}>
+                    <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddToCart}>
                         <Basket />
                     </a>
-                    <a className={styles.cardItemIconWrapper} href="#1">
+                    <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddFavorites}>
                         <Heart />
                     </a>
                 </div>
