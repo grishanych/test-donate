@@ -1,10 +1,11 @@
 // import React, { useState, useEffect } from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
+import { Link } from 'react-router-dom';
 import Basket from "./icons/basket/Basket"
 import Heart from "./icons/heart/Heart"
 import styles from "./Card.module.scss"
 
-export function Card({ name, price, nameCloudinary, isLot }) {
+export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
 
     // for working with Cloudinary
     const cld = new Cloudinary({
@@ -17,7 +18,6 @@ export function Card({ name, price, nameCloudinary, isLot }) {
 
 
     return(
-        // <a href="#">
             <li className={styles.cardItemWrapper}>
                 {isLot === "Благодійний лот" ? 
                     <div className={styles.decorLot}>ЛОТ</div>
@@ -26,11 +26,11 @@ export function Card({ name, price, nameCloudinary, isLot }) {
                 :
                     null}
                     <div className={styles.cardItemImageWrapper}>
-                        <a href="#1">
+                        <Link to={`/product/${itemNo}`}>
                             <img src={imageURL} className={styles.cardItemImage} alt="My img"/>
-                        </a>
+                        </Link>
                     </div>
-                    <a href="#1">
+                    <Link to={`/product/${itemNo}`}>
                         <div className={styles.cardItemTextWrapper}>
                             <h3 className={styles.cardItemHeadline}>{name}</h3>
                             {price ?
@@ -38,7 +38,7 @@ export function Card({ name, price, nameCloudinary, isLot }) {
                             :
                             null}
                         </div>
-                    </a>
+                    </Link>
                 <div className={styles.cardItemIconsWrapper}>
                     <a className={styles.cardItemIconWrapper} href="#1">
                         <Basket />
@@ -49,6 +49,5 @@ export function Card({ name, price, nameCloudinary, isLot }) {
                 </div>
                 <div className={styles.cardItemDecor}></div>
             </li>
-        // </a>
     )
 }

@@ -65,8 +65,8 @@ function Registration({ headline, to }){
       }
     })
     .catch(err => {
-      // ! add the way for another errors
       console.log(err);
+      // !
       if (err.response.data.message.includes("already exists") || err.response.data.password === "Allowed characters for password is a-z, A-Z, 0-9.") {
         console.log(err.response.data.message);
         console.log(err.response.data.password);

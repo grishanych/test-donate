@@ -12,6 +12,7 @@ import AdminPage from "./adminRoutes/adminPage/AdminPage"
 import CustomerPage from "./adminRoutes/customerPage/CustomerPage"
 import CustomerRegistration from './adminRoutes/CustomerRegistration';
 import AdminRegistration from './adminRoutes/AdminRegistration';
+import CardPage from "./CardPage"
 
 
 function AppRoutes() {
@@ -25,6 +26,9 @@ function AppRoutes() {
       <Route path="/reports" element={<Reports/>}/>
       <Route path="/blog" element={<Blog/>}/>
       <Route path="/contacts" element={<Contacts/>}/>
+      
+      <Route path="/product/:itemNo" element={<CardPage/>}/>
+
       <Route path="/log-in" element={<CustomerLogIn/>}/>
       <Route path="/account" element={<CustomerPage/>}/>
       <Route path="/admin" element={<AdminLogIn/>}/>
