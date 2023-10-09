@@ -9,15 +9,20 @@ import styles from "./App.module.scss";
 
 
 function App() {
-
+  
   const [isLinkVisible, setIsLinkVisible] = useState(true);
-  const contextData = { isLinkVisible, setIsLinkVisible };
+  const [contextData, setContextData] = useState({ isLinkVisible, setIsLinkVisible });
+  const updateContextData = (newData) => {
+    setContextData(prevData => ({ ...prevData, ...newData }));
+  };
+  
+  console.log(contextData);
 
 
   return (
     <div className={styles.container}>
       <BrowserRouter>
-        <Context.Provider value={contextData}>
+        <Context.Provider value={{ contextData, updateContextData }}>
           <Header />
           <Main>
             <AppRoutes/>

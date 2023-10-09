@@ -1,3 +1,6 @@
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import Context from "../Context";
 import Button from "../button/Button";
 import styles from "./CategorysList.module.scss"
 // import stylesApp from "../App.module.scss"
@@ -69,19 +72,37 @@ const Categorys = () => {
   // });
   };
 
+const [isCategoryDonateOpen, setCategoryDonateOpen] = useState(false);
+const { updateContextData } = useContext(Context);
+function handleCategory() {
+  setCategoryDonateOpen(prevState => !prevState);
+  console.log(isCategoryDonateOpen); // false
+}
+
+useEffect(() => {
+  console.log("Updating context with:", isCategoryDonateOpen);
+  if (isCategoryDonateOpen) {  // змінено умову
+    updateContextData({ isCategoryDonateOpen });
+  }
+}, [isCategoryDonateOpen, updateContextData]);
+
+
+
 
 return (
   <section className={styles.categorysWrapper}>
     <ul className={styles.categorysList}>
-      <li className={styles.categorysIteam}>
-        <div className={styles.categorysImageWrapper}>
-          <Donate/>
-        </div>
-        <div className={styles.textWrapper}>
-          <h3 className={styles.categorysHeadline}> Донати на ЗСУ </h3>
-          <p className={styles.categorysText}>Зроби донат на потреби ЗСУ!</p>
-        </div>
-      </li>
+      <Link to="/categories" onClick={handleCategory}>
+        <li className={styles.categorysIteam}>
+          <div className={styles.categorysImageWrapper}>
+            <Donate/>
+          </div>
+          <div className={styles.textWrapper}>
+            <h3 className={styles.categorysHeadline}> Донати на ЗСУ </h3>
+            <p className={styles.categorysText}>Зроби донат на потреби ЗСУ!</p>
+          </div>
+        </li>
+      </Link>
       <li className={styles.categorysIteam}>
         <div className={styles.categorysImageWrapper}>
           <Auction/>

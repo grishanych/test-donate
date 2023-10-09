@@ -7,15 +7,16 @@ import styles from "./Header.module.scss";
 
 function SearchInHeader() {
     const [isLinkVisible, setIsLinkVisible] = useState(true);
-    const context = useContext(Context);
+const { updateContextData } = useContext(Context);
+
 
     const handleClick = () => {
         setIsLinkVisible(false);
-        context.setIsLinkVisible(false);
+        updateContextData(isLinkVisible);
     };
     const handleInputDoubleClick = (event) => {
         setIsLinkVisible(true);
-        context.setIsLinkVisible(true);
+        updateContextData(isLinkVisible);
     };
 
     const crossStyle = {

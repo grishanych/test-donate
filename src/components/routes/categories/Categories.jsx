@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Slider from "react-slider";
+import Context from "../../Context";
 import { Card } from "../../card/Card"
 import Button from "../../button/Button"
 import styles from "./Categories.module.scss"
@@ -10,6 +11,9 @@ export default function Categories() {
   const [selectedValue, setSelectedValue] = useState("all");
   const [sliderValue, setSliderValue] = useState([0, 10000]);
   const [tempSliderValue, setTempSliderValue] = useState([0, 10000]);
+  // !
+  const { contextData } = useContext(Context);
+  const { isCategoryDonateOpen } = contextData;
 
 
   const handleChange = (e) => {
@@ -40,7 +44,7 @@ export default function Categories() {
           if (selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])) {
             if (selectedValue === "all") {
               newData.push(item);
-            } else if (selectedValue === "donation" && item.category === "Донат") {
+            } else if ((isCategoryDonateOpen === true || selectedValue === "donation") && item.category === "Донат") {
               newData.push(item);
             } else if (selectedValue === "lots" && item.category === "Благодійний лот") {
               newData.push(item);
@@ -57,7 +61,7 @@ export default function Categories() {
         setItems(mixedData);
       })
       .catch(error => console.error('There was an error!', error));
-  }, [selectedValue, sliderValue]); 
+  }, [selectedValue, sliderValue, isCategoryDonateOpen]);
       
 
   return (
