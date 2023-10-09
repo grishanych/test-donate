@@ -81,10 +81,9 @@ function handleCategory() {
 
 useEffect(() => {
   console.log("Updating context with:", isCategoryDonateOpen);
-  if (isCategoryDonateOpen) {  // змінено умову
-    updateContextData({ isCategoryDonateOpen });
-  }
+  updateContextData({ isCategoryDonateOpen });
 }, [isCategoryDonateOpen, updateContextData]);
+
 
 
 
