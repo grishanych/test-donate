@@ -14,10 +14,6 @@ function Header() {
     const [menuVisible, setMenuVisible] = useState(false);
     const { isLinkVisible } = useContext(Context);
 
-    const handleLogin = (e) => {
-        e.preventDefault()
-    }
-
     // const toggleMenu = () => {
     //     setMenuVisible(!menuVisible);
     // };
@@ -70,9 +66,10 @@ function Header() {
                     </Link>
                     {cartCount === 0 ? null :
                     <span >{cartCount}</span>}
-                        <Button text="" width="50px" onClick={handleLogin} jc="center">
-                            <IconEnter/>
-                        </Button>
+
+                    <Button toPage="/log-in" width="50px">
+                        <IconEnter/>
+                    </Button>
                 </div>
             </div>
             {/* change if we build mobile menu vers.1 */}

@@ -56,6 +56,7 @@ function LogIn({ headline, to }){
     <section className={styles.windowWrapper}>
       <div className={styles.window}>
         <h1 className={styles.headline}>{headline}</h1>
+        <p className={styles.text}>Введіть логін та пароль, щоб увійти</p>
         <Formik 
           initialValues={{login: "", password: ""}}
           onSubmit={(values, { setSubmitting }) => {
@@ -67,7 +68,7 @@ function LogIn({ headline, to }){
           <Form className={styles.form}>
           <Field name="login">
               {({ field, meta }) => (
-                <label htmlFor="login" className={styles.label}>Логін:
+                // <label htmlFor="login" className={styles.label}>Логін:
                   <input
                     {...field}
                     id="login"
@@ -77,12 +78,12 @@ function LogIn({ headline, to }){
                         : styles.input
                     }
                   />
-                </label>
+                // </label>
               )}
             </Field>
             <Field name="password">
               {({ field, meta }) => (
-                <label htmlFor="login" className={`${styles.passwordWrapper} ${styles.label}`}>Пароль:
+                <div className={`${styles.passwordWrapper} ${styles.label}`}>
                   <input
                     {...field}
                     type={showPassword ? "text" : "password"}
@@ -99,20 +100,20 @@ function LogIn({ headline, to }){
                   >
                     {showPassword === false ? <EyeClosed /> : <EyeOpen />}
                   </div>
-                </label>
+                </div>
               )}
             </Field>
-            <button type="submit" className={styles.buttonStyle}
+            <button type="submit" className={styles.buttonStyle} width="300px"
             >Увійти
             </button>
             {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
             <div className={styles.errorsWrapper}>
-              <ErrorMessage name="login" component="p"/>
-              <ErrorMessage name="password" component="p"/>
+              <ErrorMessage name="login" component="p" className={styles.textAttention}/>
+              <ErrorMessage name="password" component="p" className={styles.textAttention}/>
             </div>
           </Form>
         </Formik>
-        <Link to={to}><span className={styles.text}>Зареєструватися</span></Link> 
+        <Link to={to} className={`${styles.text} ${styles.textRegistration}`}>Зареєструватися</Link> 
       </div>
     </section>
   )
