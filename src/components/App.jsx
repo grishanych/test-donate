@@ -13,6 +13,10 @@ import Contacts from "../components/routs/Contacts"
 import Home from "../components/routs/Home"
 import Categorys from "../components/routs/Categories"
 import Favorites from "./routs/Favorites/Favorites";
+import DeliveryPayment from "./routs/DeliveryPayment";
+import Returns from "./routs/Returns";
+import PrivacyPolicy from "./routs/PrivacyPolicy";
+import ProductPage from "./routs/ProductPage";
 
 
 
@@ -36,6 +40,10 @@ function App() {
                 <Route path="/blog" element={<Blog/>}/>
                 <Route path="/contacts" element={<Contacts/>}/>
                 <Route path="/favorites" element={<Favorites />}/>
+                <Route path="/delivery-payment" element={<DeliveryPayment />} />
+                <Route path="/returns" element={<Returns />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/product/:id" element={<ProductPage />} />
             </Routes>
           </Main>
           <Footer />

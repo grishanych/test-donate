@@ -6,8 +6,9 @@ import styles from "./Card.module.scss"
 import { useDispatch } from "react-redux";
 import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
+import {Link} from "react-router-dom";
 
-export function Card({ name, price, nameCloudinary, isLot }) {
+export function Card({id, name, price, nameCloudinary, isLot }) {
     
     const dispatch = useDispatch();
 
@@ -56,11 +57,11 @@ export function Card({ name, price, nameCloudinary, isLot }) {
                 :
                     null}
                     <div className={styles.cardItemImageWrapper}>
-                        <a href="#1">
+                        <Link to={`/product/${id}`}>
                             <img src={imageURL} className={styles.cardItemImage} alt="My img"/>
-                        </a>
+                        </Link>
                     </div>
-                    <a href="#1">
+                    <Link to={`/product/${id}`}>
                         <div className={styles.cardItemTextWrapper}>
                             <h3 className={styles.cardItemHeadline}>{name}</h3>
                             {price ?
@@ -68,7 +69,7 @@ export function Card({ name, price, nameCloudinary, isLot }) {
                             :
                             null}
                         </div>
-                    </a>
+                    </Link>
                 <div className={styles.cardItemIconsWrapper}>
                     <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddToCart}>
                         <Basket />
