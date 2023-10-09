@@ -8,15 +8,13 @@ import { counterIncrement } from "../../redux/actionsCreators/counterActionsCrea
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import {Link} from "react-router-dom";
 
-export function Card({id, name, price, nameCloudinary, isLot }) {
-    
-    const dispatch = useDispatch();
+export function Card({itemNo, name, price, nameCloudinary, isLot }) {
 
-    
+    const dispatch = useDispatch();
 
     // for working with Cloudinary
     const cld = new Cloudinary({
-        cloud: { cloudName: 'dzaxltnel' },
+        cloud: { cloudName: "dzaxltnel" },
         url: { secure: true }
     });
     const myImage = cld.image(`${nameCloudinary}`);
@@ -48,38 +46,36 @@ export function Card({id, name, price, nameCloudinary, isLot }) {
     }
 
     return(
-        // <a href="#">
-            <li className={styles.cardItemWrapper}>
-                {isLot === "Благодійний лот" ? 
-                    <div className={styles.decorLot}>ЛОТ</div>
-                : isLot === "Донат" ? 
-                    <div className={styles.decorDonat}>ДОНАТ</div>
-                :
-                    null}
-                    <div className={styles.cardItemImageWrapper}>
-                        <Link to={`/product/${id}`}>
-                            <img src={imageURL} className={styles.cardItemImage} alt="My img"/>
-                        </Link>
-                    </div>
-                    <Link to={`/product/${id}`}>
-                        <div className={styles.cardItemTextWrapper}>
-                            <h3 className={styles.cardItemHeadline}>{name}</h3>
-                            {price ?
-                            <p className={styles.cardItemPrice}>{price} грн</p>
-                            :
-                            null}
-                        </div>
+        <li className={styles.cardItemWrapper}>
+            {isLot === "Благодійний лот" ? 
+                <div className={styles.decorLot}>ЛОТ</div>
+            : isLot === "Донат" ? 
+                <div className={styles.decorDonat}>ДОНАТ</div>
+            :
+                null}
+                <div className={styles.cardItemImageWrapper}>
+                    <Link to={`/product/${itemNo}`}>
+                        <img src={imageURL} className={styles.cardItemImage} alt="My img"/>
                     </Link>
-                <div className={styles.cardItemIconsWrapper}>
-                    <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddToCart}>
-                        <Basket />
-                    </a>
-                    <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddFavorites}>
-                        <Heart />
-                    </a>
                 </div>
-                <div className={styles.cardItemDecor}></div>
-            </li>
-        // </a>
+                <Link to={`/product/${itemNo}`}>
+                    <div className={styles.cardItemTextWrapper}>
+                        <h3 className={styles.cardItemHeadline}>{name}</h3>
+                        {price ?
+                        <p className={styles.cardItemPrice}>{price} грн</p>
+                        :
+                        null}
+                    </div>
+                </Link>
+            <div className={styles.cardItemIconsWrapper}>
+                <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddToCart}>
+                    <Basket />
+                </a>
+                <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddFavorites}>
+                    <Heart />
+                </a>
+            </div>
+            <div className={styles.cardItemDecor}></div>
+        </li>
     )
 }
