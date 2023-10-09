@@ -55,7 +55,7 @@ function LogIn({ headline, to }){
   return(
     <section className={styles.windowWrapper}>
       <div className={styles.window}>
-        <h1>{headline}</h1>
+        <h1 className={styles.headline}>{headline}</h1>
         <Formik 
           initialValues={{login: "", password: ""}}
           onSubmit={(values, { setSubmitting }) => {

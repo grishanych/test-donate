@@ -59,29 +59,21 @@ function Registration({ headline, to }){
   axios
     .post("http://localhost:4000/api/customers", userData)
     .then(loginResult => {
-      console.log(loginResult);
       if(loginResult.status === 200) {
         navigate({to});
         // const token = loginResult.data.token;
       }
     })
     .catch(err => {
-      // ! add the way for another errors
-      console.log(err);
       if (err.response && err.response.data) {
         if (err.response.data.login === "Login must be between 3 and 10 characters") {
           setShowError("Логін має містити від 3 до 10 символів");
-          console.log(err.response.data.login);
         } else if (err.response.data.login === "Allowed characters for login is a-z, A-Z, 0-9.") {
           setShowError("Дозволені символи для логіна a-z, A-Z, 0-9");
-          console.log(err.response.data.login);
         } else if (err.response.data.password === "Allowed characters for password is a-z, A-Z, 0-9.") {
-          console.log(err.response.data.password);
           setShowError("Allowed characters for password is a-z, A-Z, 0-9.");  
         } else if (err.response.data.message.includes("already exists")) {
           setShowError("Такий логін чи електронна адреса вже існує");
-          console.log(showError);
-          console.log(err.response.data.message);
         }
       }
     });
