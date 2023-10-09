@@ -6,7 +6,6 @@ import Cart from "./icons/cart/IconCart";
 import IconEnter from "./icons/enter/IconEnter";
 import SearchInHeader from './Search';
 import Button from "../button/Button";
-import stylesApp from "../App.module.scss";
 import styles from './Header.module.scss';
 import { useSelector } from 'react-redux';
 import HeartFavorite from './icons/favorites/Heart';
@@ -38,8 +37,8 @@ function Header() {
     
 
     return (
-        <header>
-            <div className={`${styles.headerLaptop} ${stylesApp.container}`}>
+        <header className={styles.header}>
+            <div className={styles.headerLaptop}>
                 <Link to="/" className={styles.logo}><img src={logo} alt="" width={70} height={70} /></Link>
                 {/* make it beter if we build mobile menu vers.1 */}
                 {/* <div className={`${styles.burgerButton} ${menuVisible ? styles.active : ''}`} onClick={toggleMenu}>
@@ -69,13 +68,11 @@ function Header() {
                     <Link to="/cart">
                         <Cart />
                     </Link>
-                    {cartCount == 0 ? null :
+                    {cartCount === 0 ? null :
                     <span >{cartCount}</span>}
-                    <a href="/">
                         <Button text="" width="50px" onClick={handleLogin} jc="center">
                             <IconEnter/>
                         </Button>
-                    </a>
                 </div>
             </div>
             {/* change if we build mobile menu vers.1 */}

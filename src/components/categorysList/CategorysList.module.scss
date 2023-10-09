@@ -22,7 +22,6 @@
     border-radius: 5px;
     border: 1px solid rgba(70, 163, 89, 0.1);   
     background-color: variables.$bgc-second;
-    // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 
     @include devices(laptop) {
         width: 32%;
@@ -48,7 +47,6 @@
     font-weight: 600;
     color: #3D3D3D;
     text-transform: uppercase;
-    // padding-bottom: 20px;
 }
 
 .categorysText{

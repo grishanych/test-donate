@@ -1,6 +1,12 @@
 @use "../../styles/variables";
 @import "../../styles/mediaqueries";
 
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .headerMobile {
     padding: 25px 15px;
 
@@ -21,6 +27,7 @@
 }
 
 .headerLaptop {
+    width: 100%;
     padding: 25px 15px;
     display: flex;
     justify-content: space-between;

@@ -1,7 +1,7 @@
-import CategorysList from "../categorysList/CategorysList"
-import CardList from "../cardlist/CardList"
+import CategorysList from "../../categorysList/CategorysList"
+import CardList from "../../cardlist/CardList"
 import styles from "./Home.module.scss"
-import stylesApp from "../App.module.scss"
+// import stylesApp from "../App.module.scss"
 
 
 function MainPage(){
@@ -15,7 +15,6 @@ function MainPage(){
         "justifyContent": "center",
         "fontSize": "50px",
         "color": "white",
-        // "backgroundImage": "url('https://res.cloudinary.com/dzaxltnel/image/upload/v1696186408/logo_bgxjco.jpg')",
         "backgroundSize": "contain",
         "backgroundRepeat": "no-repeat",
     }
@@ -27,7 +26,7 @@ function MainPage(){
             </div>
             <CategorysList />
             <CardList />
-            <section className={`${styles.homeTextSection} ${stylesApp.container}`}>
+            <section className={styles.homeTextSection}>
                 <p className={styles.call}>Долучись до Підтримки Наших Героїв!</p>
                 <h2 className={styles.headline}>Вітаємо на сайті Ставка на Перемогу!</h2>
                 <p>Друже, вітаємо тебе на нашому благодійному порталі, де кожен може допомогти нашим захисникам. Цей сайт створений з одною єдиною метою: підтримати Збройні Сили України у їхній важливій місії. І тут кожен може зробити свій внесок в перемогу. Як? Дуже просто!</p>

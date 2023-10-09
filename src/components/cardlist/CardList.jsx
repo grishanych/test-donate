@@ -16,7 +16,7 @@ export default function CardList() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:4000/api/products') // ! change for deploying a backend
+        fetch('http://localhost:4000/api/products')
           .then(response => response.json())
           .then(data => {
             let newData = [];
@@ -43,7 +43,7 @@ export default function CardList() {
                     {items.map((item, index) => (
                         <Card
                             key={index}
-                            id={item.id}
+                            itemNo={item.itemNo}
                             name={item.name}
                             price={item.price}
                             nameCloudinary={item.nameCloudinary[0]}
