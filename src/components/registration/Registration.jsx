@@ -12,8 +12,8 @@ import styles from "./Registration.module.scss"
 function Registration({ headline, to }){
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
-  const [showError, setShowError] = useState(false);
-  // const [showError, setShowError] = useState("");
+  // const [showError, setShowError] = useState(false);
+  const [showError, setShowError] = useState("");
   const navigate = useNavigate();
 
   const validationSchema = object().shape({
@@ -29,8 +29,9 @@ function Registration({ headline, to }){
       .max(25, "Прізвище має містити від 2 до 25 символів"),
     login: string()
       .required("Поле логіну є обов'язковим для заповнення")
+      .matches(/[a-zA-Zа-яА-Я]/, "Дозволені символи для логіна a-z, A-Z, 0-9")
       .min(6, "Логін повинен мати не менше 6 символів")
-      .max(16, "Логін повинен мати не більше 16 символів"),
+      .max(10, "Логін повинен мати не більше 10 символів"),
     email: string()
       .email("Некорректний формат електронної адреси")
       .required("Поле логіну є обов'язковим для заповнення"),
@@ -67,10 +68,21 @@ function Registration({ headline, to }){
     .catch(err => {
       // ! add the way for another errors
       console.log(err);
-      if (err.response.data.message.includes("already exists") || err.response.data.password === "Allowed characters for password is a-z, A-Z, 0-9.") {
-        console.log(err.response.data.message);
-        console.log(err.response.data.password);
-        setShowError(true);
+      if (err.response && err.response.data) {
+        if (err.response.data.login === "Login must be between 3 and 10 characters") {
+          setShowError("Логін має містити від 3 до 10 символів");
+          console.log(err.response.data.login);
+        } else if (err.response.data.login === "Allowed characters for login is a-z, A-Z, 0-9.") {
+          setShowError("Дозволені символи для логіна a-z, A-Z, 0-9");
+          console.log(err.response.data.login);
+        } else if (err.response.data.password === "Allowed characters for password is a-z, A-Z, 0-9.") {
+          console.log(err.response.data.password);
+          setShowError("Allowed characters for password is a-z, A-Z, 0-9.");  
+        } else if (err.response.data.message.includes("already exists")) {
+          setShowError("Такий логін чи електронна адреса вже існує");
+          console.log(showError);
+          console.log(err.response.data.message);
+        }
       }
     });
   }
@@ -239,7 +251,7 @@ function Registration({ headline, to }){
                 Зареєструватися
               </button>
               <div className={styles.errorsWrapper}>
-                {showError ? <p className={showError && styles.textAttention}>Такий логін чи пароль вже існує</p> : null}
+                {showError ? <p className={showError && styles.textAttention}>{showError}</p> : null}
                 <ErrorMessage name="firstName" component="p" className={styles.textAttention}/>
                 <ErrorMessage name="lastName" component="p" className={styles.textAttention}/>
                 <ErrorMessage name="login" component="p" className={styles.textAttention}/>
