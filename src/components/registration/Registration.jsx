@@ -84,7 +84,7 @@ function Registration({ headline, to }){
     <section className={styles.windowWrapper}>
       <div className={styles.window}>
         <h1 className={styles.headline}>{headline}</h1>
-        <p className={`${styles.text} ${styles.headlineText}`}>Введіть логін та пароль, щоб увійти</p>
+        <p className={`${styles.text} ${styles.headlineText}`}>Введіть дані для реєстрації</p>
 
         <Formik 
           initialValues={{
