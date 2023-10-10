@@ -25,7 +25,13 @@ function MainPage(){
                 Тут міг бути ваш слайдер
             </div>
             <CategorysList />
-            <CardList />
+            <section className={styles.cardListSection}>
+                <div className={styles.cardsSectionTextContent}>
+                    <h2 className={styles.cardsSectionHeadline}>Наші хіти</h2>
+                    <p className={styles.cardsSectionText}>Найпопулярніші позиції</p>
+                </div>
+                <CardList />
+            </section>
             <section className={styles.homeTextSection}>
                 <p className={styles.call}>Долучись до Підтримки Наших Героїв!</p>
                 <h2 className={styles.headline}>Вітаємо на сайті Ставка на Перемогу!</h2>

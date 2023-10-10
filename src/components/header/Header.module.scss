@@ -76,11 +76,11 @@
 
     @include devices(tablet) {
         gap: 10px;
-        font-size: 18px;
+        font-size: 16px;
     }
     @media only screen and (min-width: 800px) {
         display: flex;
-        font-size: 18px;
+        font-size: 16px;
     }
 }
 
