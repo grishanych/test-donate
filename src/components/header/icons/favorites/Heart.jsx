@@ -1,5 +1,5 @@
 import { ReactComponent as HeartSVG } from './heart.svg';
-// import { ReactComponent as HeartFillSVG } from './heart-fill.svg';
+import { ReactComponent as HeartFillSVG } from './heart-fill.svg';
 import { useSelector } from "react-redux";
 
 const HeartFavorite = () => {
@@ -8,9 +8,9 @@ const HeartFavorite = () => {
     return (
     <div>
       {isFavoritesEmpty ? (
-        null
-      ) : (
         <HeartSVG />
+      ) : (
+        <HeartFillSVG /> 
       )}
     </div>
     );

@@ -16,10 +16,11 @@ function Cart() {
           <h2>Кошик</h2>
           <br></br>
           <ul className={styles.cardsListWrapper}>
-            {cartItems.map((item) => (
+            {cartItems.map((item, index) => (
               <CartItem
-                key={item.id}
+                key={index}
                 item={item}
+
               />
             ))}
           </ul>

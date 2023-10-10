@@ -20,15 +20,14 @@ export const cartReducer = (state = initialState.cart, action) => {
             return {
                 ...state,
                 items: [...state.items, action.payload],
-                itemCount: state.itemCount + 1, // Збільшити лічильник на 1
+                itemCount: state.itemCount + 1,
             };
         case REMOVE_FROM_CART:
             return {
                 ...state,
                 items: state.items.filter((item) => item.name !== action.payload),
-                itemCount: state.itemCount - 1, // Зменшити лічильник на 1
+                itemCount: state.itemCount - 1,
             };
-        // інші випадки...
         default:
             return state;
     }
@@ -41,15 +40,15 @@ export const favoritesReducer = (state = initialState.favorites, action) => {
             return {
                 ...state,
                 items: [...state.items, action.payload],
-                itemCount: state.itemCount + 1, // Збільшити лічильник на 1
+                itemCount: state.itemCount + 1,
             };
         case REMOVE_FROM_FAVORITES:
             return {
                 ...state,
                 items: state.items.filter((item) => item.name !== action.payload),
-                itemCount: state.itemCount - 1, // Зменшити лічильник на 1
+                itemCount: state.itemCount - 1,
             };
-        // інші випадки...
+        
         default:
             return state;
     }
