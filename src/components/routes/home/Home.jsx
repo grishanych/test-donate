@@ -1,29 +1,15 @@
 import CategorysList from "../../categorysList/CategorysList"
 import CardList from "../../cardlist/CardList"
+import MainSlider from "../../slider/MainSlider"
 import styles from "./Home.module.scss"
 // import stylesApp from "../App.module.scss"
 
 
 function MainPage(){
 
-    const style = {
-        "width": "100%",
-        "height": "500px",
-        "backgroundColor": "green",
-        "display": "flex",
-        "alignItems": "center",
-        "justifyContent": "center",
-        "fontSize": "50px",
-        "color": "white",
-        "backgroundSize": "contain",
-        "backgroundRepeat": "no-repeat",
-    }
-
     return (
         <>
-            <div style={style}>
-                Тут міг бути ваш слайдер
-            </div>
+            <MainSlider />
             <CategorysList />
             <section className={styles.cardListSection}>
                 <div className={styles.cardsSectionTextContent}>
