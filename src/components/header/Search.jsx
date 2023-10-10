@@ -1,4 +1,6 @@
 import { useState, useContext } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { setInputValue } from '../../redux/actionsCreators/inputValueActionsCreators';
 import Context from "../Context";
 import IconSearch from './icons/search/IconSearch';
 import Button from "../button/Button"
@@ -6,8 +8,15 @@ import styles from './Header.module.scss';
 
 
 function SearchInHeader() {
+    const inputValue = useSelector((state) => state.input.inputValue);
+    const dispatch = useDispatch();
     const [isLinkVisible, setIsLinkVisible] = useState(true);
     const context = useContext(Context);
+
+    const handleInputChange = (event) => {
+        dispatch(setInputValue(event.target.value));
+      };
+
 
     const handleClick = () => {
         setIsLinkVisible(false);
@@ -37,6 +46,8 @@ function SearchInHeader() {
                         type="text"
                         placeholder="Пошук..."
                         onDoubleClick={handleInputDoubleClick}
+                        value={inputValue}
+                        onChange={handleInputChange}
                     />
                     <div className={styles.searchButtons}>
                         <Button
