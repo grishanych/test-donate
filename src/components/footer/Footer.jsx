@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-      <footer className={`${stylesApp.container}`}>
+      <footer>
         <div className={styles.footerMobileVersion}>
           <div className={styles.mobileIconsContainer}>
             <a href="##" className={styles.mobileIcons}>
