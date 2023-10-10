@@ -1,6 +1,30 @@
 @use "../../styles/variables";
 @import "../../styles/mediaqueries";
 
-.slickList {
+.section {
+  padding: 20px 15px 60px;
+  position: relative;
   display: flex;
+  justify-content: center;
+  background-color: variables.$bgc-main;
+  border-radius: 5px;
+}
+
+.imageswrapper {
+  margin: 0 auto;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 650px;
+  // background-color: white;
+}
+
+.image {
+  width: 28%;
+  border: 1px solid variables.$bgc-second;
+  border-radius: 10px;
+  padding: 8px;
+  background-color: white;
+  cursor: pointer;
 }
