@@ -19,7 +19,7 @@ function SearchInHeader() {
     };
 
     const crossStyle = {
-        height: "13px",
+        height: "18px",
     }
 
     return (
