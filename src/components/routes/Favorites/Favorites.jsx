@@ -21,8 +21,8 @@ function Favorites() {
           <h2>Обрані товари</h2>
           <br />
           <ul className={styles.favoritesListWrapper}>
-            {favoriteItems.map((item) => (
-              <li key={item.id} className={styles.favoritesItemWrapper}>
+            {favoriteItems.map((item, index) => (
+              <li key={index} className={styles.favoritesItemWrapper}>
                 <div className={styles.favoritesItemImageWrapper}>
                   <img
                     src={item.imageURL}
