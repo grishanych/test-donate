@@ -22,7 +22,7 @@ function ProductView() {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/api/products/" + params.id
+          "http://localhost:4000/api/products/" + params.itemNo
         );
 
         const data = await response.json();
@@ -34,10 +34,10 @@ function ProductView() {
       }
     };
 
-    if (params.id) {
+    if (params.itemNo) {
       fetchProduct();
     }
-  }, [dispatch, params.id]);
+  }, [dispatch, params.itemNo]);
 
   if (!product) {
     return <div>Product not found...</div>;

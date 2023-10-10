@@ -8,7 +8,7 @@ import { counterIncrement } from "../../redux/actionsCreators/counterActionsCrea
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import {Link} from "react-router-dom";
 
-export function Card({id, name, price, nameCloudinary, isLot }) {
+export function Card({itemNo, name, price, nameCloudinary, isLot }) {
     
     const dispatch = useDispatch();
 
@@ -57,11 +57,11 @@ export function Card({id, name, price, nameCloudinary, isLot }) {
                 :
                     null}
                     <div className={styles.cardItemImageWrapper}>
-                        <Link to={`/product/${id}`}>
+                        <Link to={`/product/${itemNo}`}>
                             <img src={imageURL} className={styles.cardItemImage} alt="My img"/>
                         </Link>
                     </div>
-                    <Link to={`/product/${id}`}>
+                    <Link to={`/product/${itemNo}`}>
                         <div className={styles.cardItemTextWrapper}>
                             <h3 className={styles.cardItemHeadline}>{name}</h3>
                             {price ?

@@ -43,7 +43,7 @@ function App() {
                 <Route path="/delivery-payment" element={<DeliveryPayment />} />
                 <Route path="/returns" element={<Returns />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/product/:id" element={<ProductPage />} />
+                <Route path="/product/:itemNo" element={<ProductPage />} />
             </Routes>
           </Main>
           <Footer />

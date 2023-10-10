@@ -14,10 +14,10 @@ import { ReactComponent as PaypalIcon } from "../footer/icons/paymentMethods/pay
 import { ReactComponent as MastercardIcon } from "../footer/icons/paymentMethods/mastercard.svg";
 import { ReactComponent as VisaIcon } from "../footer/icons/paymentMethods/visa.svg";
 import { ReactComponent as LiqpayIcon } from "../footer/icons/paymentMethods/liqpay.svg";
-import HomeIcon from "../footer/icons/mobileVersionIcons/Home.svg";
-import FavoriteIcon from "../footer/icons/mobileVersionIcons/Vector.svg";
-import CartIcon from "../footer/icons/mobileVersionIcons/Shop.svg";
-import UserIcon from "../footer/icons/mobileVersionIcons/User.svg";
+import HomeIcon from './icons/mobileVersionIcons/HomeIcon'
+import FavoriteIcon from "./icons/mobileVersionIcons/FavoriteIcon";
+import CartIcon from "./icons/mobileVersionIcons/CartIcon";
+import UserIcon from "./icons/mobileVersionIcons/UserIcon";
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -25,18 +25,18 @@ function Footer() {
       <footer className={`${stylesApp.container}`}>
         <div className={styles.footerMobileVersion}>
           <div className={styles.mobileIconsContainer}>
-            <a href="##" className={styles.mobileIcons}>
-              <img src={HomeIcon} alt="Home Icon" />
-            </a>
-            <a href="##" className={styles.mobileIcons}>
-              <img src={FavoriteIcon} alt="Favorite Icon" />
-            </a>
-            <a href="##" className={styles.mobileIcons}>
-              <img src={CartIcon} alt="Cart Icon" />
-            </a>
-            <a href="##" className={styles.mobileIcons}>
-              <img src={UserIcon} alt="User Icon" />
-            </a>
+            <Link to="/" className={styles.mobileIcons}>
+              <HomeIcon />
+            </Link>
+            <Link to="/favorites" className={styles.mobileIcons}>
+              <FavoriteIcon />
+            </Link>
+            <Link to="/" className={styles.mobileIcons}>
+             <CartIcon />
+            </Link>
+            <Link to="/" className={styles.mobileIcons}>
+              <UserIcon />
+            </Link>
           </div>
         </div>
         <div className={styles.footerContainer}>

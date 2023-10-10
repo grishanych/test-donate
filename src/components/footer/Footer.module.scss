@@ -25,6 +25,12 @@
     padding-bottom: 35px;
   }
 }
+.mobileIconsContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .mobileIcons {
   @include devices(mobile) {
@@ -195,6 +201,9 @@
   @include mixins.font-family-regular;
   font-size: 14px;
   line-height: 30px;
+  &:hover{
+    color: #46a358;
+  }
 }
 
 .bottomItem {
