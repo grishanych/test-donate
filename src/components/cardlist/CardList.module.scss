@@ -21,17 +21,13 @@
 .cardsListWrapper {
     padding-top: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     column-gap: 10px;
     row-gap: 20px;
     
     @include devices(mobile) {
-        justify-content: center;
         column-gap: 30px;
-    }
-    @include devices(laptop) {
-        justify-content: space-between;
     }
     @media only screen and (min-width: 1201px) {
         column-gap: 50px;

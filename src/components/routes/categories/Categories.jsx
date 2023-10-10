@@ -3,6 +3,7 @@ import Slider from "react-slider";
 import { Card } from "../../card/Card"
 import Button from "../../button/Button"
 import styles from "./Categories.module.scss"
+// import stylesCardList from "../../cardlist/CardList.module.scss"
 import stylesCardList from "../../cardlist/CardList.module.scss"
 
 export default function Categories() {
@@ -61,16 +62,16 @@ export default function Categories() {
       
 
   return (
-    <section className={stylesCardList.cardsSectionWrapper}>
-      <div className={stylesCardList.cardsSectionTextContent}>
-        <h1 className={stylesCardList.cardsSectionHeadline}>Заголовок</h1>
-        <p className={stylesCardList.cardsSectionText}>Всі донати, відкриті аукціони та військовий одяг</p>
+    <section className={styles.cardsSectionWrapper}>
+      <div className={styles.cardsSectionTextContent}>
+        <h1 className={styles.cardsSectionHeadline}>Категорії</h1>
+        <p className={styles.cardsSectionText}>Всі донати, відкриті аукціони та військовий одяг</p>
       </div>
 
       <div className={styles.filtrationWrapper}>
-        <h2 className={styles.filtrationHeadline}>Оберіть, що вам потрібно:</h2>
         <div className={styles.filtration}>
           <div className={styles.filtrationSelectWrapper}>
+            <p className={styles.filtrationHeadline}>Оберіть, що вам потрібно:</p>
             <select name="categories" value={selectedValue} onChange={handleChange} className={styles.select}>
               <option value="all" className={styles.option}>Всі</option>
               <option value="donation" className={styles.option}>Донати</option>
@@ -112,7 +113,7 @@ export default function Categories() {
             <Card
               key={index}
               itemNo={item.itemNo}
-              name={item.name}
+              name={item.shortName}
               price={item.price}
               nameCloudinary={item.nameCloudinary[0]}
               isLot={item.category}

@@ -38,7 +38,7 @@ export default function CardList() {
                 <Card
                     key={index}
                     itemNo={item.itemNo}
-                    name={item.name}
+                    name={item.shortName}
                     price={item.price}
                     nameCloudinary={item.nameCloudinary[0]}
                     isLot={item.category}
