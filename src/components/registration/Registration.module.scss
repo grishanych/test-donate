@@ -2,26 +2,64 @@
 @import "../../styles/mediaqueries";
 
 .windowWrapper {
-  padding: 50px;
+  padding: 50px 0px;
+
+  @include devices(mobile) {
+    padding-top: 36px;
+  }
 }
   
 .window {
-  padding: 50px;
+  padding: 50px 100px 68px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 600px;
-  border: 2px solid variables.$border-color-decor;
-  row-gap: 20px;
+  width: 500px;
+  
+  @include devices(mobile) {
+    width: 300px;
+    padding: 0px;
+  }
+}
+
+.headline {
+  font-size: variables.$fs-x;
+  padding-bottom: 53px;
+  color: variables.$fc-main;
+  font-weight: 600;
+
+  @include devices(mobile) {
+    padding-bottom: 20px;
+  }
+}
+
+.text,
+.textAttention {
+  font-size: variables.$fs-s;
+  text-align: center;
+}
+
+.text {
+  color: variables.$fc-text;
+}
+
+.headlineText {
+  @include devices(mobile) {
+    display: none;
+  }
+}
+
+.textAttention {
+  color: variables.$bgc-attention;
 }
 
 .form {
-  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 14px;
 }
 
 .label {
@@ -30,97 +68,60 @@
   justify-content: space-between;
 }
 
-.labelTextWrapper {
-  display: flex;
-  // align-items: center;
-}
-
-.iconWrapper {
-  display: flex;
-  // align-items: center;
-  position: relative;
-  cursor: pointer;
-}
-
-.iconWrapper:hover .infoText {
-  visibility: visible;
-}
-
-.infoText {
-  visibility: hidden;
-  position: absolute;
-  bottom: 42px;
-  left: 20px;
-  color: variables.$fc-info-hidden;
-  font-size: variables.$fs-sx;
-}
-
-.labelText {
-  padding-left: 5px;
-}
-
 .input,
 .inputAttention {
-  width: 60%;
-  border: 1px solid variables.$border-color-main;
-  border-radius: 15px;
-  background-color: variables.$bgc-second;
+  width: 280px;
+  height: 40px;
+  border: 1px solid variables.$border-color-decor;
+  border-radius: 5px;
   padding: 2px 10px;
-  margin-bottom: 20px;
+  margin-bottom: 17px;
+
+  @include devices(mobile) {
+    height: 50px;
+  }
+}
+
+.input {
+  &:focus {
+    border: none;
+    outline: none;
+    border: 1px solid variables.$border-color-main;
+  }
 }
 
 .passwordWrapper {
+  width: 100%;
   position: relative;
 }
 
 .iconButton {
   position: absolute;
   cursor: pointer;
-  top: 2px;
-  left: 470px;
+  top: 11px;
+  left: 260px;
 }
 
 .inputAttention {
-  border: 1px solid red;
-  background-color: rgb(255, 165, 165);
-}
-
-input:focus {
-  border: none;
-  outline: none;
-  border: 1px solid variables.$border-color-main;
+  border: 1px solid variables.$bgc-attention;
 }
 
 .buttonStyle {
   height: 40px;
-  width: 150px;
+  width: 300px;
   background-color: variables.$bgc-main;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
   color: #fff;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-top: 27px;
+
+  @include devices(mobile) {
+    height: 60px;
+  }
 }
 
-.text {
-  font-size: 14px;
-}
-
-.textAttention {
-  color: red;
-  text-align: center;
-}
-
-.text:hover {
-  font-size: 14px;
-  text-decoration: underline;
-  color: variables.$fc-main;
-}
-
-.remark {
-  color: rgb(173, 173, 173);
+.errorsWrapper {
+  padding-top: 46px;
 }

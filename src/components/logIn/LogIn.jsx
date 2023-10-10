@@ -56,7 +56,8 @@ function LogIn({ headline, to }){
     <section className={styles.windowWrapper}>
       <div className={styles.window}>
         <h1 className={styles.headline}>{headline}</h1>
-        <p className={styles.text}>Введіть логін та пароль, щоб увійти</p>
+        <p className={`${styles.text} ${styles.headlineText}`}>Введіть логін та пароль, щоб увійти</p>
+
         <Formik 
           initialValues={{login: "", password: ""}}
           onSubmit={(values, { setSubmitting }) => {
@@ -68,7 +69,6 @@ function LogIn({ headline, to }){
           <Form className={styles.form}>
           <Field name="login">
               {({ field, meta }) => (
-                // <label htmlFor="login" className={styles.label}>Логін:
                   <input
                     {...field}
                     id="login"
@@ -77,8 +77,8 @@ function LogIn({ headline, to }){
                         ? styles.inputAttention
                         : styles.input
                     }
+                    placeholder="Логін"
                   />
-                // </label>
               )}
             </Field>
             <Field name="password">
@@ -92,6 +92,7 @@ function LogIn({ headline, to }){
                         ? styles.inputAttention
                         : styles.input
                     }
+                    placeholder="Пароль"
                   />
                   <div
                     type="button"
