@@ -2,7 +2,7 @@
 @import "../../../styles/mediaqueries";
 
 .cardsSectionWrapper {
-  padding: 100px 15px 100px;
+  padding: 50px 15px 100px;
 
   @include devices(mobile) {
     padding: 50px 15px 25px;
@@ -139,4 +139,14 @@
 
 .filtrationSliderText {
   text-align: center;
+}
+
+.pictureWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.picture {
+  padding: 100px 15px 0px;
+  width: 97%;
 }

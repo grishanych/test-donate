@@ -2,7 +2,7 @@ import CategorysList from "../../categorysList/CategorysList"
 import CardList from "../../cardlist/CardList"
 import MainSlider from "../../slider/MainSlider"
 import styles from "./Home.module.scss"
-// import stylesApp from "../App.module.scss"
+import pic from './../../../images/bet-on-victory-ban-1.png';
 
 
 function MainPage(){
@@ -32,6 +32,9 @@ function MainPage(){
                 <p>Кожен твій крок, навіть найменший, робить нас сильнішими. Це не просто покупки або донати. Це інвестиції в безпеку і майбутнє нашої держави. Поділися нашим сайтом з друзями, родичами, колегами. Чим більше людей дізнається про нашу ініціативу, тим ефективніше ми зможемо допомогти нашим захисникам!</p>
                 <p>З нами — перемагаємо!</p>
             </section>
+            <div className={styles.pictureWrapper}>
+                <img src={pic} alt="alt" className={styles.picture} />
+            </div>
         </>
     )
 }

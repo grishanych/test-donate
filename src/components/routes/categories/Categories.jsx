@@ -5,6 +5,7 @@ import Button from "../../button/Button"
 import styles from "./Categories.module.scss"
 // import stylesCardList from "../../cardlist/CardList.module.scss"
 import stylesCardList from "../../cardlist/CardList.module.scss"
+import pic from './../../../images/bet-on-victory-ban-2.png';
 
 export default function Categories() {
   const [items, setItems] = useState([]);
@@ -123,6 +124,9 @@ export default function Categories() {
         ) : (
         "Завантаження..."
       )}    
+      <div className={styles.pictureWrapper}>
+        <img src={pic} alt="alt" className={styles.picture} />
+      </div>
     </section>
   );
 }
