@@ -31,9 +31,16 @@ function MainSlider(){
       
       <div className={styles.imageswrapper}>
         <div className={styles.images}>
-          <img src={picOne} alt="alt" onClick={() => setCurrentPic(0)} className={styles.image}/>
-          <img src={picTwo} alt="alt" onClick={() => setCurrentPic(1)} className={styles.image}/>
-          <img src={picThree} alt="alt" onClick={() => setCurrentPic(2)} className={styles.image}/>
+          {/* <img src={picOne} alt="alt" onClick={() => setCurrentPic(0)} className={styles.image}/> */}
+          <img src={picOne} alt="alt" onClick={() => setCurrentPic(0)} className={
+            currentPic === 0 ? styles.image : styles.secondPlaneImage
+          }/>
+          <img src={picTwo} alt="alt" onClick={() => setCurrentPic(1)} className={
+            currentPic === 1 ? styles.image : styles.secondPlaneImage
+          }/>
+          <img src={picThree} alt="alt" onClick={() => setCurrentPic(2)} className={
+            currentPic === 2 ? styles.image : styles.secondPlaneImage
+          }/>
         </div>
       </div>
     </section>

@@ -45,11 +45,22 @@
   }
 }
 
-.image {
+.image,
+.secondPlaneImage {
   width: 28%;
   border: 1px solid variables.$bgc-second;
   border-radius: 10px;
   padding: 8px;
   background-color: white;
   cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.secondPlaneImage {
+  opacity: 0.6;
+}
+
+.image:hover,
+.secondPlaneImage:hover {
+  transform: scale(1.1);
 }
