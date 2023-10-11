@@ -2,22 +2,47 @@
 @import "../../styles/mediaqueries";
 
 .section {
-  padding: 20px 15px 60px;
+  padding: 5px 15px 0px;
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  background-color: variables.$bgc-main;
+  align-items: center;
   border-radius: 5px;
 }
 
 .imageswrapper {
-  margin: 0 auto;
-  width: 70%;
+  margin-top: -10px;
+  width: 100%;
+  border-top: 50px solid variables.$bgc-main;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.images {
+  margin-top: -30px;
+  width: 80%;
   display: flex;
   justify-content: space-between;
-  position: absolute;
-  top: 650px;
-  // background-color: white;
+
+  @include devices(mobile) {
+    width: 100%;
+}
+}
+
+.mainPisture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  
+  & img {
+    padding-top: 20px;
+    background-color: variables.$bgc-main;
+    width: 100%;
+  }
 }
 
 .image {

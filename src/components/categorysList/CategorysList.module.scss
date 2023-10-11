@@ -2,7 +2,14 @@
 @import "../../styles/mediaqueries";
 
 .categorysWrapper{
-    padding: 180px 15px 0px;
+    padding: 100px 15px 0px;
+
+    @include devices(tablet) {
+        padding-top: 80px; 
+    }
+    @include devices(mobile) {
+        padding-top: 50px; 
+    }
 }
 
 .categorysList{
