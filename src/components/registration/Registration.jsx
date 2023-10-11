@@ -5,6 +5,7 @@ import { Form, Field, ErrorMessage, Formik } from "formik"
 import { object, string } from "yup"
 import EyeClosed from "../logIn/eye/EyeClosed";
 import EyeOpen from "../logIn/eye/EyeOpen";
+import { FormButton } from "../button/Button";
 // import Info from "./icons/Info";
 import styles from "./Registration.module.scss"
 
@@ -190,12 +191,17 @@ function Registration({ headline, to }){
                 )}
               </Field>
 
-              <button
+              <FormButton type="submit"
+                className={styles.buttonStyle}
+                disabled={isSubmitting}
+                text="Зареєструватися"
+                width="300px"/>
+              {/* <button
                 type="submit"
                 className={styles.buttonStyle}
                 disabled={isSubmitting}>
                 Зареєструватися
-              </button>
+              </button> */}
               <div className={styles.errorsWrapper}>
                 {showError ? <p className={showError && styles.textAttention}>{showError}</p> : null}
                 <ErrorMessage name="firstName" component="p" className={styles.textAttention}/>

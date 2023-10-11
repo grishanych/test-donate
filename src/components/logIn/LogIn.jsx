@@ -6,6 +6,7 @@ import { Form, Field, ErrorMessage, Formik } from "formik";
 import { object, string } from "yup";
 import EyeClosed from "./eye/EyeClosed";
 import EyeOpen from "./eye/EyeOpen";
+import { FormButton } from "../button/Button";
 import styles from "./LogIn.module.scss"
 
 
@@ -104,9 +105,10 @@ function LogIn({ headline, to }){
                 </div>
               )}
             </Field>
-            <button type="submit" className={styles.buttonStyle} width="300px"
+            <FormButton type="submit" className={styles.buttonStyle} width="300px" text="Увійти"/>
+            {/* <button type="submit" className={styles.buttonStyle} width="300px"
             >Увійти
-            </button>
+            </button> */}
             {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
             <div className={styles.errorsWrapper}>
               <ErrorMessage name="login" component="p" className={styles.textAttention}/>
