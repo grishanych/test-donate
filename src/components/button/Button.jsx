@@ -1,7 +1,8 @@
 import styles from "./Button.module.scss"
 import { Link } from "react-router-dom";
 
-export default function Button({ text="", type=null, color="rgba(70, 163, 88, 1)", padding="", width="150px", toPage="", onClick=null, children}) {
+
+export default function Button({ text="", color="rgba(70, 163, 88, 1)", padding="", width="150px", toPage="", onClick=null, children, ...rest}) {
 
   const buttonStyle = {
     backgroundColor: color,
@@ -11,7 +12,7 @@ export default function Button({ text="", type=null, color="rgba(70, 163, 88, 1)
 
 
   return  (
-    <Link to={toPage} type={type} style={buttonStyle} className={styles.buttonStyle} onClick={onClick}>
+    <Link to={toPage} style={buttonStyle} className={styles.buttonStyle} onClick={onClick} {...rest}>
         {
          text !== ""  ? text : children
         }
@@ -20,7 +21,7 @@ export default function Button({ text="", type=null, color="rgba(70, 163, 88, 1)
   )
 };
 
-export function FormButton({ text="", type=null, color="rgba(70, 163, 88, 1)", padding="", width="150px", onClick=null, children}) {
+export function FormButton({ text="", type=null, color="rgba(70, 163, 88, 1)", padding="", width="150px", onClick=null, children, ...rest}) {
 
   const buttonStyle = {
     backgroundColor: color,
@@ -30,7 +31,7 @@ export function FormButton({ text="", type=null, color="rgba(70, 163, 88, 1)", p
 
 
   return  (
-    <button type={type} style={buttonStyle} className={styles.buttonStyle} onClick={onClick}>
+    <button type={type} style={buttonStyle} className={styles.buttonStyle} onClick={onClick} {...rest}>
         {
          text !== ""  ? text : children
         }

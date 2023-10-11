@@ -67,7 +67,7 @@ function Header() {
                     {cartCount === 0 ? null :
                     <span >{cartCount}</span>}
 
-                    <Button toPage="/log-in" width="50px">
+                    <Button toPage="/log-in" width="56px">
                         <IconEnter/>
                     </Button>
                 </div>

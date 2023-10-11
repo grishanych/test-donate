@@ -66,55 +66,58 @@ function LogIn({ headline, to }){
             setSubmitting(false);
           }}
           validationSchema={validationSchema}
-        >   
-          <Form className={styles.form}>
-          <Field name="login">
-              {({ field, meta }) => (
-                  <input
-                    {...field}
-                    id="login"
-                    className={
-                      meta.touched && meta.error
-                        ? styles.inputAttention
-                        : styles.input
-                    }
-                    placeholder="Логін"
-                  />
-              )}
-            </Field>
-            <Field name="password">
-              {({ field, meta }) => (
-                <div className={`${styles.passwordWrapper} ${styles.label}`}>
-                  <input
-                    {...field}
-                    type={showPassword ? "text" : "password"}
-                    className={
-                      meta.touched && meta.error
-                        ? styles.inputAttention
-                        : styles.input
-                    }
-                    placeholder="Пароль"
-                  />
-                  <div
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    className={styles.iconButton}
-                  >
-                    {showPassword === false ? <EyeClosed /> : <EyeOpen />}
+        >
+
+          {({ isSubmitting }) => (
+            <Form className={styles.form}>
+            <Field name="login">
+                {({ field, meta }) => (
+                    <input
+                      {...field}
+                      id="login"
+                      className={
+                        meta.touched && meta.error
+                          ? styles.inputAttention
+                          : styles.input
+                      }
+                      placeholder="Логін"
+                    />
+                )}
+              </Field>
+              <Field name="password">
+                {({ field, meta }) => (
+                  <div className={`${styles.passwordWrapper} ${styles.label}`}>
+                    <input
+                      {...field}
+                      type={showPassword ? "text" : "password"}
+                      className={
+                        meta.touched && meta.error
+                          ? styles.inputAttention
+                          : styles.input
+                      }
+                      placeholder="Пароль"
+                    />
+                    <div
+                      type="button"
+                      onClick={togglePasswordVisibility}
+                      className={styles.iconButton}
+                    >
+                      {showPassword === false ? <EyeClosed /> : <EyeOpen />}
+                    </div>
                   </div>
-                </div>
-              )}
-            </Field>
-            <FormButton type="submit" className={styles.buttonStyle} width="300px" text="Увійти"/>
-            {/* <button type="submit" className={styles.buttonStyle} width="300px"
-            >Увійти
-            </button> */}
-            {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
-            <div className={styles.errorsWrapper}>
-              <ErrorMessage name="login" component="p" className={styles.textAttention}/>
-              <ErrorMessage name="password" component="p" className={styles.textAttention}/>
-            </div>
-          </Form>
+                )}
+              </Field>
+              <FormButton type="submit" className={styles.buttonStyle} width="300px" text="Увійти" disabled={isSubmitting}/>
+              {/* <button type="submit" className={styles.buttonStyle} width="300px"
+              >Увійти
+              </button> */}
+              {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
+              <div className={styles.errorsWrapper}>
+                <ErrorMessage name="login" component="p" className={styles.textAttention}/>
+                <ErrorMessage name="password" component="p" className={styles.textAttention}/>
+              </div>
+            </Form>
+          )}
         </Formik>
         <Link to={to} className={`${styles.text} ${styles.textRegistration}`}>Зареєструватися</Link> 
       </div>

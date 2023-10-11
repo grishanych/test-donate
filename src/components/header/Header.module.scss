@@ -167,6 +167,9 @@ input:focus {
 }
 
 .searchBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: variables.$bgc-main;
     color: #fff;
     border: none;

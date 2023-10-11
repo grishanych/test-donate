@@ -40,17 +40,16 @@ function SearchInHeader() {
                     />
                     <div className={styles.searchButtons}>
                         <Button
-                            type="submit"
                             name="find"
                             id=""
                             className={styles.searchBtn}
                             text="Знайти"
-                            width="80px"
+                            width="100px"
                         />
                         <Button 
                             onClick={handleInputDoubleClick}
-                            className={`${styles.searchBtn} ${styles.closeSearchBtn}`}
-                            width="25px"
+                            className={styles.searchBtn}
+                            width="60px"
                             jc="center"
                             ala="center"
                             padding="20px">
