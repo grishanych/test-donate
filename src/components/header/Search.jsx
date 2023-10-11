@@ -1,27 +1,21 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setInputValue } from '../../redux/actionsCreators/inputValueActionsCreators';
+import { updateInputValue } from '../../redux/actionsCreators/inputValueActionsCreators';
 import Context from "../Context";
 import IconSearch from './icons/search/IconSearch';
-import Button from "../button/Button"
+import Button from "../button/Button";
 import styles from './Header.module.scss';
 
-
 function SearchInHeader() {
-    const inputValue = useSelector((state) => state.input.inputValue);
-    const dispatch = useDispatch();
     const [isLinkVisible, setIsLinkVisible] = useState(true);
     const context = useContext(Context);
-
-    const handleInputChange = (event) => {
-        dispatch(setInputValue(event.target.value));
-      };
-
 
     const handleClick = () => {
         setIsLinkVisible(false);
         context.setIsLinkVisible(false);
     };
+
     const handleInputDoubleClick = (event) => {
         setIsLinkVisible(true);
         context.setIsLinkVisible(true);
@@ -30,6 +24,25 @@ function SearchInHeader() {
     const crossStyle = {
         height: "13px",
     }
+
+    const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
+    const dispatch = useDispatch();
+
+    const [inputValue, setInputValue] = useState(inputValueFromRedux);
+
+    useEffect(() => {
+        setInputValue(inputValueFromRedux);
+    }, [inputValueFromRedux]);
+
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        dispatch(updateInputValue(value));
+        setInputValue(value);
+    };
+
+    const handleButtonSubmit = () => {
+        console.log('Значення інпуту:', inputValue);
+    };
 
     return (
         <div className={styles.hiddenSearchMenu}>
@@ -50,26 +63,29 @@ function SearchInHeader() {
                         onChange={handleInputChange}
                     />
                     <div className={styles.searchButtons}>
+                    <Link to="/products">
                         <Button
+                        to="/products"
                             type="submit"
                             name="find"
                             id=""
                             className={styles.searchBtn}
                             text="Знайти"
                             width="80px"
+                            onClick={handleButtonSubmit}
                         />
-                        <Button 
+                        </Link>
+                        <Button
                             onClick={handleInputDoubleClick}
                             className={`${styles.searchBtn} ${styles.closeSearchBtn}`}
                             width="25px"
                             jc="center"
                             ala="center"
                             padding="20px">
-                                <span style={crossStyle}>
-                                    &#x2715;
-                                </span>
+                            <span style={crossStyle}>
+                                &#x2715;
+                            </span>
                         </Button>
-                        {/* <button onClick={handleInputDoubleClick} className={`${styles.searchBtn} ${styles.closeSearchBtn}`}>&#x2715;</button> */}
                     </div>
                 </div>
             )}
@@ -77,4 +93,4 @@ function SearchInHeader() {
     )
 }
 
-export default SearchInHeader
+export default SearchInHeader;

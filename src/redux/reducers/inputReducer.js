@@ -1,17 +1,19 @@
 import { SET_INPUT_VALUE } from '../actions/valueActions'
 
 const initialState = {
-    inputValue: '',
+  inputValue: '',
 };
 
-export const inputReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case SET_INPUT_VALUE :
-        return {
-          ...state,
-          inputValue: action.payload,
-        };
-      default:
-        return state;
-    }
-  };
+const inputReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_INPUT_VALUE:
+      return {
+        ...state,
+        inputValue: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default inputReducer;

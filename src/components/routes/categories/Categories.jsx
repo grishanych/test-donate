@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import Slider from "react-slider";
 import { Card } from "../../card/Card"
 import Button from "../../button/Button"
@@ -11,7 +10,6 @@ export default function Categories() {
   const [selectedValue, setSelectedValue] = useState("all");
   const [sliderValue, setSliderValue] = useState([0, 10000]);
   const [tempSliderValue, setTempSliderValue] = useState([0, 10000]);
-  const inputValue = useSelector((state) => state.input.inputValue);
 
   const handleChange = (e) => {
       setSelectedValue(e.target.value);
@@ -38,8 +36,7 @@ export default function Categories() {
         data.forEach(item => {
           const price = item.price ?? 0;
           if (
-            (selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])) &&
-            (inputValue === '' || item.name.toLowerCase().includes(inputValue.toLowerCase()))
+            selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])
           ) {
             if (selectedValue === "all") {
               newData.push(item);
@@ -60,7 +57,7 @@ export default function Categories() {
         setItems(mixedData);
       })
       .catch(error => console.error('There was an error!', error));
-  }, [selectedValue, sliderValue, inputValue]);
+  }, [selectedValue, sliderValue]);
 
   return (
     <section className={stylesCardList.cardsSectionWrapper}>
