@@ -6,6 +6,7 @@ import Cart from "./icons/cart/IconCart";
 import IconEnter from "./icons/enter/IconEnter";
 import SearchInHeader from './Search';
 import Button from "../button/Button";
+import { IconSearchMobile } from './icons/search/IconSearch';
 import styles from './Header.module.scss';
 import { useSelector } from 'react-redux';
 import HeartFavorite from './icons/favorites/Heart';
@@ -13,10 +14,6 @@ import HeartFavorite from './icons/favorites/Heart';
 function Header() {
     const [menuVisible, setMenuVisible] = useState(false);
     const { isLinkVisible } = useContext(Context);
-
-    // const toggleMenu = () => {
-    //     setMenuVisible(!menuVisible);
-    // };
 
     const closeMenu = () => {
         setMenuVisible(false);
@@ -34,14 +31,18 @@ function Header() {
 
     return (
         <header className={styles.header}>
+            <div className={styles.mobileHeader}>
+                <input
+                    className={styles.inputMobileHeader}
+                    type="text"
+                    placeholder="Знайти..."
+                />
+                <button className={styles.buttonMobileHeader}>
+                    <IconSearchMobile />
+                </button>
+            </div>
             <div className={styles.headerLaptop}>
                 <Link to="/" className={styles.logo}><img src={logo} alt="" width={70} height={70} /></Link>
-                {/* make it beter if we build mobile menu vers.1 */}
-                {/* <div className={`${styles.burgerButton} ${menuVisible ? styles.active : ''}`} onClick={toggleMenu}>
-                    <div className={`${styles.burgerBar} ${menuVisible ? styles.crossBar1 : ''}`}></div>
-                    <div className={`${styles.burgerBar} ${menuVisible ? styles.crossBar2 : ''}`}></div>
-                    <div className={`${styles.burgerBar} ${menuVisible ? styles.crossBar3 : ''}`}></div>
-                </div> */}
                 <div className={styles.navWrapper}>
                     <nav style={style} className={styles.nav}>
                         <ul className={`${styles.navItem} ${menuVisible ? styles.active : ''}`}>
@@ -70,12 +71,6 @@ function Header() {
                     <Button toPage="/log-in" width="56px">
                         <IconEnter/>
                     </Button>
-                </div>
-            </div>
-            {/* change if we build mobile menu vers.1 */}
-            <div className={styles.headerMobile}>
-                <div className={styles.XXX}>
-                        <div className={styles.YYY}></div>
                 </div>
             </div>
         </header>

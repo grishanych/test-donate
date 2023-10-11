@@ -7,23 +7,37 @@
     justify-content: center;
 }
 
-.headerMobile {
-    padding: 25px 15px;
+.mobileHeader {
+    padding: 40px 5px 17px;
+    width: 100%;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
 
-    @media screen and (min-width: 768px) {
-        display: none;
+    @include devices(mobile) {
+        display: flex;
     }
 }
 
-.XXX {
-    display: flex;
-    justify-content: flex-end;
+.inputMobileHeader {
+    width: calc(85% - 20px);
+    padding: 15px 10px;
+    border-radius: 10px;
+    background-color: variables.$bgc-second;
+    border: none;
+
+    &:focus {
+        border: none;
+        outline: none;
+      }
 }
 
-.YYY {
-    width: 100px;
-    height: 100px;
-    background-color: variables.$bgc-main;
+.buttonMobileHeader {
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(137deg, variables.$bgc-second -24.6%, #46A358 100%);
 }
 
 .headerLaptop {

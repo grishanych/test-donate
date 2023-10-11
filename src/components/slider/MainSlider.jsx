@@ -24,7 +24,7 @@ function MainSlider(){
       <Link to={
         currentPic === 0 ? "/product/3456726" : currentPic === 1 ? "/product/547790" : currentPic === 2 ? "/product/111644" : null
       }
-      className={styles.mainPisture}
+      className={styles.mainPiсture}
       target="_blank">
         <img src={pictures[currentPic]} alt="alt"/>
       </Link>
