@@ -11,7 +11,6 @@ export default function Categories() {
   const [sliderValue, setSliderValue] = useState([0, 10000]);
   const [tempSliderValue, setTempSliderValue] = useState([0, 10000]);
 
-
   const handleChange = (e) => {
       setSelectedValue(e.target.value);
     };
@@ -29,7 +28,6 @@ export default function Categories() {
     return array;
   }
 
-    
   useEffect(() => {
     fetch('http://localhost:4000/api/products')
       .then(response => response.json())
@@ -37,7 +35,9 @@ export default function Categories() {
         let newData = [];
         data.forEach(item => {
           const price = item.price ?? 0;
-          if (selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])) {
+          if (
+            selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])
+          ) {
             if (selectedValue === "all") {
               newData.push(item);
             } else if (selectedValue === "donation" && item.category === "Донат") {
@@ -57,8 +57,7 @@ export default function Categories() {
         setItems(mixedData);
       })
       .catch(error => console.error('There was an error!', error));
-  }, [selectedValue, sliderValue]); 
-      
+  }, [selectedValue, sliderValue]);
 
   return (
     <section className={stylesCardList.cardsSectionWrapper}>

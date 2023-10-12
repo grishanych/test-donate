@@ -57,7 +57,7 @@ function Header() {
                         </ul>
                     </nav>
                    
-                    <SearchInHeader />
+                 <SearchInHeader />
                 </div>
                 <Link to="/favorites">
                         <HeartFavorite  />
