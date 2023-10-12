@@ -17,8 +17,9 @@ import HomeIcon from "../footer/icons/mobileVersionIcons/Home.svg";
 import FavoriteIcon from "../footer/icons/mobileVersionIcons/Vector.svg";
 import CartIcon from "../footer/icons/mobileVersionIcons/Shop.svg";
 import UserIcon from "../footer/icons/mobileVersionIcons/User.svg";
-import { FormButton } from "./../button/Button"
+// import { FormButton } from "./../button/Button"
 import { Link } from "react-router-dom";
+import Subscribe from "./Subscribe"
 
 function Footer() {
   return (
@@ -40,28 +41,9 @@ function Footer() {
           </div>
         </div>
         <div className={styles.footerContainer}>
-          <div className={styles.footerSubscribeWrapper}>
-            <div className={styles.footerSubscribeContainer}>
-              <h3 className={styles.footerSubscribeHeader}>
-                Дізнавайтесь першими про розпродажі і новинки!
-              </h3>
-              <div className={styles.footerInput}>
-                <input
-                    type="text"
-                    placeholder="Введіть email"
-                    className={styles.emailInput}
-                />
-                <FormButton type="submit" className={styles.joinBtn} text="Підписатися"/>
-                {/* <button type="submit" className={styles.joinBtn}>
-                  Підписатися
-                </button> */}
-              </div>
-              <p className={styles.footerSubscribeInfo}>
-                Оформляйте підписку та отримуйте найгарячіші пропозиції обраних
-                товарів, знижки та інформацію про нові поставки товару.
-              </p>
-            </div>
-          </div>
+          
+          <Subscribe />
+
           <div className={styles.footerContacts}>
             <div className={styles.contactsContainer}>
               <div className={styles.contactsInner}>
