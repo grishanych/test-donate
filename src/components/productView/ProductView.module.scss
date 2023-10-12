@@ -3,21 +3,38 @@
 @import "../../styles/mediaqueries";
 
 .productViewCard {
+
 }
 .mainInfoDescription {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include devices(tablet) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+  }
 }
-.productImage {
-}
+
 .productDetails {
+  padding-left: 10px;
+  @include devices(tablet){
+    min-width: 500px;
+    padding: 0 15px;
+  }
+
 }
 .productName {
   @include mixins.font-family-bold;
   font-size: variables.$fs-xxl;
   color: variables.$main-text-color;
   margin-bottom: 20px;
+  @include devices(tablet) {
+    font-size: variables.$fs-l;
+  }
 }
 .productPrice {
   @include mixins.font-family-bold;
@@ -26,6 +43,9 @@
   color: variables.$fc-main;
   padding-bottom: 13px;
   border-bottom: 0.3px solid rgba(70, 163, 88, 0.5);
+  @include devices(tablet) {
+    font-size: variables.$fs-x;
+  }
 }
 
 .descTitle,
@@ -36,6 +56,7 @@
   color: variables.$main-text-color;
   margin-bottom: 10px;
   padding-top: 15px;
+  padding-right: 10px;
 }
 .descriptionText {
   @include mixins.font-family-regular;
@@ -51,7 +72,6 @@
 }
 
 .selectedOption {
-  margin-left: 10px;
   @include mixins.font-family-bold;
   font-size: 16px;
   line-height: 16px;
@@ -61,7 +81,14 @@
   color: #3d3d3d;
 }
 .quantityCounter {
-  margin-right: 26px;
+  margin-bottom: 30px;
+  order: 1;
+  min-width: 100%;
+  @include devices(tablet){
+    order: 1;
+    margin-bottom: 20px;
+  }
+
 }
 .decrease,
 .increase {
@@ -80,10 +107,20 @@
   color: variables.$main-text-color;
   margin: 0 20px;
 }
+
 .buyButtons {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 24px;
+
+  //@include devices(tablet){
+  //  display: flex;
+  //  align-items: center;
+  //  flex-wrap: wrap;
+  //
+  //}
+
 }
 .buyNowBtn {
   @include mixins.font-family-bold;
@@ -96,6 +133,16 @@
   border: none;
   background-color: #46a358;
   margin-right: 10px;
+  @include devices(laptop) {
+    order: 2;
+  }
+
+
+
+  @include devices(tablet) {
+    order: 3;
+    margin-right: 10px;
+  }
 }
 .addToCartBtn {
   border-radius: 6px;
@@ -106,14 +153,29 @@
   text-transform: uppercase;
   color: #46a358;
   padding: 10px 20px;
-  margin-right: 10px;
   background-color: #ffffff;
+  margin-right: 10px;
+
+  @include devices(laptop) {
+    order: 2;
+  }
+  @include devices(tablet) {
+    order: 3;
+    margin-right: 10px;
+  }
 }
 .addToFavorite {
   padding: 9px 10px;
   border: 1px solid #46a358;
   border-radius: 6px;
   background-color: #ffffff;
+  @include devices(laptop) {
+    order: 2;
+  }
+  @include devices(tablet) {
+    order: 3;
+
+  }
 }
 .sku {
   @include mixins.font-family-regular;
@@ -160,6 +222,7 @@
 
 .descriptionContainer {
   margin-top: 100px;
+  padding: 0 15px;
 }
 .productDescription {
   display: flex;

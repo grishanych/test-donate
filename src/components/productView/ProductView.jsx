@@ -12,6 +12,19 @@ import Message from "./icons/message/Message";
 import { Cloudinary } from "@cloudinary/url-gen";
 import ShoesSelector from "./sizeSelector/ShoesSelector";
 import ClothesSelector from "./sizeSelector/ClothesSelector";
+import ProductViewSlider from "./ProductViewSlider";
+
+function convertToImgUrl(nameCloudinary) {
+  const cld = new Cloudinary({
+    cloud: { cloudName: "dzaxltnel" },
+    url: { secure: true },
+  });
+  const myImage = cld.image(`${nameCloudinary}`);
+  const imageURL = myImage.toURL();
+
+  return imageURL;
+}
+
 
 function ProductView() {
   const dispatch = useDispatch();
@@ -28,7 +41,7 @@ function ProductView() {
         const data = await response.json();
         console.log("Data from server:", data);
 
-        dispatch(setProduct(data));
+        dispatch(setProduct({...data, images:data.nameCloudinary.map(convertToImgUrl)}));
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -40,26 +53,17 @@ function ProductView() {
   }, [dispatch, params.itemNo]);
 
   if (!product) {
+
     return <div>Product not found...</div>;
   }
+  console.log(product)
 
-  const cld = new Cloudinary({
-    cloud: { cloudName: "dzaxltnel" },
-    url: { secure: true },
-  });
-  const myImage = cld.image(`${product.nameCloudinary[0]}`);
-  const imageURL = myImage.toURL();
 
   return (
     <div className={styles.productViewCard}>
       <div className={styles.mainInfoDescription}>
         <div className={styles.productImage}>
-          <img
-            width={"400px"}
-            height={"400px"}
-            src={imageURL}
-            alt="товарні зображення"
-          />
+          <ProductViewSlider images={product.images}/>
         </div>
         <div className={styles.productDetails}>
           <h2 className={styles.productName}>{product.name}</h2>
@@ -73,11 +77,14 @@ function ProductView() {
             null}
           <div className={styles.buyButtons}>
             <QuantityCounter />
-            <button className={styles.buyNowBtn}>Buy Now</button>
-            <button className={styles.addToCartBtn}>Add To Cart</button>
-            <button className={styles.addToFavorite}>
-              <img src={heart} alt="add to favorite" />
-            </button>
+
+              <button className={styles.buyNowBtn}>Buy Now</button>
+              <button className={styles.addToCartBtn}>Add To Cart</button>
+              <button className={styles.addToFavorite}>
+                <img src={heart} alt="add to favorite" />
+              </button>
+
+
           </div>
           <p className={styles.sku}>
             <span>Код товару:</span> {product.article}
