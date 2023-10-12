@@ -17,7 +17,7 @@ import DeliveryPayment from "./DeliveryPayment";
 import Returns from "./Returns";
 import PrivacyPolicy from "./PrivacyPolicy";
 import ProductPage from "./ProductPage";
-import ListProducts from "./listProducts/ListProducts";
+import SearchProducts from "./SearchProducts/SearchProducts";
 
 
 function AppRoutes() {
@@ -42,7 +42,7 @@ function AppRoutes() {
       <Route path="/adm-page" element={<AdminPage/>}/>
       <Route path="/registration" element={<CustomerRegistration/>}/>
       <Route path="/adm-registration" element={<AdminRegistration/>}/>
-      <Route path="/products" element={<ListProducts/>} />
+      <Route path="/products-search" element={<SearchProducts/>} />
     </Routes>
   );
 }

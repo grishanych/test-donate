@@ -3,6 +3,13 @@
 
 .categorysWrapper{
     padding: 50px 15px 0px;
+
+    @include devices(tablet) {
+        padding-top: 80px; 
+    }
+    @include devices(mobile) {
+        padding-top: 50px; 
+    }
 }
 
 .categorysList{

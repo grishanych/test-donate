@@ -1,27 +1,47 @@
 import styles from "./Button.module.scss"
 import { Link } from "react-router-dom";
 
-function Button({ text="", type=null, color="rgba(70, 163, 88, 1)", jc="center", ala="", padding="", width="150px", toPage="", onClick=null, children}) {
+
+export default function Button({ text="", color="rgba(70, 163, 88, 1)", padding="", width="150px", toPage="", onClick=null, children, ...rest}) {
 
   const buttonStyle = {
     backgroundColor: color,
     width: width,
-    alignItems: ala,
-    justifyContent: jc,
     padding: padding,
   };
 
 
   return  (
-    // <Link to={toPage} >
-      <button type={type} style={buttonStyle} className={styles.buttonStyle} onClick={onClick}>
+    <Link to={toPage} style={buttonStyle} className={styles.buttonStyle} onClick={onClick} {...rest}>
         {
          text !== ""  ? text : children
         }
-      </button>
-    // </Link>
+    </Link>
 
   )
 };
 
-export default Button;
+export function FormButton({ text="", type=null, color="rgba(70, 163, 88, 1)", padding="", width="150px", onClick=null, children, ...rest}) {
+
+  const buttonStyle = {
+    backgroundColor: color,
+    width: width,
+    padding: padding,
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      onClick();
+    }
+  };
+
+
+  return  (
+    <button type={type} style={buttonStyle} className={styles.buttonStyle} onClick={onClick} {...rest} onKeyDown={handleKeyDown}>
+        {
+         text !== ""  ? text : children
+        }
+    </button>
+
+  )
+};

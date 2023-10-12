@@ -1,5 +1,3 @@
-// import styles from "./CustomerPage.module.scss"
-
 
 function CustomerPage(){
 

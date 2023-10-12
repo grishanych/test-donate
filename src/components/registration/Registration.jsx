@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Form, Field, ErrorMessage, Formik } from "formik"
 import { object, string } from "yup"
-import EyeClosed from "../routes/adminRoutes/adminLogin/eye/EyeClosed";
-import EyeOpen from "../routes/adminRoutes/adminLogin/eye/EyeOpen";
-import Info from "./icons/Info";
+import EyeClosed from "../logIn/eye/EyeClosed";
+import EyeOpen from "../logIn/eye/EyeOpen";
+import { FormButton } from "../button/Button";
+// import Info from "./icons/Info";
 import styles from "./Registration.module.scss"
 
 
@@ -18,12 +19,12 @@ function Registration({ headline, to }){
 
   const validationSchema = object().shape({
     firstName: string()
-      .required("Поле логіну є обов'язковим для заповнення")
+      .required("Поле імені є обов'язковим для заповнення")
       .matches(/[a-zA-Zа-яА-ЯіІїЇ'єЄ]/, "Дозволені символи для ім'я a-z, A-Z, а-я, А-Я")
       .min(2, "Ім'я має містити від 2 до 25 символів")
       .max(25, "Ім'я має містити від 2 до 25 символів"),
     lastName: string()
-      .required("Поле логіну є обов'язковим для заповнення")
+      .required("Поле прізвища є обов'язковим для заповнення")
       .matches(/[a-zA-Zа-яА-ЯіІїЇ'єЄ]/, "Дозволені символи для прізвища a-z, A-Z, а-я, А-Я")
       .min(2, "Прізвище має містити від 2 до 25 символів")
       .max(25, "Прізвище має містити від 2 до 25 символів"),
@@ -34,7 +35,7 @@ function Registration({ headline, to }){
       .max(10, "Логін повинен мати не більше 10 символів"),
     email: string()
       .email("Некорректний формат електронної адреси")
-      .required("Поле логіну є обов'язковим для заповнення"),
+      .required("Поле адреси електронної пошти є обов'язковим для заповнення"),
     password: string()
       .required("Поле пароля є обов'язковим для заповнення")
       .min(7, "Пароль має містити від 7 до 30 символів")
@@ -83,7 +84,8 @@ function Registration({ headline, to }){
   return(
     <section className={styles.windowWrapper}>
       <div className={styles.window}>
-        <h1>{headline}</h1>
+        <h1 className={styles.headline}>{headline}</h1>
+        <p className={`${styles.text} ${styles.headlineText}`}>Введіть дані для реєстрації</p>
 
         <Formik 
           initialValues={{
@@ -107,92 +109,54 @@ function Registration({ headline, to }){
 
               <Field name="firstName">
                 {({ field, meta }) => (
-                  <label htmlFor="firstName" className={styles.label}>
-                    <div className={styles.labelTextWrapper}>
-                      <div className={styles.iconWrapper}>
-                        <p className={styles.infoText}>Обов'язково</p>
-                        <Info/>
-                      </div>
-                      <p className={styles.labelText}>Ім'я:</p>
-                    </div>
                     <input
                       {...field}
                       id="firstName"
                       className={ meta.touched && meta.error ? styles.inputAttention : styles.input }
+                      placeholder="Ім'я"
                     />
-                  </label> 
                 )}
               </Field>
               <Field name="lastName">
                 {({ field, meta }) => (
-                  <label htmlFor="lastName" className={styles.label}>
-                    <div className={styles.labelTextWrapper}>
-                      <div className={styles.iconWrapper}>
-                        <p className={styles.infoText}>Обов'язково</p>
-                        <Info/>
-                      </div>
-                      <p className={styles.labelText}>Прізвище:</p>
-                    </div>
-                    <input
-                      {...field}
-                      id="lastName"
-                      className={ meta.touched && meta.error ? styles.inputAttention : styles.input }
-                    />
-                  </label> 
+                  <input
+                  {...field}
+                  id="lastName"
+                  className={ meta.touched && meta.error ? styles.inputAttention : styles.input }
+                  placeholder="Прізвище"
+                />
                 )}
               </Field>
               <Field name="login">
                 {({ field, meta }) => (
-                  <label htmlFor="login" className={styles.label}>
-                    <div className={styles.labelTextWrapper}>
-                      <div className={styles.iconWrapper}>
-                        <p className={styles.infoText}>Обов'язково</p>
-                        <Info/>
-                      </div>
-                      <p className={styles.labelText}>Логін:</p>
-                    </div>
-                    <input
-                      {...field}
-                      id="login"
-                      className={ meta.touched && meta.error ? styles.inputAttention : styles.input }
-                    />
-                  </label> 
+                  <input
+                  {...field}
+                  id="login"
+                  className={ meta.touched && meta.error ? styles.inputAttention : styles.input }
+                  placeholder="Логін"
+                />
                 )}
               </Field>
               <Field name="email">
                 {({ field, meta }) => (
-                  <label htmlFor="email" className={styles.label}>
-                    <div className={styles.labelTextWrapper}>
-                      <div className={styles.iconWrapper}>
-                        <p className={styles.infoText}>Обов'язково</p>
-                        <Info/>
-                      </div>
-                      <p className={styles.labelText}>Email:</p>
-                    </div>
-                    <input
+                  <input
                       {...field}
                       type="email"
                       id="email"
                       className={ meta.touched && meta.error ? styles.inputAttention : styles.input }
+                      placeholder="Email"
                     />
-                   </label> 
                 )}
               </Field>
               <Field name="password">
                 {({ field, meta }) => (
-                  <label htmlFor="password" className={`${styles.passwordWrapper} ${styles.label}`}>
-                    <div className={styles.labelTextWrapper}>
-                      <div className={styles.iconWrapper}>
-                        <p className={styles.infoText}>Обов'язково</p>
-                        <Info/>
-                      </div>
-                      <p className={styles.labelText}>Пароль:</p>
-                    </div>
+                  <div htmlFor="password" className={`${styles.passwordWrapper} ${styles.label}`}>
                     <input
                       {...field}
                       type={showPassword ? "text" : "password"}
                       id="password"
                       className={ meta.touched && meta.error ? styles.inputAttention : styles.input }
+                      placeholder="Пароль"
                     />
                     <div
                       type="button"
@@ -201,47 +165,43 @@ function Registration({ headline, to }){
                     >
                       {showPassword === false ? <EyeClosed /> : <EyeOpen />}
                     </div>
-                  </label>
+                  </div>
                 )}
               </Field>
               <Field name="telephone">
                 {({ field, meta }) => (
-                  <label htmlFor="tel" className={styles.label}>
-                    <div className={styles.labelTextWrapper}>
-                      <div className={styles.iconWrapper}>
-                        <p className={styles.infoText}>+38...</p>
-                        <Info/>
-                      </div>
-                      <p className={styles.labelText}>Телефон:</p>
-                    </div>
-                    <input
+                  <input
                       {...field}
                       type="tel"
                       id="tel"
                       className={ meta.touched && meta.error ? styles.inputAttention : styles.input }
+                      placeholder="Телефон"
                     />
-                  </label>
                 )}
               </Field>
               <Field name="birthdate">
                 {({ field, meta }) => (
-                  <label htmlFor="date" className={styles.label}>Дата народження:
-                    <input
+                  <input
                       {...field}
                       type="date"
                       id="date"
                       className={ meta.touched && meta.error ? styles.inputAttention : styles.input }
+                      placeholder="Дата народження"
                     />
-                  </label>
                 )}
               </Field>
 
-              <button
+              <FormButton type="submit"
+                className={styles.buttonStyle}
+                disabled={isSubmitting}
+                text="Зареєструватися"
+                width="300px"/>
+              {/* <button
                 type="submit"
                 className={styles.buttonStyle}
                 disabled={isSubmitting}>
                 Зареєструватися
-              </button>
+              </button> */}
               <div className={styles.errorsWrapper}>
                 {showError ? <p className={showError && styles.textAttention}>{showError}</p> : null}
                 <ErrorMessage name="firstName" component="p" className={styles.textAttention}/>

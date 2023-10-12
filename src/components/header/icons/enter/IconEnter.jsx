@@ -1,4 +1,4 @@
-import { ReactComponent as Enter } from './enter.svg';
+import { ReactComponent as Enter } from "./enter.svg";
 
 const IconEnter = () => {
 

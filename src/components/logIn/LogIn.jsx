@@ -6,6 +6,7 @@ import { Form, Field, ErrorMessage, Formik } from "formik";
 import { object, string } from "yup";
 import EyeClosed from "./eye/EyeClosed";
 import EyeOpen from "./eye/EyeOpen";
+import { FormButton } from "../button/Button";
 import styles from "./LogIn.module.scss"
 
 
@@ -56,6 +57,8 @@ function LogIn({ headline, to }){
     <section className={styles.windowWrapper}>
       <div className={styles.window}>
         <h1 className={styles.headline}>{headline}</h1>
+        <p className={`${styles.text} ${styles.headlineText}`}>Введіть логін та пароль, щоб увійти</p>
+
         <Formik 
           initialValues={{login: "", password: ""}}
           onSubmit={(values, { setSubmitting }) => {
@@ -63,56 +66,60 @@ function LogIn({ headline, to }){
             setSubmitting(false);
           }}
           validationSchema={validationSchema}
-        >   
-          <Form className={styles.form}>
-          <Field name="login">
-              {({ field, meta }) => (
-                <label htmlFor="login" className={styles.label}>Логін:
-                  <input
-                    {...field}
-                    id="login"
-                    className={
-                      meta.touched && meta.error
-                        ? styles.inputAttention
-                        : styles.input
-                    }
-                  />
-                </label>
-              )}
-            </Field>
-            <Field name="password">
-              {({ field, meta }) => (
-                <label htmlFor="login" className={`${styles.passwordWrapper} ${styles.label}`}>Пароль:
-                  <input
-                    {...field}
-                    type={showPassword ? "text" : "password"}
-                    className={
-                      meta.touched && meta.error
-                        ? styles.inputAttention
-                        : styles.input
-                    }
-                  />
-                  <div
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    className={styles.iconButton}
-                  >
-                    {showPassword === false ? <EyeClosed /> : <EyeOpen />}
+        >
+
+          {({ isSubmitting }) => (
+            <Form className={styles.form}>
+            <Field name="login">
+                {({ field, meta }) => (
+                    <input
+                      {...field}
+                      id="login"
+                      className={
+                        meta.touched && meta.error
+                          ? styles.inputAttention
+                          : styles.input
+                      }
+                      placeholder="Логін"
+                    />
+                )}
+              </Field>
+              <Field name="password">
+                {({ field, meta }) => (
+                  <div className={`${styles.passwordWrapper} ${styles.label}`}>
+                    <input
+                      {...field}
+                      type={showPassword ? "text" : "password"}
+                      className={
+                        meta.touched && meta.error
+                          ? styles.inputAttention
+                          : styles.input
+                      }
+                      placeholder="Пароль"
+                    />
+                    <div
+                      type="button"
+                      onClick={togglePasswordVisibility}
+                      className={styles.iconButton}
+                    >
+                      {showPassword === false ? <EyeClosed /> : <EyeOpen />}
+                    </div>
                   </div>
-                </label>
-              )}
-            </Field>
-            <button type="submit" className={styles.buttonStyle}
-            >Увійти
-            </button>
-            {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
-            <div className={styles.errorsWrapper}>
-              <ErrorMessage name="login" component="p"/>
-              <ErrorMessage name="password" component="p"/>
-            </div>
-          </Form>
+                )}
+              </Field>
+              <FormButton type="submit" className={styles.buttonStyle} width="300px" text="Увійти" disabled={isSubmitting}/>
+              {/* <button type="submit" className={styles.buttonStyle} width="300px"
+              >Увійти
+              </button> */}
+              {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
+              <div className={styles.errorsWrapper}>
+                <ErrorMessage name="login" component="p" className={styles.textAttention}/>
+                <ErrorMessage name="password" component="p" className={styles.textAttention}/>
+              </div>
+            </Form>
+          )}
         </Formik>
-        <Link to={to}><span className={styles.text}>Зареєструватися</span></Link> 
+        <Link to={to} className={`${styles.text} ${styles.textRegistration}`}>Зареєструватися</Link> 
       </div>
     </section>
   )

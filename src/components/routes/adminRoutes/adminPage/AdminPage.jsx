@@ -1,5 +1,3 @@
-// import styles from "./AdminPage.module.scss"
-
 
 function AdminPage(){
 

@@ -1,31 +1,23 @@
 import CategorysList from "../../categorysList/CategorysList"
 import CardList from "../../cardlist/CardList"
+import MainSlider from "../../slider/MainSlider"
 import styles from "./Home.module.scss"
-// import stylesApp from "../App.module.scss"
+import pic from "./../../../images/bet-on-victory-ban-1.jpeg";
 
 
 function MainPage(){
 
-    const style = {
-        "width": "100%",
-        "height": "500px",
-        "backgroundColor": "green",
-        "display": "flex",
-        "alignItems": "center",
-        "justifyContent": "center",
-        "fontSize": "50px",
-        "color": "white",
-        "backgroundSize": "contain",
-        "backgroundRepeat": "no-repeat",
-    }
-
     return (
         <>
-            <div style={style}>
-                Тут міг бути ваш слайдер
-            </div>
+            <MainSlider />
             <CategorysList />
-            <CardList />
+            <section className={styles.cardListSection}>
+                <div className={styles.cardsSectionTextContent}>
+                    <h2 className={styles.cardsSectionHeadline}>Наші хіти</h2>
+                    <p className={styles.cardsSectionText}>Найпопулярніші позиції</p>
+                </div>
+                <CardList />
+            </section>
             <section className={styles.homeTextSection}>
                 <p className={styles.call}>Долучись до Підтримки Наших Героїв!</p>
                 <h2 className={styles.headline}>Вітаємо на сайті Ставка на Перемогу!</h2>
@@ -40,6 +32,9 @@ function MainPage(){
                 <p>Кожен твій крок, навіть найменший, робить нас сильнішими. Це не просто покупки або донати. Це інвестиції в безпеку і майбутнє нашої держави. Поділися нашим сайтом з друзями, родичами, колегами. Чим більше людей дізнається про нашу ініціативу, тим ефективніше ми зможемо допомогти нашим захисникам!</p>
                 <p>З нами — перемагаємо!</p>
             </section>
+            <div className={styles.pictureWrapper}>
+                <img src={pic} alt="alt" className={styles.picture} />
+            </div>
         </>
     )
 }

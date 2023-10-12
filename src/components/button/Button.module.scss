@@ -1,12 +1,14 @@
+@use "../../styles/variables";
+
 .buttonStyle {
-    height: 40px;
-    // padding: 0px 20px;
+    height: 56px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     color: #fff;
+    font-size: variables.$fs-s;
     font-weight: 700;
 }

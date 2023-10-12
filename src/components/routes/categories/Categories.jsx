@@ -4,6 +4,7 @@ import { Card } from "../../card/Card"
 import Button from "../../button/Button"
 import styles from "./Categories.module.scss"
 import stylesCardList from "../../cardlist/CardList.module.scss"
+import pic from "./../../../images/bet-on-victory-ban-2.jpeg";
 
 export default function Categories() {
   const [items, setItems] = useState([]);
@@ -60,16 +61,14 @@ export default function Categories() {
   }, [selectedValue, sliderValue]);
 
   return (
-    <section className={stylesCardList.cardsSectionWrapper}>
-      <div className={stylesCardList.cardsSectionTextContent}>
-        <h1 className={stylesCardList.cardsSectionHeadline}>Заголовок</h1>
-        <p className={stylesCardList.cardsSectionText}>Всі донати, відкриті аукціони та військовий одяг</p>
-      </div>
+    <section className={styles.cardsSectionWrapper}>
+      <h1 className={styles.cardsSectionHeadline}>Категорії</h1>
+      <p className={styles.cardsSectionText}>Всі донати, відкриті аукціони та військовий одяг</p>
 
       <div className={styles.filtrationWrapper}>
-        <h2 className={styles.filtrationHeadline}>Оберіть, що вам потрібно:</h2>
         <div className={styles.filtration}>
           <div className={styles.filtrationSelectWrapper}>
+            <p className={styles.filtrationHeadline}>Оберіть, що вам потрібно:</p>
             <select name="categories" value={selectedValue} onChange={handleChange} className={styles.select}>
               <option value="all" className={styles.option}>Всі</option>
               <option value="donation" className={styles.option}>Донати</option>
@@ -121,6 +120,9 @@ export default function Categories() {
         ) : (
         "Завантаження..."
       )}    
+      <div className={styles.pictureWrapper}>
+        <img src={pic} alt="alt" className={styles.picture} />
+      </div>
     </section>
   );
 }
