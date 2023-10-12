@@ -13,13 +13,13 @@ function Button({ text="", type=null, color="rgba(70, 163, 88, 1)", jc="center",
 
 
   return  (
-    <Link to={toPage} >
+    // <Link to={toPage} >
       <button type={type} style={buttonStyle} className={styles.buttonStyle} onClick={onClick}>
         {
          text !== ""  ? text : children
         }
       </button>
-    </Link>
+    // </Link>
 
   )
 };
