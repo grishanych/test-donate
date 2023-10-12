@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateInputValue } from '../../redux/actionsCreators/inputValueActionsCreators';
 import Context from "../Context";
-import IconSearch from './icons/search/IconSearch';
+import { IconSearch } from './icons/search/IconSearch';
 import Button from "../button/Button";
 import styles from './Header.module.scss';
 
@@ -22,7 +21,7 @@ function SearchInHeader() {
     };
 
     const crossStyle = {
-        height: "13px",
+        height: "18px",
     }
 
     const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
@@ -39,10 +38,10 @@ function SearchInHeader() {
         dispatch(updateInputValue(value));
         setInputValue(value);
     };
-
-    const handleButtonSubmit = () => {
-        console.log('Значення інпуту:', inputValue);
-    };
+      
+    // const handleButtonSubmit = () => {
+    //     console.log('Значення інпуту:', inputValue);
+    // };
 
     return (
         <div className={styles.hiddenSearchMenu}>
@@ -63,22 +62,19 @@ function SearchInHeader() {
                         onChange={handleInputChange}
                     />
                     <div className={styles.searchButtons}>
-                    <Link to="/products">
                         <Button
-                        to="/products"
+                            toPage="/products-search"
                             type="submit"
                             name="find"
-                            id=""
                             className={styles.searchBtn}
                             text="Знайти"
                             width="80px"
-                            onClick={handleButtonSubmit}
+                            // onClick={handleButtonSubmit}
                         />
-                        </Link>
                         <Button
                             onClick={handleInputDoubleClick}
                             className={`${styles.searchBtn} ${styles.closeSearchBtn}`}
-                            width="25px"
+                            width="60px"
                             jc="center"
                             ala="center"
                             padding="20px">

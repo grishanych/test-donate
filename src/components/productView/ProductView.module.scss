@@ -2,21 +2,21 @@
 @use "../../styles/variables";
 @import "../../styles/mediaqueries";
 
-.productViewCard {
-}
+// .productViewCard {
+// }
 .mainInfoDescription {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.productImage {
-}
-.productDetails {
-}
+// .productImage {
+// }
+// .productDetails {
+// }
 .productName {
   @include mixins.font-family-bold;
   font-size: variables.$fs-xxl;
-  color: variables.$main-text-color;
+  color: variables.$fc-text;
   margin-bottom: 20px;
 }
 .productPrice {
@@ -33,7 +33,7 @@
   @include mixins.font-family-medium;
   font-size: 15px;
   line-height: 16px;
-  color: variables.$main-text-color;
+  color: variables.$fc-text;
   margin-bottom: 10px;
   padding-top: 15px;
 }
@@ -77,7 +77,7 @@
   @include mixins.font-family-regular;
   font-size: 20px;
   line-height: 10px;
-  color: variables.$main-text-color;
+  color: variables.$fc-text;
   margin: 0 20px;
 }
 .buyButtons {

@@ -1,7 +1,10 @@
+import { ReactComponent as IconSVGMobile } from './search-mobile.svg';
 import { ReactComponent as IconSVG } from './search.svg';
 
-const IconSearch = () => {
+export const IconSearch = () => {
     return <IconSVG />;
-  };
+};
   
-export default IconSearch;
+export const IconSearchMobile = () => {
+  return <IconSVGMobile />;
+};

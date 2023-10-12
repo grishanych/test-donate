@@ -3,6 +3,10 @@
 
 .windowWrapper {
   padding: 50px 0px;
+
+  @include devices(mobile) {
+    padding-top: 100px;
+  }
 }
   
 .window {
@@ -12,20 +16,59 @@
   flex-direction: column;
   align-items: center;
   width: 500px;
-  border: 2px solid variables.$border-color-decor;
-  row-gap: 20px;
+
+  @include devices(mobile) {
+    width: 300px;
+    padding: 0px;
+  }
+}
+
+.headline {
+  font-size: variables.$fs-x;
+  padding-bottom: 53px;
+  color: variables.$fc-main;
+  font-weight: 600;
+
+  @include devices(mobile) {
+    padding-bottom: 32px;
+  }
+}
+
+.text,
+.textAttention {
+  font-size: variables.$fs-s;
+  text-align: center;
+}
+
+.text {
+  color: variables.$fc-text;
+}
+
+.headlineText {
+  @include devices(mobile) {
+    display: none;
+  }
+}
+
+.textAttention {
+  color: variables.$bgc-attention;
+}
+
+.textRegistration {
+  color: variables.$fc-main;
+  padding-top: 46px;
+}
+
+.textRegistration:hover {
+  text-decoration: underline;
 }
 
 .form {
-  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.headline {
-  font-size: 20px;
+  padding-top: 14px;
 }
 
 .label {
@@ -36,11 +79,24 @@
 
 .input,
 .inputAttention {
-  border: 1px solid variables.$border-color-main;
-  border-radius: 15px;
-  background-color: variables.$bgc-second;
+  width: 280px;
+  height: 40px;
+  border: 1px solid variables.$border-color-decor;
+  border-radius: 5px;
   padding: 2px 10px;
-  margin-bottom: 20px;
+  margin-bottom: 17px;
+
+  @include devices(mobile) {
+    height: 50px;
+  }
+}
+
+.input {
+  &:focus {
+    border: none;
+    outline: none;
+    border: 1px solid variables.$border-color-main;
+  }
 }
 
 .passwordWrapper {
@@ -51,47 +107,30 @@
 .iconButton {
   position: absolute;
   cursor: pointer;
-  top:2px;
-  left: 270px;
+  top: 11px;
+  left: 260px;
 }
 
 .inputAttention {
-  border: 1px solid red;
-  background-color: rgb(255, 165, 165);
-}
-
-input:focus {
-  border: none;
-  outline: none;
-  border: 1px solid variables.$border-color-main;
+  border: 1px solid variables.$bgc-attention;
 }
 
 .buttonStyle {
   height: 40px;
-  width: 150px;
+  width: 300px;
   background-color: variables.$bgc-main;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
   color: #fff;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-top: 27px;
+
+  @include devices(mobile) {
+    height: 60px;
+  }
 }
 
-.text {
-  font-size: 14px;
-}
-
-.textAttention {
-  text-align: center;
-  color: red;
-}
-
-.text:hover {
-  font-size: 14px;
-  text-decoration: underline;
-  color: variables.$fc-main;
+.errorsWrapper {
+  padding-top: 46px;
 }

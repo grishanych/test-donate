@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Footer.module.scss";
-import stylesApp from "../App.module.scss";
 import Logo from "../footer/icons/Logo.svg";
 import { Location } from "./icons/location/Location";
 import { Message } from "./icons/message/Message";
@@ -18,6 +17,7 @@ import HomeIcon from "../footer/icons/mobileVersionIcons/Home.svg";
 import FavoriteIcon from "../footer/icons/mobileVersionIcons/Vector.svg";
 import CartIcon from "../footer/icons/mobileVersionIcons/Shop.svg";
 import UserIcon from "../footer/icons/mobileVersionIcons/User.svg";
+import { FormButton } from "./../button/Button"
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -51,9 +51,10 @@ function Footer() {
                     placeholder="Введіть email"
                     className={styles.emailInput}
                 />
-                <button type="submit" className={styles.joinBtn}>
+                <FormButton type="submit" className={styles.joinBtn} text="Підписатися"/>
+                {/* <button type="submit" className={styles.joinBtn}>
                   Підписатися
-                </button>
+                </button> */}
               </div>
               <p className={styles.footerSubscribeInfo}>
                 Оформляйте підписку та отримуйте найгарячіші пропозиції обраних

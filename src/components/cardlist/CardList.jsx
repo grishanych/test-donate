@@ -33,24 +33,17 @@ export default function CardList() {
     
 
     return (
-        <section className={styles.cardsSectionWrapper}>
-                <div className={styles.cardsSectionTextContent}>
-                    <h2 className={styles.cardsSectionHeadline}>Наші хіти</h2>
-                    <p className={styles.cardsSectionText}>Найбільш популярні позиції</p>
-                </div>
-
-                <ul className={styles.cardsListWrapper}>
-                    {items.map((item, index) => (
-                        <Card
-                            key={index}
-                            itemNo={item.itemNo}
-                            name={item.name}
-                            price={item.price}
-                            nameCloudinary={item.nameCloudinary[0]}
-                            isLot={item.category}
-                        />
-                    ))}
-                </ul>
-        </section>
+        <ul className={styles.cardsListWrapper}>
+            {items.map((item, index) => (
+                <Card
+                    key={index}
+                    itemNo={item.itemNo}
+                    name={item.name}
+                    price={item.price}
+                    nameCloudinary={item.nameCloudinary[0]}
+                    isLot={item.category}
+                />
+            ))}
+        </ul>
     );
 }

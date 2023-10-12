@@ -1,4 +1,4 @@
-import { ReactComponent as IconSVG } from './donate.svg';
+import { ReactComponent as IconSVG } from "./donate.svg";
 
 const Donate = () => {
     return <IconSVG />;
