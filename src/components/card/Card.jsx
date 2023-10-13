@@ -9,6 +9,8 @@ import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import { Link } from "react-router-dom";
 import BasketFull from "./icons/basket/BasketFull";
 import HeartFull from "./icons/heart/HeartFull";
+import PropTypes from "prop-types"
+
 
 export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
 
@@ -131,3 +133,14 @@ export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
     </li>
   )
 }
+
+Card.propTypes = {
+  itemNo: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.number.isRequired
+  ]),
+  nameCloudinary: PropTypes.string.isRequired,
+  isLot: PropTypes.string.isRequired
+};

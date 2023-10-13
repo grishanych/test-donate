@@ -1,4 +1,3 @@
-
 import ProductView from "../productView/ProductView";
 
 function ProductPage() {

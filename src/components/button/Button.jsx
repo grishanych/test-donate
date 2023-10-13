@@ -1,5 +1,6 @@
 import styles from "./Button.module.scss"
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types"
 
 
 export default function Button({ text="", color="rgba(70, 163, 88, 1)", padding="", width="150px", toPage="", onClick=null, children, ...rest}) {
@@ -45,3 +46,35 @@ export function FormButton({ text="", type=null, color="rgba(70, 163, 88, 1)", p
 
   )
 };
+
+Button.propTypes = {
+  text: PropTypes.string,
+  color: PropTypes.string,
+  padding: PropTypes.string,
+  width: PropTypes.string,
+  toPage: PropTypes.string,
+
+  onClick: PropTypes.func,
+
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element
+  ])
+};
+
+FormButton.propTypes = {
+  text: PropTypes.string,
+  type: PropTypes.string,
+  color: PropTypes.string,
+  padding: PropTypes.string,
+  width: PropTypes.string,
+  
+  onClick: PropTypes.func,
+
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element
+  ])
+};
+
+
