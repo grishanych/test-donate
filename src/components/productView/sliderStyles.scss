@@ -1,0 +1,60 @@
+@use "../../styles/mixins";
+@use "../../styles/variables";
+@import "../../styles/mediaqueries";
+
+
+.slick-slider{
+  //height: 25em;
+  .slick-list {
+    overflow: hidden;
+    .slick-track {
+      max-height: 400px;
+    }
+  }
+}
+
+
+.slick-slider.slick-vertical {
+  width: 7em;
+  @include devices(tablet) {
+
+  }
+  @include devices(mobile) {
+    display: none;
+  }
+}
+
+
+
+.sliderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-height: 500px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  @include devices(tablet) {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    padding: 0;
+  }
+  @include devices(mobile) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #F4F4F4, #FAFAFA);
+    border-top-left-radius: 31px;
+    border-top-right-radius: 31px;
+
+
+  ;
+  }
+}
+
+.vertical-slider{
+  display: none;
+}
+
+

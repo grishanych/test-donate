@@ -7,14 +7,21 @@
   display: none;
 
   @include devices(mobile) {
-    border-radius: 25px;
-    background-color: rgb(248, 247, 247);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 35px;
+    //border-radius: 25px;
+    //background-color: rgb(248, 247, 247);
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+    //padding-top: 40px;
+    //padding-bottom: 35px;
+    display: none;
   }
+}
+
+.mobileIconsContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .mobileIcons {
@@ -195,6 +202,9 @@
   @include mixins.font-family-regular;
   font-size: 14px;
   line-height: 30px;
+  &:hover{
+    color: #46a358;
+  }
 }
 
 .bottomItem {
