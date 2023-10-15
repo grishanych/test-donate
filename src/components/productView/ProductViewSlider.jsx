@@ -17,6 +17,49 @@ export default function ProductViewSlider({ images}) {
         setNav2(sliderRef2);
     }, []);
 
+    const responsiveSettings =[
+        {
+            breakpoint: 1441,
+            settings: {
+                slidesToShow: 3,
+                vertical: true,
+                autoplay: true,
+                speed: 800,
+            }
+        },
+        {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                vertical: true,
+                autoplay: true,
+                speed: 800,
+            }
+        },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    vertical: true,
+                    autoplay: false,
+                    speed: 800,
+
+                }
+            },
+            {
+                breakpoint: 425,
+                settings: {
+                    slidesToShow: 1,
+                    arrows: false,
+                    fade: true,
+                    dots:true,
+                    autoplay: true,
+                    speed: 800,
+                    className: "vertical-slider"
+                }
+            }
+        ]
+
     return (
         <div className="sliderContainer">
             <Slider
@@ -25,22 +68,26 @@ export default function ProductViewSlider({ images}) {
                 slidesToShow={3}
                 swipeToSlide={true}
                 focusOnSelect={true}
-                vertical={true}
+                infinite={true}
+                responsive={responsiveSettings}
+
                 style = {
                     {
-                        maxWidth: "400px",
-                        maxHeight: "400px"
+                        maxWidth: "574px",
+                        maxHeight: "500px"
                     }
                 }
 
+
             >
 
-                    {images.map(image => <div  >
+                    {images.map(image => <div >
                         <img
                             width={"100px"}
                             height={"100px"}
                             src={image}
                             alt="товарні зображення"
+
 
                         />
                     </div>)}
@@ -54,18 +101,16 @@ export default function ProductViewSlider({ images}) {
                 style = {
                     {
                         maxWidth: "400px",
-                        maxHeight: "400px"
+                        maxHeight: "400px",
                     }
                 }
             >
                 {images.map(image => <div >
                     <img
-                        width={"370px"}
-                        height={"370px"}
+                        width={"100%"}
+                        height={"100%"}
                         src={image}
                         alt="товарні зображення"
-
-
                     />
                 </div>)}
 

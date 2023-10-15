@@ -13,6 +13,7 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import ShoesSelector from "./sizeSelector/ShoesSelector";
 import ClothesSelector from "./sizeSelector/ClothesSelector";
 import ProductViewSlider from "./ProductViewSlider";
+import TabComponent from "./Tabs";
 
 function convertToImgUrl(nameCloudinary) {
   const cld = new Cloudinary({
@@ -67,9 +68,10 @@ function ProductView() {
         </div>
         <div className={styles.productDetails}>
           <h2 className={styles.productName}>{product.name}</h2>
+          <p className={styles.productShortName}>{product.shortName}</p>
           <p className={styles.productPrice}>{product.price} грн.</p>
           <p className={styles.descTitle}>Короткий опис:</p>
-          <p className={styles.descriptionText}>{product.purpose}</p>
+          <p className={styles.descriptionText}>{product.shortDescription}</p>
 
           {(product.category === "Взуття" && <ShoesSelector />) ||
             ((product.category === "Комплекти форми" ||
@@ -87,7 +89,7 @@ function ProductView() {
 
           </div>
           <p className={styles.sku}>
-            <span>Код товару:</span> {product.article}
+            <span>Код товару:</span> {product.itemNo}
           </p>
           <p className={styles.categories}>
             <span>Категорії: </span>
@@ -120,10 +122,9 @@ function ProductView() {
       </div>
       <div className={styles.descriptionContainer}>
         <div className={styles.productDescription}>
-          <h4 className={styles.descriptionTitle}>Product Description</h4>
-          <h4 className={styles.reviewsTitle}>Reviews (0)</h4>
+          <TabComponent productDescription={product.description} />
         </div>
-        <p className={styles.descriptionContent}>{product.description}</p>
+
       </div>
     </div>
   );
