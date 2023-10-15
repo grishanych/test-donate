@@ -126,6 +126,33 @@
     transition: text-shadow 0.2s;
 }
 
+// 
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownContent {
+    padding: 10px 10px 15px;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: variables.$border-color-decor;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+    & a {
+        padding: 10px 0px 5px;
+
+        &:hover {
+            border-bottom: 1px solid variables.$border-color-main;
+            padding-bottom: 4px;
+        }
+    }
+}
+// 
+
 .navRightSideMenu {
     display: flex;
     justify-content: space-between;

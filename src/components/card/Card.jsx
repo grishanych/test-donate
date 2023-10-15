@@ -12,7 +12,7 @@ import HeartFull from "./icons/heart/HeartFull";
 import PropTypes from "prop-types"
 
 
-export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
+export function Card({ itemNo, name, price, nameCloudinary, category }) {
 
   const dispatch = useDispatch();
   const [showAddedMessage, setShowAddedMessage] = useState(false);
@@ -38,7 +38,7 @@ export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
       name,
       price,
       imageURL,
-      isLot,
+      category,
     };
 
     if (!isItemInCart) {
@@ -57,7 +57,7 @@ export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
       name,
       price,
       imageURL,
-      isLot,
+      category,
     };
 
     if (!isItemInFavorites) {
@@ -105,9 +105,9 @@ export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
 
   return (
     <li className={styles.cardItemWrapper}>
-      {isLot === "Благодійний лот" ?
+      {category === "Благодійний лот" ?
         <div className={styles.decorLot}>ЛОТ</div>
-        : isLot === "Донат" ?
+        : category === "Донат" ?
           <div className={styles.decorDonat}>ДОНАТ</div>
           :
           null}
@@ -142,5 +142,5 @@ Card.propTypes = {
     PropTypes.number.isRequired
   ]),
   nameCloudinary: PropTypes.string.isRequired,
-  isLot: PropTypes.string.isRequired
+  category: PropTypes.string.isRequired
 };

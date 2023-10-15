@@ -38,10 +38,7 @@ function SearchInHeader() {
         dispatch(updateInputValue(value));
         setInputValue(value);
     };
-      
-    // const handleButtonSubmit = () => {
-    //     console.log('Значення інпуту:', inputValue);
-    // };
+    
 
     return (
         <div className={styles.hiddenSearchMenu}>
@@ -69,7 +66,6 @@ function SearchInHeader() {
                             className={styles.searchBtn}
                             text="Знайти"
                             width="80px"
-                            // onClick={handleButtonSubmit}
                         />
                         <Button
                             onClick={handleInputDoubleClick}
