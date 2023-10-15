@@ -15,7 +15,8 @@
     align-items: center;
 
     @include devices(mobile) {
-        display: flex;
+        //display: flex;
+        display: none;
     }
 }
 

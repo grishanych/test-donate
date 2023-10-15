@@ -1,4 +1,3 @@
-// productReducer.js
 import { SET_PRODUCT } from "../actions/productActions";
 
 const initialState = {
