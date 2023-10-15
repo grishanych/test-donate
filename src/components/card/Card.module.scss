@@ -96,6 +96,7 @@
     transition: all 0.3s ease;
     display: flex;
     justify-content: center;
+   
 }
 
 .cardItemIconWrapper {
@@ -107,8 +108,39 @@
     align-items: center;
 }
 
+
+.cardItemIconWrapperAfterClick{
+    width: 50px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+
 .cardItemIcon {
     padding-top: 5px;
     width: 25px;
 }
 
+
+.addedToMessage{
+    transform: translateY(-180px);
+    color: green;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: aliceblue;
+    opacity: 0.8;
+    text-align: center;
+}
+
+
+// .inBasket{
+//     transform: translate(-20px, 8px);
+//     position: absolute;
+// }
+
+// .inFavorites{
+//     transform: translate(25px, 8px);
+//     position: absolute;
+// }

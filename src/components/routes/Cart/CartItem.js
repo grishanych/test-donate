@@ -3,16 +3,33 @@ import styles from "./Cart.module.scss";
 import { removeFromCart } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
 import Button from "../../button/Button";
+import { useEffect, useState } from "react";
+
+
 
 function CartItem({ item }) {
+
+  const [items, setItems] = useState([]);
 
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (productId) => {
     dispatch(counterDecrement())
     dispatch(removeFromCart(productId));
+    
 
   };
+
+ 
+
+useEffect(() => {
+  const items = JSON.parse(localStorage.getItem('cartItems'));
+  if (items) {
+   setItems(items);
+  }
+}, []);
+
+  
   
   return (
     <li key={item.id} className={styles.cardItemWrapper}>
