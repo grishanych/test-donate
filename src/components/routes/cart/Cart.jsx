@@ -9,23 +9,18 @@ function Cart() {
 
   return (
     <div className={styles.cardsSectionWrapper}>
-      {isCartEmpty ? (
-        <h2>Ваш кошик порожній</h2>
-      ) : (
-        <>
-          <h2>Кошик</h2>
-          <br></br>
-          <ul className={styles.cardsListWrapper}>
-            {cartItems.map((item, index) => (
-              <CartItem
-                key={index}
-                item={item}
+      <h1 className={styles.cardsSectionHeadline}>Кошик</h1>
+      <p className={styles.cardsSectionText}>Ваші замовлення</p>
 
-              />
-            ))}
-          </ul>
-        </>
-      )
+      {isCartEmpty ? <p>Ваш кошик порожній</p> :
+        <ul className={styles.cardsListWrapper}>
+          {cartItems.map((item, index) => (
+            <CartItem
+              key={index}
+              item={item}
+            />
+          ))}
+        </ul>
       }
     </div>
   );

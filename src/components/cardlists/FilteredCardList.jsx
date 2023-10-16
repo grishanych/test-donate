@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setProducts } from "../../redux/actions/productActions"
 import CardList from "./CardList";
 import PropTypes from "prop-types"
 
 export default function FilteredCardList( {property, value, priceRange} ) {
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
+  const dispatch = useDispatch();
+  const [items, setItems] = useState([]);
+  const priceLow = priceRange ? priceRange[0] : 0;
+  const priceHigh = priceRange ? priceRange[1] : Infinity;
+  const [prevPriceRange, setPrevPriceRange] = useState(null);
     
-    const [items, setItems] = useState([]);
-    const priceLow = priceRange ? priceRange[0] : 0;
-    const priceHigh = priceRange ? priceRange[1] : Infinity;
-    const [prevPriceRange, setPrevPriceRange] = useState(null);
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+    
 
     useEffect(() => {
         if (JSON.stringify(prevPriceRange) === JSON.stringify(priceRange)) {
@@ -23,6 +27,7 @@ export default function FilteredCardList( {property, value, priceRange} ) {
         fetch('http://localhost:4000/api/products')
           .then(response => response.json())
           .then(data => {
+            dispatch(setProducts(data));
             let newData = [];
             data.forEach(item => {
                 if (
@@ -41,7 +46,7 @@ export default function FilteredCardList( {property, value, priceRange} ) {
             setPrevPriceRange(priceRange); 
           })
           .catch(error => console.error('There was an error!', error));
-    }, [property, value, priceRange, priceLow, priceHigh, prevPriceRange]);
+    }, [property, value, priceRange, priceLow, priceHigh, prevPriceRange, dispatch]);
     
 
     return (
