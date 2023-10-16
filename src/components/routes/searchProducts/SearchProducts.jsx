@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import axios from 'axios';
 import { Card } from "../../card/Card";
 import styles from './SearchProducts.module.scss';
-import Spinner from '../../Spinner/Spinner'
+import Spinner from '../../spinner/Spinner'
 
 const ListProducts = () => {
     const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);

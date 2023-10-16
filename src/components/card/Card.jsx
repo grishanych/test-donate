@@ -1,26 +1,11 @@
-import React, { useState } from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
-import Basket from "./icons/basket/Basket"
-import Heart from "./icons/heart/Heart"
 import styles from "./Card.module.scss"
-import { useDispatch, useSelector } from "react-redux";
-import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
-import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import { Link } from "react-router-dom";
-import BasketFull from "./icons/basket/BasketFull";
-import HeartFull from "./icons/heart/HeartFull";
 import PropTypes from "prop-types"
+import { Icons } from "./Icons";
 
 
-export function Card({ itemNo, name, price, nameCloudinary, category }) {
-
-  const dispatch = useDispatch();
-  const [showAddedMessage, setShowAddedMessage] = useState(false);
-  const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === itemNo));
-  const isItemInFavorites = useSelector((state) => state.favorites.items.some((favItem) => favItem.itemNo === itemNo));
-
-  const [itemInCart, setItemInCart] = useState(false);
-  const [itemInFavorites, setItemInFavorites] = useState(false);
+export function Card({ itemNo, name, price, nameCloudinary, category, id }) {
 
   // for working with Cloudinary
   const cld = new Cloudinary({
@@ -30,78 +15,6 @@ export function Card({ itemNo, name, price, nameCloudinary, category }) {
   const myImage = cld.image(`${nameCloudinary}`);
   const imageURL = myImage.toURL();
 
-
-  const handleAddToCart = () => {
-    dispatch(counterIncrement())
-    const product = {
-      itemNo,
-      name,
-      price,
-      imageURL,
-      category,
-    };
-
-    if (!isItemInCart) {
-      dispatch(addToCart(product));
-      setItemInCart(true);
-      setShowAddedMessage(true);
-      setTimeout(() => setShowAddedMessage(false), 2000);
-    }
-  }
-
-
-  const handleAddFavorites = () => {
-    dispatch(counterIncrement());
-    const prod = {
-      itemNo,
-      name,
-      price,
-      imageURL,
-      category,
-    };
-
-    if (!isItemInFavorites) {
-      dispatch(addFavorites(prod));
-      setItemInFavorites(true);
-      setShowAddedMessage(true);
-      setTimeout(() => setShowAddedMessage(false), 2000);
-    }
-  }
-
-
-  const renderActionButton = () => {
-    if (isItemInCart) {
-      return (
-        <>
-          <BasketFull />
-          <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddFavorites}>
-            {isItemInFavorites ? "В обраному" : <Heart />}
-          </a>
-        </>
-      );
-    }
-    if (isItemInFavorites) {
-      return (
-        <>
-          <HeartFull />
-          <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddToCart}>
-            {isItemInCart ? "У кошику" : <Basket />}
-          </a>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddToCart}>
-            {isItemInCart ? "У кошику" : <Basket />}
-          </a>
-          <a className={styles.cardItemIconWrapper} href="#1" onClick={handleAddFavorites}>
-            {isItemInCart ? "В обраному" : <Heart />}
-          </a>
-        </>
-      );
-    }
-  };
 
   return (
     <li className={styles.cardItemWrapper}>
@@ -122,17 +35,18 @@ export function Card({ itemNo, name, price, nameCloudinary, category }) {
           {price ?
             <p className={styles.cardItemPrice}>{price} грн</p>
             :
-            null}
+            null
+          }
         </div>
       </Link>
-      <div className={styles.cardItemIconsWrapper}>{renderActionButton()}</div>
-      {showAddedMessage && (
-        <p className={styles.addedToMessage}>Додано до {isItemInCart ? "кошику" : "обраного"}</p>
-      )}
+
+      <Icons imageURL={imageURL} itemNo={itemNo} name={name} price={price} id={id}/>
+
       <div className={styles.cardItemDecor}></div>
     </li>
   )
 }
+
 
 Card.propTypes = {
   itemNo: PropTypes.string.isRequired,
@@ -142,5 +56,4 @@ Card.propTypes = {
     PropTypes.number.isRequired
   ]),
   nameCloudinary: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired
 };

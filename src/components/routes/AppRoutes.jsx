@@ -20,7 +20,7 @@ import DeliveryPayment from "./DeliveryPayment";
 import Returns from "./Returns";
 import PrivacyPolicy from "./PrivacyPolicy";
 import ProductPage from "./ProductPage";
-import SearchProducts from "./SearchProducts/SearchProducts";
+import SearchProducts from "./searchProducts/SearchProducts";
 
 
 function AppRoutes() {
