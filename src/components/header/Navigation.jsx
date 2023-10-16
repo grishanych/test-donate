@@ -39,23 +39,30 @@ function Navigation() {
                         onMouseEnter={showDropdown}
                         onMouseLeave={hideDropdown}
                     >
-                        <Link
-                            to="/categories"
+                        <div
                             className={`${styles.navList} ${styles.navLink}`}
                         >категорії
-                        </Link>
+                        </div>
                         {isDropdownVisible && (
                             <div className={styles.dropdownContent}>
                                 <Link
+                                    to="/categories"
+                                    onClick={() => setDropdownVisible(false)}
+                                >Всі категорії
+                                </Link>
+                                <Link
                                     to="/categories/donation"
+                                    onClick={() => setDropdownVisible(false)}
                                 >Донати на ЗСУ
                                 </Link>
                                 <Link
                                     to="/categories/charity-auction"
+                                    onClick={() => setDropdownVisible(false)}
                                 >Лоти аукціону
                                 </Link>
                                 <Link
                                     to="/categories/military-clothing"
+                                    onClick={() => setDropdownVisible(false)}
                                 >Військовий одяг
                                 </Link>
                             </div>
