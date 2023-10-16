@@ -8,6 +8,7 @@ import EyeClosed from "./eye/EyeClosed";
 import EyeOpen from "./eye/EyeOpen";
 import { FormButton } from "../button/Button";
 import styles from "./LogIn.module.scss"
+import PropTypes from "prop-types"
 
 
 function LogIn({ headline, to }){
@@ -124,5 +125,10 @@ function LogIn({ headline, to }){
     </section>
   )
 }
+
+LogIn.propTypes = {
+  headline: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired
+};
 
 export default LogIn

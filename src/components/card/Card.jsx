@@ -9,8 +9,10 @@ import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import { Link } from "react-router-dom";
 import BasketFull from "./icons/basket/BasketFull";
 import HeartFull from "./icons/heart/HeartFull";
+import PropTypes from "prop-types"
 
-export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
+
+export function Card({ itemNo, name, price, nameCloudinary, category }) {
 
   const dispatch = useDispatch();
   const [showAddedMessage, setShowAddedMessage] = useState(false);
@@ -36,7 +38,7 @@ export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
       name,
       price,
       imageURL,
-      isLot,
+      category,
     };
 
     if (!isItemInCart) {
@@ -55,7 +57,7 @@ export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
       name,
       price,
       imageURL,
-      isLot,
+      category,
     };
 
     if (!isItemInFavorites) {
@@ -103,9 +105,9 @@ export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
 
   return (
     <li className={styles.cardItemWrapper}>
-      {isLot === "Благодійний лот" ?
+      {category === "Благодійний лот" ?
         <div className={styles.decorLot}>ЛОТ</div>
-        : isLot === "Донат" ?
+        : category === "Донат" ?
           <div className={styles.decorDonat}>ДОНАТ</div>
           :
           null}
@@ -131,3 +133,14 @@ export function Card({ itemNo, name, price, nameCloudinary, isLot }) {
     </li>
   )
 }
+
+Card.propTypes = {
+  itemNo: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.number.isRequired
+  ]),
+  nameCloudinary: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired
+};
