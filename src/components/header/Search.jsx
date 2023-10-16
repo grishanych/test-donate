@@ -8,15 +8,20 @@ import styles from './Header.module.scss';
 
 function SearchInHeader() {
     const [isLinkVisible, setIsLinkVisible] = useState(true);
+    const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
+    const [inputValue, setInputValue] = useState(inputValueFromRedux);
     const context = useContext(Context);
 
     const handleClick = () => {
         setIsLinkVisible(false);
         context.setIsLinkVisible(false);
     };
+    const dispatch = useDispatch();
 
     const handleInputDoubleClick = (event) => {
+        event.preventDefault()
         setIsLinkVisible(true);
+        setInputValue('')
         context.setIsLinkVisible(true);
     };
 
@@ -24,10 +29,6 @@ function SearchInHeader() {
         height: "18px",
     }
 
-    const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
-    const dispatch = useDispatch();
-
-    const [inputValue, setInputValue] = useState(inputValueFromRedux);
 
     useEffect(() => {
         setInputValue(inputValueFromRedux);
