@@ -1,3 +1,7 @@
+import PropTypes from "prop-types"
+
+
+
 export default function Main( {children} ) {
 
     return (
@@ -6,3 +10,7 @@ export default function Main( {children} ) {
         </main>
     )
 }
+
+Main.propTypes = {
+    children: PropTypes.node
+};  

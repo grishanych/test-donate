@@ -63,6 +63,7 @@ export default function ProductViewSlider({ images}) {
     return (
         <div className="sliderContainer">
             <Slider
+                className="thumbnailsSlider"
                 asNavFor={nav1}
                 ref={slider => (sliderRef2 = slider)}
                 slidesToShow={3}

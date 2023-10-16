@@ -6,14 +6,13 @@ import { object, string } from "yup"
 import EyeClosed from "../logIn/eye/EyeClosed";
 import EyeOpen from "../logIn/eye/EyeOpen";
 import { FormButton } from "../button/Button";
-// import Info from "./icons/Info";
+import PropTypes from "prop-types"
 import styles from "./Registration.module.scss"
 
 
 function Registration({ headline, to }){
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
-  // const [showError, setShowError] = useState(false);
   const [showError, setShowError] = useState("");
   const navigate = useNavigate();
 
@@ -218,5 +217,10 @@ function Registration({ headline, to }){
     </section>
   )
 }
+
+Registration.propTypes = {
+  headline: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired
+};
 
 export default Registration

@@ -1,18 +1,21 @@
 import { Routes, Route } from "react-router-dom";
 import AboutUs from "./AboutUs";
-import Cart from "./Cart/Cart";
+import Cart from "./cart/Cart";
 import Reports from "./Reports";
 import Blog from "./Blog";
 import Contacts from "./Contacts";
 import Home from "./home/Home";
-import Categorys from "./categories/Categories";
+import Categories from "./categories/Categories";
+import Donation from "../routes/categories/Donation";
+import Clothing from "../routes/categories/Clothing";
+import Auction from "../routes/categories/Auction";
 import CustomerLogIn from "./adminRoutes/customerLogin/CustomerLogIn";
 import AdminLogIn from "./adminRoutes/adminLogin/AdminLogIn";
 import AdminPage from "./adminRoutes/adminPage/AdminPage";
 import CustomerPage from "./adminRoutes/customerPage/CustomerPage";
 import CustomerRegistration from "./adminRoutes/CustomerRegistration";
 import AdminRegistration from "./adminRoutes/AdminRegistration";
-import Favorites from "./Favorites/Favorites";
+import Favorites from "./favorites/Favorites";
 import DeliveryPayment from "./DeliveryPayment";
 import Returns from "./Returns";
 import PrivacyPolicy from "./PrivacyPolicy";
@@ -26,7 +29,10 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Home />}/>
       <Route path="/about-us" element={<AboutUs/>}/>
-      <Route path="/categories" element={<Categorys/>}/>
+      <Route path="/categories" element={<Categories/>}/>
+      <Route path="/categories/military-clothing" element={<Clothing/>}/>
+      <Route path="/categories/charity-auction" element={<Auction/>}/>
+      <Route path="/categories/donation" element={<Donation/>}/>
       <Route path="/cart" element={<Cart/>}/>
       <Route path="/reports" element={<Reports/>}/>
       <Route path="/blog" element={<Blog/>}/>

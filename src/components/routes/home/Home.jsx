@@ -1,5 +1,5 @@
-import CategorysList from "../../categorysList/CategorysList"
-import CardList from "../../cardlist/CardList"
+import CategorysList from "../../categoriesList/CategoriesList"
+import FilteredCardList from "../../cardlists/FilteredCardList"
 import MainSlider from "../../slider/MainSlider"
 import styles from "./Home.module.scss"
 import pic from "./../../../images/bet-on-victory-ban-1.jpeg";
@@ -16,7 +16,9 @@ function MainPage(){
                     <h2 className={styles.cardsSectionHeadline}>Наші хіти</h2>
                     <p className={styles.cardsSectionText}>Найпопулярніші позиції</p>
                 </div>
-                <CardList />
+
+                <FilteredCardList property="isPopular" value={true}/>
+                
             </section>
             <section className={styles.homeTextSection}>
                 <p className={styles.call}>Долучись до Підтримки Наших Героїв!</p>
