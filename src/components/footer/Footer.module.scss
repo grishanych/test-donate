@@ -3,37 +3,24 @@
 @import "../../styles/mediaqueries";
 
 
-.footerMobileVersion {
-  display: none;
 
-  @include devices(mobile) {
-    border-radius: 25px;
-    background-color: rgb(248, 247, 247);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 35px;
-  }
-}
-
-.mobileIconsContainer{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.mobileIcons {
-  @include devices(mobile) {
-    padding: 25px;
-  }
-}
-
-.footerContainer {
-  @include devices(mobile) {
+.accordionMenuMobile {
+  @include devices (laptop) {
     display: none;
   }
+  @include devices(tablet) {
+    display: none;
+  }
+  @include devices (mobile) {
+    display: block;
+    width: 100%;
+
+  }
 }
+
+//.footerContainer {
+//
+//}
 
 .footerSubscribeWrapper {
   display: flex;
@@ -42,6 +29,7 @@
   flex-direction: column;
   background-color: #fbfbfb;
   padding: 25px;
+
 }
 
 .footerSubscribeHeader {
@@ -53,6 +41,10 @@
     font-size: clamp(16px, 15.29750336px + 0.2197802198vw, 18px);
     text-align: center;
   }
+  @include devices(mobile) {
+    text-align: center;
+    font-size: clamp(14px, 13.5px + 0.3vw, 16px);
+  }
 }
 
 .footerInput {
@@ -60,6 +52,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  @include devices(mobile) {
+    width: fit-content;
+  }
 }
 
 .emailInput {
@@ -103,7 +98,6 @@
 }
 
 .footerSubscribeInfo {
-  padding: 0px 200px;
   @include mixins.font-family-regular;
   font-size: 13px;
   line-height: 22px;
@@ -145,6 +139,10 @@
     justify-content: center;
     gap: 20px;
   }
+  @include devices(mobile) {
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .contactsItem {
@@ -171,6 +169,10 @@
 .footerNavigationContainer {
   padding: 30px 25px;
   border-bottom: 1px solid rgba(70, 163, 88, 0.2);
+  @include devices (mobile) {
+    padding: 0;
+  }
+
 }
 
 .bottomInner {
@@ -182,6 +184,9 @@
     text-align: center;
     justify-content: center;
   }
+  @include devices(mobile) {
+    justify-content: center;
+  }
 }
 
 .bottomTitle {
@@ -189,6 +194,25 @@
   @include mixins.font-family-bold;
   line-height: 16px;
   margin-bottom: 8px;
+  @include devices (mobile) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include mixins.font-family-regular;
+    line-height: 2;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 2px;
+    margin-bottom: 0;
+    transition: all .2s ease-in;
+  }
+}
+
+.arrowDown {
+  transition: transform 0.3s ease;
 }
 
 .bottomListItem {
@@ -204,10 +228,27 @@
   &:hover{
     color: #46a358;
   }
+  @include devices(mobile) {
+    padding: 10px;
+
+  }
 }
 
 .bottomItem {
-  width: 280px;
+  @include devices (mobile) {
+    display: none;
+  }
+  &:last-child {
+    @include devices (mobile) {
+      display: block;
+    }
+  }
+
+}
+
+//mobile Accordion Menu:
+.bottomMobileItem {
+
 }
 
 .bottomSocialMedia {
@@ -219,6 +260,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  @include devices (mobile) {
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0;
   }
 }
 
@@ -248,7 +294,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    //flex-direction: column;
   }
 }
 

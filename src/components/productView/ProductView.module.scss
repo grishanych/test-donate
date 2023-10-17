@@ -7,33 +7,33 @@
 
 }
 .mainInfoDescription {
+  @include devices(tablet) {
+    display: flex;
+    //flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+  }
   @include devices (laptop) {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-
-  @include devices(tablet) {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-
-  }
-
 }
 
 .productDetails {
   padding-left: 10px;
   z-index: 1;
+  width: 48%;
   @include devices(tablet){
-    //min-width: 500px;
     padding: 0 15px;
   }
   @include devices(mobile) {
+    margin-left:  0;
     background-color:rgba(255, 255, 255, 1);
     border-radius: 31px;
     padding-left: 25px;
+    width: 100%;
   }
 }
 

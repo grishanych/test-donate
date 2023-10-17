@@ -13,33 +13,45 @@ import { ReactComponent as PaypalIcon } from "../footer/icons/paymentMethods/pay
 import { ReactComponent as MastercardIcon } from "../footer/icons/paymentMethods/mastercard.svg";
 import { ReactComponent as VisaIcon } from "../footer/icons/paymentMethods/visa.svg";
 import { ReactComponent as LiqpayIcon } from "../footer/icons/paymentMethods/liqpay.svg";
-import HomeIcon from "../footer/icons/mobileVersionIcons/Home.svg";
-import FavoriteIcon from "../footer/icons/mobileVersionIcons/Vector.svg";
-import CartIcon from "../footer/icons/mobileVersionIcons/Shop.svg";
-import UserIcon from "../footer/icons/mobileVersionIcons/User.svg";
+import FooterAccordion from './FooterAccordion'
 // import { FormButton } from "./../button/Button"
 import { Link } from "react-router-dom";
 import Subscribe from "./Subscribe"
 
 function Footer() {
+  const menuItems = [
+    {
+      title: 'Клієнтам',
+      items: [
+        { label: 'Вхід до кабінету', link: '/login' },
+        { label: 'Про нас', link: '/about-us' },
+        {label: 'Доставка та оплата', link: '/delivery-payment'},
+        {label: 'Обмін та повернення', link: '/returns'},
+        {label: 'Контакти', link: '/contacts'},
+      ],
+    },
+    {
+      title: 'Інформація',
+      items: [
+        { label: 'Політика конфіденційності', link: '/privacy-policy' },
+        {label: 'Блог', link: '/blog'},
+        {label: 'Звіти', link: '/reports'},
+      ],
+    },
+    {
+      title: 'Категорії',
+      items: [
+        { label: 'Верхній одяг', link: '/' },
+        {label: 'Взуття', link: '/'},
+        {label: 'Комплекти форми', link: '/'},
+        {label: 'Лоти', link: '/'},
+        {label: 'Донати', link: '/'},
+      ],
+    },
+  ];
   return (
       <footer>
-        <div className={styles.footerMobileVersion}>
-          <div className={styles.mobileIconsContainer}>
-            <a href="##" className={styles.mobileIcons}>
-              <img src={HomeIcon} alt="Home Icon" />
-            </a>
-            <a href="##" className={styles.mobileIcons}>
-              <img src={FavoriteIcon} alt="Favorite Icon" />
-            </a>
-            <a href="##" className={styles.mobileIcons}>
-              <img src={CartIcon} alt="Cart Icon" />
-            </a>
-            <a href="##" className={styles.mobileIcons}>
-              <img src={UserIcon} alt="User Icon" />
-            </a>
-          </div>
-        </div>
+
         <div className={styles.footerContainer}>
           
           <Subscribe />
@@ -69,6 +81,11 @@ function Footer() {
                 </ul>
               </div>
             </div>
+          </div>
+          <div className={styles.accordionMenuMobile}>
+            {menuItems.map((item, index) => (
+                <FooterAccordion key={index} title={item.title} items={item.items} />
+            ))}
           </div>
           <div className={styles.footerNavigationContainer}>
             <div className={styles.bottomInner}>

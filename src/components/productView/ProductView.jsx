@@ -58,9 +58,7 @@ function ProductView() {
   return (
       <div className={styles.productViewCard}>
         <div className={styles.mainInfoDescription}>
-          <div className={styles.productImage}>
             <ProductViewSlider images={product.images}/>
-          </div>
           <div className={styles.productDetails}>
             <h2 className={styles.productName}>{product.name}</h2>
             <p className={styles.productShortName}>{product.shortName}</p>
@@ -72,9 +70,9 @@ function ProductView() {
                 ((product.category === "Комплекти форми" ||
                     product.category === "Одяг верхній") && <ClothesSelector />) ||
                 null}
-            <div className={styles.buyButtons}>
-              <QuantityCounter />
 
+            <QuantityCounter />
+            <div className={styles.buyButtons}>
               <button className={styles.buyNowBtn}>Buy Now</button>
               <button className={styles.addToCartBtn}>Add To Cart</button>
               <button className={styles.addToFavorite}>
