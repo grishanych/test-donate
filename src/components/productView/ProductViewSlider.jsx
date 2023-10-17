@@ -25,6 +25,9 @@ export default function ProductViewSlider({ images}) {
                 vertical: true,
                 autoplay: true,
                 speed: 500,
+                arrows: false,
+
+
             }
         },
         {
@@ -34,6 +37,7 @@ export default function ProductViewSlider({ images}) {
                 vertical: true,
                 autoplay: true,
                 speed: 500,
+                arrows: false,
             }
         },
         {
@@ -72,20 +76,14 @@ export default function ProductViewSlider({ images}) {
                 infinite={true}
                 responsive={responsiveSettings}
 
-                style = {
-                    {
-                        maxWidth: "574px",
-                        maxHeight: "500px"
-                    }
-                }
 
 
             >
 
                 {images.map((image, index) => <div key={index} >
-                    <img
-                        width={"100px"}
-                        height={"100px"}
+                    <img className="littlePhoto"
+                        width={"100%"}
+                        height={"100%"}
                         src={image}
                         alt={`товарне зображення ${index}`}
 
@@ -96,15 +94,11 @@ export default function ProductViewSlider({ images}) {
 
             </Slider>
             <Slider
+                className="mainSlider"
                 asNavFor={nav2}
                 ref={slider => (sliderRef1 = slider)}
                 slidesToShow={1}
-                style = {
-                    {
-                        maxWidth: "400px",
-                        maxHeight: "400px",
-                    }
-                }
+
             >
                 {images.map((image, index) => <div key={index}>
                     <img
