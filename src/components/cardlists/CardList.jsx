@@ -4,14 +4,14 @@ import PropTypes from "prop-types"
 
 export default function CardList( {items} ) {
     
-
     return (
         <ul className={styles.cardsListWrapper}>
             {items.map((item, index) => (
                 <Card
                     key={index}
+                    id={item._id}
                     itemNo={item.itemNo}
-                    name={item.name}
+                    name={item.shortName}
                     price={item.price}
                     nameCloudinary={item.nameCloudinary[0]}
                     category={item.category}
