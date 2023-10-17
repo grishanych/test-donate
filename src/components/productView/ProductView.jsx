@@ -38,10 +38,7 @@ function ProductView() {
         const response = await fetch(
             "http://localhost:4000/api/products/" + params.itemNo
         );
-
         const data = await response.json();
-        console.log("Data from server:", data);
-
         dispatch(setProduct({...data, images:data.nameCloudinary.map(convertToImgUrl)}));
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -56,7 +53,6 @@ function ProductView() {
   if (!product) {
     return <div>Product not found...</div>;
   }
-  console.log(product)
 
 
   return (

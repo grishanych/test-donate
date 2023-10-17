@@ -18,7 +18,7 @@ function App() {
     <div className={styles.container}>
       <BrowserRouter>
         <Context.Provider value={contextData}>
-          <Header />
+          <Header/>
           <Main>
             <AppRoutes/>
           </Main>
