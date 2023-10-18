@@ -76,5 +76,3 @@ FormButton.propTypes = {
     PropTypes.element
   ])
 };
-
-

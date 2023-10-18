@@ -1,7 +1,7 @@
 import { ReactComponent as IconSVG} from "./heart-fill.svg";
 
 const HeartFull = () => {
-    return <IconSVG />;
+    return <IconSVG data-testid='heartFull-svg-test'/>;
   };
   
 export default HeartFull;
