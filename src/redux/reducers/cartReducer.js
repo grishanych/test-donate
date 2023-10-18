@@ -19,7 +19,7 @@ export const cartReducer = (state = initialState.cart, action) => {
         case ADD_TO_CART:
             return {
                 ...state,
-                items: [...state.items, action.payload],
+                items: [...state.items, ...action.payload],
                 itemCount: state.itemCount + 1,
             };
         case REMOVE_FROM_CART:

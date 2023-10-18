@@ -5,6 +5,7 @@ import CartItem from "./CartItem";
 
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
   const isCartEmpty = cartItems.length === 0;
 
   return (

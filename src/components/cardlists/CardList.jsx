@@ -15,6 +15,7 @@ export default function CardList( {items} ) {
                     price={item.price}
                     nameCloudinary={item.nameCloudinary[0]}
                     category={item.category}
+                    quantity={item.quantity}
                 />
             ))}
         </ul>

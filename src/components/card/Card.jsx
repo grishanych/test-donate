@@ -40,7 +40,7 @@ export function Card({ itemNo, name, price, nameCloudinary, category, id }) {
         </div>
       </Link>
 
-      <Icons imageURL={imageURL} itemNo={itemNo} name={name} price={price} id={id}/>
+      <Icons imageURL={imageURL} itemNo={itemNo} name={name} price={price} id={id} quantity={1}/>
 
       <div className={styles.cardItemDecor}></div>
     </li>

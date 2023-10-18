@@ -5,9 +5,7 @@ const initialState = {
 };
 
 const initialStateProducts = {
-  products: {
-    items: [],
-  },
+  products: null,
 };
 
 export const productReducer = (state = initialState, action) => {
@@ -22,7 +20,7 @@ export const productReducer = (state = initialState, action) => {
   }
 };
 
-export const productsReducer = (state = initialStateProducts.products, action) => {
+export const productsReducer = (state = initialStateProducts, action) => {
   switch (action.type) {
     // ! ?
     case SET_PRODUCTS:

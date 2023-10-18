@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Form, Field, ErrorMessage, Formik } from "formik";
 import { object, string } from "yup";
 import EyeClosed from "./eye/EyeClosed";
 import EyeOpen from "./eye/EyeOpen";
 import { FormButton } from "../button/Button";
+import logInUser from "../../api/logInUser"
 import styles from "./LogIn.module.scss"
 import PropTypes from "prop-types"
 
@@ -17,6 +18,7 @@ function LogIn({ headline, to }){
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const validationSchema = object().shape({
     login: string()
@@ -30,29 +32,16 @@ function LogIn({ headline, to }){
       .matches(/[a-zA-Z0-9]/, "Дозволені символи для пароля: a-z, A-Z, 0-9")
   })
 
-  const sendData = (login, password) => {
-    const userData = {
-      loginOrEmail: login,
-      password: password
-    };
-
-  axios
-    .post("http://localhost:4000/api/customers/login", userData)
-    .then(loginResult => {
-      console.log(loginResult);
-      if(loginResult.data.success === true) {
-        navigate("/adm-page");
-        // const token = loginResult.data.token;
-      }
-    })
-    .catch(err => {
-      // ! add the way for another errors
-      if(err.response.data.loginOrEmail === "Customer not found") {
+  const handleUserLogin = (login, password) => {
+    dispatch(logInUser(login, password))
+      .then(() => {
+        navigate(to);
+      })
+      .catch((error) => {
         setShowError(true);
-      }
-    });
-  }
-
+      });
+  };
+  
 
   return(
     <section className={styles.windowWrapper}>
@@ -63,7 +52,7 @@ function LogIn({ headline, to }){
         <Formik 
           initialValues={{login: "", password: ""}}
           onSubmit={(values, { setSubmitting }) => {
-            sendData(values.login, values.password);
+            handleUserLogin(values.login, values.password);
             setSubmitting(false);
           }}
           validationSchema={validationSchema}

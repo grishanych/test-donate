@@ -6,6 +6,7 @@ import QuantityCounter from "./../../productView/CounterQuantity";
 import styles from "./Cart.module.scss";
 
 function CartItem({ item }) {
+  console.log(item);
 
   const dispatch = useDispatch();
 
@@ -14,8 +15,7 @@ function CartItem({ item }) {
     dispatch(removeFromCart(productId));
   };
   
-  // const products = useSelector((state) => state.products.items);
-  
+   
   return (
     <li key={item.id} className={styles.cardItemWrapper}>
       <div className={styles.cardItemImageWrapper}>

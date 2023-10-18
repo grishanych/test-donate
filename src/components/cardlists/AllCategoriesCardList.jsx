@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 // import Button from "../button/Button"
 import styles from "./AllCategoriesCardList.module.scss"
 import CardList from "./CardList";
+import shuffleArray from "../../scripts/shuffleArray"
 import SliderPrice from "../sliderPrice/SliderPrice";
 
 export default function CategoriesCardList() {
@@ -15,17 +16,8 @@ export default function CategoriesCardList() {
       setSelectedValue(e.target.value);
     };
 
-    const applyFilter = () => {
-      setSliderValue(tempSliderValue);
-    }
-
-      // for mixing cards
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
+  const applyFilter = () => {
+    setSliderValue(tempSliderValue);
   }
 
   useEffect(() => {

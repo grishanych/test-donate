@@ -1,11 +1,19 @@
-import axios from 'axios';
+// import { useSelector } from "react-redux";
+// import axios from 'axios';
 
-const setAuthToken = token => {
-  if (token) {
-    axios.defaults.headers.common['Authorization'] = token;
-  } else {
-    delete axios.defaults.headers.common['Authorization'];
-  }
-};
+// const useSetAuthToken = () => {
+//   const token = useSelector((state) => state.auth.token);
+//   console.log(token);
 
-export default setAuthToken;
+//   const setAuthToken = () => {
+//     if (token) {
+//       axios.defaults.headers.common['Authorization'] = token;
+//     } else {
+//       delete axios.defaults.headers.common['Authorization'];
+//     }
+//   };
+  
+//   return { token, setAuthToken };
+// };
+
+// export default useSetAuthToken;
