@@ -10,7 +10,7 @@ import styles from "./Card.module.scss"
 import PropTypes from "prop-types"
 
 
-export function Icons({ itemNo, name, price, imageURL, id, quantity }) {
+export function Icons({ itemNo, name, price, imageURL, id, quantity, category }) {
 
   const dispatch = useDispatch();
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === itemNo));
@@ -51,9 +51,12 @@ export function Icons({ itemNo, name, price, imageURL, id, quantity }) {
 
   return (
     <div className={styles.cardItemIconsWrapper}>
+      {category !== "Благодійний лот" && category !== "Донат" ?
       <div className={styles.cardItemIconWrapper} onClick={handleAddToCart}>
         { isItemInCart ? <BasketFull /> : <Basket /> }
       </div>
+       : null
+      }
       <div className={styles.cardItemIconWrapper} onClick={handleAddFavorites}>
         { isItemInFavorites ? <HeartFull /> : <Heart /> }
       </div>

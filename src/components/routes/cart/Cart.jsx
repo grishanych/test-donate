@@ -24,7 +24,7 @@ function Cart() {
       <h1 className={styles.cardsSectionHeadline}>Кошик</h1>
       <p className={styles.cardsSectionText}>Ваші замовлення</p>
 
-      {isCartEmpty ? <p>Ваш кошик порожній</p> :
+      {isCartEmpty ? <p className={styles.cartEmpty}>Ваш кошик порожній</p> :
         <ul className={styles.cardsListWrapper}>
           {currentProducts.map((item) => (
             <CartItem

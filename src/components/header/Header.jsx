@@ -12,8 +12,6 @@ import HeartFavorite from "./icons/favorites/Heart";
 function Header() {
     const cartCount = useSelector((state) => state.cart.itemCount);
     const favoriteCount = useSelector((state) => state.favorites.itemCount);
-    const cartCountFromLS = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
-    const favoritesCountFromLS = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
 
     
     return (
@@ -36,17 +34,15 @@ function Header() {
                 <Link to="/favorites">
                     <HeartFavorite />
                 </Link>
-                {favoritesCountFromLS && favoriteCount === 0 ? null :
-                // <span >{favoriteCount}</span>}
-                <span >{favoritesCountFromLS}</span>}
+                {favoriteCount === 0 ? null :
+                <span >{favoriteCount}</span>}
                 
                 <div className={styles.navRightSideMenu}>
                     <Link to="/cart">
                         <Cart />
                     </Link>
-                    {cartCountFromLS && cartCount === 0 ? null :
-                    // <span >{cartCount}</span>}
-                    <span >{cartCountFromLS}</span>}
+                    {cartCount === 0 ? null :
+                    <span >{cartCount}</span>}
 
                     <Button toPage="/log-in" width="56px">
                         <IconEnter/>

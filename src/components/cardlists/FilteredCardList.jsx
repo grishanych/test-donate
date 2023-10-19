@@ -4,6 +4,8 @@ import { setProducts } from "../../redux/actions/productActions"
 import CardList from "./CardList";
 import shuffleArray from "../../scripts/shuffleArray"
 import PropTypes from "prop-types"
+import { getProducts } from "../../api/getProducts";
+
 
 export default function FilteredCardList( {property, value, priceRange} ) {
   const dispatch = useDispatch();
@@ -14,31 +16,29 @@ export default function FilteredCardList( {property, value, priceRange} ) {
       
 
   useEffect(() => {
-      if (JSON.stringify(prevPriceRange) === JSON.stringify(priceRange)) {
-          return;
-        }
-      fetch('http://localhost:4000/api/products')
-        .then(response => response.json())
-        .then(data => {
-          dispatch(setProducts(data));
-          let newData = [];
-          data.forEach(item => {
-              if (
-                (Array.isArray(value) && value.includes(item[property])) || 
-                (item[property] === value)
-              ) {
-                const price = item.price ?? 0;
-                if (price >= priceLow && price <= priceHigh) {
-                  newData.push(item);
-                }
-              }
-            });
-          
-          let mixedData = shuffleArray([...newData]);
-          setItems(mixedData)
-          setPrevPriceRange(priceRange); 
-        })
-        .catch(error => console.error('There was an error!', error));
+    if (JSON.stringify(prevPriceRange) === JSON.stringify(priceRange)) {
+        return;
+      }
+    getProducts().then(data => {
+      dispatch(setProducts(data));
+      let newData = [];
+      data.forEach(item => {
+          if (
+            (Array.isArray(value) && value.includes(item[property])) || 
+            (item[property] === value)
+          ) {
+            const price = item.price ?? 0;
+            if (price >= priceLow && price <= priceHigh) {
+              newData.push(item);
+            }
+          }
+        });
+      
+      let mixedData = shuffleArray([...newData]);
+      setItems(mixedData)
+      setPrevPriceRange(priceRange); 
+    })
+      .catch(error => console.error('There was an error!', error));
   }, [property, value, priceRange, priceLow, priceHigh, prevPriceRange, dispatch]);
     
 

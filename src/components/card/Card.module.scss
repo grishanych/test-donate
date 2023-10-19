@@ -11,14 +11,17 @@
     border-radius: 25px;
     position: relative;
 
-    &:hover .cardItemDecor {
-        display: block;
-    }
 
-    &:hover .cardItemIconsWrapper {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(-15px);
+    @include devices(laptop) {
+        &:hover .cardItemDecor {
+            display: block;
+        }
+    
+        &:hover .cardItemIconsWrapper {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-15px);
+        }
     }
 }
 
@@ -88,14 +91,19 @@
 .cardItemIconsWrapper {
     position: absolute;
     width: 100%;
-    top: 185px;
+    top: 170px;
     height: 40px;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
     border-radius: 0 0 20px 20px;
     transition: all 0.3s ease;
     display: flex;
     justify-content: center;
+
+    @include devices(laptop) {
+        visibility: hidden;
+        opacity: 0;
+        top: 185px;
+    }
 }
 
 .cardItemIconWrapper {

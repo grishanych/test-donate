@@ -24,7 +24,7 @@ function Favorites() {
       <h1 className={styles.cardsSectionHeadline}>Обрані товари</h1>
       <p className={styles.cardsSectionText}>Ваші обрані товари</p>
 
-      {isFavoriteEmpty ? <p>Ви ще не додали жодного обраного товару</p> :
+      {isFavoriteEmpty ? <p className={styles.favoriteEmpty}>Ви ще не додали жодного товару</p> :
         <ul className={styles.cardsListWrapper}>
           {currentProducts.map((item) => (
             <FavoritesItem

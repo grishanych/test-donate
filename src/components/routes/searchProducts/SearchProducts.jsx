@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import axios from 'axios';
 import { Card } from "../../card/Card";
+import { getProducts } from "../../../api/getProducts";
 import styles from './SearchProducts.module.scss'
 
 const ListProducts = () => {
@@ -9,14 +9,14 @@ const ListProducts = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/api/products")
-            .then(response => {
-                setData(response.data);
-            })
-            .catch(error => {
-                console.error("Помилка при отриманні даних з сервера:", error);
-            });
-    }, [inputValueFromRedux]);
+        getProducts()
+          .then(data => {
+            setData(data);
+          })
+          .catch(error => {
+            console.error("Помилка при отриманні даних з сервера:", error);
+          });
+      }, [inputValueFromRedux]);      
 
     const filteredData = data.filter(item => item.name.toLowerCase().includes(inputValueFromRedux.toLowerCase()));
 

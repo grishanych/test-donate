@@ -40,7 +40,6 @@ function ProductView() {
         );
 
         const data = await response.json();
-        console.log("Data from server:", data);
 
         dispatch(setProduct({...data, images:data.nameCloudinary.map(convertToImgUrl)}));
       } catch (error) {
@@ -56,7 +55,6 @@ function ProductView() {
   if (!product) {
     return <div>Product not found...</div>;
   }
-  console.log(product)
 
 
   return (

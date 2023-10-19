@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import Slider from "react-slider";
-// import Button from "../button/Button"
 import styles from "./AllCategoriesCardList.module.scss"
 import CardList from "./CardList";
 import shuffleArray from "../../scripts/shuffleArray"
 import SliderPrice from "../sliderPrice/SliderPrice";
+import { getProducts } from "../../api/getProducts";
+
 
 export default function CategoriesCardList() {
   const [items, setItems] = useState([]);
@@ -21,35 +21,33 @@ export default function CategoriesCardList() {
   }
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/products')
-      .then(response => response.json())
-      .then(data => {
-        let newData = [];
-        data.forEach(item => {
-          const price = item.price ?? 0;
-          if (
-            selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])
-          ) {
-            if (selectedValue === "all") {
-              newData.push(item);
-            } else if (selectedValue === "donation" && item.category === "Донат") {
-              newData.push(item);
-            } else if (selectedValue === "lots" && item.category === "Благодійний лот") {
-              newData.push(item);
-            } else if (selectedValue === "setswear" && item.category === "Комплекти форми") {
-              newData.push(item);
-            } else if (selectedValue === "outerwear" && item.category === "Одяг верхній") {
-              newData.push(item);
-            } else if (selectedValue === "footwear" && item.category === "Взуття") {
-              newData.push(item);
-            }
+    getProducts().then(data => {
+      let newData = [];
+      data.forEach(item => {
+        const price = item.price ?? 0;
+        if (
+          selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])
+        ) {
+          if (selectedValue === "all") {
+            newData.push(item);
+          } else if (selectedValue === "donation" && item.category === "Донат") {
+            newData.push(item);
+          } else if (selectedValue === "lots" && item.category === "Благодійний лот") {
+            newData.push(item);
+          } else if (selectedValue === "setswear" && item.category === "Комплекти форми") {
+            newData.push(item);
+          } else if (selectedValue === "outerwear" && item.category === "Одяг верхній") {
+            newData.push(item);
+          } else if (selectedValue === "footwear" && item.category === "Взуття") {
+            newData.push(item);
           }
-        });
-        let mixedData = shuffleArray([...newData]);
-        setItems(mixedData);
-      })
-      .catch(error => console.error('There was an error!', error));
+        }
+      });
+      let mixedData = shuffleArray([...newData]);
+      setItems(mixedData);
+    })
   }, [selectedValue, sliderValue]);
+
 
   
   return (
@@ -77,7 +75,6 @@ export default function CategoriesCardList() {
             />
           )}
         </div>
-          {/* <p>Вибрана опція: {selectedValue}</p> */}
       </div>
 
       {selectedValue || selectedValue === "all" ? (
