@@ -1,4 +1,4 @@
-import { ADD_FAVORITES, ADD_TO_CART, REMOVE_FROM_CART, REMOVE_FROM_FAVORITES, ADD_MULTIPLE_TO_CART } from "../actions/cartActions"
+import { ADD_FAVORITES, ADD_TO_CART, REMOVE_FROM_CART, REMOVE_FROM_FAVORITES, ADD_MULTIPLE_TO_CART, ADD_MULTIPLE_TO_FAVORITES, INITIALIZE_CART, INITIALIZE_FAVORITES } from "../actions/cartActions"
 
 
 const initialState = {
@@ -25,7 +25,7 @@ export const cartReducer = (state = initialState.cart, action) => {
         case REMOVE_FROM_CART:
             return {
                 ...state,
-                items: state.items.filter((item) => item.name !== action.payload),
+                items: state.items.filter((item) => item.itemNo !== action.payload),
                 itemCount: state.itemCount - 1,
             };
         case ADD_MULTIPLE_TO_CART:
@@ -33,7 +33,14 @@ export const cartReducer = (state = initialState.cart, action) => {
                 ...state,
                 items: [...state.items, ...action.payload],
                 itemCount: state.itemCount + action.payload.length,
-            };              
+            };
+        case INITIALIZE_CART:
+            return {
+                ...state,
+                items: action.payload,
+                itemCount: action.payload.length
+            };
+                        
         default:
             return state;
     }
@@ -51,9 +58,21 @@ export const favoritesReducer = (state = initialState.favorites, action) => {
         case REMOVE_FROM_FAVORITES:
             return {
                 ...state,
-                items: state.items.filter((item) => item.name !== action.payload),
+                items: state.items.filter((item) => item.itemNo !== action.payload),
                 itemCount: state.itemCount - 1,
             };
+        case ADD_MULTIPLE_TO_FAVORITES:
+            return {
+                ...state,
+                items: [...state.items, ...action.payload],
+                itemCount: state.itemCount + action.payload.length,
+            };
+        case INITIALIZE_FAVORITES:
+            return {
+                ...state,
+                items: action.payload,
+                itemCount: action.payload.length
+            };    
         
         default:
             return state;

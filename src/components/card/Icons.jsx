@@ -19,23 +19,32 @@ export function Icons({ itemNo, name, price, imageURL, id, quantity }) {
 
 
   const handleAddToCart = () => {
-    const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
     let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
     
     if (!isItemInCart) {
+      const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
       currentProducts.push(product);
-      dispatch(counterIncrement())
       countProducts += 1;
       localStorage.setItem("Cart", JSON.stringify(currentProducts));
       localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
+      
       dispatch(addToCart(product));
+      dispatch(counterIncrement())
     }
   }
 
   const handleAddFavorites = () => {
-    dispatch(counterIncrement());
+    let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
+    
     if (!isItemInFavorites) {
+      const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
+      currentProducts.push(product);
+      countProducts += 1;
+      localStorage.setItem("Favorites", JSON.stringify(currentProducts));
+      localStorage.setItem("CountFavoritesProducts", JSON.stringify(countProducts));
+      
       dispatch(addFavorites(product));
+      dispatch(counterIncrement())
     }
   }
 

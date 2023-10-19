@@ -1,15 +1,24 @@
-import React from "react";
-// import { useSelector } from "react-redux";
-import styles from "./Cart.module.scss";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { initializeCart } from "../../../redux/actions/cartActions";
 import CartItem from "./CartItem";
+import styles from "./Cart.module.scss";
 
 function Cart() {
-  // const cartItems = useSelector((state) => state.cart.items);
-  // const isCartEmpty = cartItems.length === 0;
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
   const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-  const isCartEmpty = currentProducts.length === 0;
 
+  useEffect(() => {
+    const localData = JSON.parse(localStorage.getItem("Cart"));
+    if (localData && !cartItems.length) {
+      dispatch(initializeCart(localData));
+    }
+  }, [cartItems.length, dispatch]);
 
+  const isCartEmpty = cartItems.length === 0;
+
+  
   return (
     <div className={styles.cardsSectionWrapper}>
       <h1 className={styles.cardsSectionHeadline}>Кошик</h1>
@@ -17,9 +26,9 @@ function Cart() {
 
       {isCartEmpty ? <p>Ваш кошик порожній</p> :
         <ul className={styles.cardsListWrapper}>
-          {currentProducts.map((item, index) => (
+          {currentProducts.map((item) => (
             <CartItem
-              key={index}
+              key={item.itemNo}
               item={item}
             />
           ))}

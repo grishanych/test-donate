@@ -12,9 +12,9 @@ import HeartFavorite from "./icons/favorites/Heart";
 function Header() {
     const cartCount = useSelector((state) => state.cart.itemCount);
     const favoriteCount = useSelector((state) => state.favorites.itemCount);
-    const cartCountFromLocalStorage = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
-    console.log(cartCountFromLocalStorage);
-    // console.log(cartCount);
+    const cartCountFromLS = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
+    const favoritesCountFromLS = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
+
     
     return (
         <header className={styles.header}>
@@ -36,15 +36,17 @@ function Header() {
                 <Link to="/favorites">
                     <HeartFavorite />
                 </Link>
-                {favoriteCount === 0 ? null : <span >{favoriteCount}</span>}
+                {favoritesCountFromLS && favoriteCount === 0 ? null :
+                // <span >{favoriteCount}</span>}
+                <span >{favoritesCountFromLS}</span>}
                 
                 <div className={styles.navRightSideMenu}>
                     <Link to="/cart">
                         <Cart />
                     </Link>
-                    {cartCountFromLocalStorage && cartCount === 0 ? null :
+                    {cartCountFromLS && cartCount === 0 ? null :
                     // <span >{cartCount}</span>}
-                    <span >{cartCountFromLocalStorage}</span>}
+                    <span >{cartCountFromLS}</span>}
 
                     <Button toPage="/log-in" width="56px">
                         <IconEnter/>

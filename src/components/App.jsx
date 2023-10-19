@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from 'react-router-dom'
-import { useSelector , useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import Context from "../components/Context";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Main from "./main/Main"
 import AppRoutes from "./routes/AppRoutes";
-// import { addToCart } from "../redux/actions/cartActions";
-import { addMultipleToCart } from "../redux/actions/cartActions";
+import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
 import { setAuthToken } from "../redux/actions/authActions";
-import sendCart from "../api/sendCart";
 import styles from "./App.module.scss";
-
 
 function App() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
   const contextData = { isLinkVisible, setIsLinkVisible };
   const dispatch = useDispatch();
-  // const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
+    // const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -26,21 +24,20 @@ function App() {
       dispatch(setAuthToken(token));
     }
   }, [dispatch]);
-  
 
   useEffect(() => {
     // if (isLoggedIn) {
-      const cartFromLocalStorage = JSON.parse(localStorage.getItem("Cart")) || [];
-
-      if (cartFromLocalStorage.length > 0) {
-        // dispatch(addToCart(cartFromLocalStorage));
-        dispatch(addMultipleToCart(cartFromLocalStorage)); 
-        sendCart();
+      const storedCartItems = JSON.parse(localStorage.getItem("Cart")) || [];
+      const storedFavoriteItems = JSON.parse(localStorage.getItem("Favorites")) || [];
+      
+      if (storedCartItems.length > 0) {
+        dispatch(initializeCart(storedCartItems));
+      }
+      if (storedFavoriteItems.length > 0) {
+        dispatch(initializeFavorites(storedFavoriteItems));
       }
     // }
-  }, [
-    // isLoggedIn,
-    dispatch]);
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>
@@ -54,7 +51,6 @@ function App() {
         </Context.Provider>
       </BrowserRouter>
     </div>
-
   );
 }
 
