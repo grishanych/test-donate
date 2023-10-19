@@ -40,12 +40,19 @@ function Navigation() {
                         onMouseLeave={hideDropdown}
                     >
                         <div
-                            className={`${styles.navList} ${styles.navLink}`}
+                            className={`${styles.navList} ${styles.navLink} ${styles.navItemTablet}`}
                         >категорії
                         </div>
+                        <Link
+                            to="/categories"
+                            className={`${styles.navList} ${styles.navLink} ${styles.navItemLaptop}`}
+                            onClick={() => setDropdownVisible(false)}
+                        >категорії
+                        </Link>
                         {isDropdownVisible && (
                             <div className={styles.dropdownContent}>
                                 <Link
+                                    className={styles.dropdownItemAllCategories}
                                     to="/categories"
                                     onClick={() => setDropdownVisible(false)}
                                 >Всі категорії

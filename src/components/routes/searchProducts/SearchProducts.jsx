@@ -14,8 +14,8 @@ const ListProducts = () => {
         setIsLoading(true); // Встановлюємо isLoading на true перед запитом
 
         getProducts()
-            .then(data => {
-                setData(data);
+            .then(responseData => {
+                setData(responseData);
                 setIsLoading(false); // Завантаження завершено, встановлюємо isLoading на false
             })
             .catch(error => {

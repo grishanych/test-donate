@@ -117,6 +117,22 @@
     @include devices(tablet) {
         border-bottom: 1px solid transparent;
     }
+
+    &.navItemLaptop {
+        display: none;
+    
+        @media only screen and (min-width: 1024px) {
+            display: flex;
+        }
+    }
+    
+    &.navItemTablet {
+        display: flex;
+    
+        @media only screen and (min-width: 1024px) {
+            display: none;
+        }
+    }
 }
 
 .navLink {
@@ -126,7 +142,6 @@
     transition: text-shadow 0.2s;
 }
 
-// 
 .dropdown {
     position: relative;
     display: inline-block;
@@ -151,7 +166,12 @@
         }
     }
 }
-// 
+
+.dropdownItemAllCategories {
+    @include devices(laptop) {
+        display: none;
+    }
+}
 
 .navRightSideMenu {
     display: flex;

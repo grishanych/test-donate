@@ -4,6 +4,7 @@ import CardList from "./CardList";
 import shuffleArray from "../../scripts/shuffleArray"
 import SliderPrice from "../sliderPrice/SliderPrice";
 import { getProducts } from "../../api/getProducts";
+import Spinner from "../Spinner/Spinner";
 
 
 export default function CategoriesCardList() {
@@ -11,6 +12,7 @@ export default function CategoriesCardList() {
   const [selectedValue, setSelectedValue] = useState("all");
   const [sliderValue, setSliderValue] = useState([0, 10000]);
   const [tempSliderValue, setTempSliderValue] = useState([0, 10000]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleChange = (e) => {
       setSelectedValue(e.target.value);
@@ -21,6 +23,8 @@ export default function CategoriesCardList() {
   }
 
   useEffect(() => {
+    setIsLoading(true);
+
     getProducts().then(data => {
       let newData = [];
       data.forEach(item => {
@@ -45,7 +49,12 @@ export default function CategoriesCardList() {
       });
       let mixedData = shuffleArray([...newData]);
       setItems(mixedData);
+      setIsLoading(false);
     })
+    .catch(error => {
+      console.error("Помилка при отриманні даних:", error);
+      setIsLoading(false);
+    });
   }, [selectedValue, sliderValue]);
 
 
@@ -65,8 +74,6 @@ export default function CategoriesCardList() {
               <option value="footwear" className={styles.option}>Взуття</option>
             </select>
           </div>
-
-
           {selectedValue !== "all" && selectedValue !== "donation" && selectedValue !== "lots" && (
             <SliderPrice
               tempSliderValue={tempSliderValue} 
@@ -76,13 +83,13 @@ export default function CategoriesCardList() {
           )}
         </div>
       </div>
-
-      {selectedValue || selectedValue === "all" ? (
-
-        <CardList items={items}/>
-
-        ) : (
-        "Завантаження..."
+      
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        selectedValue || selectedValue === "all" ? (
+          <CardList items={items}/>
+        ) : null
       )}    
   </>
   );

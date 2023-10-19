@@ -5,6 +5,7 @@ import CardList from "./CardList";
 import shuffleArray from "../../scripts/shuffleArray"
 import PropTypes from "prop-types"
 import { getProducts } from "../../api/getProducts";
+import Spinner from "../Spinner/Spinner";
 
 
 export default function FilteredCardList( {property, value, priceRange} ) {
@@ -13,12 +14,15 @@ export default function FilteredCardList( {property, value, priceRange} ) {
   const priceLow = priceRange ? priceRange[0] : 0;
   const priceHigh = priceRange ? priceRange[1] : Infinity;
   const [prevPriceRange, setPrevPriceRange] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
       
 
   useEffect(() => {
     if (JSON.stringify(prevPriceRange) === JSON.stringify(priceRange)) {
         return;
       }
+
+    setIsLoading(true);
     getProducts().then(data => {
       dispatch(setProducts(data));
       let newData = [];
@@ -37,14 +41,20 @@ export default function FilteredCardList( {property, value, priceRange} ) {
       let mixedData = shuffleArray([...newData]);
       setItems(mixedData)
       setPrevPriceRange(priceRange); 
+      setIsLoading(false);
     })
-      .catch(error => console.error('There was an error!', error));
+    .catch(error => {
+      console.error("Помилка при отриманні даних:", error);
+      setIsLoading(false);
+    });
   }, [property, value, priceRange, priceLow, priceHigh, prevPriceRange, dispatch]);
     
 
-    return (
-        <CardList items={items}/>
-    );
+  return (
+    <>
+    {isLoading ? <Spinner /> : <CardList items={items}/>} 
+    </>
+  )
 }
 
 FilteredCardList.propTypes = {
