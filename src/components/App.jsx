@@ -6,8 +6,8 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Main from "./main/Main"
 import AppRoutes from "./routes/AppRoutes";
-import { addToCart } from "../redux/actions/cartActions";
-// import { setToken } from "../redux/actions/tokenActions";
+// import { addToCart } from "../redux/actions/cartActions";
+import { addMultipleToCart } from "../redux/actions/cartActions";
 import { setAuthToken } from "../redux/actions/authActions";
 import sendCart from "../api/sendCart";
 import styles from "./App.module.scss";
@@ -17,7 +17,7 @@ function App() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
   const contextData = { isLinkVisible, setIsLinkVisible };
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  // const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -29,14 +29,18 @@ function App() {
   
 
   useEffect(() => {
-    if (isLoggedIn) {
+    // if (isLoggedIn) {
       const cartFromLocalStorage = JSON.parse(localStorage.getItem("Cart")) || [];
+
       if (cartFromLocalStorage.length > 0) {
-        dispatch(addToCart(cartFromLocalStorage));
+        // dispatch(addToCart(cartFromLocalStorage));
+        dispatch(addMultipleToCart(cartFromLocalStorage)); 
         sendCart();
       }
-    }
-  }, [isLoggedIn, dispatch]);
+    // }
+  }, [
+    // isLoggedIn,
+    dispatch]);
 
   return (
     <div className={styles.container}>

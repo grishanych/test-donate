@@ -12,6 +12,9 @@ import HeartFavorite from "./icons/favorites/Heart";
 function Header() {
     const cartCount = useSelector((state) => state.cart.itemCount);
     const favoriteCount = useSelector((state) => state.favorites.itemCount);
+    const cartCountFromLocalStorage = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
+    console.log(cartCountFromLocalStorage);
+    // console.log(cartCount);
     
     return (
         <header className={styles.header}>
@@ -39,8 +42,9 @@ function Header() {
                     <Link to="/cart">
                         <Cart />
                     </Link>
-                    {cartCount === 0 ? null :
-                    <span >{cartCount}</span>}
+                    {cartCountFromLocalStorage && cartCount === 0 ? null :
+                    // <span >{cartCount}</span>}
+                    <span >{cartCountFromLocalStorage}</span>}
 
                     <Button toPage="/log-in" width="56px">
                         <IconEnter/>

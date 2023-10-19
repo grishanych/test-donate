@@ -1,4 +1,4 @@
-import { ADD_FAVORITES, ADD_TO_CART, REMOVE_FROM_CART, REMOVE_FROM_FAVORITES } from "../actions/cartActions"
+import { ADD_FAVORITES, ADD_TO_CART, REMOVE_FROM_CART, REMOVE_FROM_FAVORITES, ADD_MULTIPLE_TO_CART } from "../actions/cartActions"
 
 
 const initialState = {
@@ -19,7 +19,7 @@ export const cartReducer = (state = initialState.cart, action) => {
         case ADD_TO_CART:
             return {
                 ...state,
-                items: [...state.items, ...action.payload],
+                items: [...state.items, action.payload],
                 itemCount: state.itemCount + 1,
             };
         case REMOVE_FROM_CART:
@@ -28,6 +28,12 @@ export const cartReducer = (state = initialState.cart, action) => {
                 items: state.items.filter((item) => item.name !== action.payload),
                 itemCount: state.itemCount - 1,
             };
+        case ADD_MULTIPLE_TO_CART:
+            return {
+                ...state,
+                items: [...state.items, ...action.payload],
+                itemCount: state.itemCount + action.payload.length,
+            };              
         default:
             return state;
     }

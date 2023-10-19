@@ -9,7 +9,6 @@ const selectCartForApi = state => state.cart.items.map(item => ({
 }));
 
 export default function sendCart() {
-  console.log(store.getState().auth);
   const { token } = store.getState().auth;
   store.dispatch(setAuthToken(token));
 

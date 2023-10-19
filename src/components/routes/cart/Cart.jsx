@@ -1,12 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import styles from "./Cart.module.scss";
 import CartItem from "./CartItem";
 
 function Cart() {
-  const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems);
-  const isCartEmpty = cartItems.length === 0;
+  // const cartItems = useSelector((state) => state.cart.items);
+  // const isCartEmpty = cartItems.length === 0;
+  const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+  const isCartEmpty = currentProducts.length === 0;
+
 
   return (
     <div className={styles.cardsSectionWrapper}>
@@ -15,7 +17,7 @@ function Cart() {
 
       {isCartEmpty ? <p>Ваш кошик порожній</p> :
         <ul className={styles.cardsListWrapper}>
-          {cartItems.map((item, index) => (
+          {currentProducts.map((item, index) => (
             <CartItem
               key={index}
               item={item}

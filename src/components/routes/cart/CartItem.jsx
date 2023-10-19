@@ -6,7 +6,7 @@ import QuantityCounter from "./../../productView/CounterQuantity";
 import styles from "./Cart.module.scss";
 
 function CartItem({ item }) {
-  console.log(item);
+  // console.log(item);
 
   const dispatch = useDispatch();
 
