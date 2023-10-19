@@ -5,13 +5,11 @@ import { counterDecrement } from "../../../redux/actionsCreators/counterActionsC
 import Button from "../../button/Button";
 
 function CartItem({ item }) {
-
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (productId) => {
-    dispatch(counterDecrement())
+    dispatch(counterDecrement());
     dispatch(removeFromCart(productId));
-
   };
   
   return (
@@ -20,13 +18,19 @@ function CartItem({ item }) {
         <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
       </div>
       <p>{item.name}</p>
-      {item.price ? <p className={styles.cardItemPrice}>{item.price} грн</p> : null}
+      {item.price ? (
+        <p className={styles.cardItemPrice}>
+          {item.price}
+          {" "}
+          грн
+        </p>
+      ) : null}
       {item.isLot === "Благодійний лот" ? (
         <p className={styles.decorLot}>ЛОТ</p>
       ) : item.isLot === "Донат" ? (
         <p className={styles.decorDonat}>ДОНАТ</p>
       ) : null}
-      <Button className={styles.buttonDelete} onClick={() => handleRemoveFromCart(item.name)} text="Видалити"/>
+      <Button className={styles.buttonDelete} onClick={() => handleRemoveFromCart(item.name)} text="Видалити" />
     </li>
   );
 }

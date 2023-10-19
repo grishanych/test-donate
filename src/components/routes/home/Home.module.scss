@@ -10,9 +10,9 @@
 }
 
 .cardsSectionHeadline {
+  color: variables.$fc-main;
   font-weight: 700;
   text-transform: uppercase;
-  color: variables.$fc-main;
 }
 
 .cardsSectionText {
@@ -25,10 +25,10 @@
 }
 
 .call {
-  font-size: variables.$fs-x;
-  font-weight: 700;
-  text-transform: uppercase;
   color: variables.$bgc-main;
+  font-weight: 700;
+  font-size: variables.$fs-x;
+  text-transform: uppercase;
 }
 
 .headline {
@@ -41,6 +41,6 @@
 }
 
 .picture {
-  padding: 0px 15px 50px;
   width: calc(100% - 30px);
+  padding: 0px 15px 50px;
 }

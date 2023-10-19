@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom';
-import logo from '../../images/header/Logo.png';
-import Cart from "./icons/cart/IconCart";
-import IconEnter from "./icons/enter/IconEnter";
-import Button from "../button/Button";
+import logo from '../../images/header/logo.png';
+import Cart from './icons/cart/IconCart';
+import IconEnter from './icons/enter/IconEnter';
+import Button from '../button/Button';
 import Navigation from './Navigation';
 import { IconSearchMobile } from './icons/search/IconSearch';
 import styles from './Header.module.scss';
 import { useSelector } from 'react-redux';
-import HeartFavorite from "./icons/favorites/Heart";
+import HeartFavorite from './icons/favorites/Heart';
 
-function Header() {
-    const cartCount = useSelector((state) => state.cart.itemCount);
-    const favoriteCount = useSelector((state) => state.favorites.itemCount);
+function Header () {
+  const cartCount = useSelector((state) => state.cart.itemCount);
+  const favoriteCount = useSelector((state) => state.favorites.itemCount);
     
-    return (
+  return (
         <header className={styles.header}>
             <div className={styles.mobileHeader}>
                 <input
@@ -22,6 +22,7 @@ function Header() {
                     placeholder="Знайти..."
                 />
                 <button className={styles.buttonMobileHeader}>
+
                     <IconSearchMobile />
                 </button>
             </div>
@@ -39,8 +40,7 @@ function Header() {
                     <Link to="/cart">
                         <Cart />
                     </Link>
-                    {cartCount === 0 ? null :
-                    <span >{cartCount}</span>}
+                    {cartCount === 0 ? null : <span >{cartCount}</span>}
 
                     <Button toPage="/log-in" width="56px">
                         <IconEnter/>
@@ -48,7 +48,7 @@ function Header() {
                 </div>
             </div>
         </header>
-    )
+  )
 }
 
 export default Header

@@ -1,0 +1,25 @@
+{
+    "env": {
+      "browser": true,
+      "mocha": true
+    },
+    "extends": [
+      "airbnb",
+      "react-app"
+    ],
+    "rules": {
+    "quotes": ["error", "double"], //всі лапки подвійні
+    "indent": [2], // Встановлення відступу на 2 пробіли
+    "no-multiple-empty-lines": ["error", { "max": 3 }], // максимум 3 порожніх рядки
+    "no-restricted-globals": ["error", "fetch"], // Вимкнення правила для 'fetch'
+    "no-trailing-spaces": ["error", { "skipBlankLines": true } ] //пробіли в кінці порожніх рядків (без тексту) не вважаються помилкою
+    },
+    "settings": {
+      "react": {
+        "createClass": "createReactClass",
+        "pragma": "React",
+        "version": "18.2.0"
+      },
+      "propWrapperFunctions": [ "forbidExtraProps" ] //обмеження використання "надмірних" пропсів у компонентах React.
+    }
+  }

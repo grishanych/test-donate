@@ -7,7 +7,7 @@ function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
   const isCartEmpty = cartItems.length === 0;
 
-  return (
+   return (
     <div className={styles.cardsSectionWrapper}>
       {isCartEmpty ? (
         <h2>Ваш кошик порожній</h2>

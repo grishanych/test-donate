@@ -1,7 +1,7 @@
-import { SET_INPUT_VALUE } from '../actions/valueActions'
+import { SET_INPUT_VALUE } from "../actions/valueActions";
 
 const initialState = {
-  inputValue: '',
+  inputValue: "",
 };
 
 const inputReducer = (state = initialState, action) => {
