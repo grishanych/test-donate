@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-// import counterReducer from "./counterReducer";
-import {cartReducer,  favoritesReducer } from "./cartReducer";
-import {productReducer, productsReducer} from "./productReducer";
+import { cartReducer,  favoritesReducer } from "./cartReducer";
+import { productReducer } from "./productReducer";
+import { productsReducer} from "./productsReducer";
 import inputReducer from "./inputReducer";
 import { authReducer } from "./authReducer";
 import errorReducer from "./errorReducer"

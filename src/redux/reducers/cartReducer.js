@@ -1,4 +1,4 @@
-import { ADD_FAVORITES, ADD_TO_CART, REMOVE_FROM_CART, REMOVE_FROM_FAVORITES, ADD_MULTIPLE_TO_CART, ADD_MULTIPLE_TO_FAVORITES, INITIALIZE_CART, INITIALIZE_FAVORITES } from "../actions/cartActions"
+import { ADD_FAVORITES, ADD_TO_CART, REMOVE_FROM_CART, REMOVE_FROM_FAVORITES, INITIALIZE_CART, INITIALIZE_FAVORITES } from "../actions/cartActions"
 
 
 const initialState = {
@@ -13,7 +13,6 @@ const initialState = {
 };
 
 
-// Редуктор для кошика
 export const cartReducer = (state = initialState.cart, action) => {
     switch (action.type) {
         case ADD_TO_CART:
@@ -28,12 +27,6 @@ export const cartReducer = (state = initialState.cart, action) => {
                 items: state.items.filter((item) => item.itemNo !== action.payload),
                 itemCount: state.itemCount - 1,
             };
-        case ADD_MULTIPLE_TO_CART:
-            return {
-                ...state,
-                items: [...state.items, ...action.payload],
-                itemCount: state.itemCount + action.payload.length,
-            };
         case INITIALIZE_CART:
             return {
                 ...state,
@@ -46,7 +39,7 @@ export const cartReducer = (state = initialState.cart, action) => {
     }
 };
 
-// Редуктор для списку обраних товарів
+
 export const favoritesReducer = (state = initialState.favorites, action) => {
     switch (action.type) {
         case ADD_FAVORITES:
@@ -60,12 +53,6 @@ export const favoritesReducer = (state = initialState.favorites, action) => {
                 ...state,
                 items: state.items.filter((item) => item.itemNo !== action.payload),
                 itemCount: state.itemCount - 1,
-            };
-        case ADD_MULTIPLE_TO_FAVORITES:
-            return {
-                ...state,
-                items: [...state.items, ...action.payload],
-                itemCount: state.itemCount + action.payload.length,
             };
         case INITIALIZE_FAVORITES:
             return {

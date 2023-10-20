@@ -1,58 +1,65 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setProducts } from "../../redux/actions/productActions"
 import CardList from "./CardList";
 import shuffleArray from "../../scripts/shuffleArray"
 import PropTypes from "prop-types"
-import { getProducts } from "../../api/getProducts";
 import Spinner from "../Spinner/Spinner";
-
+import axios from "axios";
+import { GET_PRODUCTS_URL } from "../../endpoints/endpoints"
 
 export default function FilteredCardList( {property, value, priceRange} ) {
-  const dispatch = useDispatch();
-  const [items, setItems] = useState([]);
   const priceLow = priceRange ? priceRange[0] : 0;
   const priceHigh = priceRange ? priceRange[1] : Infinity;
   const [prevPriceRange, setPrevPriceRange] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-      
+  const [filteredData, setFilteredData] = useState([]);
+    
 
   useEffect(() => {
     if (JSON.stringify(prevPriceRange) === JSON.stringify(priceRange)) {
-        return;
-      }
-
-    setIsLoading(true);
-    getProducts().then(data => {
-      dispatch(setProducts(data));
-      let newData = [];
-      data.forEach(item => {
-          if (
-            (Array.isArray(value) && value.includes(item[property])) || 
-            (item[property] === value)
-          ) {
-            const price = item.price ?? 0;
-            if (price >= priceLow && price <= priceHigh) {
-              newData.push(item);
-            }
+      return;
+    }
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(GET_PRODUCTS_URL);
+        const products = response.data;
+  
+        if (!Array.isArray(products)) {
+          console.log("products не є масивом:", products);
+          setIsLoading(false);
+          return;
+        }
+  
+        let newData = [];
+      products.forEach(item => {
+        if (
+          (Array.isArray(value) && value.includes(item[property])) || 
+          (item[property] === value)
+        ) {
+          const price = item.price ?? 0;
+          if (price >= priceLow && price <= priceHigh) {
+            newData.push(item);
           }
-        });
-      
-      let mixedData = shuffleArray([...newData]);
-      setItems(mixedData)
-      setPrevPriceRange(priceRange); 
-      setIsLoading(false);
-    })
-    .catch(error => {
-      console.error("Помилка при отриманні даних:", error);
-      setIsLoading(false);
-    });
-  }, [property, value, priceRange, priceLow, priceHigh, prevPriceRange, dispatch]);
-    
+        }
+      });
 
+      let mixedData = shuffleArray([...newData]);
+      setPrevPriceRange(priceRange); 
+      setFilteredData(mixedData);
+
+    } catch (error) {
+      console.error("Помилка при завантаженні даних:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+    fetchData();
+  }, [property, value, priceRange, priceLow, priceHigh, prevPriceRange]);
+  
   return (
     <>
-    {isLoading ? <Spinner /> : <CardList items={items}/>} 
+      {isLoading ? <Spinner /> : <CardList items={filteredData}/>} 
     </>
   )
 }

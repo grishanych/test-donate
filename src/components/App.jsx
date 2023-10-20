@@ -9,6 +9,8 @@ import AppRoutes from "./routes/AppRoutes";
 import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
 import { setAuthToken } from "../redux/actions/authActions";
 import styles from "./App.module.scss";
+import { getProducts } from "../api/getProducts";
+import { setProducts } from "../redux/actions/productActions";
 
 function App() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
@@ -37,6 +39,16 @@ function App() {
         dispatch(initializeFavorites(storedFavoriteItems));
       }
     // }
+  }, [dispatch]);
+
+  useEffect(() => {
+    getProducts()
+      .then(data => {
+        dispatch(setProducts(data));
+      })
+      .catch(error => {
+        console.error("Помилка при отриманні товарів:", error);
+      });
   }, [dispatch]);
 
   return (

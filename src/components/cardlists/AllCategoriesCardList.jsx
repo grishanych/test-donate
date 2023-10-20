@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import styles from "./AllCategoriesCardList.module.scss"
+// import { getProducts } from "../../api/getProducts";
 import CardList from "./CardList";
-import shuffleArray from "../../scripts/shuffleArray"
 import SliderPrice from "../sliderPrice/SliderPrice";
-import { getProducts } from "../../api/getProducts";
 import Spinner from "../Spinner/Spinner";
+import shuffleArray from "../../scripts/shuffleArray"
+import styles from "./AllCategoriesCardList.module.scss"
+
+import { useSelector } from "react-redux";
 
 
 export default function CategoriesCardList() {
@@ -13,6 +15,7 @@ export default function CategoriesCardList() {
   const [sliderValue, setSliderValue] = useState([0, 10000]);
   const [tempSliderValue, setTempSliderValue] = useState([0, 10000]);
   const [isLoading, setIsLoading] = useState(true);
+  const productsList = useSelector((state) => state.products.items);
 
   const handleChange = (e) => {
       setSelectedValue(e.target.value);
@@ -25,9 +28,9 @@ export default function CategoriesCardList() {
   useEffect(() => {
     setIsLoading(true);
 
-    getProducts().then(data => {
+    // getProducts().then(data => {
       let newData = [];
-      data.forEach(item => {
+      productsList.forEach(item => {
         const price = item.price ?? 0;
         if (
           selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])
@@ -50,12 +53,12 @@ export default function CategoriesCardList() {
       let mixedData = shuffleArray([...newData]);
       setItems(mixedData);
       setIsLoading(false);
-    })
-    .catch(error => {
-      console.error("Помилка при отриманні даних:", error);
-      setIsLoading(false);
-    });
-  }, [selectedValue, sliderValue]);
+    // })
+    // .catch(error => {
+    //   console.error("Помилка при отриманні даних:", error);
+    //   setIsLoading(false);
+    // });
+  }, [selectedValue, sliderValue, productsList]);
 
 
   
