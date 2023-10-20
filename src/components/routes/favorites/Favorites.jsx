@@ -34,7 +34,7 @@ function Favorites() {
           ))}
         </ul>
       }
-  </div>
+    </div>
   );
 }
 

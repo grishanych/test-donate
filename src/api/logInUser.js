@@ -14,7 +14,6 @@ const logInUser = (login, password) => dispatch => {
   return axios
     .post(LOGIN_URL, userData)
     .then(loginResult => {
-      console.log(loginResult);
       if (loginResult.data.success === true) {
         localStorage.setItem('token', loginResult.data.token);
         // dispatch(setToken(loginResult.data.token));

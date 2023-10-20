@@ -12,6 +12,7 @@ import styles from "./LogIn.module.scss"
 import PropTypes from "prop-types"
 
 import axios from "axios";
+import { addFavorites } from "../../redux/actions/cartActions";
 
 
 function LogIn({ headline, toRegistration, toLogIn }){
@@ -34,14 +35,72 @@ function LogIn({ headline, toRegistration, toLogIn }){
       .matches(/[a-zA-Z0-9]/, "Дозволені символи для пароля: a-z, A-Z, 0-9")
   })
 
-  const handleUserLogin = (login, password) => {
-    dispatch(logInUser(login, password))
-      .then(() => {
-        navigate(toLogIn);
-      })
-      .catch((error) => {
-        setShowError(true);
-      });
+  // const handleUserLogin = (login, password) => {
+  //   dispatch(logInUser(login, password))
+  //     .then(() => {
+  //       navigate(toLogIn);
+  //     })
+  //     .catch((error) => {
+  //       setShowError(true);
+  //     });
+  // };
+
+
+  async function fetchUserDataFromServer() {
+    try {
+      const response = await axios.get("http://localhost:4000/api/customers/customer");
+      return response.data;
+    } catch (err) {
+      console.error("Помилка при отриманні даних:", err);
+    }
+  }
+
+  async function updateUserFavoritesOnServer(newFavorites) {
+    const updatedCustomer = {
+      favorites: newFavorites,
+    }
+
+    try {
+      const response = await axios.put("http://localhost:4000/api/customers", updatedCustomer);
+      return response.data.favorites;
+    } catch (err) {
+      console.error("Помилка при отриманні даних:", err);
+    }
+  }
+  
+
+  const handleUserLogin = async (login, password) => {
+    try {
+      await dispatch(logInUser(login, password));
+  
+      const userData = await fetchUserDataFromServer();
+      if (userData.favorites.items && userData.favorites.items.length > 0) {
+
+        const currentFavorites = JSON.parse(localStorage.getItem('Favorites')) || [];
+        const newFavorites = Array.from(new Set([...currentFavorites, ...userData.favorites.items]));
+        localStorage.setItem('Favorites', JSON.stringify(newFavorites));
+        dispatch(addFavorites(newFavorites));
+
+        await updateUserFavoritesOnServer(newFavorites);
+        // const dataFromServer = await updateUserFavoritesOnServer(newFavorites);
+        // оновили - на сторінку
+        // console.log(dataFromServer);
+      } else {
+        const currentFavorites = JSON.parse(localStorage.getItem('Favorites')) || [];
+        if (currentFavorites.length > 0) {
+          await updateUserFavoritesOnServer(currentFavorites);
+          // const dataFromServer = await updateUserFavoritesOnServer(currentFavorites);
+          // додали - на сторінку
+          // console.log(dataFromServer);
+        }
+      } 
+    }
+    catch (error) {
+      setShowError(true);
+      console.error("Помилка при вході:", error);
+    } finally {
+      navigate(toLogIn)
+    }
   };
   
 
