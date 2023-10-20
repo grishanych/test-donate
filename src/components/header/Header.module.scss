@@ -16,11 +16,12 @@
 
     @include devices(mobile) {
         display: flex;
+        flex-direction: row-reverse;
     }
 }
 
 .inputMobileHeader {
-    width: calc(85% - 20px);
+    width: 60%; 
     padding: 15px 10px;
     border-radius: 10px;
     background-color: variables.$bgc-second;
@@ -29,7 +30,8 @@
     &:focus {
         border: none;
         outline: none;
-      }
+        border: 1px solid variables.$border-color-main;
+    }
 }
 
 .buttonMobileHeader {
@@ -38,6 +40,7 @@
     border-radius: 14px;
     border: none;
     background: linear-gradient(137deg, variables.$bgc-second -24.6%, #46A358 100%);
+    cursor: pointer;
 }
 
 .headerLaptop {
@@ -85,7 +88,7 @@
             display: flex;
             flex-direction: column;
             max-height: 500px;
-          }
+        }
     }
 
     @include devices(tablet) {
@@ -126,7 +129,6 @@
     transition: text-shadow 0.2s;
 }
 
-// 
 .dropdown {
     position: relative;
     display: inline-block;
@@ -139,19 +141,18 @@
     flex-direction: column;
     position: absolute;
     background-color: variables.$border-color-decor;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
+}
 
-    & a {
-        padding: 10px 0px 5px;
+.dropdownContent a {
+    padding: 10px 0px 5px;
 
-        &:hover {
-            border-bottom: 1px solid variables.$border-color-main;
-            padding-bottom: 4px;
-        }
+    &:hover {
+        border-bottom: 1px solid variables.$border-color-main;
+        padding-bottom: 4px;
     }
 }
-// 
 
 .navRightSideMenu {
     display: flex;
@@ -176,7 +177,6 @@
     display: flex;
     gap: 10px;
 
-    // ! ???
     @include devices(mobile) {
         flex-direction: column;
     }
@@ -186,7 +186,7 @@
     border: 1px solid variables.$border-color-main;
     border-radius: 15px;
     background-color: variables.$bgc-second;
-    padding: 0px 10px; 
+    padding: 0px 10px;
 }
 
 input:focus {
@@ -194,7 +194,6 @@ input:focus {
     outline: none;
     border: 1px solid variables.$border-color-main;
 }
-
 
 .iconSearch {
     width: 35px;
@@ -238,30 +237,57 @@ input:focus {
     cursor: pointer;
 }
 
-.burgerButton {
-    display: none;
+.toggleButton {
+    position: relative;
+    width: 20px;
+    height: 10px;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
-    transition: 0.4s;
-
-    @media only screen and (max-width: 799px) {
-        display: block;
-    }
-  }
+    padding: 0;
   
-.burgerBar {
-    width: 25px;
-    height: 3px;
-    background-color: #333;
-    margin: 4px 0;
-    transition: 0.4s;
+    .bar {
+        width: 100%;
+        height: 4px;
+        margin: 2px;
+        background-color: #46A358;
+        transition: background-color 0.3s;
+    }
+  
+    &.cross {
+        .bar:nth-child(1) {
+            transform: rotate(45deg) translate(1px, 1px);
+        }
+        .bar:nth-child(2) {
+            transform: rotate(-45deg) translate(3px, -3px);
+        }
+        .bar:nth-child(3) {
+            display: none;
+        }
+    }
+}
 
-    &.crossBar1 {
-        transform: rotate(-45deg) translate(-5px, 4px);
-    }
-    &.crossBar2 {
-        opacity: 0;
-    }
-    &.crossBar3 {
-        transform: rotate(45deg) translate(-6px, -5px);
-    }
+.menuList {
+    position: absolute;
+    z-index: 9;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-bottom-right-radius: 10px;
+    border: 1px solid #46A358;
+}
+
+.menuItem {
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #46A358;
+    color: #46A358;
+    font-family: Cera Pro;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    padding: 10px 15px;
 }
