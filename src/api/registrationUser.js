@@ -12,7 +12,8 @@ const registrationUser = (firstName, lastName, login, email, password, telephone
     password: password,
     isAdmin: isAdmin,
     telephone: telephone,
-    birthdate: birthdate
+    birthdate: birthdate,
+    favorites: {"items": []}
   };
 
   return axios

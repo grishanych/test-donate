@@ -11,8 +11,10 @@ import logInUser from "../../api/logInUser"
 import styles from "./LogIn.module.scss"
 import PropTypes from "prop-types"
 
+import axios from "axios";
 
-function LogIn({ headline, to }){
+
+function LogIn({ headline, toRegistration, toLogIn }){
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
@@ -35,7 +37,7 @@ function LogIn({ headline, to }){
   const handleUserLogin = (login, password) => {
     dispatch(logInUser(login, password))
       .then(() => {
-        navigate(to);
+        navigate(toLogIn);
       })
       .catch((error) => {
         setShowError(true);
@@ -109,7 +111,7 @@ function LogIn({ headline, to }){
             </Form>
           )}
         </Formik>
-        <Link to={to} className={`${styles.text} ${styles.textRegistration}`}>Зареєструватися</Link> 
+        <Link to={toRegistration} className={`${styles.text} ${styles.textRegistration}`}>Зареєструватися</Link> 
       </div>
     </section>
   )
@@ -117,7 +119,8 @@ function LogIn({ headline, to }){
 
 LogIn.propTypes = {
   headline: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired
+  toRegistration: PropTypes.string.isRequired,
+  toLogIn: PropTypes.string.isRequired
 };
 
 export default LogIn

@@ -4,7 +4,7 @@ function CustomerLogIn(){
 
   return(
     <>
-      <LogIn headline="Увійти" to="/registration"/>
+      <LogIn headline="Увійти" toRegistration="/registration" toLogIn="/account"/>
     </>
   )
 }

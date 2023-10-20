@@ -4,7 +4,7 @@ function AdminLogIn(){
 
   return(
     <>
-      <LogIn headline="Увійдіть в систему" to="/adm-page"/>
+      <LogIn headline="Увійдіть в систему" toRegistration="/adm-registration" toLogIn="/adm-page"/>
     </>
   )
 }

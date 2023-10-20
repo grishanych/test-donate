@@ -49,7 +49,7 @@ function Registration({ headline, to, isAdmin }){
   const handleUserRegistration = (firstName, lastName, login, email, password, telephone, birthdate) => {
     dispatch(registrationUser(firstName, lastName, login, email, password, telephone, birthdate, isAdmin))
       .then(() => {
-        navigate({to});
+        navigate(to);
       })
       .catch((error) => {
         if (error.response && error.response.data) {
