@@ -1,0 +1,127 @@
+@use "../../styles/variables";
+@import "../../styles/mediaqueries";
+
+.windowWrapper {
+  padding: 50px 0px;
+
+  @include devices(mobile) {
+    padding-top: 36px;
+  }
+}
+  
+.window {
+  padding: 50px 100px 68px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  
+  @include devices(mobile) {
+    width: 300px;
+    padding: 0px;
+  }
+}
+
+.headline {
+  font-size: variables.$fs-x;
+  padding-bottom: 53px;
+  color: variables.$fc-main;
+  font-weight: 600;
+
+  @include devices(mobile) {
+    padding-bottom: 20px;
+  }
+}
+
+.text,
+.textAttention {
+  font-size: variables.$fs-s;
+  text-align: center;
+}
+
+.text {
+  color: variables.$fc-text;
+}
+
+.headlineText {
+  @include devices(mobile) {
+    display: none;
+  }
+}
+
+.textAttention {
+  color: variables.$bgc-attention;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 14px;
+}
+
+.label {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input,
+.inputAttention {
+  width: 280px;
+  height: 40px;
+  border: 1px solid variables.$border-color-decor;
+  border-radius: 5px;
+  padding: 2px 10px;
+  margin-bottom: 17px;
+
+  @include devices(mobile) {
+    height: 50px;
+  }
+}
+
+.input {
+  &:focus {
+    border: none;
+    outline: none;
+    border: 1px solid variables.$border-color-main;
+  }
+}
+
+.passwordWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.iconButton {
+  position: absolute;
+  cursor: pointer;
+  top: 11px;
+  left: 260px;
+}
+
+.inputAttention {
+  border: 1px solid variables.$bgc-attention;
+}
+
+.buttonStyle {
+  height: 40px;
+  width: 300px;
+  background-color: variables.$bgc-main;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 27px;
+
+  @include devices(mobile) {
+    height: 60px;
+  }
+}
+
+.errorsWrapper {
+  padding-top: 46px;
+}

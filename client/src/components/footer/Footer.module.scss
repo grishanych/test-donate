@@ -1,0 +1,316 @@
+@use "../../styles/mixins";
+@use "../../styles/variables";
+@import "../../styles/mediaqueries";
+
+
+
+.accordionMenuMobile {
+  @include devices (laptop) {
+    display: none;
+  }
+  @include devices(tablet) {
+    display: none;
+  }
+  @include devices (mobile) {
+    display: block;
+    width: 100%;
+
+  }
+}
+
+.footerContainer {
+margin-top: 100px;
+}
+
+.footerSubscribeWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fbfbfb;
+  padding: 25px;
+
+}
+
+.footerSubscribeHeader {
+  @include mixins.font-family-bold;
+  line-height: 16px;
+  margin-bottom: 18px;
+
+  @include devices(tablet) {
+    font-size: clamp(16px, 15.29750336px + 0.2197802198vw, 18px);
+    text-align: center;
+  }
+  @include devices(mobile) {
+    text-align: center;
+    font-size: clamp(14px, 13.5px + 0.3vw, 16px);
+  }
+}
+
+.footerInput {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include devices(mobile) {
+    width: fit-content;
+  }
+}
+
+.emailInput {
+  @include mixins.font-family-regular;
+  font-size: 14px;
+  line-height: 16px;
+  color: #acacac;
+  padding: 12px 86px 12px 12px;
+  border-radius: 6px;
+  border-color: #ffffff;
+  border: none;
+  outline: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.06);
+  width: 100%;
+
+  @include devices(tablet) {
+    padding: 12px;
+  }
+}
+
+.joinBtn {
+  @include mixins.font-family-bold;
+  line-height: 16px;
+  padding: 12px 25px;
+  border-radius: 0px 6px 6px 0px;
+  background-color: variables.$bgc-main;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+
+  @include devices(tablet) {
+    font-size: 14px;
+  }
+}
+
+.errorsWrapper {
+  padding-top: 18px;
+  text-align: center;
+  font-size: variables.$fs-sx;
+  color: variables.$bgc-attention
+}
+
+.footerSubscribeInfo {
+  @include mixins.font-family-regular;
+  font-size: 13px;
+  line-height: 22px;
+  color: rgba(114, 114, 114, 1);
+  margin-top: 17px;
+  max-width: 410px;
+  text-align: center;
+
+  @include devices(tablet) {
+    max-width: fit-content;
+  }
+}
+
+.contactsContainer {
+  padding: 25px 15px;
+  border-width: 1px 0;
+  border-style: solid;
+  border-color: rgba(70, 163, 89, 0.1);
+  background-color: rgba(70, 163, 88, 0.1);
+
+  @include devices(tablet) {
+    position: relative;
+  }
+}
+
+.contactsInner {
+  @include devices(tablet) {
+    padding-top: 40px;
+  }
+}
+
+.contactsList {
+  display: flex;
+  gap: 20px 80px;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @include devices(tablet) {
+    justify-content: center;
+    gap: 20px;
+  }
+  @include devices(mobile) {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.contactsItem {
+  @include mixins.font-family-regular;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+
+  a {
+    text-decoration: none;
+    color: rgba(61, 61, 61, 1);
+    padding-left: 10px;
+  }
+
+  @include devices(tablet) {
+    &:first-child {
+      position: absolute;
+      top: 15px;
+    }
+  }
+}
+
+.footerNavigationContainer {
+  padding: 30px 25px;
+  border-bottom: 1px solid rgba(70, 163, 88, 0.2);
+  @include devices (mobile) {
+    padding: 0;
+  }
+
+}
+
+.bottomInner {
+  display: grid;
+  gap: 25px 15px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 230px));
+
+  @include devices(tablet) {
+    text-align: center;
+    justify-content: center;
+  }
+  @include devices(mobile) {
+    justify-content: center;
+  }
+}
+
+.bottomTitle {
+  color: #3d3d3d;
+  @include mixins.font-family-bold;
+  line-height: 16px;
+  margin-bottom: 8px;
+  @include devices (mobile) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include mixins.font-family-regular;
+    line-height: 2;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 2px;
+    margin-bottom: 0;
+    transition: all .2s ease-in;
+  }
+}
+
+.arrowDown {
+  transition: transform 0.3s ease;
+}
+
+.bottomListItem {
+  list-style: none;
+}
+
+.bottomLink {
+  text-decoration: none;
+  color: inherit;
+  @include mixins.font-family-regular;
+  font-size: 14px;
+  line-height: 30px;
+  &:hover{
+    color: #46a358;
+  }
+  @include devices(mobile) {
+    padding: 10px;
+
+  }
+}
+
+.bottomItem {
+  @include devices (mobile) {
+    display: none;
+  }
+  &:last-child {
+    @include devices (mobile) {
+      display: block;
+    }
+  }
+
+}
+
+//mobile Accordion Menu:
+.bottomMobileItem {
+
+}
+
+.bottomSocialMedia {
+  display: flex;
+  padding-top: 12px;
+  margin-bottom: 2.0625rem;
+
+  @include devices(tablet) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @include devices (mobile) {
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0;
+  }
+}
+
+.bottomSocialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: rgba(70, 163, 88, 0.6);
+  border: 1px solid rgba(70, 163, 88, 0.2);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.bottomSocialLink:not(:last-child) {
+  margin-right: 10px;
+}
+
+.bottomPaymentMethods {
+  // width:50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+  @include devices(tablet) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //flex-direction: column;
+  }
+}
+
+.bottomPaymentMethodsIconOne {
+  width: 70px;
+}
+
+.bottomPaymentMethodsIconTwo {
+  width: 45px;
+}
+
+.rightsReserved {
+  @include mixins.font-family-regular;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  color: #3d3d3d;
+  margin-top: 6px;
+}

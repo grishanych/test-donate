@@ -1,0 +1,400 @@
+@use "../../styles/mixins";
+@use "../../styles/variables";
+@import "../../styles/mediaqueries";
+
+
+.mainInfoDescription {
+  @include devices(tablet) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  @include devices (laptop) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.productDetails {
+  padding-left: 10px;
+  //z-index: 1;
+  width: 48%;
+  @include devices(tablet){
+    padding: 0 15px;
+  }
+  @include devices(mobile) {
+    margin-left:  0;
+    background-color:rgba(255, 255, 255, 1);
+    border-radius: 31px;
+    width: 100%;
+  }
+}
+
+
+.productShortName{
+  @include devices(laptop) {
+    display: none;
+  }
+  @include devices(tablet){
+    display: none;
+  }
+  @include devices(mobile) {
+    display: flex;
+    font-size: variables.$fs-x;
+    @include mixins.font-family-medium;
+    line-height: 16px;
+    color: variables.$main-text-color;
+    margin-bottom: 24px;
+  }
+}
+.productName {
+  @include mixins.font-family-bold;
+  font-size: variables.$fs-xxl;
+  color: variables.$main-text-color;
+  margin-bottom: 20px;
+  @include devices(tablet) {
+    font-size: variables.$fs-l;
+  }
+  @include devices(mobile) {
+    display: none;
+  }
+
+}
+.productPrice {
+  @include mixins.font-family-bold;
+  font-size: 22px;
+  line-height: 16px;
+  color: variables.$fc-main;
+  padding-bottom: 13px;
+  border-bottom: 0.3px solid rgba(70, 163, 88, 0.5);
+  @include devices(tablet) {
+    font-size: variables.$fs-x;
+  }
+  @include devices(mobile) {
+    border-bottom: none;
+  }
+}
+
+.descTitle,
+.size {
+  @include mixins.font-family-medium;
+  font-size: 15px;
+  line-height: 16px;
+  color: variables.$main-text-color;
+  margin-bottom: 10px;
+  padding-top: 15px;
+  padding-right: 10px;
+}
+.descTitle {
+  @include devices(mobile) {
+    display: block;
+  }
+}
+.descriptionText {
+  @include mixins.font-family-regular;
+  font-size: 14px;
+  line-height: 24px;
+  color: #727272;
+  margin-bottom: 24px;
+
+}
+.selectContainer {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.selectedOption {
+  @include mixins.font-family-bold;
+  font-size: 16px;
+  line-height: 16px;
+  width: 150px;
+  height: 30px;
+  border-radius: 6px;
+  color: #3d3d3d;
+}
+.quantityCounter {
+  margin-bottom: 30px;
+  order: 1;
+  min-width: 100%;
+  @include devices(tablet){
+    order: 1;
+    margin-bottom: 20px;
+  }
+
+}
+.decrease,
+.increase {
+  border-radius: 29px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #46a358;
+  padding: 9px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.quantity {
+  @include mixins.font-family-regular;
+  font-size: 20px;
+  line-height: 10px;
+  color: variables.$main-text-color;
+  margin: 0 20px;
+}
+
+.buyButtons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+
+  //@include devices(tablet){
+  //  display: flex;
+  //  align-items: center;
+  //  flex-wrap: wrap;
+  //
+  //}
+
+}
+.buyNowBtn {
+  @include mixins.font-family-bold;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding: 10px 30px;
+  border-radius: 6px;
+  border: none;
+  background-color: #46a358;
+  margin-right: 10px;
+  @include devices(laptop) {
+    order: 2;
+  }
+  @include devices(tablet) {
+    order: 3;
+    margin-right: 10px;
+  }
+  @include devices(mobile) {
+    border-radius: 40px;
+    background-color: rgba(70, 163, 88, 1);
+  }
+}
+.addToCartBtn {
+  border-radius: 6px;
+  border: 1px solid #46a358;
+  @include mixins.font-family-bold;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: #46a358;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  margin-right: 10px;
+
+  @include devices(laptop) {
+    order: 2;
+  }
+  @include devices(tablet) {
+    order: 3;
+    margin-right: 10px;
+  }
+  @include devices(mobile) {
+    display: none;
+  }
+}
+.addToFavorite {
+  padding: 9px 10px;
+  border: 1px solid #46a358;
+  border-radius: 6px;
+  background-color: #ffffff;
+  @include devices(laptop) {
+    order: 2;
+  }
+  @include devices(tablet) {
+    order: 3;
+
+  }
+}
+.sku {
+  @include mixins.font-family-regular;
+  font-size: 15px;
+  line-height: 16px;
+  color: #727272;
+  margin-bottom: 10px;
+  span {
+    color: #a5a5a5;
+    text-transform: uppercase;
+  }
+}
+.categories {
+  @include mixins.font-family-regular;
+  font-size: 15px;
+  line-height: 16px;
+  color: #727272;
+  margin-bottom: 10px;
+  span {
+    color: #acacac;
+  }
+}
+.productColors {
+  @include mixins.font-family-regular;
+  font-size: 15px;
+  line-height: 16px;
+  color: #727272;
+  margin-bottom: 18px;
+  span {
+    color: #acacac;
+  }
+}
+.shareProducts {
+  @include mixins.font-family-medium;
+  font-size: 15px;
+  line-height: 16px;
+  color: #3d3d3d;
+
+  a {
+    margin-left: 16px;
+    vertical-align: middle;
+  }
+
+  @include devices(mobile) {
+    display: none;
+  }
+}
+
+.descriptionContainer {
+  margin-top: 100px;
+  @include devices(mobile) {
+    display: none;
+  }
+}
+.tabs {
+  display: flex;
+  @include mixins.font-family-regular;
+  font-size: 17px;
+  line-height: 16px;
+  color: rgba(61, 61, 61, 1);
+  cursor: pointer;
+  border-bottom: 0.3px solid rgba(70, 163, 88, 0.5);
+  margin-bottom: 18px;
+  .activeTab {
+    @include mixins.font-family-bold;
+    font-size: 17px;
+    line-height: 16px;
+    color: #46a358;
+    cursor: pointer;
+    border-bottom: 2px solid #46A358;
+    padding-bottom: 12px;
+
+  }
+}
+.descriptionTab{
+  margin-right: 30px;
+}
+.tabContent{
+  @include mixins.font-family-regular;
+  font-size: 14px;
+  line-height: 24px;
+  color: #727272;
+  min-height: max-content;
+
+}
+
+.donateStartDate {
+  font-size: 16px;
+  @include mixins.font-family-regular;
+  color: #a5a5a5;
+}
+.foundrasingInfo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.foundrasingResult {
+  text-align: center;
+}
+
+.donateBtnContainer{
+  display: flex;
+  margin-bottom: 20px;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+
+}
+
+.donateBtn {
+  width: 50%;
+  @include mixins.font-family-bold;
+  font-size: 17px;
+  line-height: 16px;
+  background-color: #46A358;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+}
+
+//lots page
+.lotRate {
+  @include mixins.font-family-regular;
+  background: transparent;
+  border-right: none;
+  border-left: none;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid #46A358;
+  color: rgb(26, 26, 26);
+  line-height: 120%;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 300ms linear 0s;
+  font-size: 14px;
+  //width: 120px;
+  text-align: center;
+}
+.lotDetails{
+  display: grid;
+  width: 100%;
+  gap: 20px;
+}
+.lotInfo, .donateInfo{
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  justify-content: space-between;
+  gap: 10px;
+}
+.lotInfoDetails{
+  @include mixins.font-family-medium;
+  font-size: 16px;
+  line-height: 16px;
+
+}
+.rateUpBtnWrapper{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  margin-top: 10px;
+}
+.rateContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.descriptionOfProduct{
+  margin-top: 10px;
+}
+.timer{
+@include mixins.font-family-bold;
+  text-transform: uppercase;
+
+}

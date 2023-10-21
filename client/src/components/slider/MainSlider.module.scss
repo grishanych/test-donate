@@ -1,0 +1,97 @@
+@use "../../styles/variables";
+@import "../../styles/mediaqueries";
+
+.section {
+  padding: 5px 15px 0px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+
+  @include devices(mobile) {
+    padding: 5px 5px 0px;
+  }
+}
+
+.imageswrapper {
+  margin-top: -10px;
+  width: 100%;
+  border-top: 50px solid variables.$bgc-main;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.images {
+  margin-top: -30px;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+
+  @include devices(mobile) {
+    width: 90%;
+  }
+
+  & img {
+    @media screen and (max-width: 424px) {
+      width: 20%;
+    }
+    @media screen and (min-width: 425px) {
+      width: 25%;
+    }
+    @media screen and (min-width: 500px) {
+      width: 25%;
+    }
+    // @include devices(mobile) {
+    //   width: 95px;
+    // } 
+  }
+}
+
+.mainPiсture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  @include devices(mobile) {
+    border-radius: 25px;
+  }
+  
+  & img {
+    padding-top: 20px;
+    background-color: variables.$bgc-main;
+    width: 100%;
+
+    @include devices(mobile) {
+      border-radius: 25px 25px 0px 0px;
+    }  
+  }
+}
+
+.image,
+.secondPlaneImage {
+  width: 28%;
+  border: 1px solid variables.$bgc-second;
+  border-radius: 10px;
+  padding: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.secondPlaneImage {
+  opacity: 0.6;
+
+  // @include devices(mobile) {
+  //   width: 90px;
+  // }
+}
+
+.image:hover,
+.secondPlaneImage:hover {
+  transform: scale(1.1);
+}

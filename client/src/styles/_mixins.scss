@@ -1,0 +1,14 @@
+@mixin font-family-regular {
+  font-family: "CeraProRegular", serif;
+  font-weight: 400;
+}
+
+@mixin font-family-bold {
+  font-family: "CeraProBold", serif;
+  font-weight: 700;
+}
+
+@mixin font-family-medium {
+  font-family: "CeraProMedium", serif;
+  font-weight: 500;
+}

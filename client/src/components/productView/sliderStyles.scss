@@ -1,0 +1,109 @@
+@use "../../styles/mixins";
+@use "../../styles/variables";
+@import "../../styles/mediaqueries";
+
+
+.slick-slider{
+  .slick-list {
+    overflow: hidden;
+    .slick-track {
+      max-height: 400px;
+    }
+  }
+}
+
+
+.slick-slider.slick-vertical {
+  width: 7em;
+  @include devices(mobile) {
+    display: none;
+  }
+}
+
+.thumbnailsSlider {
+    width: 20%;
+  max-width: 574px;
+  max-height: 500px;
+  .slick-slide {
+    width: 100%!important;
+  }
+  .slick-track {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+  }
+}
+
+
+
+.sliderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 48%;
+  max-height: 500px;
+  padding: 0 15px;
+  box-sizing: border-box;
+
+  @include devices(mobile) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+
+  }
+}
+
+.vertical-slider{
+  display: none;
+}
+
+
+//// added styles
+//.slick-prev,
+//.slick-next {
+//  width: 30px;
+//  height: 30px;
+//}
+//
+//.slick-prev {
+//  left: -35px !important;
+//}
+//
+//.slick-next {
+//  right: -35px !important;
+//}
+//
+//.slick-prev::before,
+//.slick-next::before {
+//  font-size: 25px;
+//  color: variables.$fc-info-hidden;
+//}
+
+.mainSlider {
+  max-height: 400px;
+  max-width: 400px;
+  width: 80%;
+}
+.slick-slide {
+  outline: none;
+}
+
+.slick-slide div {
+  outline: none;
+}
+
+.slick-slide {
+  &:focus, a {
+    outline: none;
+  }
+}
+
+
+.littlePhoto {
+  width: 100%;
+  height: auto;
+  max-width: 100px;
+}
