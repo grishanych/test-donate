@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 
-const BurgerMenu = () => {
+const BurgerMenu = ({toggleBar}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    toggleBar()
   };
 
   return (

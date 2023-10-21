@@ -18,21 +18,29 @@ function Header() {
 
     const isMobileScreen = useMediaQuery('(max-width: 767px)'); 
 
-
     const [showBurgerMenu, setShowBurgerMenu] = useState(false);
     const [showInput, setShowInput] = useState(false);
 
-   
     const toggleInput = () => {
         setShowInput(!showInput);
+        if (showBurgerMenu) {
+            toggleBar()
+        }
     };
+
+    const toggleBar = () => {
+        setShowBurgerMenu(showBurgerMenu);
+        if (showInput) {
+            setShowInput(false);
+        }
+    }
 
     return (
         <header className={styles.header}>
             <div className={styles.mobileHeader}>
 
             <button className={styles.buttonMobileHeader} onClick={toggleInput}>
-                    <IconSearchMobile />
+                    <IconSearchMobile/>
                 </button>
             {showInput && (
                     <input
@@ -44,7 +52,7 @@ function Header() {
 
                 {isMobileScreen && 
                
-                        <BurgerMenu />
+                        <BurgerMenu toggleBar={toggleBar} />
                    
                 }
             </div>
