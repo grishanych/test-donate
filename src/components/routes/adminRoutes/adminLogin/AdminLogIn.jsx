@@ -1,10 +1,12 @@
 import LogIn from "../../../logIn/LogIn";
+import DocumentTitle from "../../DocumentTitle";
 
 function AdminLogIn(){
 
   return(
     <>
-      <LogIn headline="Увійдіть в систему" toRegistration="/adm-registration" toLogIn="/adm-page"/>
+      <DocumentTitle title="Увійдіть в систему"/>
+        <LogIn headline="Увійдіть в систему" toRegistration="/adm-registration" toLogIn="/adm-page"/>
     </>
   )
 }

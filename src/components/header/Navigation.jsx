@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import Context from "../Context";
 import SearchInHeader from './Search';
+import ActiveLink from './ActiveLink';
 import styles from './Header.module.scss';
 
 
@@ -24,16 +24,8 @@ function Navigation() {
         <div className={styles.navWrapper}>
             <nav style={style} className={styles.nav}>
                 <ul className={`${styles.navItem} ${styles.active}`}>
-                    <Link
-                        to="/"
-                        className={`${styles.navList} ${styles.navLink}`}
-                    >головна
-                    </Link>
-                    <Link
-                        to="/about-us"
-                        className={`${styles.navList} ${styles.navLink}`}
-                    >про нас
-                    </Link>
+                    <ActiveLink label="головна" to="/" className={`${styles.navList} ${styles.navLink}`} />
+                    <ActiveLink label="про нас" to="/about-us" className={`${styles.navList} ${styles.navLink}`} />
                     <div 
                         className={styles.dropdown}
                         onMouseEnter={showDropdown}
@@ -43,49 +35,18 @@ function Navigation() {
                             className={`${styles.navList} ${styles.navLink} ${styles.navItemTablet}`}
                         >категорії
                         </div>
-                        <Link
-                            to="/categories"
-                            className={`${styles.navList} ${styles.navLink} ${styles.navItemLaptop}`}
-                            onClick={() => setDropdownVisible(false)}
-                        >категорії
-                        </Link>
+                        <ActiveLink label="категорії" to="/categories" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink} ${styles.navItemLaptop}`}/>
                         {isDropdownVisible && (
                             <div className={styles.dropdownContent}>
-                                <Link
-                                    className={styles.dropdownItemAllCategories}
-                                    to="/categories"
-                                    onClick={() => setDropdownVisible(false)}
-                                >Всі категорії
-                                </Link>
-                                <Link
-                                    to="/categories/donation"
-                                    onClick={() => setDropdownVisible(false)}
-                                >Донати на ЗСУ
-                                </Link>
-                                <Link
-                                    to="/categories/charity-auction"
-                                    onClick={() => setDropdownVisible(false)}
-                                >Лоти аукціону
-                                </Link>
-                                <Link
-                                    to="/categories/military-clothing"
-                                    onClick={() => setDropdownVisible(false)}
-                                >Військовий одяг
-                                </Link>
+                                <ActiveLink label="Всі категорії" to="/categories" onClick={() => setDropdownVisible(false)} className={styles.dropdownItemAllCategories}/>
+                                <ActiveLink label="Донати на ЗСУ" to="/categories/donation" onClick={() => setDropdownVisible(false)} />
+                                <ActiveLink label="Лоти аукціону" to="/categories/charity-auction" onClick={() => setDropdownVisible(false)} />
+                                <ActiveLink label="Військовий одяг" to="/categories/military-clothing" onClick={() => setDropdownVisible(false)} />
                             </div>
                         )}
                     </div>
-
-                    <Link
-                        to="/blog"
-                        className={`${styles.navList} ${styles.navLink}`}
-                    >блог
-                    </Link>
-                    <Link
-                        to="/contacts"
-                        className={`${styles.navList} ${styles.navLink}`}
-                    >контакти
-                    </Link>
+                    <ActiveLink label="блог" to="/blog" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`}/>
+                    <ActiveLink label="контакти" to="/contacts" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`}/>
                 </ul>
             </nav>
             

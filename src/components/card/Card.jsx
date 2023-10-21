@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 import { Icons } from "./Icons";
 
 
-export function Card({ itemNo, name, price, nameCloudinary, category, id }) {
+export function Card({ itemNo, name, price, goal, nameCloudinary, category, id }) {
 
   // for working with Cloudinary
   const cld = new Cloudinary({
@@ -33,7 +33,11 @@ export function Card({ itemNo, name, price, nameCloudinary, category, id }) {
         <div className={styles.cardItemTextWrapper}>
           <h3 className={styles.cardItemHeadline}>{name}</h3>
           {price ?
-            <p className={styles.cardItemPrice}>{price} грн</p>
+            <p className={styles.cardItemPrice}>Ціна: {price} грн</p> :
+            goal && category === "Благодійний лот" ? 
+            <p className={styles.cardItemGoalLot}>Ставка: {goal} грн</p> :
+            goal && category === "Донат" ? 
+            <p className={styles.cardItemGoalDonat}>Збираємо: {goal} грн</p>
             :
             null
           }

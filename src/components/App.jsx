@@ -8,14 +8,19 @@ import Main from "./main/Main"
 import AppRoutes from "./routes/AppRoutes";
 import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
 import { setAuthToken } from "../redux/actions/authActions";
-import styles from "./App.module.scss";
 import { getProducts } from "../api/getProducts";
 import { setProducts } from "../redux/actions/productActions";
+import ScrollToTop from "./ScrollToTop"
+import { FormButton } from "./button/Button";
+import AppArrow from "../images/appArrow/AppArrow"
+import styles from "./App.module.scss";
+
 
 function App() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
   const contextData = { isLinkVisible, setIsLinkVisible };
   const dispatch = useDispatch();
+  const [isVisible, setIsVisible] = useState(false);
 
     // const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
@@ -51,16 +56,43 @@ function App() {
       });
   }, [dispatch]);
 
+  // Arrow button
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const show = window.scrollY > 50;
+      setIsVisible(show);
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  
+
   return (
     <div className={styles.container}>
       <BrowserRouter>
-        <Context.Provider value={contextData}>
-          <Header/>
-          <Main>
-            <AppRoutes/>
-          </Main>
-          <Footer />
-        </Context.Provider>
+        <ScrollToTop />
+          <Context.Provider value={contextData}>
+            <Header/>
+            <Main>
+              <AppRoutes/>
+            </Main>
+            <Footer />
+
+            {isVisible && (
+              <FormButton padding="6px 0px" width="50px" onClick={scrollToTop} className={styles.scrollToTopButton}>
+                  <AppArrow />
+              </FormButton>
+            )}
+
+          </Context.Provider>
       </BrowserRouter>
     </div>
   );

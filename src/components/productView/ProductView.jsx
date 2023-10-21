@@ -15,6 +15,8 @@ import ClothesSelector from "./sizeSelector/ClothesSelector";
 import ProductViewSlider from './ProductViewSlider'
 import TabComponent from './Tabs'
 
+import DocumentTitle from "../routes/DocumentTitle";
+
 
 function convertToImgUrl(nameCloudinary) {
   const cld = new Cloudinary({
@@ -58,6 +60,9 @@ function ProductView() {
 
 
   return (
+    <>
+    <DocumentTitle title={`${product.shortName} | Донат Перемоги`}/>
+
       <div className={styles.productViewCard}>
         <div className={styles.mainInfoDescription}>
             <ProductViewSlider images={product.images}/>
@@ -122,6 +127,7 @@ function ProductView() {
 
         </div>
       </div>
+    </>
   );
 }
 

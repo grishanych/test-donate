@@ -21,3 +21,12 @@ main {
 footer {
   flex-shrink: 0;
 }
+
+.scrollToTopButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 25%;
+  border: none;
+  cursor: pointer;
+}

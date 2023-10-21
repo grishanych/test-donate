@@ -73,10 +73,23 @@
     color: #3D3D3D;
 }
 
-.cardItemPrice {
+.cardItemPrice,
+.cardItemGoalLot,
+.cardItemGoalDonat {
     padding-top: 4px;
     font-weight: 700;
+}
+
+.cardItemPrice {
     color: variables.$fc-main;
+}
+
+.cardItemGoalLot {
+    color: variables.$fc-hot;
+}
+
+.cardItemGoalDonat {
+    color: variables.$fc-attention;
 }
 
 .cardItemDecor {
