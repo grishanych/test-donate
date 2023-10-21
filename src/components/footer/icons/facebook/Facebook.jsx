@@ -1,5 +1,7 @@
 import { ReactComponent as FacebookIcon } from "./facebook.svg";
 
-export default function Facebook() {
+export function Facebook() {
   return <FacebookIcon data-testid='facebook-svg-test'/>;
 }
+
+export default Facebook;

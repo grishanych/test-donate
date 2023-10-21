@@ -1,4 +1,4 @@
-import Linkedin from './LinkedIn';
+import Linkedin from './Linkedin';
 import {render,screen} from '@testing-library/react';
 
 describe('should the SVG icon Linkedin', () =>{

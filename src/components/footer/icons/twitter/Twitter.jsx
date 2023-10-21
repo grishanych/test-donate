@@ -1,5 +1,8 @@
 import { ReactComponent as TwitterIcon } from "./Twitter.svg";
 
-export default function Twitter() {
+export function Twitter() {
   return <TwitterIcon data-testid='twitter-svg-test'/>;
 }
+
+
+export default Twitter
