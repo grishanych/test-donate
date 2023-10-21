@@ -2,14 +2,10 @@
 @use "../../styles/variables";
 @import "../../styles/mediaqueries";
 
-.productViewCard {
-  //забрати коментарі і консолі
 
-}
 .mainInfoDescription {
   @include devices(tablet) {
     display: flex;
-    //flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 
@@ -23,7 +19,7 @@
 
 .productDetails {
   padding-left: 10px;
-  z-index: 1;
+  //z-index: 1;
   width: 48%;
   @include devices(tablet){
     padding: 0 15px;
@@ -32,7 +28,6 @@
     margin-left:  0;
     background-color:rgba(255, 255, 255, 1);
     border-radius: 31px;
-    padding-left: 25px;
     width: 100%;
   }
 }
@@ -46,7 +41,7 @@
     display: none;
   }
   @include devices(mobile) {
-    display: block;
+    display: flex;
     font-size: variables.$fs-x;
     @include mixins.font-family-medium;
     line-height: 16px;
@@ -94,7 +89,7 @@
 }
 .descTitle {
   @include devices(mobile) {
-    display: none;
+    display: block;
   }
 }
 .descriptionText {
@@ -270,7 +265,6 @@
 
 .descriptionContainer {
   margin-top: 100px;
-  padding: 0 15px;
   @include devices(mobile) {
     display: none;
   }
@@ -304,5 +298,102 @@
   line-height: 24px;
   color: #727272;
   min-height: max-content;
+
+}
+
+.donateStartDate {
+  font-size: 16px;
+  @include mixins.font-family-regular;
+  color: #a5a5a5;
+}
+.foundrasingInfo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.foundrasingResult {
+  text-align: center;
+}
+
+.donateBtnContainer{
+  display: flex;
+  margin-bottom: 20px;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+
+}
+
+.donateBtn {
+  width: 50%;
+  @include mixins.font-family-bold;
+  font-size: 17px;
+  line-height: 16px;
+  background-color: #46A358;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+}
+
+//lots page
+.lotRate {
+  @include mixins.font-family-regular;
+  background: transparent;
+  border-right: none;
+  border-left: none;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid #46A358;
+  color: rgb(26, 26, 26);
+  line-height: 120%;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 300ms linear 0s;
+  font-size: 14px;
+  //width: 120px;
+  text-align: center;
+}
+.lotDetails{
+  display: grid;
+  width: 100%;
+  gap: 20px;
+}
+.lotInfo, .donateInfo{
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  justify-content: space-between;
+  gap: 10px;
+}
+.lotInfoDetails{
+  @include mixins.font-family-medium;
+  font-size: 16px;
+  line-height: 16px;
+
+}
+.rateUpBtnWrapper{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  margin-top: 10px;
+}
+.rateContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.descriptionOfProduct{
+  margin-top: 10px;
+}
+.timer{
+@include mixins.font-family-bold;
+  text-transform: uppercase;
 
 }
