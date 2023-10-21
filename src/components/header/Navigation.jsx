@@ -4,7 +4,6 @@ import SearchInHeader from './Search';
 import ActiveLink from './ActiveLink';
 import styles from './Header.module.scss';
 
-
 function Navigation() {
     const { isLinkVisible } = useContext(Context);
     const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -16,12 +15,16 @@ function Navigation() {
     const showDropdown = () => {
         setDropdownVisible(true);
     };
+
     const hideDropdown = () => {
         setDropdownVisible(false);
     };
 
     return (
         <div className={styles.navWrapper}>
+            <div className={styles.burgerMenuWrapper}>
+                
+            </div>
             <nav style={style} className={styles.nav}>
                 <ul className={`${styles.navItem} ${styles.active}`}>
                     <ActiveLink label="головна" to="/" className={`${styles.navList} ${styles.navLink}`} />
