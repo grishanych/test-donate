@@ -1,5 +1,5 @@
 import { ReactComponent as LocationIcon } from "./Location.svg";
 
-export function Location() {
-  return <LocationIcon />;
+export default function Location() {
+  return <LocationIcon data-testid='location-svg-test'/>;
 }

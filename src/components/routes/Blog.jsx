@@ -1,7 +1,7 @@
 function Blog(){
 
     return(
-        <div>blog</div>
+        <div data-testid='blog-test'>blog</div>
     )
 }
 

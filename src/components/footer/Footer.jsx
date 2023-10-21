@@ -50,7 +50,7 @@ function Footer() {
     },
   ];
   return (
-      <footer>
+      <footer data-testid='footer-svg-test'>
 
         <div className={styles.footerContainer}>
           

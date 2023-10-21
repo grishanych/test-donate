@@ -2,9 +2,8 @@ import { ReactComponent as CartEmpty } from "./arrow.svg";
 
 const Arrow = () => {
 
-
     return (
-        <CartEmpty />
+        <CartEmpty data-testid='arrow-svg-test'/>
     )
   };
   
