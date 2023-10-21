@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CardList from "./CardList";
 import shuffleArray from "../../scripts/shuffleArray"
 import PropTypes from "prop-types"
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../spinner/Spinner";
 import axios from "axios";
 import { GET_PRODUCTS_URL } from "../../endpoints/endpoints"
 

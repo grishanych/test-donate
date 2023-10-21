@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { getProducts } from "../../api/getProducts";
 import CardList from "./CardList";
 import SliderPrice from "../sliderPrice/SliderPrice";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../spinner/Spinner";
 import shuffleArray from "../../scripts/shuffleArray"
 import styles from "./AllCategoriesCardList.module.scss"
 

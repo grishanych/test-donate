@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-=======
 import DocumentTitle from "../../DocumentTitle"
 
-
->>>>>>> cart-back
 function AdminPage(){
 
   return(

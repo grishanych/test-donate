@@ -25,27 +25,6 @@ export const removeFromCart = (productId) => ({
   payload: productId,
 });
 
-<<<<<<< HEAD
-export const addFavorites= (product) => ({
-  type: ADD_FAVORITES,
-  payload: product,
-});
-export const removeFavorites= (productId) => ({
-  type: REMOVE_FROM_FAVORITES,
-  payload: productId,
-});
-
-export const setCartItems = (cartItems) => ({
-  type: SET_CART_ITEMS,
-  payload: cartItems,
-});
-
-export const setItemCount = (itemCount) => ({
-  type: SET_ITEM_COUNT,
-  payload: itemCount,
-});
-
-=======
 export const addFavorites = (product) => ({
   type: ADD_FAVORITES,
   payload: product,
@@ -54,4 +33,3 @@ export const removeFavorites = (productId) => ({
   type: REMOVE_FROM_FAVORITES,
   payload: productId,
 });
->>>>>>> cart-back

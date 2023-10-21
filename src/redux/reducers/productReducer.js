@@ -4,15 +4,12 @@ const initialState = {
   product: null,
 };
 
-<<<<<<< HEAD
 const initialStateProducts = {
   products: {
     items: [],
   },
 };
 
-=======
->>>>>>> cart-back
 export const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PRODUCT:
@@ -23,7 +20,6 @@ export const productReducer = (state = initialState, action) => {
     default:
       return state;
   }
-<<<<<<< HEAD
 };
 
 export const productsReducer = (state = initialStateProducts.products, action) => {
@@ -37,6 +33,4 @@ export const productsReducer = (state = initialStateProducts.products, action) =
     default:
       return state;
   }
-=======
->>>>>>> cart-back
 };
