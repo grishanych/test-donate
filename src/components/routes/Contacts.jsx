@@ -1,7 +1,12 @@
+import DocumentTitle from "./DocumentTitle"
+
 function Contacts(){
 
     return(
-        <div>Contacts</div>
+        <>
+            <DocumentTitle title="Контакти"/>
+                <h1>Контакти</h1>
+        </>
     )
 }
 

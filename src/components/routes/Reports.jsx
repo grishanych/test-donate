@@ -1,8 +1,13 @@
+import DocumentTitle from "./DocumentTitle"
+
 function Report(){
 
     return(
-        <div>report</div>
+        <>
+            <DocumentTitle title="Звіти по донатам"/>
+                <h1>Звіти по донатам</h1>
+        </>
     )
 }
 
-export default Report
+export default Report;

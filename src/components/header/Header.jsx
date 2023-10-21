@@ -12,6 +12,7 @@ import HeartFavorite from "./icons/favorites/Heart";
 function Header() {
     const cartCount = useSelector((state) => state.cart.itemCount);
     const favoriteCount = useSelector((state) => state.favorites.itemCount);
+
     
     return (
         <header className={styles.header}>
@@ -33,7 +34,8 @@ function Header() {
                 <Link to="/favorites">
                     <HeartFavorite />
                 </Link>
-                {favoriteCount === 0 ? null : <span >{favoriteCount}</span>}
+                {favoriteCount === 0 ? null :
+                <span >{favoriteCount}</span>}
                 
                 <div className={styles.navRightSideMenu}>
                     <Link to="/cart">

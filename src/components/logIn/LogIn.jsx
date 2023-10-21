@@ -1,22 +1,27 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Form, Field, ErrorMessage, Formik } from "formik";
 import { object, string } from "yup";
 import EyeClosed from "./eye/EyeClosed";
 import EyeOpen from "./eye/EyeOpen";
 import { FormButton } from "../button/Button";
+import logInUser from "../../api/logInUser"
 import styles from "./LogIn.module.scss"
 import PropTypes from "prop-types"
 
+import axios from "axios";
+import { addFavorites } from "../../redux/actions/cartActions";
 
-function LogIn({ headline, to }){
+
+function LogIn({ headline, toRegistration, toLogIn }){
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const validationSchema = object().shape({
     login: string()
@@ -30,29 +35,74 @@ function LogIn({ headline, to }){
       .matches(/[a-zA-Z0-9]/, "Дозволені символи для пароля: a-z, A-Z, 0-9")
   })
 
-  const sendData = (login, password) => {
-    const userData = {
-      loginOrEmail: login,
-      password: password
-    };
+  // const handleUserLogin = (login, password) => {
+  //   dispatch(logInUser(login, password))
+  //     .then(() => {
+  //       navigate(toLogIn);
+  //     })
+  //     .catch((error) => {
+  //       setShowError(true);
+  //     });
+  // };
 
-  axios
-    .post("http://localhost:4000/api/customers/login", userData)
-    .then(loginResult => {
-      console.log(loginResult);
-      if(loginResult.data.success === true) {
-        navigate("/adm-page");
-        // const token = loginResult.data.token;
-      }
-    })
-    .catch(err => {
-      // ! add the way for another errors
-      if(err.response.data.loginOrEmail === "Customer not found") {
-        setShowError(true);
-      }
-    });
+
+  async function fetchUserDataFromServer() {
+    try {
+      const response = await axios.get("http://localhost:4000/api/customers/customer");
+      return response.data;
+    } catch (err) {
+      console.error("Помилка при отриманні даних:", err);
+    }
   }
 
+  async function updateUserFavoritesOnServer(newFavorites) {
+    const updatedCustomer = {
+      favorites: newFavorites,
+    }
+
+    try {
+      const response = await axios.put("http://localhost:4000/api/customers", updatedCustomer);
+      return response.data.favorites;
+    } catch (err) {
+      console.error("Помилка при отриманні даних:", err);
+    }
+  }
+  
+
+  const handleUserLogin = async (login, password) => {
+    try {
+      await dispatch(logInUser(login, password));
+  
+      const userData = await fetchUserDataFromServer();
+      if (userData.favorites.items && userData.favorites.items.length > 0) {
+
+        const currentFavorites = JSON.parse(localStorage.getItem('Favorites')) || [];
+        const newFavorites = Array.from(new Set([...currentFavorites, ...userData.favorites.items]));
+        localStorage.setItem('Favorites', JSON.stringify(newFavorites));
+        dispatch(addFavorites(newFavorites));
+
+        await updateUserFavoritesOnServer(newFavorites);
+        // const dataFromServer = await updateUserFavoritesOnServer(newFavorites);
+        // оновили - на сторінку
+        // console.log(dataFromServer);
+      } else {
+        const currentFavorites = JSON.parse(localStorage.getItem('Favorites')) || [];
+        if (currentFavorites.length > 0) {
+          await updateUserFavoritesOnServer(currentFavorites);
+          // const dataFromServer = await updateUserFavoritesOnServer(currentFavorites);
+          // додали - на сторінку
+          // console.log(dataFromServer);
+        }
+      } 
+    }
+    catch (error) {
+      setShowError(true);
+      console.error("Помилка при вході:", error);
+    } finally {
+      navigate(toLogIn)
+    }
+  };
+  
 
   return(
     <section className={styles.windowWrapper}>
@@ -63,7 +113,7 @@ function LogIn({ headline, to }){
         <Formik 
           initialValues={{login: "", password: ""}}
           onSubmit={(values, { setSubmitting }) => {
-            sendData(values.login, values.password);
+            handleUserLogin(values.login, values.password);
             setSubmitting(false);
           }}
           validationSchema={validationSchema}
@@ -120,7 +170,7 @@ function LogIn({ headline, to }){
             </Form>
           )}
         </Formik>
-        <Link to={to} className={`${styles.text} ${styles.textRegistration}`}>Зареєструватися</Link> 
+        <Link to={toRegistration} className={`${styles.text} ${styles.textRegistration}`}>Зареєструватися</Link> 
       </div>
     </section>
   )
@@ -128,7 +178,8 @@ function LogIn({ headline, to }){
 
 LogIn.propTypes = {
   headline: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired
+  toRegistration: PropTypes.string.isRequired,
+  toLogIn: PropTypes.string.isRequired
 };
 
 export default LogIn

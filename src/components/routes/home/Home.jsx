@@ -1,14 +1,16 @@
 import CategorysList from "../../categoriesList/CategoriesList"
 import FilteredCardList from "../../cardlists/FilteredCardList"
 import MainSlider from "../../slider/MainSlider"
-import styles from "./Home.module.scss"
+import DocumentTitle from "../DocumentTitle"
 import pic from "./../../../images/bet-on-victory-ban-1.jpeg";
+import styles from "./Home.module.scss"
 
 
 function MainPage(){
 
     return (
         <>
+            <DocumentTitle title="Донат Перемоги - твій внесок в Перемогу!"/>
             <MainSlider />
             <CategorysList />
             <section className={styles.cardListSection}>

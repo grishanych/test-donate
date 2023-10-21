@@ -1,5 +1,5 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import Basket from "./icons/basket/Basket"
@@ -10,68 +10,53 @@ import styles from "./Card.module.scss"
 import PropTypes from "prop-types"
 
 
-export function Icons({ itemNo, name, price, imageURL, id }) {
+export function Icons({ itemNo, name, price, imageURL, id, quantity, category }) {
 
   const dispatch = useDispatch();
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === itemNo));
   const isItemInFavorites = useSelector((state) => state.favorites.items.some((favItem) => favItem.itemNo === itemNo));
+  const product = { itemNo, name, price, imageURL, id, quantity };
 
-  const sendCart = (productId) => {
-    const newCart = {
-      products: [
-        {
-          product: productId,
-          cartQuantity: 1
-        }
-      ]
-    };
-
-    const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjdmZDE0OTBhNGZiOWY3OWRkNWFhNiIsImZpcnN0TmFtZSI6ItCf0LDQstC10LsiLCJsYXN0TmFtZSI6ItCc0LjRhtC60LXQu9C10LLQuNGHIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjk3NDY2ODA4LCJleHAiOjE2OTc1MDI4MDh9.0DxQJbIy9pG8PRDeL9nXS16Yqkvs6CUHcrWr63jGsAU"
-    const setAuthToken = token => {
-      if (token) {
-        axios.defaults.headers.common['Authorization'] = token;
-      } else {
-        delete axios.defaults.headers.common['Authorization'];
-      }
-    };
-    setAuthToken(token);
-  
-    axios
-      .post("http://localhost:4000/api/cart", newCart)
-      .then(newCart => {
-        return console.log(newCart);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  // what data we need to take to the cart's Card
-  const product = { itemNo, name, price, imageURL, id };
 
   const handleAddToCart = () => {
-    dispatch(counterIncrement())
-    sendCart(id);
-
+    let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
+    
     if (!isItemInCart) {
+      const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+      currentProducts.push(product);
+      countProducts += 1;
+      localStorage.setItem("Cart", JSON.stringify(currentProducts));
+      localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
+      
       dispatch(addToCart(product));
+      dispatch(counterIncrement())
     }
   }
 
   const handleAddFavorites = () => {
-    dispatch(counterIncrement());
-
+    let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
+    
     if (!isItemInFavorites) {
+      const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
+      currentProducts.push(product);
+      countProducts += 1;
+      localStorage.setItem("Favorites", JSON.stringify(currentProducts));
+      localStorage.setItem("CountFavoritesProducts", JSON.stringify(countProducts));
+      
       dispatch(addFavorites(product));
+      dispatch(counterIncrement())
     }
   }
 
 
   return (
     <div className={styles.cardItemIconsWrapper}>
+      {category !== "Благодійний лот" && category !== "Донат" ?
       <div className={styles.cardItemIconWrapper} onClick={handleAddToCart}>
         { isItemInCart ? <BasketFull /> : <Basket /> }
       </div>
+       : null
+      }
       <div className={styles.cardItemIconWrapper} onClick={handleAddFavorites}>
         { isItemInFavorites ? <HeartFull /> : <Heart /> }
       </div>
@@ -84,8 +69,8 @@ Icons.propTypes = {
   itemNo: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.number.isRequired
+    PropTypes.string,
+    PropTypes.number
   ]),
   imageURL: PropTypes.string.isRequired
 };

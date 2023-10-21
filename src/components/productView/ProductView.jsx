@@ -16,6 +16,8 @@ import Button from "../button/Button";
 import CountdownTimer from "./CountdownTimer";
 
 
+import DocumentTitle from "../routes/DocumentTitle";
+
 
 function convertToImgUrl(nameCloudinary) {
   const cld = new Cloudinary({
@@ -43,8 +45,11 @@ function ProductView() {
             "http://localhost:4000/api/products/" + params.itemNo
         );
         const data = await response.json();
+<<<<<<< HEAD
         const rawDate = new Date(data.date);
         const formattedDate = `${rawDate.getDate()}/${rawDate.getMonth() + 1}/${rawDate.getFullYear()}`;
+=======
+>>>>>>> cart-back
 
         const initialPrice = data.goal;
         dispatch(setProduct({...data, formattedDate, initialPrice: initialPrice, images:data.nameCloudinary.map(convertToImgUrl)}));
@@ -61,6 +66,7 @@ function ProductView() {
   if (!product) {
     return <div>Product not found...</div>;
   }
+<<<<<<< HEAD
   const handleBidClick = () => {
     // Отримайте значення ставки зі стейту currentBid та відобразіть його в спані або іншому елементі
 
@@ -72,9 +78,14 @@ function ProductView() {
     // Тут ви можете використовувати це значення для відображення на сторінці або відправки на сервер
   };
 
+=======
+>>>>>>> cart-back
 
 
   return (
+    <>
+    <DocumentTitle title={`${product.shortName} | Донат Перемоги`}/>
+
       <div className={styles.productViewCard}>
         <div className={styles.mainInfoDescription}>
             <ProductViewSlider images={product.images}/>
@@ -250,6 +261,7 @@ function ProductView() {
 
 
       </div>
+    </>
   );
 }
 
