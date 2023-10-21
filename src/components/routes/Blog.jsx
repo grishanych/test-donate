@@ -1,7 +1,13 @@
+import DocumentTitle from "./DocumentTitle"
+
+
 function Blog(){
 
     return(
-        <div>blog</div>
+        <>
+            <DocumentTitle title="Блог: новини, звіти, статті"/>
+                <div data-testid='blog-test'>blog</div>
+        </>
     )
 }
 

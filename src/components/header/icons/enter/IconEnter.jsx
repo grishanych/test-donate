@@ -4,7 +4,7 @@ const IconEnter = () => {
 
 
     return (
-        <Enter />
+        <Enter data-testid='iconEnter-svg-test'/>
     )
   };
   

@@ -17,7 +17,7 @@ const QuantityCounter = () => {
   return (
     <div className={styles.quantityCounter}>
       <button className={styles.decrease} onClick={handleDecrease}>
-        --
+        -
       </button>
       <span className={styles.quantity}>{quantity}</span>
       <button className={styles.increase} onClick={handleIncrease}>

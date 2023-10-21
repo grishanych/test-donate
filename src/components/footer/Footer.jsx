@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Footer.module.scss";
+import { Link } from "react-router-dom";
 import Logo from "../footer/icons/Logo.svg";
 import { Location } from "./icons/location/Location";
 import { Message } from "./icons/message/Message";
@@ -14,16 +14,16 @@ import { ReactComponent as MastercardIcon } from "../footer/icons/paymentMethods
 import { ReactComponent as VisaIcon } from "../footer/icons/paymentMethods/visa.svg";
 import { ReactComponent as LiqpayIcon } from "../footer/icons/paymentMethods/liqpay.svg";
 import FooterAccordion from './FooterAccordion'
-// import { FormButton } from "./../button/Button"
-import { Link } from "react-router-dom";
 import Subscribe from "./Subscribe"
+import styles from "./Footer.module.scss";
+
 
 function Footer() {
   const menuItems = [
     {
       title: 'Клієнтам',
       items: [
-        { label: 'Вхід до кабінету', link: '/login' },
+        { label: 'Вхід до кабінету', link: '/log-in' },
         { label: 'Про нас', link: '/about-us' },
         {label: 'Доставка та оплата', link: '/delivery-payment'},
         {label: 'Обмін та повернення', link: '/returns'},
@@ -41,16 +41,14 @@ function Footer() {
     {
       title: 'Категорії',
       items: [
-        { label: 'Верхній одяг', link: '/' },
-        {label: 'Взуття', link: '/'},
-        {label: 'Комплекти форми', link: '/'},
-        {label: 'Лоти', link: '/'},
-        {label: 'Донати', link: '/'},
+        { label: 'Військовий одяг', link: '/categories/military-clothing' },
+        {label: 'Лоти', link: '/categories/charity-auction'},
+        {label: 'Донати', link: '/categories/donation'},
       ],
     },
   ];
   return (
-      <footer>
+      <footer data-testid='footer-svg-test'>
 
         <div className={styles.footerContainer}>
           
@@ -93,9 +91,9 @@ function Footer() {
                 <h4 className={styles.bottomTitle}>Клієнтам</h4>
                 <ul className={styles.bottomList}>
                   <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
+                    <Link to="/log-in" className={styles.bottomLink}>
                       Вхід до кабінету
-                    </a>
+                    </Link>
                   </li>
                   <li className={styles.bottomListItem}>
                     <Link to="/about-us" className={styles.bottomLink}>
@@ -145,29 +143,19 @@ function Footer() {
                 <h4 className={styles.bottomTitle}>Категорії</h4>
                 <ul className={styles.bottomList}>
                   <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
-                      Верхній одяг
-                    </a>
+                    <Link to="/categories/military-clothing" className={styles.bottomLink}>
+                      Військовий одяг
+                    </Link>
                   </li>
                   <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
-                      Взуття
-                    </a>
-                  </li>
-                  <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
-                      Комплекти форми
-                    </a>
-                  </li>
-                  <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
+                    <Link to="/categories/charity-auction" className={styles.bottomLink}>
                       Лоти
-                    </a>
+                    </Link>
                   </li>
                   <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
+                    <Link to="/categories/donation" className={styles.bottomLink}>
                       Донати
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>

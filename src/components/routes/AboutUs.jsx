@@ -1,7 +1,13 @@
+import DocumentTitle from "./DocumentTitle"
+
+
 function AboutUs(){
 
     return(
-        <div>about us</div>
+        <>
+            <DocumentTitle title="Про Донат Перемоги"/>
+                <h1>Про Донат Перемоги</h1>
+        </>
     )
 }
 

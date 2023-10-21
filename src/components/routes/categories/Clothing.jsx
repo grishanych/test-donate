@@ -8,11 +8,11 @@ export default function Clothing() {
   const [sliderValue, setSliderValue] = useState([0, 10000]);
   const [tempSliderValue, setTempSliderValue] = useState([0, 10000]);
 
-
   const applyFilter = () => {
     setSliderValue(tempSliderValue);
   }
 
+  
   return (
     <section className={styles.cardsSectionWrapper}>
       <h1 className={styles.cardsSectionHeadline}>Військовий одяг</h1>

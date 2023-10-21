@@ -6,7 +6,6 @@ const ClothesSelector = () => {
 
   const handleSizeChange = (event) => {
     const selectedSize = event.target.value;
-    // console.log(`Выбран размер: ${selectedSize}`);
   };
 
   return (

@@ -1,46 +1,28 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Form, Field, ErrorMessage, Formik } from "formik";
-import axios from "axios";
 import { object, string } from "yup";
 import { FormButton } from "./../button/Button"
+import subscribeUser from "../../api/subscribeUser";
 import styles from "./Footer.module.scss";
+
 
 export default function Subscribe() {
   const [showError, setShowError] = useState(false);
-
+  const dispatch = useDispatch();
 
   const validationSchema = object().shape({
     email: string()
       .email("Некорректний формат електронної адреси")
   })
 
-  const sendData = (email) => {
-
-    // ! Make the letter!
-    const newSubscriber = {
-      email: email,
-      enabled: true,
-      letterSubject: "Subject",
-      letterHtml: "<p>Letter</p>",
-      date: new Date().toISOString()
-    };
-    
-    
-    axios
-      .post("http://localhost:4000/api/subscribers", newSubscriber)
-      .then(newSubscriber => {
-        console.log(newSubscriber);
-      })
-      .catch(err => {
-        if (err.response && err.response.data) {
-          if (err.response.data.message.includes("already exists")) {
-            setShowError(true);
-          }
-          // console.log(err);
-        }
+  const handleUserSubscribe = (email) => {
+    dispatch(subscribeUser(email))
+      .catch((error) => {
+        setShowError(true);
+        setTimeout(() => setShowError(false), 2000);
       });
-  }
-
+  };
 
 
   return (
@@ -52,9 +34,7 @@ export default function Subscribe() {
       <Formik 
         initialValues={{email: ""}}
         onSubmit={(values, { setSubmitting }) => {
-          sendData(values.email);
-          console.log(values.email);
-          // sendData();
+          handleUserSubscribe(values.email);
           setSubmitting(false);
         }}
         validationSchema={validationSchema}

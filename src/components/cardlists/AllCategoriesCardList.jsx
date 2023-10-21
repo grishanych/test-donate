@@ -1,63 +1,57 @@
 import React, { useState, useEffect } from "react";
-// import Slider from "react-slider";
-// import Button from "../button/Button"
-import styles from "./AllCategoriesCardList.module.scss"
+import { useSelector } from "react-redux";
 import CardList from "./CardList";
 import SliderPrice from "../sliderPrice/SliderPrice";
+import Spinner from "../spinner/Spinner";
+import shuffleArray from "../../scripts/shuffleArray"
+import styles from "./AllCategoriesCardList.module.scss"
+
 
 export default function CategoriesCardList() {
   const [items, setItems] = useState([]);
   const [selectedValue, setSelectedValue] = useState("all");
   const [sliderValue, setSliderValue] = useState([0, 10000]);
   const [tempSliderValue, setTempSliderValue] = useState([0, 10000]);
+  const [isLoading, setIsLoading] = useState(true);
+  const productsList = useSelector((state) => state.products.items);
 
   const handleChange = (e) => {
       setSelectedValue(e.target.value);
     };
 
-    const applyFilter = () => {
-      setSliderValue(tempSliderValue);
-    }
-
-      // for mixing cards
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
+  const applyFilter = () => {
+    setSliderValue(tempSliderValue);
   }
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/products')
-      .then(response => response.json())
-      .then(data => {
-        let newData = [];
-        data.forEach(item => {
-          const price = item.price ?? 0;
-          if (
-            selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])
-          ) {
-            if (selectedValue === "all") {
-              newData.push(item);
-            } else if (selectedValue === "donation" && item.category === "Донат") {
-              newData.push(item);
-            } else if (selectedValue === "lots" && item.category === "Благодійний лот") {
-              newData.push(item);
-            } else if (selectedValue === "setswear" && item.category === "Комплекти форми") {
-              newData.push(item);
-            } else if (selectedValue === "outerwear" && item.category === "Одяг верхній") {
-              newData.push(item);
-            } else if (selectedValue === "footwear" && item.category === "Взуття") {
-              newData.push(item);
-            }
+    setIsLoading(true);
+
+      let newData = [];
+      productsList.forEach(item => {
+        const price = item.price ?? 0;
+        if (
+          selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])
+        ) {
+          if (selectedValue === "all") {
+            newData.push(item);
+          } else if (selectedValue === "donation" && item.category === "Донат") {
+            newData.push(item);
+          } else if (selectedValue === "lots" && item.category === "Благодійний лот") {
+            newData.push(item);
+          } else if (selectedValue === "setswear" && item.category === "Комплекти форми") {
+            newData.push(item);
+          } else if (selectedValue === "outerwear" && item.category === "Одяг верхній") {
+            newData.push(item);
+          } else if (selectedValue === "footwear" && item.category === "Взуття") {
+            newData.push(item);
           }
-        });
-        let mixedData = shuffleArray([...newData]);
-        setItems(mixedData);
-      })
-      .catch(error => console.error('There was an error!', error));
-  }, [selectedValue, sliderValue]);
+        }
+      });
+      let mixedData = shuffleArray([...newData]);
+      setItems(mixedData);
+      setIsLoading(false);
+  }, [selectedValue, sliderValue, productsList]);
+
 
   
   return (
@@ -75,8 +69,6 @@ export default function CategoriesCardList() {
               <option value="footwear" className={styles.option}>Взуття</option>
             </select>
           </div>
-
-
           {selectedValue !== "all" && selectedValue !== "donation" && selectedValue !== "lots" && (
             <SliderPrice
               tempSliderValue={tempSliderValue} 
@@ -85,15 +77,14 @@ export default function CategoriesCardList() {
             />
           )}
         </div>
-          {/* <p>Вибрана опція: {selectedValue}</p> */}
       </div>
-
-      {selectedValue || selectedValue === "all" ? (
-
-        <CardList items={items}/>
-
-        ) : (
-        "Завантаження..."
+      
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        selectedValue || selectedValue === "all" ? (
+          <CardList items={items}/>
+        ) : null
       )}    
   </>
   );

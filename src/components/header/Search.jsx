@@ -1,34 +1,37 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateInputValue } from '../../redux/actionsCreators/inputValueActionsCreators';
 import Context from "../Context";
+import { updateInputValue } from '../../redux/actionsCreators/inputValueActionsCreators';
 import { IconSearch } from './icons/search/IconSearch';
 import Button from "../button/Button";
 import styles from './Header.module.scss';
 
+
 function SearchInHeader() {
     const [isLinkVisible, setIsLinkVisible] = useState(true);
+    const [inputVisible, setInputVisible] = useState(false); 
     const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
     const [inputValue, setInputValue] = useState(inputValueFromRedux);
     const context = useContext(Context);
+    const dispatch = useDispatch();
 
     const handleClick = () => {
         setIsLinkVisible(false);
         context.setIsLinkVisible(false);
+        setInputVisible(!inputVisible); 
     };
-    const dispatch = useDispatch();
 
     const handleInputDoubleClick = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         setIsLinkVisible(true);
-        setInputValue('')
+        setInputValue('');
         context.setIsLinkVisible(true);
+        setInputVisible(false); 
     };
 
     const crossStyle = {
         height: "18px",
     }
-
 
     useEffect(() => {
         setInputValue(inputValueFromRedux);
@@ -39,7 +42,6 @@ function SearchInHeader() {
         dispatch(updateInputValue(value));
         setInputValue(value);
     };
-    
 
     return (
         <div className={styles.hiddenSearchMenu}>
@@ -51,14 +53,15 @@ function SearchInHeader() {
                 </a>
             ) : (
                 <div className={styles.searching}>
-                    <input
-                        className={styles.input}
-                        type="text"
-                        placeholder="Пошук..."
-                        onDoubleClick={handleInputDoubleClick}
-                        value={inputValue}
-                        onChange={handleInputChange}
-                    />
+                    {inputVisible && ( 
+                        <input
+                            className={styles.input}
+                            type="text"
+                            placeholder="Пошук..."
+                            value={inputValue}
+                            onChange={handleInputChange}
+                        />
+                    )}
                     <div className={styles.searchButtons}>
                         <Button
                             toPage="/products-search"

@@ -1,13 +1,18 @@
+import DocumentTitle from "../../DocumentTitle"
+
 
 function AdminPage(){
 
-
   return(
-    <section>
-      <div>
-        <h1>Кабінет адміністратора</h1>
-      </div>
-    </section>
+    <>
+      <DocumentTitle title="Кабінет адміністратора"/>
+        <section>
+          <div>
+            <h1>Кабінет адміністратора</h1>
+          </div>
+        </section>
+
+    </>
   )
 }
 
