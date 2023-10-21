@@ -23,7 +23,7 @@ function Footer() {
     {
       title: 'Клієнтам',
       items: [
-        { label: 'Вхід до кабінету', link: '/login' },
+        { label: 'Вхід до кабінету', link: '/log-in' },
         { label: 'Про нас', link: '/about-us' },
         {label: 'Доставка та оплата', link: '/delivery-payment'},
         {label: 'Обмін та повернення', link: '/returns'},
@@ -41,11 +41,9 @@ function Footer() {
     {
       title: 'Категорії',
       items: [
-        { label: 'Верхній одяг', link: '/' },
-        {label: 'Взуття', link: '/'},
-        {label: 'Комплекти форми', link: '/'},
-        {label: 'Лоти', link: '/'},
-        {label: 'Донати', link: '/'},
+        { label: 'Військовий одяг', link: '/categories/military-clothing' },
+        {label: 'Лоти', link: '/categories/charity-auction'},
+        {label: 'Донати', link: '/categories/donation'},
       ],
     },
   ];
@@ -93,9 +91,9 @@ function Footer() {
                 <h4 className={styles.bottomTitle}>Клієнтам</h4>
                 <ul className={styles.bottomList}>
                   <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
+                    <Link to="/log-in" className={styles.bottomLink}>
                       Вхід до кабінету
-                    </a>
+                    </Link>
                   </li>
                   <li className={styles.bottomListItem}>
                     <Link to="/about-us" className={styles.bottomLink}>
@@ -145,29 +143,19 @@ function Footer() {
                 <h4 className={styles.bottomTitle}>Категорії</h4>
                 <ul className={styles.bottomList}>
                   <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
-                      Верхній одяг
-                    </a>
+                    <Link to="/categories/military-clothing" className={styles.bottomLink}>
+                      Військовий одяг
+                    </Link>
                   </li>
                   <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
-                      Взуття
-                    </a>
-                  </li>
-                  <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
-                      Комплекти форми
-                    </a>
-                  </li>
-                  <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
+                    <Link to="/categories/charity-auction" className={styles.bottomLink}>
                       Лоти
-                    </a>
+                    </Link>
                   </li>
                   <li className={styles.bottomListItem}>
-                    <a href="##" className={styles.bottomLink}>
+                    <Link to="/categories/donation" className={styles.bottomLink}>
                       Донати
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>
