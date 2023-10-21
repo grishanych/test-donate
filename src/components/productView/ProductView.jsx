@@ -1,24 +1,22 @@
 import React, {useEffect, useState} from "react";
-import styles from "../productView/ProductView.module.scss";
 import QuantityCounter from "./CounterQuantity";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Cloudinary } from "@cloudinary/url-gen";
 import { setProduct } from "../../redux/actions/productActions";
 import heart from "./icons/heart.svg";
-import { Cloudinary } from "@cloudinary/url-gen";
 import ShoesSelector from "./sizeSelector/ShoesSelector";
 import ClothesSelector from "./sizeSelector/ClothesSelector";
 import ProductViewSlider from './ProductViewSlider'
 import TabComponent from './Tabs'
-import {ProgressBar} from "./ProgressBar";
+import { ProgressBar } from "./ProgressBar";
 import ShareProducts from "./ShareProducts";
 import Button from "../button/Button";
 import CountdownTimer from "./CountdownTimer";
-
-
 import DocumentTitle from "../routes/DocumentTitle";
+import styles from "../productView/ProductView.module.scss";
 
-
+// ! replace
 function convertToImgUrl(nameCloudinary) {
   const cld = new Cloudinary({
     cloud: { cloudName: "dzaxltnel" },
@@ -29,6 +27,7 @@ function convertToImgUrl(nameCloudinary) {
 
   return imageURL;
 }
+
 
 function ProductView() {
   const dispatch = useDispatch();
@@ -242,16 +241,11 @@ function ProductView() {
 
         </div>
 
-
-
-
         {["Взуття", "Комплекти форми", "Одяг верхній"].includes(product.category) && (
             <div className={styles.descriptionContainer}>
                 <TabComponent productDescription={product.description} />
             </div>
         )}
-
-
 
       </div>
     </>

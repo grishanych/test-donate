@@ -1,8 +1,8 @@
 import { Cloudinary } from "@cloudinary/url-gen";
-import styles from "./Card.module.scss"
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types"
 import { Icons } from "./Icons";
+import PropTypes from "prop-types"
+import styles from "./Card.module.scss"
 
 
 export function Card({ itemNo, name, price, goal, nameCloudinary, category, id }) {

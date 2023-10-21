@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from 'react-router-dom'
 import { useDispatch } from "react-redux"
-import Context from "../components/Context";
-import Header from "./header/Header";
-import Footer from "./footer/Footer";
-import Main from "./main/Main"
 import AppRoutes from "./routes/AppRoutes";
 import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
 import { setAuthToken } from "../redux/actions/authActions";
 import { getProducts } from "../api/getProducts";
+import Context from "../components/Context";
+import Header from "./header/Header";
+import Footer from "./footer/Footer";
+import Main from "./main/Main"
 import { setProducts } from "../redux/actions/productActions";
 import ScrollToTop from "./ScrollToTop"
 import { FormButton } from "./button/Button";
@@ -74,7 +74,6 @@ function App() {
   }, []);
 
   
-
   return (
     <div className={styles.container}>
       <BrowserRouter>

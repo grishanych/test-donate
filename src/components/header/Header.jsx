@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
 import logo from '../../images/header/Logo.png';
 import Cart from "./icons/cart/IconCart";
 import IconEnter from "./icons/enter/IconEnter";
 import Button from "../button/Button";
 import Navigation from './Navigation';
 import { IconSearchMobile } from './icons/search/IconSearch';
-import styles from './Header.module.scss';
-import { useSelector } from 'react-redux';
 import HeartFavorite from "./icons/favorites/Heart";
 import BurgerMenu from './BurgerMenu';
-import { useMediaQuery } from '@mui/material';
+import styles from './Header.module.scss';
+
 
 function Header() {
     const cartCount = useSelector((state) => state.cart.itemCount);
@@ -35,14 +36,14 @@ function Header() {
         }
     }
 
+
     return (
         <header className={styles.header}>
             <div className={styles.mobileHeader}>
-
-            <button className={styles.buttonMobileHeader} onClick={toggleInput}>
+                <button className={styles.buttonMobileHeader} onClick={toggleInput}>
                     <IconSearchMobile/>
                 </button>
-            {showInput && (
+                {showInput && (
                     <input
                         className={styles.inputMobileHeader}
                         type="text"
@@ -51,9 +52,7 @@ function Header() {
                 )}
 
                 {isMobileScreen && 
-               
-                        <BurgerMenu toggleBar={toggleBar} />
-                   
+                    <BurgerMenu toggleBar={toggleBar} />
                 }
             </div>
          

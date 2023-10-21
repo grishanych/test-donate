@@ -182,12 +182,6 @@ function Registration({ headline, to, isAdmin }){
                 disabled={isSubmitting}
                 text="Зареєструватися"
                 width="300px"/>
-              {/* <button
-                type="submit"
-                className={styles.buttonStyle}
-                disabled={isSubmitting}>
-                Зареєструватися
-              </button> */}
               <div className={styles.errorsWrapper}>
                 {showError ? <p className={showError && styles.textAttention}>{showError}</p> : null}
                 <ErrorMessage name="firstName" component="p" className={styles.textAttention}/>
@@ -204,6 +198,7 @@ function Registration({ headline, to, isAdmin }){
     </section>
   )
 }
+
 
 Registration.propTypes = {
   headline: PropTypes.string.isRequired,

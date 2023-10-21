@@ -6,12 +6,11 @@ import Basket from "./icons/basket/Basket"
 import Heart from "./icons/heart/Heart"
 import BasketFull from "./icons/basket/BasketFull";
 import HeartFull from "./icons/heart/HeartFull";
-import styles from "./Card.module.scss"
 import PropTypes from "prop-types"
+import styles from "./Card.module.scss"
 
 
 export function Icons({ itemNo, name, price, imageURL, id, quantity, category }) {
-
   const dispatch = useDispatch();
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === itemNo));
   const isItemInFavorites = useSelector((state) => state.favorites.items.some((favItem) => favItem.itemNo === itemNo));

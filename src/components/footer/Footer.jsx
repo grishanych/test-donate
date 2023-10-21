@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Footer.module.scss";
+import { Link } from "react-router-dom";
 import Logo from "../footer/icons/Logo.svg";
 import { Location } from "./icons/location/Location";
 import { Message } from "./icons/message/Message";
@@ -14,9 +14,9 @@ import { ReactComponent as MastercardIcon } from "../footer/icons/paymentMethods
 import { ReactComponent as VisaIcon } from "../footer/icons/paymentMethods/visa.svg";
 import { ReactComponent as LiqpayIcon } from "../footer/icons/paymentMethods/liqpay.svg";
 import FooterAccordion from './FooterAccordion'
-// import { FormButton } from "./../button/Button"
-import { Link } from "react-router-dom";
 import Subscribe from "./Subscribe"
+import styles from "./Footer.module.scss";
+
 
 function Footer() {
   const menuItems = [

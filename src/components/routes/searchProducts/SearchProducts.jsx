@@ -2,17 +2,18 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Card } from "../../card/Card";
 import { getProducts } from "../../../api/getProducts";
-import styles from './SearchProducts.module.scss'
 import Spinner from '../../spinner/Spinner'
 import DocumentTitle from "../DocumentTitle";
+import styles from './SearchProducts.module.scss'
+
 
 const ListProducts = () => {
     const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {        setIsLoading(true);
-
+    useEffect(() => {
+        setIsLoading(true);
         getProducts()
             .then(responseData => {
                 setData(responseData);
@@ -26,6 +27,7 @@ const ListProducts = () => {
 
     const filteredData = data.filter(item => item.name.toLowerCase().includes(inputValueFromRedux.toLowerCase()));
 
+    
     return (
         <>
             <DocumentTitle title={`Пошук: ${inputValueFromRedux}`}/>

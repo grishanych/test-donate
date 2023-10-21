@@ -4,6 +4,7 @@ import { initializeCart } from "../../../redux/actions/cartActions";
 import CartItem from "./CartItem";
 import styles from "./Cart.module.scss";
 
+
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import CardList from "./CardList";
-import shuffleArray from "../../scripts/shuffleArray"
-import PropTypes from "prop-types"
-import Spinner from "../spinner/Spinner";
 import axios from "axios";
 import { GET_PRODUCTS_URL } from "../../endpoints/endpoints"
+import CardList from "./CardList";
+import Spinner from "../spinner/Spinner";
+import shuffleArray from "../../scripts/shuffleArray"
+import PropTypes from "prop-types"
+
 
 export default function FilteredCardList( {property, value, priceRange} ) {
   const priceLow = priceRange ? priceRange[0] : 0;
@@ -13,7 +14,6 @@ export default function FilteredCardList( {property, value, priceRange} ) {
   const [isLoading, setIsLoading] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
     
-
   useEffect(() => {
     if (JSON.stringify(prevPriceRange) === JSON.stringify(priceRange)) {
       return;
@@ -25,23 +25,22 @@ export default function FilteredCardList( {property, value, priceRange} ) {
         const products = response.data;
   
         if (!Array.isArray(products)) {
-          console.log("products не є масивом:", products);
           setIsLoading(false);
           return;
         }
   
         let newData = [];
-      products.forEach(item => {
-        if (
-          (Array.isArray(value) && value.includes(item[property])) || 
-          (item[property] === value)
-        ) {
-          const price = item.price ?? 0;
-          if (price >= priceLow && price <= priceHigh) {
-            newData.push(item);
+        products.forEach(item => {
+          if (
+            (Array.isArray(value) && value.includes(item[property])) || 
+            (item[property] === value)
+          ) {
+            const price = item.price ?? 0;
+            if (price >= priceLow && price <= priceHigh) {
+              newData.push(item);
+            }
           }
-        }
-      });
+        });
 
       let mixedData = shuffleArray([...newData]);
       setPrevPriceRange(priceRange); 
@@ -63,6 +62,7 @@ export default function FilteredCardList( {property, value, priceRange} ) {
     </>
   )
 }
+
 
 FilteredCardList.propTypes = {
     property: PropTypes.string.isRequired,

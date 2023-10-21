@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './Footer.module.scss'
 import downArrow from './icons/down_arrow.svg'
+import styles from './Footer.module.scss'
+
 
 const FooterAccordion = ({ title, items }) => {
     const [isOpen, setIsOpen] = useState(false);

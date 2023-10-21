@@ -3,16 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Form, Field, ErrorMessage, Formik } from "formik";
+import axios from "axios";
 import { object, string } from "yup";
+import { addFavorites } from "../../redux/actions/cartActions";
 import EyeClosed from "./eye/EyeClosed";
 import EyeOpen from "./eye/EyeOpen";
 import { FormButton } from "../button/Button";
 import logInUser from "../../api/logInUser"
-import styles from "./LogIn.module.scss"
 import PropTypes from "prop-types"
-
-import axios from "axios";
-import { addFavorites } from "../../redux/actions/cartActions";
+import styles from "./LogIn.module.scss"
 
 
 function LogIn({ headline, toRegistration, toLogIn }){
@@ -45,7 +44,7 @@ function LogIn({ headline, toRegistration, toLogIn }){
   //     });
   // };
 
-
+  // in the process
   async function fetchUserDataFromServer() {
     try {
       const response = await axios.get("http://localhost:4000/api/customers/customer");
@@ -55,6 +54,7 @@ function LogIn({ headline, toRegistration, toLogIn }){
     }
   }
 
+  // in the process
   async function updateUserFavoritesOnServer(newFavorites) {
     const updatedCustomer = {
       favorites: newFavorites,
@@ -68,7 +68,6 @@ function LogIn({ headline, toRegistration, toLogIn }){
     }
   }
   
-
   const handleUserLogin = async (login, password) => {
     try {
       await dispatch(logInUser(login, password));
@@ -82,16 +81,10 @@ function LogIn({ headline, toRegistration, toLogIn }){
         dispatch(addFavorites(newFavorites));
 
         await updateUserFavoritesOnServer(newFavorites);
-        // const dataFromServer = await updateUserFavoritesOnServer(newFavorites);
-        // оновили - на сторінку
-        // console.log(dataFromServer);
       } else {
         const currentFavorites = JSON.parse(localStorage.getItem('Favorites')) || [];
         if (currentFavorites.length > 0) {
           await updateUserFavoritesOnServer(currentFavorites);
-          // const dataFromServer = await updateUserFavoritesOnServer(currentFavorites);
-          // додали - на сторінку
-          // console.log(dataFromServer);
         }
       } 
     }
@@ -159,9 +152,6 @@ function LogIn({ headline, toRegistration, toLogIn }){
                 )}
               </Field>
               <FormButton type="submit" className={styles.buttonStyle} width="300px" text="Увійти" disabled={isSubmitting}/>
-              {/* <button type="submit" className={styles.buttonStyle} width="300px"
-              >Увійти
-              </button> */}
               {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
               <div className={styles.errorsWrapper}>
                 <ErrorMessage name="login" component="p" className={styles.textAttention}/>

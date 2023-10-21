@@ -5,6 +5,7 @@ import picTwo from "./../../images/bet-on-victory-2.jpeg";
 import picThree from "./../../images/bet-on-victory-3.jpeg";
 import styles from "./MainSlider.module.scss"
 
+
 function MainSlider(){
   const [currentPic, setCurrentPic] = useState(0);
 

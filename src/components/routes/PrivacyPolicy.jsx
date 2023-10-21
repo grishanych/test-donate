@@ -1,5 +1,6 @@
 import DocumentTitle from "./DocumentTitle"
 
+
 function PrivacyPolicy(){
 
     return(

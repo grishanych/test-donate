@@ -4,6 +4,7 @@ import { initializeFavorites } from "../../../redux/actions/cartActions";
 import FavoritesItem from "./FavoritesItem";
 import styles from "./Favorites.module.scss";
 
+
 function Favorites() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.favorites.items);

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styles from './ProductView.module.scss'
 
+
 const TabComponent = ({productDescription}) => {
-    const [activeTab, setActiveTab] = useState('tab1'); // начальная активная вкладка - tab1
+    const [activeTab, setActiveTab] = useState('tab1');
 
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
@@ -26,7 +27,6 @@ const TabComponent = ({productDescription}) => {
             <div className={styles.tabContent}>
                 {activeTab === 'tab1' && <div>{productDescription}</div>}
                 {activeTab === 'tab2' && <div>Відгуків ще немає</div>}
-
             </div>
         </>
     );

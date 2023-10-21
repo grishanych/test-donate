@@ -1,8 +1,7 @@
 import React from "react";
 import Slider from "react-slider";
-// import styles from "../cardlists/AllCategoriesCardList.module.scss";
-import styles from "./SliderPrice.module.scss";
 import Button from "../button/Button";
+import styles from "./SliderPrice.module.scss";
 
 
 export default function SliderPrice({tempSliderValue, setTempSliderValue, applyFilter}) {

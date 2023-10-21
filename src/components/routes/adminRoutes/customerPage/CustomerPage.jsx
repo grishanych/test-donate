@@ -41,8 +41,6 @@ function CustomerPage(){
           </div>
           <div className={styles.cardsSectionWrapper}>
           <h1 className={styles.cardsSectionHeadline}>Ви обрали товари:</h1>
-          {/* <p className={styles.cardsSectionText}>Ваші обрані товари</p> */}
-
             {products && products.map((item) => (
             <FavoritesItem
                 key={item.itemNo}

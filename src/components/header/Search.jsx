@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateInputValue } from '../../redux/actionsCreators/inputValueActionsCreators';
 import Context from "../Context";
+import { updateInputValue } from '../../redux/actionsCreators/inputValueActionsCreators';
 import { IconSearch } from './icons/search/IconSearch';
 import Button from "../button/Button";
 import styles from './Header.module.scss';
+
 
 function SearchInHeader() {
     const [isLinkVisible, setIsLinkVisible] = useState(true);

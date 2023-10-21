@@ -1,6 +1,7 @@
-import styles from "./CardList.module.scss"
 import { Card } from "../card/Card"
 import PropTypes from "prop-types"
+import styles from "./CardList.module.scss"
+
 
 export default function CardList( {items} ) {
     
@@ -22,6 +23,7 @@ export default function CardList( {items} ) {
         </ul>
     );
 }
+
 
 CardList.propTypes = {
     items: PropTypes.arrayOf(

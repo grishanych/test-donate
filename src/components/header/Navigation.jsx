@@ -4,6 +4,7 @@ import SearchInHeader from './Search';
 import ActiveLink from './ActiveLink';
 import styles from './Header.module.scss';
 
+
 function Navigation() {
     const { isLinkVisible } = useContext(Context);
     const [isDropdownVisible, setDropdownVisible] = useState(false);

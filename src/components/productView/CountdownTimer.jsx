@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from './ProductView.module.scss'
 
+// ! replace
 const CountdownTimer = ({ targetDate }) => {
     const calculateTimeLeft = () => {
         const difference = +new Date(targetDate) - +new Date();
@@ -17,7 +18,7 @@ const CountdownTimer = ({ targetDate }) => {
 
         return timeLeft;
     };
-
+    
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
     useEffect(() => {

@@ -1,6 +1,6 @@
-import styles from "./Categories.module.scss"
 import pic from "./../../../images/bet-on-victory-ban-2.jpeg";
 import AllCategoriesCardList from "../../cardlists/AllCategoriesCardList";
+import styles from "./Categories.module.scss"
 
 
 export default function Categories() {

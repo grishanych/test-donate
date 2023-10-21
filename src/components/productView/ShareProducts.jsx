@@ -1,11 +1,13 @@
-import styles from "./ProductView.module.scss";
+import React from "react";
 import Facebook from "./icons/facebook/Facebook";
 import Twitter from "./icons/twitter/Twitter";
 import Linkedin from "./icons/linkedin/Linkedin";
 import Message from "./icons/message/Message";
-import React from "react";
+import styles from "./ProductView.module.scss";
+
 
 function ShareProducts() {
+
     return (<div className={styles.shareProducts}>
         <span>Поділитись: </span>
         <a

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './ErrorBoundery.module.scss'
 
+
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);

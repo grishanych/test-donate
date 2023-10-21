@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Button from "../button/Button";
-import styles from "./CategoriesList.module.scss"
 import Donate from "./icons/donates/Donate"
 import Buy from "./icons/goods/Buy"
 import Auction from "./icons/lots/Auction"
+import styles from "./CategoriesList.module.scss"
 
 
 const Categorys = () => {

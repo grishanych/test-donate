@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import { getProducts } from "../../api/getProducts";
+import { useSelector } from "react-redux";
 import CardList from "./CardList";
 import SliderPrice from "../sliderPrice/SliderPrice";
 import Spinner from "../spinner/Spinner";
 import shuffleArray from "../../scripts/shuffleArray"
 import styles from "./AllCategoriesCardList.module.scss"
-
-import { useSelector } from "react-redux";
 
 
 export default function CategoriesCardList() {
@@ -28,7 +26,6 @@ export default function CategoriesCardList() {
   useEffect(() => {
     setIsLoading(true);
 
-    // getProducts().then(data => {
       let newData = [];
       productsList.forEach(item => {
         const price = item.price ?? 0;
@@ -53,11 +50,6 @@ export default function CategoriesCardList() {
       let mixedData = shuffleArray([...newData]);
       setItems(mixedData);
       setIsLoading(false);
-    // })
-    // .catch(error => {
-    //   console.error("Помилка при отриманні даних:", error);
-    //   setIsLoading(false);
-    // });
   }, [selectedValue, sliderValue, productsList]);
 
 

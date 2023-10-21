@@ -5,6 +5,7 @@ import Button from "../../button/Button";
 import QuantityCounter from "./../../productView/CounterQuantity";
 import styles from "./Cart.module.scss";
 
+
 function CartItem({ item }) {
   const dispatch = useDispatch();
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === item.itemNo));

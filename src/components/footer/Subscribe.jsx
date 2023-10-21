@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Form, Field, ErrorMessage, Formik } from "formik";
 import { useDispatch } from "react-redux";
+import { Form, Field, ErrorMessage, Formik } from "formik";
 import { object, string } from "yup";
 import { FormButton } from "./../button/Button"
 import subscribeUser from "../../api/subscribeUser";
 import styles from "./Footer.module.scss";
+
 
 export default function Subscribe() {
   const [showError, setShowError] = useState(false);
