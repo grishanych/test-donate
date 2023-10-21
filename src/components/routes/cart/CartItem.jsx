@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { removeFromCart } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
 import Button from "../../button/Button";
@@ -28,9 +29,11 @@ function CartItem({ item }) {
   
   return (
     <li key={item.id} className={styles.cardItemWrapper}>
-      <div className={styles.cardItemImageWrapper}>
-        <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
-      </div>
+      <Link to={`/product/${item.itemNo}`}>
+        <div className={styles.cardItemImageWrapper}>
+          <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
+        </div>
+      </Link>
       <p>{item.name}</p>
       <div className={styles.quantityCounterWrapper}>
         <QuantityCounter />
