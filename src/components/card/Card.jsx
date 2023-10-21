@@ -37,7 +37,7 @@ export function Card({ itemNo, name, price, goal, nameCloudinary, category, id }
             goal && category === "Благодійний лот" ? 
             <p className={styles.cardItemGoalLot}>Ставка: {goal} грн</p> :
             goal && category === "Донат" ? 
-            <p className={styles.cardItemGoalDonat}>Збираємо: {goal} грн</p>
+            <p className={styles.cardItemGoalDonat}>Мета: {goal} грн</p>
             :
             null
           }

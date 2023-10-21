@@ -34,8 +34,6 @@ export default function Subscribe() {
         initialValues={{email: ""}}
         onSubmit={(values, { setSubmitting }) => {
           handleUserSubscribe(values.email);
-          console.log(values.email);
-          // sendData();
           setSubmitting(false);
         }}
         validationSchema={validationSchema}
