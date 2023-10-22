@@ -1,4 +1,5 @@
-import { SET_PRODUCT,
+import {
+  SET_PRODUCT,
   // SET_PRODUCTS
 } from "../actions/productActions";
 
