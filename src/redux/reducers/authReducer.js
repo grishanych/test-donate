@@ -1,5 +1,5 @@
-import { SET_AUTH_TOKEN, REMOVE_AUTH_TOKEN } from "../actions/authActions"
-import { LOG_IN, LOG_OUT } from "../actions/loggedInActions"
+import { SET_AUTH_TOKEN, REMOVE_AUTH_TOKEN } from "../actions/authActions";
+import { LOG_IN, LOG_OUT } from "../actions/loggedInActions";
 
 const initialState = {
   token: null,
@@ -7,16 +7,16 @@ const initialState = {
 };
 
 export const authReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SET_AUTH_TOKEN:
       return {
         ...state,
-        token: action.payload
+        token: action.payload,
       };
     case REMOVE_AUTH_TOKEN:
       return {
         ...state,
-        token: null
+        token: null,
       };
     case LOG_IN:
       return {

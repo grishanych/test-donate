@@ -1,9 +1,9 @@
 import axios from "axios";
 import store from "../redux/store";
-import { setAuthToken } from '../redux/actions/authActions';
+import { setAuthToken } from "../redux/actions/authActions";
 
 
-const selectCartForApi = state => state.cart.items.map(item => ({
+const selectCartForApi = (state) => state.cart.items.map((item) => ({
   product: item.id,
   cartQuantity: item.quantity,
 }));
@@ -20,10 +20,10 @@ export default function sendCart() {
 
   axios
     .post("http://localhost:4000/api/cart", newCart)
-    .then(newCart => {
-      console.log(newCart);
+    .then((response) => {
+      console.log(response);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 }

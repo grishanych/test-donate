@@ -1,30 +1,38 @@
 import axios from "axios";
 import { setAuthToken } from "../redux/actions/authActions";
 import { setError } from "../redux/actions/errorActions";
-import { REGISTRATION_URL } from "../endpoints/endpoints"
+import { REGISTRATION_URL } from "../endpoints/endpoints";
 
-const registrationUser = (firstName, lastName, login, email, password, telephone, birthdate, isAdmin) => dispatch => {
+const registrationUser = (
+  firstName,
+  lastName,
+  login,
+  email,
+  password,
+  telephone,
+  birthdate,
+  isAdmin,
+) => (dispatch) => {
   const userData = {
-    firstName: firstName,
-    lastName: lastName,
-    login: login,
-    email: email,
-    password: password,
-    isAdmin: isAdmin,
-    telephone: telephone,
-    birthdate: birthdate,
-    favorites: {"items": []}
+    firstName,
+    lastName,
+    login,
+    email,
+    password,
+    isAdmin,
+    telephone,
+    birthdate,
+    favorites: { items: [] },
   };
 
   return axios
     .post(REGISTRATION_URL, userData)
-    .then(loginResult => {
+    .then((loginResult) => {
       if (loginResult.data.success === true) {
         dispatch(setAuthToken(loginResult.token));
-
       }
     })
-    .catch(err => {
+    .catch((err) => {
       if (err.response && err.response.data) {
         if (err.response.data.login === "Login must be between 3 and 10 characters") {
           dispatch(setError("Логін має містити від 3 до 10 символів"));
