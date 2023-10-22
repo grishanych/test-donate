@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
-import logo from '../../images/header/Logo.png';
+import logo from '../../images/header/logo.png';
 import Cart from "./icons/cart/IconCart";
 import IconEnter from "./icons/enter/IconEnter";
 import Button from "../button/Button";

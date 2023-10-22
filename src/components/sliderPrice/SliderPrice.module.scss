@@ -3,14 +3,14 @@
 
 .filtrationSliderSection {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: 350px;
 
   @include devices(mobile) {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 }
 
@@ -40,12 +40,12 @@
   height: 25px;
 
   & .thumb {
-    height: 25px;
-    line-height: 25px;
     width: 25px;
+    height: 25px;
+    color: #fff;
+    line-height: 25px;
     text-align: center;
     background-color: variables.$bgc-main;
-    color: #fff;
     border-radius: 50%;
     cursor: grab;
   }
@@ -53,7 +53,7 @@
   & .track {
     top: 10px;
     bottom: 10px;
-    background: #ccc;
     height: 5px;
+    background: #ccc;
   }
 }

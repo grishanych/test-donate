@@ -12,23 +12,23 @@
   }
   @include devices (laptop) {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   }
 }
 
 .productDetails {
-  padding-left: 10px;
-  //z-index: 1;
   width: 48%;
+  padding-left: 10px;
+
   @include devices(tablet){
     padding: 0 15px;
   }
   @include devices(mobile) {
+    width: 100%;
     margin-left:  0;
     background-color:rgba(255, 255, 255, 1);
     border-radius: 31px;
-    width: 100%;
   }
 }
 
@@ -42,18 +42,18 @@
   }
   @include devices(mobile) {
     display: flex;
-    font-size: variables.$fs-x;
-    @include mixins.font-family-medium;
-    line-height: 16px;
-    color: variables.$main-text-color;
     margin-bottom: 24px;
+    color: variables.$main-text-color;
+    font-size: variables.$fs-x;
+    line-height: 16px;
+    @include mixins.font-family-medium;
   }
 }
 .productName {
   @include mixins.font-family-bold;
-  font-size: variables.$fs-xxl;
-  color: variables.$main-text-color;
   margin-bottom: 20px;
+  color: variables.$main-text-color;
+  font-size: variables.$fs-xxl;
   @include devices(tablet) {
     font-size: variables.$fs-l;
   }
@@ -64,11 +64,11 @@
 }
 .productPrice {
   @include mixins.font-family-bold;
+  padding-bottom: 13px;
+  color: variables.$fc-main;
   font-size: 22px;
   line-height: 16px;
-  color: variables.$fc-main;
-  padding-bottom: 13px;
-  border-bottom: 0.3px solid rgba(70, 163, 88, 0.5);
+  border-bottom: .3px solid rgba(70, 163, 88, .5);
   @include devices(tablet) {
     font-size: variables.$fs-x;
   }
@@ -80,12 +80,12 @@
 .descTitle,
 .size {
   @include mixins.font-family-medium;
-  font-size: 15px;
-  line-height: 16px;
-  color: variables.$main-text-color;
   margin-bottom: 10px;
   padding-top: 15px;
   padding-right: 10px;
+  color: variables.$main-text-color;
+  font-size: 15px;
+  line-height: 16px;
 }
 .descTitle {
   @include devices(mobile) {
@@ -94,10 +94,10 @@
 }
 .descriptionText {
   @include mixins.font-family-regular;
+  margin-bottom: 24px;
+  color: #727272;
   font-size: 14px;
   line-height: 24px;
-  color: #727272;
-  margin-bottom: 24px;
 
 }
 .selectContainer {
@@ -108,17 +108,17 @@
 
 .selectedOption {
   @include mixins.font-family-bold;
-  font-size: 16px;
-  line-height: 16px;
   width: 150px;
   height: 30px;
-  border-radius: 6px;
   color: #3d3d3d;
+  font-size: 16px;
+  line-height: 16px;
+  border-radius: 6px;
 }
 .quantityCounter {
-  margin-bottom: 30px;
   order: 1;
   min-width: 100%;
+  margin-bottom: 30px;
   @include devices(tablet){
     order: 1;
     margin-bottom: 20px;
@@ -127,48 +127,41 @@
 }
 .decrease,
 .increase {
-  border-radius: 29px;
-  font-size: 16px;
-  color: #ffffff;
-  background-color: #46a358;
   padding: 9px 15px;
+  color: #ffffff;
+  font-size: 16px;
+  background-color: #46a358;
   border: none;
+  border-radius: 29px;
   cursor: pointer;
 }
 
 .quantity {
   @include mixins.font-family-regular;
+  margin: 0 20px;
+  color: variables.$main-text-color;
   font-size: 20px;
   line-height: 10px;
-  color: variables.$main-text-color;
-  margin: 0 20px;
 }
 
 .buyButtons {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
+  align-items: center;
   margin-bottom: 24px;
-
-  //@include devices(tablet){
-  //  display: flex;
-  //  align-items: center;
-  //  flex-wrap: wrap;
-  //
-  //}
-
 }
+
 .buyNowBtn {
   @include mixins.font-family-bold;
+  margin-right: 10px;
+  padding: 10px 30px;
+  color: #ffffff;
   font-size: 14px;
   line-height: 20px;
   text-transform: uppercase;
-  color: #ffffff;
-  padding: 10px 30px;
-  border-radius: 6px;
-  border: none;
   background-color: #46a358;
-  margin-right: 10px;
+  border: none;
+  border-radius: 6px;
   @include devices(laptop) {
     order: 2;
   }
@@ -177,21 +170,21 @@
     margin-right: 10px;
   }
   @include devices(mobile) {
-    border-radius: 40px;
     background-color: rgba(70, 163, 88, 1);
+    border-radius: 40px;
   }
 }
 .addToCartBtn {
-  border-radius: 6px;
-  border: 1px solid #46a358;
-  @include mixins.font-family-bold;
+  margin-right: 10px;
+  padding: 10px 20px;
+  color: #46a358;
   font-size: 14px;
   line-height: 20px;
   text-transform: uppercase;
-  color: #46a358;
-  padding: 10px 20px;
   background-color: #ffffff;
-  margin-right: 10px;
+  border: 1px solid #46a358;
+  border-radius: 6px;
+  @include mixins.font-family-bold;
 
   @include devices(laptop) {
     order: 2;
@@ -206,9 +199,9 @@
 }
 .addToFavorite {
   padding: 9px 10px;
+  background-color: #ffffff;
   border: 1px solid #46a358;
   border-radius: 6px;
-  background-color: #ffffff;
   @include devices(laptop) {
     order: 2;
   }
@@ -219,10 +212,10 @@
 }
 .sku {
   @include mixins.font-family-regular;
+  margin-bottom: 10px;
+  color: #727272;
   font-size: 15px;
   line-height: 16px;
-  color: #727272;
-  margin-bottom: 10px;
   span {
     color: #a5a5a5;
     text-transform: uppercase;
@@ -230,29 +223,29 @@
 }
 .categories {
   @include mixins.font-family-regular;
+  margin-bottom: 10px;
+  color: #727272;
   font-size: 15px;
   line-height: 16px;
-  color: #727272;
-  margin-bottom: 10px;
   span {
     color: #acacac;
   }
 }
 .productColors {
   @include mixins.font-family-regular;
+  margin-bottom: 18px;
+  color: #727272;
   font-size: 15px;
   line-height: 16px;
-  color: #727272;
-  margin-bottom: 18px;
   span {
     color: #acacac;
   }
 }
 .shareProducts {
   @include mixins.font-family-medium;
+  color: #3d3d3d;
   font-size: 15px;
   line-height: 16px;
-  color: #3d3d3d;
 
   a {
     margin-left: 16px;
@@ -272,21 +265,21 @@
 }
 .tabs {
   display: flex;
-  @include mixins.font-family-regular;
+  margin-bottom: 18px;
+  color: rgba(61, 61, 61, 1);
   font-size: 17px;
   line-height: 16px;
-  color: rgba(61, 61, 61, 1);
+  border-bottom: .3px solid rgba(70, 163, 88, .5);
   cursor: pointer;
-  border-bottom: 0.3px solid rgba(70, 163, 88, 0.5);
-  margin-bottom: 18px;
+  @include mixins.font-family-regular;
   .activeTab {
     @include mixins.font-family-bold;
+    padding-bottom: 12px;
+    color: #46a358;
     font-size: 17px;
     line-height: 16px;
-    color: #46a358;
-    cursor: pointer;
     border-bottom: 2px solid #46A358;
-    padding-bottom: 12px;
+    cursor: pointer;
 
   }
 }
@@ -295,23 +288,23 @@
 }
 .tabContent{
   @include mixins.font-family-regular;
+  min-height: max-content;
+  color: #727272;
   font-size: 14px;
   line-height: 24px;
-  color: #727272;
-  min-height: max-content;
 
 }
 
 .donateStartDate {
+  color: #a5a5a5;
   font-size: 16px;
   @include mixins.font-family-regular;
-  color: #a5a5a5;
 }
 .foundrasingInfo {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
-  align-items: center;
   margin-bottom: 20px;
 }
 .foundrasingResult {
@@ -320,55 +313,54 @@
 
 .donateBtnContainer{
   display: flex;
-  margin-bottom: 20px;
+  flex-direction: row-reverse;
   align-items: baseline;
   justify-content: space-between;
-  flex-direction: row-reverse;
+  margin-bottom: 20px;
 
 }
 
 .donateBtn {
   width: 50%;
-  @include mixins.font-family-bold;
+  margin-top: 20px;
+  padding: 12px 25px;
+  color: white;
   font-size: 17px;
   line-height: 16px;
-  background-color: #46A358;
-  color: white;
-  padding: 12px 25px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
   text-align: center;
-  margin-top: 20px;
+  background-color: #46A358;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  @include mixins.font-family-bold;
 }
 
 //lots page
 .lotRate {
   @include mixins.font-family-regular;
-  background: transparent;
-  border-right: none;
-  border-left: none;
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid #46A358;
   color: rgb(26, 26, 26);
-  line-height: 120%;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: all 300ms linear 0s;
   font-size: 14px;
-  //width: 120px;
+  line-height: 120%;
+  white-space: nowrap;
   text-align: center;
+  text-transform: uppercase;
+  background: transparent;
+  border-top: 1px solid transparent;
+  border-right: none;
+  border-bottom: 1px solid #46A358;
+  border-left: none;
+  transition: all 300ms linear 0s;
 }
 .lotDetails{
   display: grid;
-  width: 100%;
   gap: 20px;
+  width: 100%;
 }
 .lotInfo, .donateInfo{
   display: grid;
   grid-template-columns: 1fr max-content;
-  justify-content: space-between;
   gap: 10px;
+  justify-content: space-between;
 }
 .lotInfoDetails{
   @include mixins.font-family-medium;
@@ -378,16 +370,16 @@
 }
 .rateUpBtnWrapper{
   display: flex;
+  flex-direction: row-reverse;
   align-items: flex-end;
   justify-content: space-between;
-  flex-direction: row-reverse;
   margin-top: 10px;
 }
 .rateContainer {
   display: flex;
+  gap: 10px;
   justify-content: center;
   width: 100%;
-  gap: 10px;
 }
 
 .descriptionOfProduct{
