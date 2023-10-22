@@ -10,9 +10,9 @@
 }
 
 .cardsSectionHeadline {
+  color: variables.$fc-main;
   font-weight: 700;
   text-transform: uppercase;
-  color: variables.$fc-main;
 }
 
 .cardsSectionText {
@@ -26,19 +26,19 @@
 }
 
 .picture {
-  padding: 100px 15px 0px;
   width: 97%;
+  padding: 100px 15px 0px;
 }
 
 .filtration {
-  padding-top: 50px;
-  width: 100%;
   display: flex;
   justify-content: flex-end;
+  width: 100%;
+  padding-top: 50px;
 
   @include devices(mobile) {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 }
