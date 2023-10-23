@@ -23,7 +23,9 @@ function Navigation() {
 
   return (
     <div className={styles.navWrapper}>
+      {/* ! ??? ! */}
       <div className={styles.burgerMenuWrapper} />
+      {/* ! ??? ! */}
       <nav style={style} className={styles.nav}>
         <ul className={`${styles.navItem} ${styles.active}`}>
           <ActiveLink label="головна" to="/" className={`${styles.navList} ${styles.navLink}`} />
@@ -50,6 +52,7 @@ function Navigation() {
           </div>
           <ActiveLink label="блог" to="/blog" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} />
           <ActiveLink label="контакти" to="/contacts" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} />
+          <ActiveLink label="кабінет" to="/account" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} />
         </ul>
       </nav>
             
