@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { setToken } from "../redux/actions/tokenActions";
 import { setAuthToken } from "../redux/actions/authActions";
 import { logIn } from "../redux/actions/loggedInActions";
 import { setError } from "../redux/actions/errorActions";
@@ -16,7 +15,6 @@ const logInUser = (login, password) => (dispatch) => {
     .then((loginResult) => {
       if (loginResult.data.success === true) {
         localStorage.setItem("token", loginResult.data.token);
-        // dispatch(setToken(loginResult.data.token));
         dispatch(setAuthToken(loginResult.data.token));
         dispatch(logIn());
       }

@@ -3,7 +3,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
 import {
   Form, Field, ErrorMessage, Formik,
@@ -16,10 +15,13 @@ import EyeClosed from "./eye/EyeClosed";
 import EyeOpen from "./eye/EyeOpen";
 import { FormButton } from "../button/Button";
 import logInUser from "../../api/logInUser";
+import { NEW_CART_URL, GET_FAVORITES, REGISTRATION_URL } from "../../endpoints/endpoints";
+import sendCart from "../../api/sendCart";
+import updateCart from "../../api/updateCart";
 import styles from "./LogIn.module.scss";
 
 
-function LogIn({ headline, toRegistration, toLogIn }) {
+function LogIn({ headline, toRegistration }) {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const [showError, setShowError] = useState(false);
@@ -38,66 +40,79 @@ function LogIn({ headline, toRegistration, toLogIn }) {
       .matches(/[a-zA-Z0-9]/, "Дозволені символи для пароля: a-z, A-Z, 0-9"),
   });
 
-  // const handleUserLogin = (login, password) => {
-  //   dispatch(logInUser(login, password))
-  //     .then(() => {
-  //       navigate(toLogIn);
-  //     })
-  //     .catch((error) => {
-  //       setShowError(true);
-  //     });
-  // };
 
-  // in the process
-  // eslint-disable-next-line consistent-return
-  async function fetchUserDataFromServer() {
+  // get Favorites
+  async function getFavoritesFromServer() {
     try {
-      const response = await axios.get("http://localhost:4000/api/customers/customer");
+      const response = await axios.get(GET_FAVORITES);
       return response.data;
     } catch (err) {
       console.error("Помилка при отриманні даних:", err);
+      return null;
     }
   }
 
-  // in the process
-  // eslint-disable-next-line consistent-return
-  async function updateUserFavoritesOnServer(newFavorites) {
+  // get Cart
+  // ! api
+  async function getCartFromServer() {
+    try {
+      const response = await axios.get(NEW_CART_URL);
+      return response.data;
+    } catch (err) {
+      console.error("Помилка при отриманні даних:", err);
+      return null;
+    }
+  }
+
+  // update Favorites
+  async function updateFavoritesToServer(newFavorites) {
     const updatedCustomer = {
       favorites: newFavorites,
     };
 
     try {
-      const response = await axios.put("http://localhost:4000/api/customers", updatedCustomer);
+      const response = await axios.put(REGISTRATION_URL, updatedCustomer);
       return response.data.favorites;
     } catch (err) {
       console.error("Помилка при отриманні даних:", err);
+      return null;
     }
   }
-  
+ 
   const handleUserLogin = async (login, password) => {
     try {
       await dispatch(logInUser(login, password));
   
-      const userData = await fetchUserDataFromServer();
+      const userData = await getFavoritesFromServer();
       if (userData.favorites.items && userData.favorites.items.length > 0) {
         const currentFavorites = JSON.parse(localStorage.getItem("Favorites")) || [];
-        // eslint-disable-next-line max-len
         const newFavorites = Array.from(new Set([...currentFavorites, ...userData.favorites.items]));
         localStorage.setItem("Favorites", JSON.stringify(newFavorites));
         dispatch(addFavorites(newFavorites));
 
-        await updateUserFavoritesOnServer(newFavorites);
+        await updateFavoritesToServer(newFavorites);
       } else {
         const currentFavorites = JSON.parse(localStorage.getItem("Favorites")) || [];
         if (currentFavorites.length > 0) {
-          await updateUserFavoritesOnServer(currentFavorites);
+          await updateFavoritesToServer(currentFavorites);
         }
+      }
+
+      const cartData = await getCartFromServer();
+      if (cartData === null) {
+        sendCart();
+      } else {
+        updateCart();
+      }
+
+      if (userData.isAdmin === false) {
+        navigate("/account");
+      } else if (userData.isAdmin === true) {
+        navigate("/adm-page");
       }
     } catch (error) {
       setShowError(true);
       console.error("Помилка при вході:", error);
-    } finally {
-      navigate(toLogIn);
     }
   };
   
@@ -125,10 +140,10 @@ function LogIn({ headline, toRegistration, toLogIn }) {
                     {...field}
                     id="login"
                     className={
-                        meta.touched && meta.error
-                          ? styles.inputAttention
-                          : styles.input
-                      }
+                      meta.touched && meta.error
+                        ? styles.inputAttention
+                        : styles.input
+                    }
                     placeholder="Логін"
                   />
                 )}
@@ -174,7 +189,6 @@ function LogIn({ headline, toRegistration, toLogIn }) {
 LogIn.propTypes = {
   headline: PropTypes.string.isRequired,
   toRegistration: PropTypes.string.isRequired,
-  toLogIn: PropTypes.string.isRequired,
 };
 
 export default LogIn;

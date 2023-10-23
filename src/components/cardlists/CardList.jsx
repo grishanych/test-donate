@@ -8,13 +8,13 @@ import styles from "./CardList.module.scss";
 export default function CardList({ items }) {
   return (
     <ul className={styles.cardsListWrapper}>
-      {items.map((item, index) => (
+      {items.map((item) => (
         <Card
-          key={index}
+          key={item.itemNo}
           id={item._id}
           itemNo={item.itemNo}
           name={item.shortName}
-          price={item.price}
+          price={item.currentPrice}
           goal={item.goal}
           nameCloudinary={item.nameCloudinary[0]}
           category={item.category}

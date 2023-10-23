@@ -183,7 +183,7 @@ function ProductView() {
 
             {(product.category === "Взуття" && (
             <p className={styles.productPrice}>
-              {product.price}
+              {product.currentPrice}
               {" "}
               грн.
             </p>
@@ -191,7 +191,7 @@ function ProductView() {
                 || ((product.category === "Комплекти форми"
                     || product.category === "Одяг верхній") && (
                     <p className={styles.productPrice}>
-                      {product.price}
+                      {product.currentPrice}
                       {" "}
                       грн.
                     </p>

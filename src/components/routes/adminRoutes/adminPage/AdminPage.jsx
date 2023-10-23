@@ -10,7 +10,6 @@ function AdminPage() {
           <h1>Кабінет адміністратора</h1>
         </div>
       </section>
-
     </>
   );
 }

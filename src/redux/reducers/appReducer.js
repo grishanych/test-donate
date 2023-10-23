@@ -5,6 +5,7 @@ import { productsReducer } from "./productsReducer";
 import inputReducer from "./inputReducer";
 import { authReducer } from "./authReducer";
 import errorReducer from "./errorReducer";
+import { userReducer } from "./userReducer";
 
 const appReducer = combineReducers({
   cart: cartReducer,
@@ -14,6 +15,7 @@ const appReducer = combineReducers({
   inputValue: inputReducer,
   auth: authReducer,
   showError: errorReducer,
+  username: userReducer,
 });
 
 export default appReducer;
