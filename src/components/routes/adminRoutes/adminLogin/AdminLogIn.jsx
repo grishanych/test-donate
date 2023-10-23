@@ -2,14 +2,13 @@ import LogIn from "../../../logIn/LogIn";
 import DocumentTitle from "../../DocumentTitle";
 
 
-function AdminLogIn(){
-
-  return(
+function AdminLogIn() {
+  return (
     <>
-      <DocumentTitle title="Увійдіть в систему"/>
-        <LogIn headline="Увійдіть в систему" toRegistration="/adm-registration" toLogIn="/adm-page"/>
+      <DocumentTitle title="Увійдіть в систему" />
+      <LogIn headline="Увійдіть в систему" toRegistration="/adm-registration" toLogIn="/adm-page" />
     </>
-  )
+  );
 }
 
-export default AdminLogIn
+export default AdminLogIn;

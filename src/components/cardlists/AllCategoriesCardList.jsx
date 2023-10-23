@@ -1,10 +1,11 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CardList from "./CardList";
 import SliderPrice from "../sliderPrice/SliderPrice";
 import Spinner from "../spinner/Spinner";
-import shuffleArray from "../../scripts/shuffleArray"
-import styles from "./AllCategoriesCardList.module.scss"
+import shuffleArray from "../../scripts/shuffleArray";
+import styles from "./AllCategoriesCardList.module.scss";
 
 
 export default function CategoriesCardList() {
@@ -16,40 +17,40 @@ export default function CategoriesCardList() {
   const productsList = useSelector((state) => state.products.items);
 
   const handleChange = (e) => {
-      setSelectedValue(e.target.value);
-    };
+    setSelectedValue(e.target.value);
+  };
 
   const applyFilter = () => {
     setSliderValue(tempSliderValue);
-  }
+  };
 
   useEffect(() => {
     setIsLoading(true);
 
-      let newData = [];
-      productsList.forEach(item => {
-        const price = item.price ?? 0;
-        if (
-          selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])
-        ) {
-          if (selectedValue === "all") {
-            newData.push(item);
-          } else if (selectedValue === "donation" && item.category === "Донат") {
-            newData.push(item);
-          } else if (selectedValue === "lots" && item.category === "Благодійний лот") {
-            newData.push(item);
-          } else if (selectedValue === "setswear" && item.category === "Комплекти форми") {
-            newData.push(item);
-          } else if (selectedValue === "outerwear" && item.category === "Одяг верхній") {
-            newData.push(item);
-          } else if (selectedValue === "footwear" && item.category === "Взуття") {
-            newData.push(item);
-          }
+    const newData = [];
+    productsList.forEach((item) => {
+      const price = item.price ?? 0;
+      if (
+        selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])
+      ) {
+        if (selectedValue === "all") {
+          newData.push(item);
+        } else if (selectedValue === "donation" && item.category === "Донат") {
+          newData.push(item);
+        } else if (selectedValue === "lots" && item.category === "Благодійний лот") {
+          newData.push(item);
+        } else if (selectedValue === "setswear" && item.category === "Комплекти форми") {
+          newData.push(item);
+        } else if (selectedValue === "outerwear" && item.category === "Одяг верхній") {
+          newData.push(item);
+        } else if (selectedValue === "footwear" && item.category === "Взуття") {
+          newData.push(item);
         }
-      });
-      let mixedData = shuffleArray([...newData]);
-      setItems(mixedData);
-      setIsLoading(false);
+      }
+    });
+    const mixedData = shuffleArray([...newData]);
+    setItems(mixedData);
+    setIsLoading(false);
   }, [selectedValue, sliderValue, productsList]);
 
 
@@ -71,8 +72,8 @@ export default function CategoriesCardList() {
           </div>
           {selectedValue !== "all" && selectedValue !== "donation" && selectedValue !== "lots" && (
             <SliderPrice
-              tempSliderValue={tempSliderValue} 
-              setTempSliderValue={setTempSliderValue} 
+              tempSliderValue={tempSliderValue}
+              setTempSliderValue={setTempSliderValue}
               applyFilter={applyFilter}
             />
           )}
@@ -83,9 +84,9 @@ export default function CategoriesCardList() {
         <Spinner />
       ) : (
         selectedValue || selectedValue === "all" ? (
-          <CardList items={items}/>
+          <CardList items={items} />
         ) : null
-      )}    
-  </>
+      )}
+    </>
   );
 }

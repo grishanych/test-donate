@@ -1,50 +1,54 @@
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types"
-import styles from "./Button.module.scss"
+import PropTypes from "prop-types";
+import styles from "./Button.module.scss";
 
 
-export default function Button({ text="", color="rgba(70, 163, 88, 1)", padding="", width="150px", toPage="", onClick=null, children, ...rest}) {
-
+export default function Button({
+  text = "", color = "rgba(70, 163, 88, 1)", padding = "", width = "150px", toPage = "", onClick = null, children, ...rest
+}) {
   const buttonStyle = {
     backgroundColor: color,
-    width: width,
-    padding: padding,
+    width,
+    padding,
   };
 
-  return  (
+  return (
+    // eslint-disable-next-line max-len
     <Link to={toPage} style={buttonStyle} className={styles.buttonStyle} onClick={onClick} {...rest}>
-        {
-         text !== ""  ? text : children
+      {
+         text !== "" ? text : children
         }
     </Link>
 
-  )
-};
+  );
+}
 
 
-export function FormButton({ text="", type=null, color="rgba(70, 163, 88, 1)", padding="", width="150px", onClick=null, children, ...rest}) {
-
+export function FormButton({
+  text = "", type = null, color = "rgba(70, 163, 88, 1)", padding = "", width = "150px", onClick = null, children, ...rest
+}) {
   const buttonStyle = {
     backgroundColor: color,
-    width: width,
-    padding: padding,
+    width,
+    padding,
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       onClick();
     }
   };
 
-  return  (
+  return (
+    // eslint-disable-next-line max-len, react/button-has-type
     <button type={type} style={buttonStyle} className={styles.buttonStyle} onClick={onClick} {...rest} onKeyDown={handleKeyDown}>
-        {
-         text !== ""  ? text : children
+      {
+         text !== "" ? text : children
         }
     </button>
 
-  )
-};
+  );
+}
 
 
 Button.propTypes = {
@@ -58,8 +62,8 @@ Button.propTypes = {
 
   children: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.element
-  ])
+    PropTypes.element,
+  ]),
 };
 
 FormButton.propTypes = {
@@ -73,6 +77,6 @@ FormButton.propTypes = {
 
   children: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.element
-  ])
+    PropTypes.element,
+  ]),
 };

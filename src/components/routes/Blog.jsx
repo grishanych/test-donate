@@ -1,14 +1,13 @@
-import DocumentTitle from "./DocumentTitle"
+import DocumentTitle from "./DocumentTitle";
 
 
-function Blog(){
-
-    return(
-        <>
-            <DocumentTitle title="Блог: новини, звіти, статті"/>
-                <div data-testid='blog-test'>blog</div>
-        </>
-    )
+function Blog() {
+  return (
+    <>
+      <DocumentTitle title="Блог: новини, звіти, статті" />
+      <div data-testid="blog-test">blog</div>
+    </>
+  );
 }
 
-export default Blog
+export default Blog;

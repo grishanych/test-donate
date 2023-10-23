@@ -7,9 +7,10 @@ import styles from "./Favorites.module.scss";
 
 function FavoritesItem({ item }) {
   const dispatch = useDispatch();
+  // eslint-disable-next-line max-len
   const isItemInFavorites = useSelector((state) => state.favorites.items.some((cartItem) => cartItem.itemNo === item.itemNo));
 
-  const handleRemoveFromFavorites= () => {
+  const handleRemoveFromFavorites = () => {
     if (isItemInFavorites) {
       let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
       countProducts -= 1;
@@ -34,8 +35,12 @@ function FavoritesItem({ item }) {
       <div className={styles.quantityCounterWrapper}>
         <QuantityCounter />
       </div>
-      <p className={styles.cardItemPrice}>{item.price} грн</p>
-      <Button className={styles.buttonDelete} onClick={() => handleRemoveFromFavorites()} text="Видалити"/>
+      <p className={styles.cardItemPrice}>
+        {item.price}
+        {" "}
+        грн
+      </p>
+      <Button className={styles.buttonDelete} onClick={() => handleRemoveFromFavorites()} text="Видалити" />
     </li>
   );
 }

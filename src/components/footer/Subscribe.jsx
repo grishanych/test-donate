@@ -1,8 +1,11 @@
+/* eslint-disable max-len */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Form, Field, ErrorMessage, Formik } from "formik";
+import {
+  Form, Field, ErrorMessage, Formik,
+} from "formik";
 import { object, string } from "yup";
-import { FormButton } from "./../button/Button"
+import { FormButton } from "../button/Button";
 import subscribeUser from "../../api/subscribeUser";
 import styles from "./Footer.module.scss";
 
@@ -13,11 +16,12 @@ export default function Subscribe() {
 
   const validationSchema = object().shape({
     email: string()
-      .email("Некорректний формат електронної адреси")
-  })
+      .email("Некорректний формат електронної адреси"),
+  });
 
   const handleUserSubscribe = (email) => {
     dispatch(subscribeUser(email))
+      // eslint-disable-next-line no-unused-vars
       .catch((error) => {
         setShowError(true);
         setTimeout(() => setShowError(false), 2000);
@@ -31,8 +35,8 @@ export default function Subscribe() {
         Дізнавайтесь про термінові збори, оновлення лотів та важливі новини!
       </h3>
 
-      <Formik 
-        initialValues={{email: ""}}
+      <Formik
+        initialValues={{ email: "" }}
         onSubmit={(values, { setSubmitting }) => {
           handleUserSubscribe(values.email);
           setSubmitting(false);
@@ -43,13 +47,13 @@ export default function Subscribe() {
 
           <Form>
             <div className={styles.footerInput}>
-              <Field 
-                type="email" 
-                name="email" 
-                placeholder="Введіть email" 
-                className={styles.emailInput} 
+              <Field
+                type="email"
+                name="email"
+                placeholder="Введіть email"
+                className={styles.emailInput}
               />
-              <FormButton type="submit" className={styles.joinBtn} text="Підписатися" disabled={isSubmitting}/>
+              <FormButton type="submit" className={styles.joinBtn} text="Підписатися" disabled={isSubmitting} />
             </div>
             <div className={styles.errorsWrapper}>
               <ErrorMessage name="email" component="p" />
@@ -64,5 +68,5 @@ export default function Subscribe() {
         Оформляйте підписку та отримуйте першими новини про оновлення в зборах та лотах аукціону доброчинності, акційні пропозиції та інформацію про нові поставки товару.
       </p>
     </div>
-  )
+  );
 }

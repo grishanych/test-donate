@@ -1,12 +1,12 @@
-import Linkedin from './Linkedin';
-import {render,screen} from '@testing-library/react';
+import { render, screen } from "@testing-library/react";
+// eslint-disable-next-line import/no-named-as-default, import/no-unresolved
+import Linkedin from "./Linkedin";
 
-describe('should the SVG icon Linkedin', () =>{
+describe("should the SVG icon Linkedin", () => {
+  test("should render the SVG icon Linkedin", () => {
+    render(<Linkedin />);
 
-    test('should render the SVG icon Linkedin', () =>{
-        render (<Linkedin />)
-
-        const linkedin = screen.getByTestId('linkedin-svg-test');
-        expect(linkedin.getAttribute('data-testid')).toBe('linkedin-svg-test');
-    });
+    const linkedin = screen.getByTestId("linkedin-svg-test");
+    expect(linkedin.getAttribute("data-testid")).toBe("linkedin-svg-test");
+  });
 });

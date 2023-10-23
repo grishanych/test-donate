@@ -1,21 +1,25 @@
+/* eslint-disable max-len */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
-import { Form, Field, ErrorMessage, Formik } from "formik";
+import {
+  Form, Field, ErrorMessage, Formik,
+} from "formik";
 import axios from "axios";
 import { object, string } from "yup";
+import PropTypes from "prop-types";
 import { addFavorites } from "../../redux/actions/cartActions";
 import EyeClosed from "./eye/EyeClosed";
 import EyeOpen from "./eye/EyeOpen";
 import { FormButton } from "../button/Button";
-import logInUser from "../../api/logInUser"
-import PropTypes from "prop-types"
-import styles from "./LogIn.module.scss"
+import logInUser from "../../api/logInUser";
+import styles from "./LogIn.module.scss";
 
 
-function LogIn({ headline, toRegistration, toLogIn }){
-
+function LogIn({ headline, toRegistration, toLogIn }) {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const [showError, setShowError] = useState(false);
@@ -31,8 +35,8 @@ function LogIn({ headline, toRegistration, toLogIn }){
       .required("Поле пароля є обов'язковим для заповнення")
       .min(7, "Пароль має містити від 7 до 30 символів")
       .max(30, "Пароль має містити від 7 до 30 символів")
-      .matches(/[a-zA-Z0-9]/, "Дозволені символи для пароля: a-z, A-Z, 0-9")
-  })
+      .matches(/[a-zA-Z0-9]/, "Дозволені символи для пароля: a-z, A-Z, 0-9"),
+  });
 
   // const handleUserLogin = (login, password) => {
   //   dispatch(logInUser(login, password))
@@ -45,6 +49,7 @@ function LogIn({ headline, toRegistration, toLogIn }){
   // };
 
   // in the process
+  // eslint-disable-next-line consistent-return
   async function fetchUserDataFromServer() {
     try {
       const response = await axios.get("http://localhost:4000/api/customers/customer");
@@ -55,10 +60,11 @@ function LogIn({ headline, toRegistration, toLogIn }){
   }
 
   // in the process
+  // eslint-disable-next-line consistent-return
   async function updateUserFavoritesOnServer(newFavorites) {
     const updatedCustomer = {
       favorites: newFavorites,
-    }
+    };
 
     try {
       const response = await axios.put("http://localhost:4000/api/customers", updatedCustomer);
@@ -74,37 +80,36 @@ function LogIn({ headline, toRegistration, toLogIn }){
   
       const userData = await fetchUserDataFromServer();
       if (userData.favorites.items && userData.favorites.items.length > 0) {
-
-        const currentFavorites = JSON.parse(localStorage.getItem('Favorites')) || [];
+        const currentFavorites = JSON.parse(localStorage.getItem("Favorites")) || [];
+        // eslint-disable-next-line max-len
         const newFavorites = Array.from(new Set([...currentFavorites, ...userData.favorites.items]));
-        localStorage.setItem('Favorites', JSON.stringify(newFavorites));
+        localStorage.setItem("Favorites", JSON.stringify(newFavorites));
         dispatch(addFavorites(newFavorites));
 
         await updateUserFavoritesOnServer(newFavorites);
       } else {
-        const currentFavorites = JSON.parse(localStorage.getItem('Favorites')) || [];
+        const currentFavorites = JSON.parse(localStorage.getItem("Favorites")) || [];
         if (currentFavorites.length > 0) {
           await updateUserFavoritesOnServer(currentFavorites);
         }
-      } 
-    }
-    catch (error) {
+      }
+    } catch (error) {
       setShowError(true);
       console.error("Помилка при вході:", error);
     } finally {
-      navigate(toLogIn)
+      navigate(toLogIn);
     }
   };
   
 
-  return(
+  return (
     <section className={styles.windowWrapper}>
       <div className={styles.window}>
         <h1 className={styles.headline}>{headline}</h1>
         <p className={`${styles.text} ${styles.headlineText}`}>Введіть логін та пароль, щоб увійти</p>
 
-        <Formik 
-          initialValues={{login: "", password: ""}}
+        <Formik
+          initialValues={{ login: "", password: "" }}
           onSubmit={(values, { setSubmitting }) => {
             handleUserLogin(values.login, values.password);
             setSubmitting(false);
@@ -114,18 +119,18 @@ function LogIn({ headline, toRegistration, toLogIn }){
 
           {({ isSubmitting }) => (
             <Form className={styles.form}>
-            <Field name="login">
+              <Field name="login">
                 {({ field, meta }) => (
-                    <input
-                      {...field}
-                      id="login"
-                      className={
+                  <input
+                    {...field}
+                    id="login"
+                    className={
                         meta.touched && meta.error
                           ? styles.inputAttention
                           : styles.input
                       }
-                      placeholder="Логін"
-                    />
+                    placeholder="Логін"
+                  />
                 )}
               </Field>
               <Field name="password">
@@ -151,25 +156,25 @@ function LogIn({ headline, toRegistration, toLogIn }){
                   </div>
                 )}
               </Field>
-              <FormButton type="submit" className={styles.buttonStyle} width="300px" text="Увійти" disabled={isSubmitting}/>
+              <FormButton type="submit" className={styles.buttonStyle} width="300px" text="Увійти" disabled={isSubmitting} />
               {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
               <div className={styles.errorsWrapper}>
-                <ErrorMessage name="login" component="p" className={styles.textAttention}/>
-                <ErrorMessage name="password" component="p" className={styles.textAttention}/>
+                <ErrorMessage name="login" component="p" className={styles.textAttention} />
+                <ErrorMessage name="password" component="p" className={styles.textAttention} />
               </div>
             </Form>
           )}
         </Formik>
-        <Link to={toRegistration} className={`${styles.text} ${styles.textRegistration}`}>Зареєструватися</Link> 
+        <Link to={toRegistration} className={`${styles.text} ${styles.textRegistration}`}>Зареєструватися</Link>
       </div>
     </section>
-  )
+  );
 }
 
 LogIn.propTypes = {
   headline: PropTypes.string.isRequired,
   toRegistration: PropTypes.string.isRequired,
-  toLogIn: PropTypes.string.isRequired
+  toLogIn: PropTypes.string.isRequired,
 };
 
-export default LogIn
+export default LogIn;
