@@ -17,4 +17,4 @@ deploy:
   github-token: $token-for-travis
   local_dir: build
   on:
-    branch: stylelint-eslint
+    branch: develop
