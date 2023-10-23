@@ -34,7 +34,8 @@ function ProductView() {
   const product = useSelector((state) => state.product.product);
   const params = useParams();
   const [progress, setProgress] = useState(15);
-  const [currentBid, setCurrentBid] = useState('');
+  const [currentBid, setCurrentBid] = useState(product?.initialPrice || '');
+  const [newCurrentBid, setNewCurrentBid] = useState('')
 
 
   useEffect(() => {
@@ -48,7 +49,8 @@ function ProductView() {
         const formattedDate = `${rawDate.getDate()}/${rawDate.getMonth() + 1}/${rawDate.getFullYear()}`;
 
         const initialPrice = data.goal;
-        dispatch(setProduct({...data, formattedDate, initialPrice: initialPrice, images:data.nameCloudinary.map(convertToImgUrl)}));
+        dispatch(setProduct({...data, formattedDate,  initialPrice: initialPrice, images:data.nameCloudinary.map(convertToImgUrl)}));
+        setCurrentBid(initialPrice);
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -63,14 +65,13 @@ function ProductView() {
     return <div>Product not found...</div>;
   }
   const handleBidClick = () => {
-    // Отримайте значення ставки зі стейту currentBid та відобразіть його в спані або іншому елементі
 
-    if (parseFloat(currentBid) > parseFloat(product.initialPrice)) {
-      // якщо так, оновіть значення стартової ціни на нову ставку
-      setCurrentBid(currentBid);
+    if (parseFloat(newCurrentBid) > parseFloat(product.initialPrice)) {
+      setCurrentBid(newCurrentBid);
+      setNewCurrentBid('');
     }
-    console.log('Ставка піднята:', currentBid);
-    // Тут ви можете використовувати це значення для відображення на сторінці або відправки на сервер
+
+
   };
 
 
@@ -144,10 +145,11 @@ function ProductView() {
             ) : null }
 
 
-            {(product.category === "Взуття" && <p className={styles.productPrice}>{product.price} грн.</p>) ||
-                ((product.category === "Комплекти форми" ||
-                    product.category === "Одяг верхній") && <p className={styles.productPrice}>{product.price} грн.</p>) ||
-                null}
+            {["Взуття", "Комплекти форми", "Одяг верхній"].includes(product.category) && (
+                <>
+                  <p className={styles.productPrice}>{product.price} грн.</p>
+                </>
+            )}
 
             {["Взуття", "Комплекти форми", "Одяг верхній"].includes(product.category) && (
                 <>
@@ -209,8 +211,8 @@ function ProductView() {
             {product.category === "Благодійний лот" ? (
                 <>
                   <div className={styles.rateContainer}>
-                    <input placeholder="Ваша ставка" className={styles.lotRate} value={currentBid}
-                           onChange={(e) => setCurrentBid(e.target.value)} />
+                    <input placeholder="Ваша ставка" className={styles.lotRate} value={newCurrentBid}
+                    onChange={(e) => setNewCurrentBid(e.target.value)} />
 
                   </div>
                   <div className={styles.rateUpBtnWrapper}>
