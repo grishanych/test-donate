@@ -1,14 +1,13 @@
-import DocumentTitle from "./DocumentTitle"
+import DocumentTitle from "./DocumentTitle";
 
 
-function PrivacyPolicy(){
-
-    return(
-        <>
-            <DocumentTitle title="Політика конфіденційності"/>
-                <h1>Політика конфіденційності</h1>
-        </>
-    )
+function PrivacyPolicy() {
+  return (
+    <>
+      <DocumentTitle title="Політика конфіденційності" />
+      <h1>Політика конфіденційності</h1>
+    </>
+  );
 }
 
 export default PrivacyPolicy;

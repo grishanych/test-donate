@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "../ProductView.module.scss";
 
-const ClothesSelector = () => {
+function ClothesSelector() {
   const clothingSizes = ["S", "M", " L", "XL", "XXL"];
 
   const handleSizeChange = (event) => {
+    // eslint-disable-next-line no-unused-vars
     const selectedSize = event.target.value;
   };
 
@@ -20,6 +21,6 @@ const ClothesSelector = () => {
       </select>
     </div>
   );
-};
+}
 
 export default ClothesSelector;

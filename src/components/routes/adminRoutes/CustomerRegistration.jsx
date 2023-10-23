@@ -1,15 +1,14 @@
-import Registration from "../../registration/Registration"
-import DocumentTitle from "../DocumentTitle"
+import Registration from "../../registration/Registration";
+import DocumentTitle from "../DocumentTitle";
 
 
-function CustomerRegistration(){
-
-  return(
+function CustomerRegistration() {
+  return (
     <>
       <DocumentTitle title="Реєстрація акаунта" />
-        <Registration headline="Реєстрація акаунта" to="/account" isAdmin={false}/>
+      <Registration headline="Реєстрація акаунта" to="/account" isAdmin={false} />
     </>
-  )
+  );
 }
 
-export default CustomerRegistration
+export default CustomerRegistration;

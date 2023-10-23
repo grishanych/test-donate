@@ -1,15 +1,14 @@
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
 
-export default function Main( {children} ) {
-
-    return (
-        <main>
-            {children}
-        </main>
-    )
+export default function Main({ children }) {
+  return (
+    <main>
+      {children}
+    </main>
+  );
 }
 
 Main.propTypes = {
-    children: PropTypes.node
-};  
+  children: PropTypes.node,
+};

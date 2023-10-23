@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { removeFromCart } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
 import Button from "../../button/Button";
-import QuantityCounter from "./../../productView/CounterQuantity";
+import QuantityCounter from "../../productView/CounterQuantity";
 import styles from "./Cart.module.scss";
 
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
+  // eslint-disable-next-line max-len
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === item.itemNo));
   
   const handleRemoveFromCart = () => {
@@ -38,8 +39,12 @@ function CartItem({ item }) {
       <div className={styles.quantityCounterWrapper}>
         <QuantityCounter />
       </div>
-      <p className={styles.cardItemPrice}>{item.price} грн</p>
-      <Button className={styles.buttonDelete} onClick={() => handleRemoveFromCart()} text="Видалити"/>
+      <p className={styles.cardItemPrice}>
+        {item.price}
+        {" "}
+        грн
+      </p>
+      <Button className={styles.buttonDelete} onClick={() => handleRemoveFromCart()} text="Видалити" />
     </li>
   );
 }

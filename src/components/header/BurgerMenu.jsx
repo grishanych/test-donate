@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './Header.module.scss';
+/* eslint-disable react/button-has-type */
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "./Header.module.scss";
 
-const BurgerMenu = ({toggleBar}) => {
+function BurgerMenu({ toggleBar }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-    toggleBar()
+    toggleBar();
   };
 
   return (
     <nav className={styles.wrapperMenu}>
-      <button className={`${styles.toggleButton} ${isOpen ? styles.cross : ''}`} onClick={toggleMenu}>
-        <div className={styles.bar}></div>
-        <div className={styles.bar}></div>
-        <div className={styles.bar}></div>
+      <button className={`${styles.toggleButton} ${isOpen ? styles.cross : ""}`} onClick={toggleMenu}>
+        <div className={styles.bar} />
+        <div className={styles.bar} />
+        <div className={styles.bar} />
       </button>
       {isOpen && (
         <ul className={styles.menuList}>
@@ -28,7 +29,7 @@ const BurgerMenu = ({toggleBar}) => {
       )}
     </nav>
   );
-};
+}
 
 export default BurgerMenu;
 

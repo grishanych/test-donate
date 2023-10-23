@@ -1,15 +1,14 @@
 import React from "react";
-import styles from './Spinner.module.scss'
+import styles from "./Spinner.module.scss";
 
 
-const Spinner = () => {
-  
+function Spinner() {
   return (
     <div className={styles.spinnerContainer}>
-      <div className={styles.spinner}></div>
+      <div className={styles.spinner} />
     </div>
   );
-};
+}
 
 export default Spinner;
 

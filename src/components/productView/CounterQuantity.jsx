@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styles from "../productView/ProductView.module.scss";
+import styles from "./ProductView.module.scss";
 
-const QuantityCounter = () => {
+function QuantityCounter() {
   const [quantity, setQuantity] = useState(1);
 
   const handleIncrease = () => {
@@ -16,15 +16,15 @@ const QuantityCounter = () => {
 
   return (
     <div className={styles.quantityCounter}>
-      <button className={styles.decrease} onClick={handleDecrease}>
+      <button className={styles.decrease} onClick={handleDecrease} type="button">
         -
       </button>
       <span className={styles.quantity}>{quantity}</span>
-      <button className={styles.increase} onClick={handleIncrease}>
+      <button className={styles.increase} onClick={handleIncrease} type="button">
         +
       </button>
     </div>
   );
-};
+}
 
 export default QuantityCounter;

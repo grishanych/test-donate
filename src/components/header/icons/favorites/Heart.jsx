@@ -1,19 +1,19 @@
+import { useSelector } from "react-redux";
 import { ReactComponent as HeartSVG } from "./heart.svg";
 import { ReactComponent as HeartFillSVG } from "./heart-fill.svg";
-import { useSelector } from "react-redux";
 
-const HeartFavorite = () => {
+function HeartFavorite() {
   const favorites = useSelector((state) => state.favorites.items);
   const isFavoritesEmpty = favorites.length === 0;
-    return (
+  return (
     <div>
       {isFavoritesEmpty ? (
         <HeartSVG />
       ) : (
-        <HeartFillSVG /> 
+        <HeartFillSVG />
       )}
     </div>
-    );
-  };
+  );
+}
   
 export default HeartFavorite;

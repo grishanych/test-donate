@@ -1,15 +1,14 @@
-import Registration from "../../registration/Registration"
-import DocumentTitle from "../DocumentTitle"
+import Registration from "../../registration/Registration";
+import DocumentTitle from "../DocumentTitle";
 
 
-function AdminRegistration(){
-
-  return(
+function AdminRegistration() {
+  return (
     <>
-      <DocumentTitle title="Реєстрація адміністратора"/>
-        <Registration headline="Реєстрація адміністратора" to="/adm-page" isAdmin={true}/>
+      <DocumentTitle title="Реєстрація адміністратора" />
+      <Registration headline="Реєстрація адміністратора" to="/adm-page" isAdmin />
     </>
-  )
+  );
 }
 
-export default AdminRegistration
+export default AdminRegistration;

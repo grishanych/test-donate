@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+/* eslint-disable max-len */
+import React, { useState } from "react";
 import FilteredCardList from "../../cardlists/FilteredCardList";
-import SliderPrice from '../../sliderPrice/SliderPrice';
-import styles from "./Categories.module.scss"
+import SliderPrice from "../../sliderPrice/SliderPrice";
+import styles from "./Categories.module.scss";
 
 
 export default function Clothing() {
@@ -10,7 +11,7 @@ export default function Clothing() {
 
   const applyFilter = () => {
     setSliderValue(tempSliderValue);
-  }
+  };
 
   
   return (

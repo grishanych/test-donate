@@ -46,7 +46,8 @@
     "stylelint-build": "stylelint src/**/*.scss",
     "stylelint-fix-sass": "stylelint --fix src/**/*.scss",
     "watch-sass-js": "npm-watch",
-    "eslint": "eslint src/**/*.js"
+    "eslint": "eslint src/**/*.js",
+    "lint": "eslint --fix --ext .js,.jsx ."
   },
   "watch": {
     "stylelint-dev": {
@@ -82,11 +83,11 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "eslint": "^8.2.0",
+    "eslint": "^8.52.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.3.0",
     "sass": "^1.68.0",
     "scss": "^0.2.4",
