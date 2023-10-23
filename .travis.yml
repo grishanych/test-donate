@@ -14,7 +14,7 @@ script:
 deploy:
   provider: pages
   skip_cleanup: true
-  github-token: $token-for-travis
+  github-token: "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"
   local_dir: build
   on:
     branch: develop
