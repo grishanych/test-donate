@@ -11,7 +11,7 @@ import styles from "./Cart.module.scss";
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-  const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+  // const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
 
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("Cart"));
@@ -19,8 +19,20 @@ function Cart() {
       dispatch(initializeCart(localData));
     }
   }, [cartItems.length, dispatch]);
-
   const isCartEmpty = cartItems.length === 0;
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const cartData = await getCartFromServer();
+  //     if (cartData !== null && !cartItems.length) {
+  //       dispatch(initializeCart(cartData.products));
+  //     }
+  //   };
+  
+  //   if (!cartItems.length) {
+  //     fetchData();
+  //   }
+  // }, [cartItems.length, dispatch]);
 
   // ! api
   async function getCartFromServer() {
@@ -47,7 +59,6 @@ function Cart() {
           letterSubject: "Thank you for order! You are welcome!",
           letterHtml: "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>",
         };
-        console.log(newOrder);
         
         axios
           .post(MAKE_ORDERS, newOrder)
@@ -74,7 +85,7 @@ function Cart() {
       {isCartEmpty ? <p className={styles.cartEmpty}>Ваш кошик порожній</p>
         : (
           <ul className={styles.cardsListWrapper}>
-            {currentProducts.map((item) => (
+            {cartItems.map((item) => (
               <CartItem
                 key={item.itemNo}
                 item={item}

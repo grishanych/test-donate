@@ -19,6 +19,8 @@ import { NEW_CART_URL, GET_FAVORITES } from "../../endpoints/endpoints";
 // import sendCart from "../../api/sendCart";
 // import updateCart from "../../api/updateCart";
 import styles from "./LogIn.module.scss";
+// TODO
+import { initializeCart } from "../../redux/actions/cartActions";
 
 
 function LogIn({ headline, toRegistration }) {
@@ -121,7 +123,8 @@ function LogIn({ headline, toRegistration }) {
 
       const userFavotites = await getFavoritesFromServer();
       const userCart = await getCartFromServer();
-      console.log(userCart);
+      const productsFromServer = userCart.products.map((item) => item.product);
+      dispatch(initializeCart(productsFromServer));
       if (userFavotites.isAdmin === false) {
         navigate("/account");
       } else if (userFavotites.isAdmin === true) {

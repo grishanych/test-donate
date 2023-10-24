@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import AppRoutes from "./routes/AppRoutes";
 import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
@@ -13,6 +14,7 @@ import { logIn } from "../redux/actions/loggedInActions";
 import { setProducts } from "../redux/actions/productActions";
 import ScrollToTop from "./ScrollToTop";
 import { FormButton } from "./button/Button";
+import { NEW_CART_URL } from "../endpoints/endpoints";
 import AppArrow from "../images/appArrow/AppArrow";
 import styles from "./App.module.scss";
 
@@ -48,6 +50,29 @@ function App() {
     }
     // }
   }, [dispatch]);
+
+  // В App.js або де визначено головний компонент додатку
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const cartData = await getCartFromServer();
+      if (cartData !== null) {
+        dispatch(initializeCart(cartData.products));
+      }
+    };
+
+    fetchData();
+  }, [dispatch]);
+
+  async function getCartFromServer() {
+    try {
+      const response = await axios.get(NEW_CART_URL);
+      return response.data;
+    } catch (err) {
+      console.error("Помилка при отриманні даних:", err);
+      return null;
+    }
+  }
 
   useEffect(() => {
     getProducts()

@@ -3,6 +3,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import Basket from "./icons/basket/Basket";
@@ -10,6 +11,10 @@ import Heart from "./icons/heart/Heart";
 import BasketFull from "./icons/basket/BasketFull";
 import HeartFull from "./icons/heart/HeartFull";
 import styles from "./Card.module.scss";
+// TODO
+import sendCart from "../../api/sendCart";
+import { NEW_CART_URL } from "../../endpoints/endpoints";
+// import updateCart from "../../api/updateCart";
 
 
 export function Icons({
@@ -24,6 +29,36 @@ export function Icons({
     itemNo, name, price, imageURL, id, quantity,
   };
 
+  async function getCartFromServer() {
+    try {
+      const response = await axios.get(NEW_CART_URL);
+      return response.data;
+    } catch (err) {
+      console.error("Помилка при отриманні даних:", err);
+      return null;
+    }
+  }
+
+  async function chechCartFromServer() {
+    try {
+      const cartData = await getCartFromServer();
+      if (cartData === null) {
+        sendCart();
+      } else if (cartData !== null) {
+        axios
+          .put(`http://localhost:4000/api/cart/${product.id}`)
+          // .then((updatedCart) => {
+          //   console.log(updatedCart);
+          // })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } catch (error) {
+      console.error("Помилка при виході:", error);
+    }
+  }
+
 
   const handleAddToCart = () => {
     let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
@@ -35,6 +70,9 @@ export function Icons({
       localStorage.setItem("Cart", JSON.stringify(currentProducts));
       localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
       
+      // TODO
+      chechCartFromServer();
+
       dispatch(addToCart(product));
       dispatch(counterIncrement());
     }

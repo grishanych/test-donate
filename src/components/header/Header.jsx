@@ -15,9 +15,10 @@ import { resetCart, resetFavorites } from "../../redux/actions/cartActions";
 import { IconSearchMobile } from "./icons/search/IconSearch";
 import HeartFavorite from "./icons/favorites/Heart";
 import BurgerMenu from "./BurgerMenu";
-import { NEW_CART_URL, REGISTRATION_URL } from "../../endpoints/endpoints";
-import sendCart from "../../api/sendCart";
-import updateCart from "../../api/updateCart";
+import { REGISTRATION_URL } from "../../endpoints/endpoints";
+// import { NEW_CART_URL, REGISTRATION_URL } from "../../endpoints/endpoints";
+// import sendCart from "../../api/sendCart";
+// import updateCart from "../../api/updateCart";
 import styles from "./Header.module.scss";
 
 
@@ -63,15 +64,15 @@ function Header() {
   //   console.log("Out");
   // }
 
-  async function getCartFromServer() {
-    try {
-      const response = await axios.get(NEW_CART_URL);
-      return response.data;
-    } catch (err) {
-      console.error("Помилка при отриманні даних:", err);
-      return null;
-    }
-  }
+  // async function getCartFromServer() {
+  //   try {
+  //     const response = await axios.get(NEW_CART_URL);
+  //     return response.data;
+  //   } catch (err) {
+  //     console.error("Помилка при отриманні даних:", err);
+  //     return null;
+  //   }
+  // }
 
   async function updateFavoritesToServer(newFavorites) {
     const updatedCustomer = {
@@ -94,12 +95,12 @@ function Header() {
         await updateFavoritesToServer(currentFavorites);
       }
   
-      const cartData = await getCartFromServer();
-      if (cartData === null) {
-        sendCart();
-      } else if (cartData !== null) {
-        updateCart();
-      }
+      // const cartData = await getCartFromServer();
+      // if (cartData === null) {
+      //   sendCart();
+      // } else if (cartData !== null) {
+      //   updateCart();
+      // }
     
       // Видалити всі локальні дані
       localStorage.removeItem("userLogin");
