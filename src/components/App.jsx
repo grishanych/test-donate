@@ -9,6 +9,7 @@ import Context from "./Context";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Main from "./main/Main";
+import { logIn } from "../redux/actions/loggedInActions";
 import { setProducts } from "../redux/actions/productActions";
 import ScrollToTop from "./ScrollToTop";
 import { FormButton } from "./button/Button";
@@ -30,6 +31,7 @@ function App() {
     
     if (token) {
       dispatch(setAuthToken(token));
+      dispatch(logIn());
     }
   }, [dispatch]);
 

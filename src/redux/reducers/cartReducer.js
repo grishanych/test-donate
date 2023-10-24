@@ -5,6 +5,8 @@ import {
   REMOVE_FROM_FAVORITES,
   INITIALIZE_CART,
   INITIALIZE_FAVORITES,
+  RESET_CART,
+  RESET_FAVORITES,
 } from "../actions/cartActions";
 
 
@@ -40,6 +42,10 @@ export const cartReducer = (state = initialState.cart, action) => {
         items: action.payload,
         itemCount: action.payload.length,
       };
+    case RESET_CART:
+      return {
+        ...initialState.cart,
+      };
                         
     default:
       return state;
@@ -66,6 +72,10 @@ export const favoritesReducer = (state = initialState.favorites, action) => {
         ...state,
         items: action.payload,
         itemCount: action.payload.length,
+      };
+    case RESET_FAVORITES:
+      return {
+        ...initialState.favorites,
       };
         
     default:
