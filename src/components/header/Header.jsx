@@ -17,6 +17,7 @@ import HeartFavorite from "./icons/favorites/Heart";
 import BurgerMenu from "./BurgerMenu";
 import { NEW_CART_URL, REGISTRATION_URL } from "../../endpoints/endpoints";
 import sendCart from "../../api/sendCart";
+import updateCart from "../../api/updateCart";
 import styles from "./Header.module.scss";
 
 
@@ -25,7 +26,6 @@ function Header() {
   const favoriteCount = useSelector((state) => state.favorites.itemCount);
 
   const isLogIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log(isLogIn);
   const dispatch = useDispatch();
 
   
@@ -97,6 +97,8 @@ function Header() {
       const cartData = await getCartFromServer();
       if (cartData === null) {
         sendCart();
+      } else if (cartData !== null) {
+        updateCart();
       }
     
       // Видалити всі локальні дані
