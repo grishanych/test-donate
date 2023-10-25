@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
-import logo from "../../images/header/logo.png";
+import logo from "../../images/header/logoTwo.png";
 import Cart from "./icons/cart/IconCart";
 import IconEnter from "./icons/enter/IconEnter";
 import Button from "../button/Button";
@@ -57,7 +57,7 @@ function Header() {
       </div>
          
       <div className={styles.headerLaptop}>
-        <Link to="/" className={styles.logo}><img src={logo} alt="alt" width={70} height={70} /></Link>
+        <Link to="/" className={styles.logo}><img src={logo} alt="alt" width={150} height={100} /></Link>
 
         {showBurgerMenu && <BurgerMenu />}
         <Navigation />

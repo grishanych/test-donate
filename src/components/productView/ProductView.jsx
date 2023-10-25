@@ -16,6 +16,8 @@ import Button from "../button/Button";
 import CountdownTimer from "./CountdownTimer";
 import DocumentTitle from "../routes/DocumentTitle";
 import styles from "./ProductView.module.scss";
+import { openModal } from "../../redux/actionsCreators/modalActionsCreators";
+import Modal from "../modal/Modal";
 
 // ! replace
 function convertToImgUrl(nameCloudinary) {
@@ -37,7 +39,7 @@ function ProductView() {
   // eslint-disable-next-line no-unused-vars
   const [progress, setProgress] = useState(15);
   const [currentBid, setCurrentBid] = useState("");
-
+  const isModalOpen = useSelector((state) => state.modal.isOpen);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -217,7 +219,7 @@ function ProductView() {
 
             {["Взуття", "Комплекти форми", "Одяг верхній"].includes(product.category) && (
             <div className={styles.buyButtons}>
-              <button className={styles.buyNowBtn}>Миттєва купівля</button>
+              <button className={styles.buyNowBtn} onClick={ () => { dispatch(openModal()) } } >Миттєва купівля</button>
               {/* <Button */}
               {/*    text="Додати в кошик" */}
               {/*    color="rgba(70, 163, 88, 1)" */}
@@ -304,6 +306,8 @@ function ProductView() {
           <TabComponent productDescription={product.description} />
         </div>
         )}
+
+        {isModalOpen && <Modal tittle="Ми раді повідомити, що ви успішно купили товар" />}
 
       </div>
     </>

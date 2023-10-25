@@ -6,12 +6,14 @@ import CartItem from "./CartItem";
 import { FormButton } from "../../button/Button";
 import { NEW_CART_URL, MAKE_ORDERS } from "../../../endpoints/endpoints";
 import styles from "./Cart.module.scss";
-
+import { openModal } from "../../../redux/actionsCreators/modalActionsCreators";
+import Modal from "../../modal/Modal";
 
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+  const isModalOpen = useSelector((state) => state.modal.isOpen);
 
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("Cart"));
@@ -21,6 +23,12 @@ function Cart() {
   }, [cartItems.length, dispatch]);
 
   const isCartEmpty = cartItems.length === 0;
+  let modalText = '' 
+  if (!isCartEmpty) {
+     modalText = "Ви успішно замовили товар! Дякуємо за вашу покупку. Незабаром ми з вами зв'яжемось для підтвердження деталей доставки та оплати. Гарного дня!"
+  } else {
+      modalText = "Здається, ви забули вибрати товар для покупки. Будь ласка, оберіть товар, який вас цікавить, і натисніть 'Купити'."
+  }
 
   // ! api
   async function getCartFromServer() {
@@ -34,11 +42,11 @@ function Cart() {
   }
 
   const handlePurchase = async () => {
+    dispatch(openModal())
     try {
       const cartData = await getCartFromServer();
       if (cartData !== null) {
         const { email, telephone, _id: customerId } = cartData.customerId;
-        
         const newOrder = {
           customerId,
           canceled: false,
@@ -48,7 +56,6 @@ function Cart() {
           letterHtml: "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>",
         };
         console.log(newOrder);
-        
         axios
           .post(MAKE_ORDERS, newOrder)
           .then((response) => {
@@ -63,9 +70,8 @@ function Cart() {
       // setShowError(true);
       console.error("Помилка при вході:", error);
     }
-  };
+  }
 
-  
   return (
     <div className={styles.cardsSectionWrapper}>
       <h1 className={styles.cardsSectionHeadline}>Кошик</h1>
@@ -83,6 +89,9 @@ function Cart() {
           </ul>
         )}
 
+      {isModalOpen && ( 
+        <Modal tittle={modalText} />
+       )}
       <FormButton text="Купити" padding="10px" onClick={handlePurchase} />
     </div>
   );
