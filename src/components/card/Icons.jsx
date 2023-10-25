@@ -71,15 +71,37 @@ export function Icons({
   }
 
 
+  // async function checkFavoritesFromServer() {
+  //   try {
+  //     const cartData = await getFavoritesFromServer();
+      
+  //     if (cartData && Array.isArray(cartData.favorites)) {
+  //       const updatedFavorites = [...cartData.favorites, product];
+  
+  //       const updatedCustomer = {
+  //         favorites: updatedFavorites,
+  //       };
+        
+  //       axios
+  //         .put("http://localhost:4000/api/customers", updatedCustomer)
+  //         .then((response) => console.log(response));
+  //     }
+  //   } catch (error) {
+  //     console.error("Помилка при виході:", error);
+  //   }
+  // }
+
   async function checkFavoritesFromServer() {
     try {
       const cartData = await getFavoritesFromServer();
       
-      if (cartData && Array.isArray(cartData.favorites)) {
-        const updatedFavorites = [...cartData.favorites, product];
-  
+      if (cartData && cartData.favorites && Array.isArray(cartData.favorites.items)) {
+        const updatedFavoritesItems = [...cartData.favorites.items, product];
+    
         const updatedCustomer = {
-          favorites: updatedFavorites,
+          favorites: {
+            items: updatedFavoritesItems,
+          },
         };
         
         axios
@@ -90,8 +112,8 @@ export function Icons({
       console.error("Помилка при виході:", error);
     }
   }
+  
     
-
 
   const handleAddToCart = () => {
     let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;

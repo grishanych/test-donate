@@ -28,13 +28,14 @@ function FavoritesItem({ item }) {
       const cartData = await getFavoritesFromServer();
       
       if (cartData && Array.isArray(cartData.favorites)) {
-        // eslint-disable-next-line max-len
+      // eslint-disable-next-line max-len
         const updatedFavorites = cartData.favorites.filter((favItem) => favItem.itemNo !== item.itemNo);
   
         const updatedCustomer = {
-          favorites: updatedFavorites,
+          favorites: {
+            items: updatedFavorites,
+          },
         };
-        console.log(updatedCustomer);
         
         axios
           .put("http://localhost:4000/api/customers", updatedCustomer)
@@ -46,6 +47,36 @@ function FavoritesItem({ item }) {
     }
   }
 
+  // async function deleteFavoritesFromServer() {
+  //   try {
+  //     const cartData = await getFavoritesFromServer();
+      
+  //     if (cartData && cartData.favorites && Array.isArray(cartData.favorites.items)) {
+  //       let updatedFavoritesItems = [];
+        
+  //       if (cartData.favorites.items.length > 1) {
+  // eslint-disable-next-line max-len
+  //         updatedFavoritesItems = cartData.favorites.items.filter((favItem) => favItem.itemNo !== item.itemNo);
+  //       } // if only one item is left, updatedFavoritesItems remains an empty array
+  
+  //       const updatedCustomer = {
+  //         favorites: {
+  //           items: updatedFavoritesItems,
+  //         },
+  //       };
+        
+  //       console.log(updatedCustomer);
+        
+  //       axios
+  //         .put("http://localhost:4000/api/customers", updatedCustomer)
+  //         .then((response) => console.log(response))
+  //         .catch((error) => console.error("Помилка при оновленні даних:", error));
+  //     }
+  //   } catch (error) {
+  //     console.error("Помилка при виході:", error);
+  //   }
+  // }
+  
 
 
   const handleRemoveFromFavorites = () => {
