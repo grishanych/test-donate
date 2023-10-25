@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Cloudinary } from "@cloudinary/url-gen";
+// import { Cloudinary } from "@cloudinary/url-gen";
 import axios from "axios";
 import { removeFromCart } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
@@ -15,13 +15,13 @@ function CartItem({ item }) {
   // eslint-disable-next-line max-len
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === item.itemNo));
 
-  console.log(item);
-  const cld = new Cloudinary({
-    cloud: { cloudName: "dzaxltnel" },
-    url: { secure: true },
-  });
-  const myImage = cld.image(item.nameCloudinary[0]);
-  const imageURL = myImage.toURL();
+  // console.log(item);
+  // const cld = new Cloudinary({
+  //   cloud: { cloudName: "dzaxltnel" },
+  //   url: { secure: true },
+  // });
+  // const myImage = cld.image(item.nameCloudinary[0]);
+  // const imageURL = myImage.toURL();
 
   async function getCartFromServer() {
     try {
@@ -91,7 +91,7 @@ function CartItem({ item }) {
     <li key={item.id} className={styles.cardItemWrapper}>
       <Link to={`/product/${item.itemNo}`}>
         <div className={styles.cardItemImageWrapper}>
-          <img src={imageURL} alt={item.name} className={styles.cardItemImage} />
+          <img alt={item.name} className={styles.cardItemImage} />
         </div>
       </Link>
       <p>{item.name}</p>

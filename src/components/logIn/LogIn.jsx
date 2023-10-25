@@ -123,8 +123,10 @@ function LogIn({ headline, toRegistration }) {
 
       const userFavotites = await getFavoritesFromServer();
       const userCart = await getCartFromServer();
-      const productsFromServer = userCart.products.map((item) => item.product);
-      dispatch(initializeCart(productsFromServer));
+      if (userCart !== null) {
+        const productsFromServer = userCart.products.map((item) => item.product);
+        dispatch(initializeCart(productsFromServer));
+      }
       if (userFavotites.isAdmin === false) {
         navigate("/account");
       } else if (userFavotites.isAdmin === true) {
