@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
+// ! var 2
+// import { useDispatch, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import AppRoutes from "./routes/AppRoutes";
 import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
@@ -25,8 +27,10 @@ function App() {
   const contextData = { isLinkVisible, setIsLinkVisible };
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+  console.log(isLoggedIn);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -51,32 +55,104 @@ function App() {
     // }
   }, [dispatch]);
 
-  // В App.js або де визначено головний компонент додатку
+  // ! var 1
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const cartData = await getCartFromServer();
+  //     if (cartData !== null) {
+  //       dispatch(initializeCart(cartData.products));
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [dispatch, getCartFromServer]);
+
+  // async function getCartFromServer() {
+  //   if (isLoggedIn) {
+  //     try {
+  //       const response = await axios.get(NEW_CART_URL);
+  //       return response.data;
+  //     } catch (err) {
+  //       console.error("Помилка при отриманні даних:", err);
+  //       return null;
+  //     }
+  //   } else {
+  //     console.log("Користувач не авторизований");
+  //     return null;
+  //   }
+  // }
+
+  // ! var 2
+  // useEffect(() => {
+  //   const getCartFromServer = async () => {
+  //     if (isLoggedIn) {
+  //       try {
+  //         const response = await axios.get(NEW_CART_URL);
+  //         return response.data;
+  //       } catch (err) {
+  //         console.error("Помилка при отриманні даних:", err);
+  //         return null;
+  //       }
+  //     } else {
+  //       // ! ?
+  //       console.log("Користувач не авторизований");
+  //       return null;
+  //     }
+  //   };
+    
+  //   const fetchData = async () => {
+  //     const cartData = await getCartFromServer();
+  //     if (cartData !== null) {
+  //       dispatch(initializeCart(cartData.products));
+  //     }
+  //   };
+  
+  //   fetchData();
+  // }, [dispatch, isLoggedIn]);
+
+  // ! var 3
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const cartData = await getCartFromServer();
-      if (cartData !== null) {
-        dispatch(initializeCart(cartData.products));
+    const getCartFromServer = async () => {
+      if (isLoggedIn) {
+        try {
+          const response = await axios.get(NEW_CART_URL);
+          return response.data;
+        } catch (err) {
+          console.error("Помилка при отриманні даних:", err);
+          return null;
+        }
+      } else {
+        console.log("Користувач не авторизований");
+        return null;
       }
     };
-
-    fetchData();
-  }, [dispatch]);
-
-  async function getCartFromServer() {
-    try {
-      const response = await axios.get(NEW_CART_URL);
-      return response.data;
-    } catch (err) {
-      console.error("Помилка при отриманні даних:", err);
-      return null;
+    
+    const fetchData = async () => {
+      const cartData = await getCartFromServer();
+      if (cartData !== null && Array.isArray(cartData.products)) {
+        const productArray = cartData.products.map((item) => item.product);
+        console.log(productArray);
+        dispatch(initializeCart(productArray));
+      }
+    };
+    
+    if (isLoggedIn) {
+      fetchData();
     }
-  }
+  }, [dispatch, isLoggedIn]);
 
+  
   useEffect(() => {
     getProducts()
       .then((data) => {
+        console.log(data);
         dispatch(setProducts(data));
       })
       .catch((error) => {

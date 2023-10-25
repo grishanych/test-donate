@@ -26,7 +26,8 @@ function Header() {
   const cartCount = useSelector((state) => state.cart.itemCount);
   const favoriteCount = useSelector((state) => state.favorites.itemCount);
 
-  const isLogIn = useSelector((state) => state.auth.isLoggedIn);
+  // const isLogIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedInFromRedux = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
   
@@ -158,8 +159,8 @@ function Header() {
           </Link>
           {cartCount === 0 ? null : <span>{cartCount}</span>}
 
-          <Button toPage={isLogIn ? "/" : "/log-in"} width="56px" onClick={isLogIn ? doLogOut : null}>
-            {isLogIn ? <IconOut /> : <IconEnter /> }
+          <Button toPage={isLoggedInFromRedux ? "/" : "/log-in"} width="56px" onClick={isLoggedInFromRedux ? doLogOut : null}>
+            {isLoggedInFromRedux ? <IconOut /> : <IconEnter /> }
           </Button>
         </div>
       </div>

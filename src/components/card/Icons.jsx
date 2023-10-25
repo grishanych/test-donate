@@ -39,7 +39,7 @@ export function Icons({
     }
   }
 
-  async function chechCartFromServer() {
+  async function checkCartFromServer() {
     try {
       const cartData = await getCartFromServer();
       if (cartData === null) {
@@ -71,7 +71,7 @@ export function Icons({
       localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
       
       // TODO
-      chechCartFromServer();
+      checkCartFromServer();
 
       dispatch(addToCart(product));
       dispatch(counterIncrement());

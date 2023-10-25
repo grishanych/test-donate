@@ -11,6 +11,7 @@ import styles from "./Cart.module.scss";
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
   // const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
 
   useEffect(() => {
@@ -87,7 +88,8 @@ function Cart() {
           <ul className={styles.cardsListWrapper}>
             {cartItems.map((item) => (
               <CartItem
-                key={item.itemNo}
+                // eslint-disable-next-line no-underscore-dangle
+                key={item._id}
                 item={item}
               />
             ))}
