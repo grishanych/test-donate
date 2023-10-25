@@ -20,7 +20,7 @@ import { NEW_CART_URL, GET_FAVORITES } from "../../endpoints/endpoints";
 // import updateCart from "../../api/updateCart";
 import styles from "./LogIn.module.scss";
 // TODO
-import { initializeCart } from "../../redux/actions/cartActions";
+import { initializeCart, initializeFavorites } from "../../redux/actions/cartActions";
 
 
 function LogIn({ headline, toRegistration }) {
@@ -127,6 +127,13 @@ function LogIn({ headline, toRegistration }) {
         const productsFromServer = userCart.products.map((item) => item.product);
         dispatch(initializeCart(productsFromServer));
       }
+      if (userFavotites.favorites && userFavotites.favorites.length > 0) {
+        console.log(userFavotites.favorites);
+        dispatch(initializeFavorites(userFavotites.favorites));
+      } else {
+        console.log("Масив порожній або невизначений");
+      }
+    
       if (userFavotites.isAdmin === false) {
         navigate("/account");
       } else if (userFavotites.isAdmin === true) {

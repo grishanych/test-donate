@@ -107,7 +107,7 @@ function Header() {
       localStorage.removeItem("userLogin");
       localStorage.removeItem("CountCartProducts");
       localStorage.removeItem("Cart");
-      localStorage.removeItem("CountFavoritesProducts");
+      // localStorage.removeItem("CountFavoritesProducts");
       localStorage.removeItem("token");
       localStorage.removeItem("Favorites");
   

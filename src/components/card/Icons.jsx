@@ -13,7 +13,7 @@ import HeartFull from "./icons/heart/HeartFull";
 import styles from "./Card.module.scss";
 // TODO
 import sendCart from "../../api/sendCart";
-import { NEW_CART_URL } from "../../endpoints/endpoints";
+import { NEW_CART_URL, GET_FAVORITES } from "../../endpoints/endpoints";
 // import updateCart from "../../api/updateCart";
 
 
@@ -32,6 +32,17 @@ export function Icons({
   async function getCartFromServer() {
     try {
       const response = await axios.get(NEW_CART_URL);
+      return response.data;
+    } catch (err) {
+      console.error("Помилка при отриманні даних:", err);
+      return null;
+    }
+  }
+
+  async function getFavoritesFromServer() {
+    try {
+      const response = await axios.get(GET_FAVORITES);
+      console.log(response.data.favorites);
       return response.data;
     } catch (err) {
       console.error("Помилка при отриманні даних:", err);
@@ -60,6 +71,28 @@ export function Icons({
   }
 
 
+  async function checkFavoritesFromServer() {
+    try {
+      const cartData = await getFavoritesFromServer();
+      
+      if (cartData && Array.isArray(cartData.favorites)) {
+        const updatedFavorites = [...cartData.favorites, product];
+  
+        const updatedCustomer = {
+          favorites: updatedFavorites,
+        };
+        
+        axios
+          .put("http://localhost:4000/api/customers", updatedCustomer)
+          .then((response) => console.log(response));
+      }
+    } catch (error) {
+      console.error("Помилка при виході:", error);
+    }
+  }
+    
+
+
   const handleAddToCart = () => {
     let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
     
@@ -79,14 +112,16 @@ export function Icons({
   };
 
   const handleAddFavorites = () => {
-    let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
+    // let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
     
     if (!isItemInFavorites) {
       const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
       currentProducts.push(product);
-      countProducts += 1;
+      // countProducts += 1;
       localStorage.setItem("Favorites", JSON.stringify(currentProducts));
-      localStorage.setItem("CountFavoritesProducts", JSON.stringify(countProducts));
+      // localStorage.setItem("CountFavoritesProducts", JSON.stringify(countProducts));
+
+      checkFavoritesFromServer();
       
       dispatch(addFavorites(product));
       dispatch(counterIncrement());

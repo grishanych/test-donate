@@ -16,7 +16,7 @@ import { logIn } from "../redux/actions/loggedInActions";
 import { setProducts } from "../redux/actions/productActions";
 import ScrollToTop from "./ScrollToTop";
 import { FormButton } from "./button/Button";
-import { NEW_CART_URL } from "../endpoints/endpoints";
+import { NEW_CART_URL, GET_FAVORITES } from "../endpoints/endpoints";
 import AppArrow from "../images/appArrow/AppArrow";
 import styles from "./App.module.scss";
 
@@ -30,7 +30,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-  console.log(isLoggedIn);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -55,62 +54,7 @@ function App() {
     // }
   }, [dispatch]);
 
-  // ! var 1
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const cartData = await getCartFromServer();
-  //     if (cartData !== null) {
-  //       dispatch(initializeCart(cartData.products));
-  //     }
-  //   };
 
-  //   fetchData();
-  // }, [dispatch, getCartFromServer]);
-
-  // async function getCartFromServer() {
-  //   if (isLoggedIn) {
-  //     try {
-  //       const response = await axios.get(NEW_CART_URL);
-  //       return response.data;
-  //     } catch (err) {
-  //       console.error("Помилка при отриманні даних:", err);
-  //       return null;
-  //     }
-  //   } else {
-  //     console.log("Користувач не авторизований");
-  //     return null;
-  //   }
-  // }
-
-  // ! var 2
-  // useEffect(() => {
-  //   const getCartFromServer = async () => {
-  //     if (isLoggedIn) {
-  //       try {
-  //         const response = await axios.get(NEW_CART_URL);
-  //         return response.data;
-  //       } catch (err) {
-  //         console.error("Помилка при отриманні даних:", err);
-  //         return null;
-  //       }
-  //     } else {
-  //       // ! ?
-  //       console.log("Користувач не авторизований");
-  //       return null;
-  //     }
-  //   };
-    
-  //   const fetchData = async () => {
-  //     const cartData = await getCartFromServer();
-  //     if (cartData !== null) {
-  //       dispatch(initializeCart(cartData.products));
-  //     }
-  //   };
-  
-  //   fetchData();
-  // }, [dispatch, isLoggedIn]);
-
-  // ! var 3
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -138,13 +82,36 @@ function App() {
       const cartData = await getCartFromServer();
       if (cartData !== null && Array.isArray(cartData.products)) {
         const productArray = cartData.products.map((item) => item.product);
-        console.log(productArray);
         dispatch(initializeCart(productArray));
       }
     };
+
+    const getFavoritesFromServer = async () => {
+      if (isLoggedIn) {
+        try {
+          const response = await axios.get(GET_FAVORITES);
+          return response.data;
+        } catch (err) {
+          console.error("Помилка при отриманні обраних товарів:", err);
+          return null;
+        }
+      } else {
+        console.log("Користувач не авторизований");
+        return null;
+      }
+    };
+    
+    const fetchFavoritesData = async () => {
+      const favoritesData = await getFavoritesFromServer();
+      if (favoritesData !== null && Array.isArray(favoritesData.favorites)) {
+        dispatch(initializeFavorites(favoritesData.favorites));
+      }
+    };
+    
     
     if (isLoggedIn) {
       fetchData();
+      fetchFavoritesData();
     }
   }, [dispatch, isLoggedIn]);
 
@@ -176,6 +143,20 @@ function App() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // useEffect(() => {
+  //   const handleBeforeUnload = async () => {
+  //     if (isLoggedIn) {
+  //       await logOut();
+  //     }
+  //   };
+
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [isLoggedIn]);
 
   
   return (
