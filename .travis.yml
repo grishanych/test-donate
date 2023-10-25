@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "stable"
+  - "18.13.0"
 notifications:
   email: false
 
@@ -8,13 +8,25 @@ cache:
   directories:
   - node_modules
 
-script:
-  npm run build
+install:
+  - npm install
 
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github-token: $GITHUB_TOKEN
-  local_dir: build
-  on:
-    branch: develop
+before_script:
+  - npm run lint
+  - npm run stylelint-fix-sass
+
+script:
+  - npm start
+  # - npm test
+
+after_success:
+  - npm run build  # Збірка продакшен версії додатку
+
+branches:
+  only:
+    - main
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
