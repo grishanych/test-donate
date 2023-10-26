@@ -8,10 +8,11 @@ import Heart from "./icons/heart/Heart";
 import BasketFull from "./icons/basket/BasketFull";
 import HeartFull from "./icons/heart/HeartFull";
 import styles from "./Card.module.scss";
+import ModalSetTimeOut from "../modalSetTimeout/modalSetTimeOut";
 
 
 export function Icons({
-  itemNo, category, handleAddFavorites, handleAddToCart,
+  itemNo, category, handleAddFavorites, handleAddToCart, isModalVisible, isModalVisibleTwo,
 }) {
   // eslint-disable-next-line max-len
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === itemNo));
@@ -26,11 +27,13 @@ export function Icons({
     <div className={styles.cardItemIconsWrapper}>
       {showBasketIcon && (
         <div className={styles.cardItemIconWrapper} onClick={handleAddToCart}>
+          {isModalVisible && <ModalSetTimeOut message="Товар добавлено до обраного" />}
           {isItemInCart ? <BasketFull /> : <Basket />}
         </div>
       )}
       {showHeartIcon && (
         <div className={styles.cardItemIconWrapper} onClick={handleAddFavorites}>
+          {isModalVisibleTwo && <ModalSetTimeOut message="Товар добавлено до кошика" />}
           {isItemInFavorites ? <HeartFull /> : <Heart />}
         </div>
       )}

@@ -1,6 +1,5 @@
 import DocumentTitle from "./DocumentTitle";
 
-
 function Blog() {
   return (
     <>

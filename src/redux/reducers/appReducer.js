@@ -6,6 +6,7 @@ import inputReducer from "./inputReducer";
 import { authReducer } from "./authReducer";
 import errorReducer from "./errorReducer";
 import { userReducer } from "./userReducer";
+import modalReducer from "./modalReducer";
 
 const appReducer = combineReducers({
   cart: cartReducer,
@@ -16,6 +17,7 @@ const appReducer = combineReducers({
   auth: authReducer,
   showError: errorReducer,
   username: userReducer,
+  modal: modalReducer,
 });
 
 export default appReducer;

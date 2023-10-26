@@ -7,7 +7,8 @@ import CartItem from "./CartItem";
 import { FormButton } from "../../button/Button";
 import { NEW_CART_URL, MAKE_ORDERS } from "../../../endpoints/endpoints";
 import styles from "./Cart.module.scss";
-
+import { openModal } from "../../../redux/actionsCreators/modalActionsCreators";
+import Modal from "../../modal/Modal";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ function Cart() {
   const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, "0")}${currentDate.getDate().toString().padStart(2, "0")}`;
   const orderNumber = `52-${formattedDate}`;
 
+  // const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+  const isModalOpen = useSelector((state) => state.modal.isOpen);
 
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("Cart"));
@@ -24,6 +27,14 @@ function Cart() {
     }
   }, [cartItems.length, dispatch]);
   const isCartEmpty = cartItems.length === 0;
+  let modalText = " ";
+  if (!isCartEmpty) {
+    modalText = "Ви успішно замовили товар! Дякуємо за вашу покупку. Незабаром ми з вами зв'яжемось для підтвердження деталей доставки та оплати. Гарного дня!";
+  }
+  // else {
+  //   modalText = "Здається, ви забули вибрати товар для покупки.
+  // Будь ласка, оберіть товар, який вас цікавить, і натисніть 'Купити'.";
+  // }
 
   // ! api
   async function getCartFromServer() {
@@ -37,12 +48,12 @@ function Cart() {
   }
 
   const handlePurchase = async () => {
+    dispatch(openModal());
     try {
       const cartData = await getCartFromServer();
       console.log(cartData);
       if (cartData !== null) {
         const { email, telephone, _id: customerId } = cartData.customerId;
-        
         const newOrder = {
           customerId,
           canceled: false,
@@ -51,7 +62,7 @@ function Cart() {
           letterSubject: "Дякуємо за покупку та весок на підтримку ЗСУ!",
           letterHtml: `<h1>Ваше замовлення прийнято. Номер замовлення - ${orderNumber}.</h1><p>Ми переможемо!</p>`,
         };
-        
+
         axios
           .post(MAKE_ORDERS, newOrder)
           .then((response) => {
@@ -80,7 +91,6 @@ function Cart() {
     }
   };
 
-  
   return (
     <div className={styles.cardsSectionWrapper}>
       <h1 className={styles.cardsSectionHeadline}>Кошик</h1>
@@ -99,6 +109,9 @@ function Cart() {
           </ul>
         )}
 
+      {isModalOpen && (
+        <Modal tittle={modalText} />
+      )}
       <FormButton text="Купити" padding="10px" onClick={handlePurchase} />
     </div>
   );

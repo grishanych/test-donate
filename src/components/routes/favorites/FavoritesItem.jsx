@@ -7,6 +7,7 @@ import { GET_FAVORITES } from "../../../endpoints/endpoints";
 import QuantityCounter from "../../productView/CounterQuantity";
 import styles from "./Favorites.module.scss";
 
+
 function FavoritesItem({ item }) {
   const dispatch = useDispatch();
   // eslint-disable-next-line max-len
@@ -45,7 +46,6 @@ function FavoritesItem({ item }) {
       console.error("Помилка при виході:", error);
     }
   }
-
 
 
   const handleRemoveFromFavorites = () => {

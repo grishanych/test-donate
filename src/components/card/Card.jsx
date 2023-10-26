@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
+import React, { useState } from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +20,9 @@ export function Card({
   const dispatch = useDispatch();
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === itemNo));
   const isItemInFavorites = useSelector((state) => state.favorites.items.some((favItem) => favItem.itemNo === itemNo));
-
+  
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisibleTwo, setIsModalVisibleTwo] = useState(false);
 
   // for working with Cloudinary
   const cld = new Cloudinary({
@@ -113,6 +116,16 @@ export function Card({
 
       dispatch(addToCart(product));
       dispatch(counterIncrement());
+      setIsModalVisible(true);
+      setIsModalVisibleTwo(true);
+
+      setTimeout(() => {
+        setIsModalVisibleTwo(false);
+      }, 1000);
+
+      setTimeout(() => {
+        setIsModalVisible(false);
+      }, 1000);
     }
   };
 
@@ -126,9 +139,18 @@ export function Card({
       
       dispatch(addFavorites(product));
       dispatch(counterIncrement());
+      setIsModalVisible(true);
+      setIsModalVisibleTwo(true);
+
+      setTimeout(() => {
+        setIsModalVisibleTwo(false);
+      }, 1000);
+
+      setTimeout(() => {
+        setIsModalVisible(false);
+      }, 1000);
     }
   };
-
 
 
   return (
@@ -176,7 +198,7 @@ export function Card({
                 : null}
         </div>
       </Link>
-      <Icons imageURL={imageURL} itemNo={itemNo} name={name} price={price} id={id} quantity={1} category={category} handleAddFavorites={handleAddFavorites} handleAddToCart={handleAddToCart} />
+      <Icons imageURL={imageURL} itemNo={itemNo} name={name} price={price} id={id} quantity={1} category={category} handleAddFavorites={handleAddFavorites} handleAddToCart={handleAddToCart} isModalVisible={isModalVisible} isModalVisibleTwo={isModalVisibleTwo} />
       <div className={styles.cardItemDecor} />
     </li>
   );
