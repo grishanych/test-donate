@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { initializeCart } from "../../../redux/actions/cartActions";
+import { initializeCart, resetCart } from "../../../redux/actions/cartActions";
+// import { initializeCart } from "../../../redux/actions/cartActions";
 import CartItem from "./CartItem";
 import { FormButton } from "../../button/Button";
 import { NEW_CART_URL, MAKE_ORDERS } from "../../../endpoints/endpoints";
@@ -11,8 +12,10 @@ import styles from "./Cart.module.scss";
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems);
-  // const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, "0")}${currentDate.getDate().toString().padStart(2, "0")}`;
+  const orderNumber = `52-${formattedDate}`;
+
 
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("Cart"));
@@ -21,19 +24,6 @@ function Cart() {
     }
   }, [cartItems.length, dispatch]);
   const isCartEmpty = cartItems.length === 0;
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const cartData = await getCartFromServer();
-  //     if (cartData !== null && !cartItems.length) {
-  //       dispatch(initializeCart(cartData.products));
-  //     }
-  //   };
-  
-  //   if (!cartItems.length) {
-  //     fetchData();
-  //   }
-  // }, [cartItems.length, dispatch]);
 
   // ! api
   async function getCartFromServer() {
@@ -49,6 +39,7 @@ function Cart() {
   const handlePurchase = async () => {
     try {
       const cartData = await getCartFromServer();
+      console.log(cartData);
       if (cartData !== null) {
         const { email, telephone, _id: customerId } = cartData.customerId;
         
@@ -57,14 +48,26 @@ function Cart() {
           canceled: false,
           email,
           mobile: telephone,
-          letterSubject: "Thank you for order! You are welcome!",
-          letterHtml: "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>",
+          letterSubject: "Дякуємо за покупку та весок на підтримку ЗСУ!",
+          letterHtml: `<h1>Ваше замовлення прийнято. Номер замовлення - ${orderNumber}.</h1><p>Ми переможемо!</p>`,
         };
         
         axios
           .post(MAKE_ORDERS, newOrder)
           .then((response) => {
             console.log(response);
+
+            axios
+              .delete("http://localhost:4000/api/cart")
+              .then((result) => {
+                console.log(result);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+            dispatch(resetCart());
+            localStorage.removeItem("Cart");
+            localStorage.removeItem("CountCartProducts");
           })
           .catch((err) => {
             console.log(err);
@@ -89,7 +92,7 @@ function Cart() {
             {cartItems.map((item) => (
               <CartItem
                 // eslint-disable-next-line no-underscore-dangle
-                key={item._id}
+                key={item._id ? item._id : item.id}
                 item={item}
               />
             ))}

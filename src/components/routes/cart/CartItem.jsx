@@ -33,36 +33,18 @@ function CartItem({ item }) {
     }
   }
 
-  // async function deleteCartFromServer() {
-  //   try {
-  //     const cartData = await getCartFromServer();
-  //     if (cartData !== null) {
-  //       axios
-  //         // eslint-disable-next-line no-underscore-dangle
-  //         .put(`http://localhost:4000/api/cart/${item._id}`)
-  //         .then((updatedCart) => {
-  //           console.log(updatedCart);
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     }
-  //   } catch (error) {
-  //     console.error("Помилка при виході:", error);
-  //   }
-  // }
 
   // eslint-disable-next-line no-underscore-dangle
-  console.log(item._id);
   function deleteCartFromServer() {
     const cartData = getCartFromServer();
     if (cartData !== null) {
+      // eslint-disable-next-line no-underscore-dangle
+      const idToDelete = item._id ? item._id : item.id;
       axios
-        // eslint-disable-next-line no-underscore-dangle
-        .delete(`http://localhost:4000/api/cart/${item._id}`)
-        .then((updatedCart) => {
-          console.log(updatedCart);
-        })
+        .delete(`http://localhost:4000/api/cart/${idToDelete}`)
+        // .then((updatedCart) => {
+        //   console.log(updatedCart);
+        // })
         .catch((err) => {
           console.log(err);
         });

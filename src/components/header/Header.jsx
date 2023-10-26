@@ -21,6 +21,7 @@ import styles from "./Header.module.scss";
 function Header() {
   const cartCount = useSelector((state) => state.cart.itemCount);
   const favoriteCount = useSelector((state) => state.favorites.itemCount);
+  const isUserLoggedIn = localStorage.getItem("userLogin") || null;
 
   const isLoggedInFromRedux = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ function Header() {
       }
   
       localStorage.removeItem("userLogin");
+      localStorage.removeItem("isAdmin");
       localStorage.removeItem("CountCartProducts");
       localStorage.removeItem("Cart");
       localStorage.removeItem("token");
@@ -75,8 +77,6 @@ function Header() {
       dispatch(resetCart());
       dispatch(resetFavorites());
       dispatch(logOut());
-  
-      console.log("Out");
     } catch (error) {
       console.error("Помилка при виході:", error);
     }
@@ -107,22 +107,24 @@ function Header() {
         {showBurgerMenu && <BurgerMenu />}
         <Navigation />
 
-        <Link to="/favorites">
-          <HeartFavorite />
-        </Link>
+        {isUserLoggedIn ? (
+          <>
+            <Link to="/favorites">
+              <HeartFavorite />
+            </Link>
+            {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
+            <div className={styles.navRightSideMenu}>
+              <Link to="/cart">
+                <Cart />
+              </Link>
+              {cartCount === 0 ? null : <span>{cartCount}</span>}
+            </div>
+          </>
+        ) : null}
 
-        {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
-                
-        <div className={styles.navRightSideMenu}>
-          <Link to="/cart">
-            <Cart />
-          </Link>
-          {cartCount === 0 ? null : <span>{cartCount}</span>}
-
-          <Button toPage={isLoggedInFromRedux ? "/" : "/log-in"} width="40px" padding="10px" onClick={isLoggedInFromRedux ? doLogOut : null}>
-            {isLoggedInFromRedux ? <IconOut /> : <IconEnter /> }
-          </Button>
-        </div>
+        <Button toPage={isLoggedInFromRedux ? "/" : "/log-in"} width="40px" padding="10px" onClick={isLoggedInFromRedux ? doLogOut : null}>
+          {isLoggedInFromRedux ? <IconOut /> : <IconEnter /> }
+        </Button>
       </div>
     </header>
   );

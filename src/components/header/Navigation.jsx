@@ -8,6 +8,7 @@ import styles from "./Header.module.scss";
 function Navigation() {
   const { isLinkVisible } = useContext(Context);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const isUserLoggedIn = localStorage.getItem("userLogin") || null;
 
   const style = {
     display: isLinkVisible ? "flex" : "none",
@@ -51,8 +52,7 @@ function Navigation() {
             )}
           </div>
           <ActiveLink label="новини" to="/blog" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} />
-          {/* <ActiveLink label="кабінет" to="/account" onClick={() =>
-            setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} /> */}
+          { isUserLoggedIn ? <ActiveLink label="кабінет" to="/account" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} /> : null }
         </ul>
       </nav>
             

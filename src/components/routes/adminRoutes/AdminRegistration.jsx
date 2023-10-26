@@ -6,7 +6,7 @@ function AdminRegistration() {
   return (
     <>
       <DocumentTitle title="Реєстрація адміністратора" />
-      <Registration headline="Реєстрація адміністратора" to="/adm-page" isAdmin />
+      <Registration headline="Реєстрація адміністратора" to="/admin" isAdmin />
     </>
   );
 }

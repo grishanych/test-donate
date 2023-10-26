@@ -15,7 +15,6 @@ function FavoritesItem({ item }) {
   async function getFavoritesFromServer() {
     try {
       const response = await axios.get(GET_FAVORITES);
-      console.log(response.data.favorites);
       return response.data;
     } catch (err) {
       console.error("Помилка при отриманні даних:", err);
@@ -39,7 +38,7 @@ function FavoritesItem({ item }) {
         
         axios
           .put("http://localhost:4000/api/customers", updatedCustomer)
-          .then((response) => console.log(response))
+          // .then((response) => console.log(response))
           .catch((error) => console.error("Помилка при оновленні даних:", error));
       }
     } catch (error) {
@@ -47,36 +46,6 @@ function FavoritesItem({ item }) {
     }
   }
 
-  // async function deleteFavoritesFromServer() {
-  //   try {
-  //     const cartData = await getFavoritesFromServer();
-      
-  //     if (cartData && cartData.favorites && Array.isArray(cartData.favorites.items)) {
-  //       let updatedFavoritesItems = [];
-        
-  //       if (cartData.favorites.items.length > 1) {
-  // eslint-disable-next-line max-len
-  //         updatedFavoritesItems = cartData.favorites.items.filter((favItem) => favItem.itemNo !== item.itemNo);
-  //       } // if only one item is left, updatedFavoritesItems remains an empty array
-  
-  //       const updatedCustomer = {
-  //         favorites: {
-  //           items: updatedFavoritesItems,
-  //         },
-  //       };
-        
-  //       console.log(updatedCustomer);
-        
-  //       axios
-  //         .put("http://localhost:4000/api/customers", updatedCustomer)
-  //         .then((response) => console.log(response))
-  //         .catch((error) => console.error("Помилка при оновленні даних:", error));
-  //     }
-  //   } catch (error) {
-  //     console.error("Помилка при виході:", error);
-  //   }
-  // }
-  
 
 
   const handleRemoveFromFavorites = () => {

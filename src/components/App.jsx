@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
-// ! var 2
-// import { useDispatch, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import AppRoutes from "./routes/AppRoutes";
 import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
@@ -29,8 +27,6 @@ function App() {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     
@@ -41,7 +37,6 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    // if (isLoggedIn) {
     const storedCartItems = JSON.parse(localStorage.getItem("Cart")) || [];
     const storedFavoriteItems = JSON.parse(localStorage.getItem("Favorites")) || [];
       
@@ -51,7 +46,6 @@ function App() {
     if (storedFavoriteItems.length > 0) {
       dispatch(initializeFavorites(storedFavoriteItems));
     }
-    // }
   }, [dispatch]);
 
 
@@ -119,7 +113,6 @@ function App() {
   useEffect(() => {
     getProducts()
       .then((data) => {
-        console.log(data);
         dispatch(setProducts(data));
       })
       .catch((error) => {
@@ -144,19 +137,6 @@ function App() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const handleBeforeUnload = async () => {
-  //     if (isLoggedIn) {
-  //       await logOut();
-  //     }
-  //   };
-
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, [isLoggedIn]);
 
   
   return (

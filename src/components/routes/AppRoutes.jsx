@@ -21,6 +21,10 @@ import Returns from "./Returns";
 import PrivacyPolicy from "./PrivacyPolicy";
 import ProductPage from "./ProductPage";
 import SearchProducts from "./searchProducts/SearchProducts";
+import { withAuth } from "./withAuth";
+
+const ProtectedComponentForCustomer = withAuth(CustomerPage, "/log-in", false, true);
+const ProtectedComponentForAdmin = withAuth(AdminPage, "/admin", true);
 
 
 function AppRoutes() {
@@ -42,9 +46,9 @@ function AppRoutes() {
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/product/:itemNo" element={<ProductPage />} />
       <Route path="/log-in" element={<CustomerLogIn />} />
-      <Route path="/account" element={<CustomerPage />} />
+      <Route path="/account" element={<ProtectedComponentForCustomer />} />
       <Route path="/admin" element={<AdminLogIn />} />
-      <Route path="/adm-page" element={<AdminPage />} />
+      <Route path="/adm-page" element={<ProtectedComponentForAdmin />} />
       <Route path="/registration" element={<CustomerRegistration />} />
       <Route path="/adm-registration" element={<AdminRegistration />} />
       <Route path="/products-search" element={<SearchProducts />} />
