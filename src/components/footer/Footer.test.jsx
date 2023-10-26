@@ -7,6 +7,6 @@ describe('should the Footer', () =>{
         render (<Footer />)
 
         const footer = screen.getByTestId('footer-svg-test');
-        expect(footer.getAttribute('data-testid')).toBe('footer-svg-test');
-    });
+  expect(footer.getAttribute('data-testid')).toBe('footer-svg-test');
+});
 });
