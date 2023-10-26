@@ -35,7 +35,7 @@ jobs:
           node-version: 20.9.0
 
       - name: Install dependencies
-        run: npm install --prefix donate-final-project
+        run: npm install
 
       - name: Run build
-        run: npm run build --prefix donate-final-project
+        run: npm run build
