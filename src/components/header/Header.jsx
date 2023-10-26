@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
-import logo from "../../images/header/logo.png";
 import Cart from "./icons/cart/IconCart";
 import IconEnter from "./icons/enter/IconEnter";
 import IconOut from "./icons/enter/IconOut";
@@ -16,9 +15,6 @@ import { IconSearchMobile } from "./icons/search/IconSearch";
 import HeartFavorite from "./icons/favorites/Heart";
 import BurgerMenu from "./BurgerMenu";
 import { REGISTRATION_URL } from "../../endpoints/endpoints";
-// import { NEW_CART_URL, REGISTRATION_URL } from "../../endpoints/endpoints";
-// import sendCart from "../../api/sendCart";
-// import updateCart from "../../api/updateCart";
 import styles from "./Header.module.scss";
 
 
@@ -26,7 +22,6 @@ function Header() {
   const cartCount = useSelector((state) => state.cart.itemCount);
   const favoriteCount = useSelector((state) => state.favorites.itemCount);
 
-  // const isLogIn = useSelector((state) => state.auth.isLoggedIn);
   const isLoggedInFromRedux = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
@@ -50,31 +45,6 @@ function Header() {
     }
   };
 
-  // async function doLogOut() {
-  //   localStorage.removeItem("userLogin");
-  //   localStorage.removeItem("CountCartProducts");
-  //   localStorage.removeItem("Cart");
-  //   localStorage.removeItem("CountFavoritesProducts");
-  //   localStorage.removeItem("token");
-  //   localStorage.removeItem("Favorites");
-    
-  //   dispatch(resetCart());
-  //   dispatch(resetFavorites());
-  //   dispatch(logOut());
-    
-  //   console.log("Out");
-  // }
-
-  // async function getCartFromServer() {
-  //   try {
-  //     const response = await axios.get(NEW_CART_URL);
-  //     return response.data;
-  //   } catch (err) {
-  //     console.error("Помилка при отриманні даних:", err);
-  //     return null;
-  //   }
-  // }
-
   async function updateFavoritesToServer(newFavorites) {
     const updatedCustomer = {
       favorites: newFavorites,
@@ -96,18 +66,9 @@ function Header() {
         await updateFavoritesToServer(currentFavorites);
       }
   
-      // const cartData = await getCartFromServer();
-      // if (cartData === null) {
-      //   sendCart();
-      // } else if (cartData !== null) {
-      //   updateCart();
-      // }
-    
-      // Видалити всі локальні дані
       localStorage.removeItem("userLogin");
       localStorage.removeItem("CountCartProducts");
       localStorage.removeItem("Cart");
-      // localStorage.removeItem("CountFavoritesProducts");
       localStorage.removeItem("token");
       localStorage.removeItem("Favorites");
   
@@ -138,11 +99,10 @@ function Header() {
         )}
 
         {isMobileScreen
-                    && <BurgerMenu toggleBar={toggleBar} />}
+          && <BurgerMenu toggleBar={toggleBar} />}
       </div>
          
       <div className={styles.headerLaptop}>
-        <Link to="/" className={styles.logo}><img src={logo} alt="alt" width={70} height={70} /></Link>
 
         {showBurgerMenu && <BurgerMenu />}
         <Navigation />
@@ -159,7 +119,7 @@ function Header() {
           </Link>
           {cartCount === 0 ? null : <span>{cartCount}</span>}
 
-          <Button toPage={isLoggedInFromRedux ? "/" : "/log-in"} width="56px" onClick={isLoggedInFromRedux ? doLogOut : null}>
+          <Button toPage={isLoggedInFromRedux ? "/" : "/log-in"} width="40px" padding="10px" onClick={isLoggedInFromRedux ? doLogOut : null}>
             {isLoggedInFromRedux ? <IconOut /> : <IconEnter /> }
           </Button>
         </div>

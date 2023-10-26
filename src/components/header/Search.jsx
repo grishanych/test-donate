@@ -46,11 +46,16 @@ function SearchInHeader() {
   return (
     <div className={styles.hiddenSearchMenu}>
       {isLinkVisible ? (
-        <a href="#1" onClick={handleClick}>
-          <div className={styles.iconSearch}>
-            <IconSearch />
-          </div>
-        </a>
+        <div
+          className={styles.iconSearch}
+          onClick={handleClick}
+          onKeyDown={handleClick}
+          role="button"
+          tabIndex={0}
+        >
+          <IconSearch />
+        </div>
+
       ) : (
         <div className={styles.searching}>
           {inputVisible && (
@@ -74,10 +79,10 @@ function SearchInHeader() {
             <Button
               onClick={handleInputDoubleClick}
               className={`${styles.searchBtn} ${styles.closeSearchBtn}`}
-              width="60px"
+              width="40px"
               jc="center"
               ala="center"
-              padding="20px"
+              padding="10px"
             >
               <span style={crossStyle}>
                 &#x2715;
