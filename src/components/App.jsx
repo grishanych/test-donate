@@ -17,6 +17,7 @@ import styles from "./App.module.scss";
 
 
 
+
 function App() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
   // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -86,7 +87,6 @@ function App() {
             <AppRoutes />
           </Main>
           <Footer />
-
           {isVisible && (
           <FormButton padding="6px 0px" width="50px" onClick={scrollToTop} className={styles.scrollToTopButton}>
             <AppArrow />

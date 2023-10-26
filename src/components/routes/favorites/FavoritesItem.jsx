@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
 import { removeFavorites } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
 import Button from "../../button/Button";
 import QuantityCounter from "../../productView/CounterQuantity";
 import styles from "./Favorites.module.scss";
 
+
 function FavoritesItem({ item }) {
   const dispatch = useDispatch();
   // eslint-disable-next-line max-len
   const isItemInFavorites = useSelector((state) => state.favorites.items.some((cartItem) => cartItem.itemNo === item.itemNo));
-
   const handleRemoveFromFavorites = () => {
     if (isItemInFavorites) {
       let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
