@@ -8,7 +8,7 @@ import { FormButton } from "../../button/Button";
 import { NEW_CART_URL, MAKE_ORDERS } from "../../../endpoints/endpoints";
 import styles from "./Cart.module.scss";
 import { openModal } from "../../../redux/actionsCreators/modalActionsCreators";
-import Modal from "../../modal/Modal";
+// import Modal from "../../modal/Modal";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function Cart() {
   const orderNumber = `52-${formattedDate}`;
 
   // const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-  const isModalOpen = useSelector((state) => state.modal.isOpen);
+  // const isModalOpen = useSelector((state) => state.modal.isOpen);
 
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("Cart"));
@@ -26,11 +26,13 @@ function Cart() {
       dispatch(initializeCart(localData));
     }
   }, [cartItems.length, dispatch]);
+
   const isCartEmpty = cartItems.length === 0;
-  let modalText = " ";
-  if (!isCartEmpty) {
-    modalText = "Ви успішно замовили товар! Дякуємо за вашу покупку. Незабаром ми з вами зв'яжемось для підтвердження деталей доставки та оплати. Гарного дня!";
-  }
+  // let modalText = " ";
+  // if (!isCartEmpty) {
+  //   modalText = "Ви успішно замовили товар! Дякуємо за вашу покупку.
+  // Незабаром ми з вами зв'яжемось для підтвердження деталей доставки та оплати. Гарного дня!";
+  // }
   // else {
   //   modalText = "Здається, ви забули вибрати товар для покупки.
   // Будь ласка, оберіть товар, який вас цікавить, і натисніть 'Купити'.";
@@ -109,9 +111,9 @@ function Cart() {
           </ul>
         )}
 
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <Modal tittle={modalText} />
-      )}
+      )} */}
       <FormButton text="Купити" padding="10px" onClick={handlePurchase} />
     </div>
   );
