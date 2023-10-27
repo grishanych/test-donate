@@ -35,7 +35,7 @@ export default function FilteredCardList({ property, value, priceRange }) {
             (Array.isArray(value) && value.includes(item[property]))
             || (item[property] === value)
           ) {
-            const price = item.price ?? 0;
+            const price = item.currentPrice ?? 0;
             if (price >= priceLow && price <= priceHigh) {
               newData.push(item);
             }

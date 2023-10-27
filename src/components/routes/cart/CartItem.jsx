@@ -1,17 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
 // import { Cloudinary } from "@cloudinary/url-gen";
 import axios from "axios";
 import { removeFromCart } from "../../../redux/actions/cartActions";
-=======
-import React from "react";
-import { removeFromCart, updateCartProduct } from "../../../redux/actions/cartActions";
->>>>>>> content-page-updated
+// import { removeFromCart, updateCartProduct } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
 import Button from "../../button/Button";
 import { NEW_CART_URL } from "../../../endpoints/endpoints";
-import QuantityCounter from "../../productView/CounterQuantity";
+// import QuantityCounter from "../../productView/CounterQuantity";
 import styles from "./Cart.module.scss";
 import DeleteIcon from "./DeleteIcon";
 
@@ -19,7 +15,6 @@ import DeleteIcon from "./DeleteIcon";
 function CartItem({ item }) {
   const dispatch = useDispatch();
   // eslint-disable-next-line max-len
-<<<<<<< HEAD
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === item.itemNo));
 
   // console.log(item);
@@ -58,15 +53,15 @@ function CartItem({ item }) {
     }
   }
 
-=======
-  const itemInCart = useSelector((state) => state.cart.items.find((cartItem) => cartItem.itemNo === item.itemNo));
+  // const itemInCart = useSelector(
+  //   (state) => state.cart.items.find((cartItem) => cartItem.itemNo === item.itemNo),
+  // );
   
->>>>>>> content-page-updated
   const handleRemoveFromCart = () => {
-    if (itemInCart) {
-      let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
-      countProducts -= 1;
-      localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
+    if (isItemInCart) {
+      // let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
+      // countProducts -= 1;
+      // localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
       
       const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
       const newProducts = currentProducts.filter((cartItem) => cartItem.itemNo !== item.itemNo);
@@ -79,26 +74,24 @@ function CartItem({ item }) {
     }
   };
 
-  const handleChangeQuantity = (quantity) => {
-    dispatch(updateCartProduct({ quantity, itemNo: item.itemNo }));
-    const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+  // const handleChangeQuantity = (quantity) => {
+  //   dispatch(updateCartProduct({ quantity, itemNo: item.itemNo }));
+  //   const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
 
-    localStorage.setItem("Cart", JSON.stringify(currentProducts.map((product) => {
-      if (product.itemNo === item.itemNo) {
-        return { ...product, quantity };
-      }
+  //   localStorage.setItem("Cart", JSON.stringify(currentProducts.map((product) => {
+  //     if (product.itemNo === item.itemNo) {
+  //       return { ...product, quantity };
+  //     }
 
-      return product;
-    })));
-  };
+  //     return product;
+  //   })));
+  // };
   
   return (
-<<<<<<< HEAD
-    <li key={item.id} className={styles.cardItemWrapper}>
-      <Link to={`/product/${item.itemNo}`}>
-        <div className={styles.cardItemImageWrapper}>
-          <img alt={item.name} className={styles.cardItemImage} />
-=======
+  // <li key={item.id} className={styles.cardItemWrapper}>
+  //   <Link to={`/product/${item.itemNo}`}>
+  //     <div className={styles.cardItemImageWrapper}>
+  //       <img alt={item.name} className={styles.cardItemImage} />
 
     <tbody className={styles.cardItemWrapper}>
       <div className={styles.productInfo}>
@@ -114,7 +107,6 @@ function CartItem({ item }) {
             {" "}
             {item.itemNo}
           </p>
->>>>>>> content-page-updated
         </div>
       </div>
 
@@ -123,21 +115,20 @@ function CartItem({ item }) {
         {" "}
         грн
       </p>
-<<<<<<< HEAD
-      <Button className={styles.buttonDelete} onClick={handleRemoveFromCart} text="Видалити" />
-    </li>
-=======
-      <div className={styles.quantityCounterWrapper}>
+      <Button
+        className={styles.buttonDelete}
+        onClick={handleRemoveFromCart}
+        text="Видалити"
+      />
+      {/* {/* // </li> */}
+      {/* <div className={styles.quantityCounterWrapper}>
         <QuantityCounter quantity={itemInCart.quantity} setQuantity={handleChangeQuantity} />
-      </div>
+      </div> */}
 
       <Button style={{ backgroundColor: "none" }} onClick={() => handleRemoveFromCart()}>
         <DeleteIcon />
       </Button>
     </tbody>
-
-
->>>>>>> content-page-updated
   );
 }
 

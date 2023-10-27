@@ -40,10 +40,8 @@ function Favorites() {
 
       {isFavoriteEmpty ? <p className={styles.favoriteEmpty}>Ви ще не додали жодного товару</p>
         : (
-<<<<<<< HEAD
-          <ul className={styles.cardsListWrapper}>
-            {cartItems.map((item) => ( // І тут рендеримо використовуючи cartItems з Redux store
-=======
+          // <ul className={styles.cardsListWrapper}>
+          //   {cartItems.map((item) => ( // І тут рендеримо використовуючи cartItems з Redux store
           <table className={styles.cardsListWrapper}>
             <thead>
               <tr className={styles.tableRow}>
@@ -51,8 +49,8 @@ function Favorites() {
                 <th>Ціна</th>
               </tr>
             </thead>
-            {currentProducts.map((item) => (
->>>>>>> content-page-updated
+            {/* {currentProducts.map((item) => ( */}
+            {cartItems.map((item) => (
               <FavoritesItem
                 key={item.itemNo}
                 item={item}

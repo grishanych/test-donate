@@ -36,6 +36,9 @@
 }
 
 .buttonMobileHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 45px;
     height: 45px;
     background: linear-gradient(137deg, variables.$bgc-second -24.6%, variables.$bgc-main 100%);
@@ -321,7 +324,7 @@ input:focus {
         transform: translate(0px, 15px) rotate(-45deg);
         }
         .bar:nth-child(2) {
-            transform: translate(1px, 0px) rotate(45deg);
+            transform: translate(1px, 3px) rotate(45deg);
         }
         .bar:nth-child(3) {
         opacity: 0;
@@ -329,52 +332,51 @@ input:focus {
     }
 }
 
-// .toggleButtonClose {
-//     padding-top: 12px;
-// }
+.toggleButtonClose {
+    padding-top: 12px;
+}
 
-// .menuListWrapper {
-//     padding: 40px 15px 0px;
-//     position: fixed;
-//     z-index: 9;
-//     top: 0;
-//     left: 0;
-//     height: 100%;
-//     width: 0;
-//     overflow-x: hidden;
-//     transition: 0.5s;
-//     background-color: #fff;
-//   }
+.menuListWrapper {
+    padding: 40px 15px 0px;
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    background-color: #fff;
+  }
   
-// .menuListWrapper.open {
-//     width: 100%;
-// }
-
-// .menuList {
-//     position: fixed;
-//     top: 100px;
-//     left: 40%;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
+.menuListWrapper.open {
+    width: 100%;
+}
 
 .menuList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: 10%;
-    left: 0;
-    background-color: #fff;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    width: 150px;
-    border-radius: 4px;
-    display: none;
-    z-index: 10;
+    position: fixed;
+    top: 100px;
+    left: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+// .menuList {
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
+//     position: absolute;
+//     top: 10%;
+//     left: 0;
+//     background-color: #fff;
+//     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+//     width: 150px;
+//     border-radius: 4px;
+//     display: none;
+//     z-index: 10;
 }
 
 .menuItem {
-
     padding: 10px;
     text-decoration: none;
     color: #333;
@@ -392,9 +394,9 @@ input:focus {
 .iconsWrapper {
     width: 90px;
     position: fixed;
-    top: 270px;
+    top: 300px;
     left: 40%;
-    padding-top: 50px;
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
 }

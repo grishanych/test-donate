@@ -44,7 +44,7 @@ export function Icons({
 
 Icons.propTypes = {
   itemNo: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  // category: PropTypes.string.isRequired,
   handleAddFavorites: PropTypes.func.isRequired,
   handleAddToCart: PropTypes.func.isRequired,
 };

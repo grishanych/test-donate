@@ -1,18 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
 import axios from "axios";
-import { removeFavorites } from "../../../redux/actions/cartActions";
-import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
-import Button from "../../button/Button";
-import { GET_FAVORITES } from "../../../endpoints/endpoints";
-import QuantityCounter from "../../productView/CounterQuantity";
-=======
 import { Link } from "react-router-dom";
-import React from "react";
+import { GET_FAVORITES } from "../../../endpoints/endpoints";
+// import QuantityCounter from "../../productView/CounterQuantity";
 import { removeFavorites } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
 import Button from "../../button/Button";
->>>>>>> content-page-updated
 import styles from "./Favorites.module.scss";
 import DeleteIcon from "../cart/DeleteIcon";
 

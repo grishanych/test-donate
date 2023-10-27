@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import AboutUs from "./aboutUs/AboutUs";
+// import Cart from "./cart/Cart";
+// import Cart from "./cart/Cart";
 import Cart from "./cart/Cart";
 import Blog from "./blog/Blog";
 import Contacts from "./contacts/Contacts";

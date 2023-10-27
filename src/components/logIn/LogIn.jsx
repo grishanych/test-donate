@@ -74,9 +74,10 @@ function LogIn({ headline, toRegistration }) {
       }
       if (userFavotites.favorites && userFavotites.favorites.length > 0) {
         dispatch(initializeFavorites(userFavotites.favorites));
-      } else {
-        console.log("Масив порожній або невизначений");
       }
+      // else {
+      //   console.log("Масив порожній або невизначений");
+      // }
     
       if (userFavotites.isAdmin === false) {
         navigate("/account");

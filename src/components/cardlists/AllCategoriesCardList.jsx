@@ -29,7 +29,7 @@ export default function CategoriesCardList() {
 
     const newData = [];
     productsList.forEach((item) => {
-      const price = item.price ?? 0;
+      const price = item.currentPrice ?? 0;
       if (
         selectedValue === "donation" || selectedValue === "lots" || (price >= sliderValue[0] && price <= sliderValue[1])
       ) {

@@ -94,11 +94,6 @@ function Cart() {
     }
   };
 
-<<<<<<< HEAD
-=======
-  console.log(currentProducts);
-  
->>>>>>> content-page-updated
   return (
     <div className={styles.cardsSectionWrapper}>
       <h1 className={styles.cardsSectionHeadline}>Кошик</h1>
@@ -106,10 +101,8 @@ function Cart() {
 
       {isCartEmpty ? <p className={styles.cartEmpty}>Ваш кошик порожній</p>
         : (
-<<<<<<< HEAD
-          <ul className={styles.cardsListWrapper}>
-            {cartItems.map((item) => (
-=======
+          // <ul className={styles.cardsListWrapper}>
+          //   {cartItems.map((item) => (
           <table className={styles.cardsListWrapper}>
             <thead>
               <tr className={styles.tableRow}>
@@ -121,8 +114,9 @@ function Cart() {
                 </th>
               </tr>
             </thead>
-            {currentProducts.map((item) => (
->>>>>>> content-page-updated
+            {/* Sasha */}
+            {/* {currentProducts.map((item) => ( */}
+            {cartItems.map((item) => (
               <CartItem
                 // eslint-disable-next-line no-underscore-dangle
                 key={item._id ? item._id : item.id}
@@ -132,14 +126,11 @@ function Cart() {
           </table>
         )}
 
-<<<<<<< HEAD
       {/* {isModalOpen && (
         <Modal tittle={modalText} />
       )} */}
-      <FormButton text="Купити" padding="10px" onClick={handlePurchase} />
-=======
+      {/* // <FormButton text="Купити" padding="10px" onClick={handlePurchase} /> */}
       <FormButton text="Оформити замовлення" padding="10px" onClick={handlePurchase} />
->>>>>>> content-page-updated
     </div>
   );
 }

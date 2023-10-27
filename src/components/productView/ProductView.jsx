@@ -16,17 +16,12 @@ import Button from "../button/Button";
 import CountdownTimer from "./CountdownTimer";
 import DocumentTitle from "../routes/DocumentTitle";
 import styles from "./ProductView.module.scss";
-<<<<<<< HEAD
-import { openModal } from "../../redux/actionsCreators/modalActionsCreators";
+// import { openModal } from "../../redux/actionsCreators/modalActionsCreators";
 import Modal from "../modal/Modal";
-=======
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
 import heart from "./icons/heart/heart.svg";
 import heartFilled from "./icons/heart/heart-filled.svg";
-
-
->>>>>>> content-page-updated
 
 // ! replace
 function convertToImgUrl(nameCloudinary) {
@@ -52,11 +47,10 @@ function ProductView() {
   );
 
   // eslint-disable-next-line no-unused-vars
-<<<<<<< HEAD
-  const [progress, setProgress] = useState(15);
-  const [currentBid, setCurrentBid] = useState("");
+  // const [progress, setProgress] = useState(15);
+  // const [currentBid, setCurrentBid] = useState("");
   const isModalOpen = useSelector((state) => state.modal.isOpen);
-=======
+  // eslint-disable-next-line no-unused-vars
   const [progress, setProgress] = useState(27);
   const [currentBid, setCurrentBid] = useState(product?.initialPrice || "");
   const [newCurrentBid, setNewCurrentBid] = useState("");
@@ -65,8 +59,6 @@ function ProductView() {
   const [isInCart, setIsInCart] = useState(false);
   const [isButtonClicked, setButtonClicked] = useState(false);
 
-
->>>>>>> content-page-updated
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -272,22 +264,20 @@ function ProductView() {
 
             {["Взуття", "Комплекти форми", "Одяг верхній"].includes(product.category) && (
             <div className={styles.buyButtons}>
-<<<<<<< HEAD
-              <button
-                className={styles.buyNowBtn}
-                onClick={() => { dispatch(openModal()); }}
-              >
-                Миттєва купівля
-              </button>
-              {/* <Button */}
-              {/*    text="Додати в кошик" */}
-              {/*    color="rgba(70, 163, 88, 1)" */}
-              {/*    toPage="/" */}
-              {/* /> */}
-              <button className={styles.addToCartBtn}>Додати в кошик</button>
-              <button className={styles.addToFavorite}>
-                <img src={heart} alt="add to favorite" />
-=======
+              {/* // <button */}
+              {/* //   className={styles.buyNowBtn}
+              //   onClick={() => { dispatch(openModal()); }}
+              // >
+              //   Миттєва купівля
+              // </button> */}
+              {/* // <Button */}
+              {/* //    text="Додати в кошик"
+              // {/*    color="rgba(70, 163, 88, 1)" */}
+              {/* //    toPage="/" */}
+              {/* // /> */}
+              {/* // <button className={styles.addToCartBtn}>Додати в кошик</button> */}
+              {/* // <button className={styles.addToFavorite}> */}
+              {/* //   <img src={heart} alt="add to favorite" /> */}
               <Button
                 className={styles.addToCartBtn}
                 onClick={handleAddToCart}
@@ -300,7 +290,6 @@ function ProductView() {
                 ) : (
                   <img src={heart} alt="heartIcon" />
                 )}
->>>>>>> content-page-updated
               </button>
             </div>
             )}

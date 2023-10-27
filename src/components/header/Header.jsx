@@ -1,9 +1,10 @@
 /* eslint-disable react/button-has-type */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
+import { updateInputValue } from "../../redux/actionsCreators/inputValueActionsCreators";
 import Cart from "./icons/cart/IconCart";
 import IconEnter from "./icons/enter/IconEnter";
 import IconOut from "./icons/enter/IconOut";
@@ -30,7 +31,7 @@ function Header() {
   const isMobileScreen = useMediaQuery("(max-width: 767px)");
 
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
-  // const [showInput, setShowInput] = useState(false);
+  const [showInput, setShowInput] = useState(false);
 
   // const toggleInput = () => {
   //   setShowInput(!showInput);
@@ -41,9 +42,9 @@ function Header() {
 
   const toggleBar = () => {
     setShowBurgerMenu(showBurgerMenu);
-    // if (showInput) {
-    //   setShowInput(false);
-    // }
+    if (showInput) {
+      setShowInput(false);
+    }
   };
 
   async function updateFavoritesToServer(newFavorites) {
@@ -70,6 +71,7 @@ function Header() {
       localStorage.removeItem("userLogin");
       localStorage.removeItem("isAdmin");
       localStorage.removeItem("CountCartProducts");
+      localStorage.removeItem("CountFavoritesProducts");
       localStorage.removeItem("Cart");
       localStorage.removeItem("token");
       localStorage.removeItem("Favorites");
@@ -82,22 +84,50 @@ function Header() {
     }
   }
   
+  const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
+  const [inputValue, setInputValue] = useState(inputValueFromRedux);
+  // const navigate = useNavigate();
 
+  // const handleSearch = () => {
+  //   navigate(`/products-search?query=${inputValue}`);
+  // };
+
+  useEffect(() => {
+    setInputValue(inputValueFromRedux);
+  }, [inputValueFromRedux]);
+
+  const handleInputChange = (e) => {
+    const { value } = e.target;
+    dispatch(updateInputValue(value));
+    setInputValue(value);
+  };
 
   return (
     <header className={styles.header}>
       <div className={styles.mobileHeader}>
         {/* <button className={styles.buttonMobileHeader} onClick={toggleInput}> */}
-        <button className={styles.buttonMobileHeader}>
+        {/* <button className={styles.buttonMobileHeader} onClick={toggleInput}>
           <IconSearchMobile />
-        </button>
+        </button> */}
+        <Button
+          toPage={`/products-search?query=${inputValue}`}
+          type="submit"
+          className={styles.buttonMobileHeader}
+          // text="Знайти"
+          width="45px"
+          color=""
+        >
+          <IconSearchMobile />
+        </Button>
         {/* {showInput && ( */}
         <input
           className={styles.inputMobileHeader}
           type="text"
+          onChange={handleInputChange}
+          value={inputValue}
           placeholder="Знайти..."
         />
-        {/* // )} */}
+        {/* )} */}
 
         {isMobileScreen
           && <BurgerMenu toggleBar={toggleBar} />}

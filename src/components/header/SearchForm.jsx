@@ -12,7 +12,7 @@ function SearchForm({
         <input
           className={styles.input}
           type="text"
-          placeholder="Пошук..."
+          placeholder="Знайти..."
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={(e) => {
