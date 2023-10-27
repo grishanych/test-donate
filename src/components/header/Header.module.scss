@@ -12,7 +12,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 40px 5px 17px;
+    padding: 40px 15px 17px;
 
     @include devices(mobile) {
         display: flex;
@@ -22,7 +22,7 @@
 
 .inputMobileHeader {
     width: 60%; 
-    padding: 15px 10px;
+    padding: 10px 10px;
     background-color: variables.$bgc-second;
     border: none;
     border-radius: 10px;
@@ -260,7 +260,6 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    // padding: 5px 10px;
     color: #fff;
     background-color: variables.$bgc-main;
     border: none;
@@ -301,15 +300,15 @@ input:focus {
   
     .bar {
         width: 100%;
-        height: 4px;
-        margin: 2px;
+        height: 2px;
+        margin: 5px 0px;
         background-color: #46A358;
         transition: background-color .3s;
     }
   
     &.cross {
         .bar:nth-child(1) {
-            transform: rotate(45deg) translate(1px, 1px);
+            transform: rotate(45deg) translate(2px, 2px);
         }
         .bar:nth-child(2) {
             transform: rotate(-45deg) translate(3px, -3px);
@@ -320,16 +319,34 @@ input:focus {
     }
 }
 
-.menuList {
-    position: absolute;
+.toggleButtonClose {
+    padding-top: 12px;
+}
+
+.menuListWrapper {
+    padding: 40px 15px 0px;
+    position: fixed;
     z-index: 9;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    background-color: #fff;
+  }
+  
+.menuListWrapper.open {
+    width: 100%;
+}
+
+.menuList {
+    position: fixed;
+    top: 100px;
+    left: 40%;
     display: flex;
     flex-direction: column;
-    padding: 0;
-    list-style: none;
-    background-color: #fff;
-    border: 1px solid #46A358;
-    border-bottom-right-radius: 10px;
+    align-items: center;
 }
 
 .menuItem {
@@ -342,5 +359,30 @@ input:focus {
     font-style: normal;
     line-height: 16px;
     text-decoration: none;
-    border-bottom: 1px solid #46A358;
+}
+
+.iconsWrapper {
+    width: 90px;
+    position: fixed;
+    top: 270px;
+    left: 40%;
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon {
+    width: 35px;
+    display: flex;
+}
+
+.buttonWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

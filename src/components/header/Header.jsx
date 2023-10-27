@@ -30,20 +30,20 @@ function Header() {
   const isMobileScreen = useMediaQuery("(max-width: 767px)");
 
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
-  const [showInput, setShowInput] = useState(false);
+  // const [showInput, setShowInput] = useState(false);
 
-  const toggleInput = () => {
-    setShowInput(!showInput);
-    if (showBurgerMenu) {
-      toggleBar();
-    }
-  };
+  // const toggleInput = () => {
+  //   setShowInput(!showInput);
+  //   if (showBurgerMenu) {
+  //     toggleBar();
+  //   }
+  // };
 
   const toggleBar = () => {
     setShowBurgerMenu(showBurgerMenu);
-    if (showInput) {
-      setShowInput(false);
-    }
+    // if (showInput) {
+    //   setShowInput(false);
+    // }
   };
 
   async function updateFavoritesToServer(newFavorites) {
@@ -87,16 +87,17 @@ function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.mobileHeader}>
-        <button className={styles.buttonMobileHeader} onClick={toggleInput}>
+        {/* <button className={styles.buttonMobileHeader} onClick={toggleInput}> */}
+        <button className={styles.buttonMobileHeader}>
           <IconSearchMobile />
         </button>
-        {showInput && (
+        {/* {showInput && ( */}
         <input
           className={styles.inputMobileHeader}
           type="text"
           placeholder="Знайти..."
         />
-        )}
+        {/* // )} */}
 
         {isMobileScreen
           && <BurgerMenu toggleBar={toggleBar} />}

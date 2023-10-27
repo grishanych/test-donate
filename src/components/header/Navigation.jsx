@@ -24,9 +24,6 @@ function Navigation() {
 
   return (
     <div className={styles.navWrapper}>
-      {/* ! ??? ! */}
-      {/* <div className={styles.burgerMenuWrapper} /> */}
-      {/* ! ??? ! */}
       <nav style={style} className={styles.nav}>
         <ul className={`${styles.navItem} ${styles.active}`}>
           <ActiveLink label="головна" to="/" className={`${styles.navList} ${styles.navLink}`} />
