@@ -27,14 +27,20 @@ function Favorites() {
 
       {isFavoriteEmpty ? <p className={styles.favoriteEmpty}>Ви ще не додали жодного товару</p>
         : (
-          <ul className={styles.cardsListWrapper}>
+          <table className={styles.cardsListWrapper}>
+            <thead>
+              <tr className={styles.tableRow}>
+                <th>Продукти</th>
+                <th>Ціна</th>
+              </tr>
+            </thead>
             {currentProducts.map((item) => (
               <FavoritesItem
                 key={item.itemNo}
                 item={item}
               />
             ))}
-          </ul>
+          </table>
         )}
     </div>
   );

@@ -8,6 +8,7 @@ import { NEW_CART_URL, MAKE_ORDERS } from "../../../endpoints/endpoints";
 import styles from "./Cart.module.scss";
 
 
+
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
@@ -65,6 +66,7 @@ function Cart() {
     }
   };
 
+  console.log(currentProducts);
   
   return (
     <div className={styles.cardsSectionWrapper}>
@@ -73,17 +75,27 @@ function Cart() {
 
       {isCartEmpty ? <p className={styles.cartEmpty}>Ваш кошик порожній</p>
         : (
-          <ul className={styles.cardsListWrapper}>
+          <table className={styles.cardsListWrapper}>
+            <thead>
+              <tr className={styles.tableRow}>
+                <th>Продукти</th>
+                <th>Ціна</th>
+                <th>Кількість</th>
+                <th>
+                  {" "}
+                </th>
+              </tr>
+            </thead>
             {currentProducts.map((item) => (
               <CartItem
                 key={item.itemNo}
                 item={item}
               />
             ))}
-          </ul>
+          </table>
         )}
 
-      <FormButton text="Купити" padding="10px" onClick={handlePurchase} />
+      <FormButton text="Оформити замовлення" padding="10px" onClick={handlePurchase} />
     </div>
   );
 }

@@ -16,6 +16,7 @@ import AppArrow from "../images/appArrow/AppArrow";
 import styles from "./App.module.scss";
 
 
+
 function App() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
   // eslint-disable-next-line react/jsx-no-constructed-context-values

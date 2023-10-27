@@ -5,6 +5,7 @@ import {
   REMOVE_FROM_FAVORITES,
   INITIALIZE_CART,
   INITIALIZE_FAVORITES,
+  UPDATE_CART_PRODUCT,
 } from "../actions/cartActions";
 
 
@@ -23,6 +24,23 @@ const initialState = {
 export const cartReducer = (state = initialState.cart, action) => {
   switch (action.type) {
     case ADD_TO_CART:
+      if (state.items.some((item) => item.itemNo === action.payload.itemNo)) {
+        return {
+          ...state,
+          items: state.items.map((item) => {
+            if (item.itemNo === action.payload.itemNo) {
+              return {
+                ...item,
+                ...action.payload,
+                quantity: item.quantity + action.payload.quantity,
+              };
+            }
+    
+            return item;
+          }),
+        };
+      }
+
       return {
         ...state,
         items: [...state.items, action.payload],
@@ -40,7 +58,21 @@ export const cartReducer = (state = initialState.cart, action) => {
         items: action.payload,
         itemCount: action.payload.length,
       };
-                        
+    case UPDATE_CART_PRODUCT: {
+      const items = state.items.map((item) => {
+        if (item.itemNo === action.payload.itemNo) {
+          return { ...item, ...action.payload };
+        }
+
+        return item;
+      });
+      
+      return {
+        ...state,
+        items,
+      };
+    }
+      
     default:
       return state;
   }

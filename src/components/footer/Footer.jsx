@@ -35,7 +35,6 @@ function Footer() {
       items: [
         { label: "Політика конфіденційності", link: "/privacy-policy" },
         { label: "Блог", link: "/blog" },
-        { label: "Звіти", link: "/reports" },
       ],
     },
     {
@@ -48,7 +47,7 @@ function Footer() {
     },
   ];
   return (
-    <footer data-testid="footer-svg-test">
+    <footer data-testid="footer-svg-test" className={styles.footer}>
 
       <div className={styles.footerContainer}>
           
@@ -130,11 +129,6 @@ function Footer() {
                 <li className={styles.bottomListItem}>
                   <Link to="/blog" className={styles.bottomLink}>
                     Блог
-                  </Link>
-                </li>
-                <li className={styles.bottomListItem}>
-                  <Link to="/reports" className={styles.bottomLink}>
-                    Звіти
                   </Link>
                 </li>
               </ul>

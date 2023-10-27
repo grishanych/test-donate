@@ -1,9 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import AboutUs from "./AboutUs";
+import AboutUs from "./aboutUs/AboutUs";
 import Cart from "./cart/Cart";
-import Reports from "./Reports";
-import Blog from "./Blog";
-import Contacts from "./Contacts";
+import Blog from "./blog/Blog";
+import Contacts from "./contacts/Contacts";
 import Home from "./home/Home";
 import Categories from "./categories/Categories";
 import Donation from "./categories/Donation";
@@ -16,10 +15,10 @@ import CustomerPage from "./adminRoutes/customerPage/CustomerPage";
 import CustomerRegistration from "./adminRoutes/CustomerRegistration";
 import AdminRegistration from "./adminRoutes/AdminRegistration";
 import Favorites from "./favorites/Favorites";
-import DeliveryPayment from "./DeliveryPayment";
-import Returns from "./Returns";
-import PrivacyPolicy from "./PrivacyPolicy";
-import ProductPage from "./ProductPage";
+import DeliveryPayment from "./deliveryPayment/DeliveryPayment";
+import Returns from "./returns/Returns";
+import PrivacyPolicy from "./privacyPolicy/PrivacyPolicy";
+import ProductPage from "./productPage/ProductPage";
 import SearchProducts from "./searchProducts/SearchProducts";
 
 
@@ -33,7 +32,6 @@ function AppRoutes() {
       <Route path="/categories/charity-auction" element={<Auction />} />
       <Route path="/categories/donation" element={<Donation />} />
       <Route path="/cart" element={<Cart />} />
-      <Route path="/reports" element={<Reports />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/contacts" element={<Contacts />} />
       <Route path="/favorites" element={<Favorites />} />

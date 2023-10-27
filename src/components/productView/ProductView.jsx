@@ -1,11 +1,11 @@
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Cloudinary } from "@cloudinary/url-gen";
 import QuantityCounter from "./CounterQuantity";
 import { setProduct } from "../../redux/actions/productActions";
-import heart from "./icons/heart.svg";
 import ShoesSelector from "./sizeSelector/ShoesSelector";
 import ClothesSelector from "./sizeSelector/ClothesSelector";
 import ProductViewSlider from "./ProductViewSlider";
@@ -16,6 +16,12 @@ import Button from "../button/Button";
 import CountdownTimer from "./CountdownTimer";
 import DocumentTitle from "../routes/DocumentTitle";
 import styles from "./ProductView.module.scss";
+import { addFavorites, addToCart } from "../../redux/actions/cartActions";
+import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
+import heart from "./icons/heart/heart.svg";
+import heartFilled from "./icons/heart/heart-filled.svg";
+
+
 
 // ! replace
 function convertToImgUrl(nameCloudinary) {
@@ -34,26 +40,42 @@ function ProductView() {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
   const params = useParams();
+  const isItemInFavorites = useSelector(
+    (state) => state.favorites.items.some(
+      (favItem) => favItem.itemNo === params.itemNo,
+    ),
+  );
+
   // eslint-disable-next-line no-unused-vars
-  const [progress, setProgress] = useState(15);
-  const [currentBid, setCurrentBid] = useState("");
+  const [progress, setProgress] = useState(27);
+  const [currentBid, setCurrentBid] = useState(product?.initialPrice || "");
+  const [newCurrentBid, setNewCurrentBid] = useState("");
+  const [errorInput, setErrorInput] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [isInCart, setIsInCart] = useState(false);
+  const [isButtonClicked, setButtonClicked] = useState(false);
+
 
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        // eslint-disable-next-line no-restricted-globals
-        const response = await fetch(
-          `http://localhost:4000/api/products/${params.itemNo}`,
-        );
-        const data = await response.json();
+        const response = await axios.get(`http://localhost:4000/api/products/${params.itemNo}`);
+        const { data } = response;
         const rawDate = new Date(data.date);
         const formattedDate = `${rawDate.getDate()}/${rawDate.getMonth() + 1}/${rawDate.getFullYear()}`;
 
         const initialPrice = data.goal;
-        dispatch(setProduct({
-          ...data, formattedDate, initialPrice, images: data.nameCloudinary.map(convertToImgUrl),
-        }));
+        dispatch(
+          setProduct({
+            ...data,
+            formattedDate,
+            initialPrice,
+            images: data.nameCloudinary.map(convertToImgUrl),
+            imageURL: convertToImgUrl(data.nameCloudinary[0]),
+          }),
+        );
+        setCurrentBid(initialPrice);
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -67,17 +89,50 @@ function ProductView() {
   if (!product) {
     return <div>Product not found...</div>;
   }
-  const handleBidClick = () => {
-    // Отримайте значення ставки зі стейту currentBid та відобразіть його в стані чи іншому елементі
 
-    if (parseFloat(currentBid) > parseFloat(product.initialPrice)) {
-      // якщо так, оновіть значення стартової ціни на нову ставку
-      setCurrentBid(currentBid);
+  const handleBidClick = () => {
+    if (parseFloat(newCurrentBid) < parseFloat(product.initialPrice)) {
+      setErrorInput(`Помилка: Запропонована Вами ставка ${newCurrentBid} нижче поточної.`);
+      return;
     }
-    console.log("Ставка піднята:", currentBid);
-    // Тут ви можете використовувати це значення для відображення на сторінці чи відправки на сервер
+    if (parseFloat(newCurrentBid) > parseFloat(product.initialPrice)) {
+      setCurrentBid(newCurrentBid);
+      setNewCurrentBid("");
+      setErrorInput("");
+    }
   };
 
+
+  const handleAddFavorites = () => {
+    let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
+
+    if (!isItemInFavorites) {
+      const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
+      currentProducts.push(product);
+      countProducts += 1;
+      localStorage.setItem("Favorites", JSON.stringify(currentProducts));
+      localStorage.setItem("CountFavoritesProducts", JSON.stringify(countProducts));
+
+      dispatch(addFavorites(product));
+      dispatch(counterIncrement());
+    }
+    setButtonClicked(true);
+  };
+
+
+
+  const handleAddToCart = () => {
+    const productWithQuantity = {
+      ...product,
+      quantity,
+    };
+
+    dispatch(addToCart(productWithQuantity));
+    console.log(productWithQuantity);
+    setQuantity(1);
+
+    setIsInCart(true);
+  };
 
   return (
     <>
@@ -90,49 +145,38 @@ function ProductView() {
             <h2 className={styles.productName}>{product.name}</h2>
             <p className={styles.productShortName}>{product.shortName}</p>
             {product.category === "Донат" ? (
-              <div className={styles.donateInfo}>
-                <span className={styles.donateInfoDetails}>До кінця збору: </span>
-                <span className={styles.timer}>
-                  {" "}
-                  <CountdownTimer targetDate={product.deadline} />
-                </span>
-              </div>
+              <>
+                <div className={styles.donateInfo}>
+                  <p className={styles.donateInfoLabel}>Зібрано</p>
+                  <div className={styles.donateInfoAmount}>
+                    <p className={styles.donateInfoResult}>
+                      {" "}
+                      {product.goal * progress / 100}
+                      {" "}
+                      грн
+                    </p>
+                    <p className={styles.donateInfoGoal}>
+                      /
+                      {" "}
+                      {product.goal}
+                      {" "}
+                      грн
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.donateInfoTimer}>
+                  <span className={styles.donateInfoDetails}>До кінця збору: </span>
+                  <span className={styles.timer}>
+                    {" "}
+                    <CountdownTimer targetDate={product.deadline} />
+                  </span>
+                </div>
+              </>
+
             ) : null}
             {product.category === "Донат" ? (
               <ProgressBar progress={progress} />
             ) : null}
-            {product.category === "Донат" ? (
-              <div className={styles.foundrasingInfo}>
-                <div>
-                  <p>Зібрано: </p>
-                  <p className={styles.foundrasingResult}>
-                    {" "}
-                    {product.goal * progress / 100}
-                    {" "}
-                    грн
-                  </p>
-                </div>
-                <div>
-                  <p>У відсотках:  </p>
-                  <p className={styles.foundrasingResult}>
-                    {" "}
-                    {progress}
-                    {" "}
-                    %
-                  </p>
-                </div>
-                <div>
-                  <p>Необхідна сума:  </p>
-                  <p className={styles.foundrasingResult}>
-                    {" "}
-                    {product.goal}
-                    {" "}
-                    грн
-                  </p>
-                </div>
-              </div>
-            ) : null}
-
             {product.category === "Благодійний лот" ? (
 
               <div className={styles.lotDescContainer}>
@@ -210,22 +254,25 @@ function ProductView() {
                     || product.category === "Одяг верхній") && <ClothesSelector />)
                 || null}
 
-            {(product.category === "Взуття" && <QuantityCounter />)
+            {(product.category === "Взуття" && <QuantityCounter quantity={quantity} setQuantity={setQuantity} />)
                 || ((product.category === "Комплекти форми"
-                    || product.category === "Одяг верхній") && <QuantityCounter />)
+                    || product.category === "Одяг верхній") && <QuantityCounter quantity={quantity} setQuantity={setQuantity} />)
                 || null}
 
             {["Взуття", "Комплекти форми", "Одяг верхній"].includes(product.category) && (
             <div className={styles.buyButtons}>
-              <button className={styles.buyNowBtn}>Миттєва купівля</button>
-              {/* <Button */}
-              {/*    text="Додати в кошик" */}
-              {/*    color="rgba(70, 163, 88, 1)" */}
-              {/*    toPage="/" */}
-              {/* /> */}
-              <button className={styles.addToCartBtn}>Додати в кошик</button>
-              <button className={styles.addToFavorite}>
-                <img src={heart} alt="add to favorite" />
+              <Button
+                className={styles.addToCartBtn}
+                onClick={handleAddToCart}
+              >
+                {isInCart ? "В Кошику" : "Купити"}
+              </Button>
+              <button className={styles.addToFavorite} onClick={handleAddFavorites}>
+                {isButtonClicked ? (
+                  <img src={heartFilled} alt="heartIcon" />
+                ) : (
+                  <img src={heart} alt="heartIcon" />
+                )}
               </button>
             </div>
             )}
@@ -266,15 +313,15 @@ function ProductView() {
                   <input
                     placeholder="Ваша ставка"
                     className={styles.lotRate}
-                    value={currentBid}
-                    onChange={(e) => setCurrentBid(e.target.value)}
+                    value={newCurrentBid}
+                    onChange={(e) => setNewCurrentBid(e.target.value)}
                   />
+                  {errorInput && <div style={{ color: "red", fontSize: "15px" }}>{errorInput}</div>}
 
                 </div>
                 <div className={styles.rateUpBtnWrapper}>
                   <Button
                     text="Підняти ставку"
-                    color="rgba(70, 163, 88, 1)"
                     onClick={handleBidClick}
                   />
                   <ShareProducts />
@@ -288,9 +335,9 @@ function ProductView() {
 
             {product.category === "Донат" ? (
               <div className={styles.donateBtnContainer}>
-                <button className={styles.donateBtn}>
-                  Підтримати
-                </button>
+                <Button
+                  text="Підтримати проект"
+                />
                 <ShareProducts />
               </div>
 

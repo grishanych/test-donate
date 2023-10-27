@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+
 import styles from "./ProductView.module.scss";
 
-function QuantityCounter() {
-  const [quantity, setQuantity] = useState(1);
-
+function QuantityCounter({ quantity, setQuantity }) {
   const handleIncrease = () => {
     setQuantity(quantity + 1);
   };
