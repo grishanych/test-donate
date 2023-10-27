@@ -1,11 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import axios from "axios";
 import { removeFavorites } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
 import Button from "../../button/Button";
 import { GET_FAVORITES } from "../../../endpoints/endpoints";
 import QuantityCounter from "../../productView/CounterQuantity";
+=======
+import { Link } from "react-router-dom";
+import React from "react";
+import { removeFavorites } from "../../../redux/actions/cartActions";
+import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
+import Button from "../../button/Button";
+>>>>>>> content-page-updated
 import styles from "./Favorites.module.scss";
+import DeleteIcon from "../cart/DeleteIcon";
+
 
 
 function FavoritesItem({ item }) {
@@ -67,21 +77,31 @@ function FavoritesItem({ item }) {
   
    
   return (
-    <li key={item.id} className={styles.cardItemWrapper}>
-      <div className={styles.cardItemImageWrapper}>
-        <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
-      </div>
-      <p>{item.name}</p>
-      <div className={styles.quantityCounterWrapper}>
-        <QuantityCounter />
+    <tbody key={item.id} className={styles.cardItemWrapper}>
+      <div className={styles.productInfo}>
+        <Link to={`/product/${item.itemNo}`}>
+          <div className={styles.cardItemImageWrapper}>
+            <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
+          </div>
+        </Link>
+        <div className={styles.nameContainer}>
+          <p className={styles.name}>{item.shortName}</p>
+          <p className={styles.sku}>
+            <span>Код товару:</span>
+            {" "}
+            {item.itemNo}
+          </p>
+        </div>
       </div>
       <p className={styles.cardItemPrice}>
-        {item.price}
+        {item.currentPrice}
         {" "}
         грн
       </p>
-      <Button className={styles.buttonDelete} onClick={() => handleRemoveFromFavorites()} text="Видалити" />
-    </li>
+      <Button style={{ backgroundColor: "none" }} onClick={() => handleRemoveFromFavorites()}>
+        <DeleteIcon />
+      </Button>
+    </tbody>
   );
 }
 

@@ -10,6 +10,7 @@ import styles from "./Cart.module.scss";
 import { openModal } from "../../../redux/actionsCreators/modalActionsCreators";
 // import Modal from "../../modal/Modal";
 
+
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
@@ -93,6 +94,11 @@ function Cart() {
     }
   };
 
+<<<<<<< HEAD
+=======
+  console.log(currentProducts);
+  
+>>>>>>> content-page-updated
   return (
     <div className={styles.cardsSectionWrapper}>
       <h1 className={styles.cardsSectionHeadline}>Кошик</h1>
@@ -100,21 +106,40 @@ function Cart() {
 
       {isCartEmpty ? <p className={styles.cartEmpty}>Ваш кошик порожній</p>
         : (
+<<<<<<< HEAD
           <ul className={styles.cardsListWrapper}>
             {cartItems.map((item) => (
+=======
+          <table className={styles.cardsListWrapper}>
+            <thead>
+              <tr className={styles.tableRow}>
+                <th>Продукти</th>
+                <th>Ціна</th>
+                <th>Кількість</th>
+                <th>
+                  {" "}
+                </th>
+              </tr>
+            </thead>
+            {currentProducts.map((item) => (
+>>>>>>> content-page-updated
               <CartItem
                 // eslint-disable-next-line no-underscore-dangle
                 key={item._id ? item._id : item.id}
                 item={item}
               />
             ))}
-          </ul>
+          </table>
         )}
 
+<<<<<<< HEAD
       {/* {isModalOpen && (
         <Modal tittle={modalText} />
       )} */}
       <FormButton text="Купити" padding="10px" onClick={handlePurchase} />
+=======
+      <FormButton text="Оформити замовлення" padding="10px" onClick={handlePurchase} />
+>>>>>>> content-page-updated
     </div>
   );
 }

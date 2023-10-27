@@ -171,7 +171,6 @@ export function Card({
           {price
             ? (
               <p className={styles.cardItemPrice}>
-                Ціна:
                 {price}
                 {" "}
                 грн
@@ -180,16 +179,14 @@ export function Card({
             : goal && category === "Благодійний лот"
               ? (
                 <p className={styles.cardItemGoalLot}>
-                  Ставка:
-                  {goal}
                   {" "}
-                  грн
                 </p>
               )
               : goal && category === "Донат"
                 ? (
                   <p className={styles.cardItemGoalDonat}>
-                    Мета:
+                    Ціль:
+                    {" "}
                     {goal}
                     {" "}
                     грн

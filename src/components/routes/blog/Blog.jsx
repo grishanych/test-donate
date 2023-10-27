@@ -1,4 +1,4 @@
-import DocumentTitle from "./DocumentTitle";
+import DocumentTitle from "../DocumentTitle";
 
 function Blog() {
   return (

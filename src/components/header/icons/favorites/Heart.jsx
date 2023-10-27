@@ -16,5 +16,5 @@ function HeartFavorite() {
     </div>
   );
 }
-  
+
 export default HeartFavorite;

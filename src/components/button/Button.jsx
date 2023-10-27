@@ -4,7 +4,7 @@ import styles from "./Button.module.scss";
 
 
 export default function Button({
-  text = "", color = "rgba(70, 163, 88, 1)", padding = "", width = "150px", toPage = "", onClick = null, children, ...rest
+  text = "", color = "#7c8d66", padding = "", width = "150px", toPage = "", onClick = null, children, ...rest
 }) {
   const buttonStyle = {
     backgroundColor: color,
@@ -25,7 +25,7 @@ export default function Button({
 
 
 export function FormButton({
-  text = "", type = null, color = "rgba(70, 163, 88, 1)", padding = "", width = "150px", onClick = null, children, ...rest
+  text = "", type = null, color = "#7c8d66", padding = "", width = "150px", onClick = null, children, ...rest
 }) {
   const buttonStyle = {
     backgroundColor: color,

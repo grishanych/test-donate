@@ -4,20 +4,22 @@ import React from "react";
 const containerStyle = {
   marginTop: "10px",
   marginBottom: "20px",
-  border: "1px solid rgb(70, 163, 88)",
-  borderRadius: "6px",
+  border: "1px solid #7c8d66",
+  borderRadius: "12px",
   background: "#ededed",
-
+  width: "100%",
+  height: "24px",
 };
 
 const contentStyle = {
-  background: "rgb(70, 163, 88)",
-  height: "24px",
+  background: "#7c8d66",
+  height: "100%",
   textAlign: "center",
   lineHeight: "24px",
   fontFamily: "sans-serif",
   transition: "0.3s",
   color: "white",
+  borderRadius: "12px",
 
 };
 
