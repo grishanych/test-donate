@@ -10,15 +10,13 @@ import {
 import axios from "axios";
 import { object, string } from "yup";
 import PropTypes from "prop-types";
-import { addFavorites } from "../../redux/actions/cartActions";
 import EyeClosed from "./eye/EyeClosed";
 import EyeOpen from "./eye/EyeOpen";
 import { FormButton } from "../button/Button";
 import logInUser from "../../api/logInUser";
-import { NEW_CART_URL, GET_FAVORITES, REGISTRATION_URL } from "../../endpoints/endpoints";
-import sendCart from "../../api/sendCart";
-import updateCart from "../../api/updateCart";
+import { NEW_CART_URL, GET_FAVORITES } from "../../endpoints/endpoints";
 import styles from "./LogIn.module.scss";
+import { initializeCart, initializeFavorites } from "../../redux/actions/cartActions";
 
 
 function LogIn({ headline, toRegistration }) {
@@ -63,51 +61,27 @@ function LogIn({ headline, toRegistration }) {
       return null;
     }
   }
-
-  // update Favorites
-  async function updateFavoritesToServer(newFavorites) {
-    const updatedCustomer = {
-      favorites: newFavorites,
-    };
-
-    try {
-      const response = await axios.put(REGISTRATION_URL, updatedCustomer);
-      return response.data.favorites;
-    } catch (err) {
-      console.error("Помилка при отриманні даних:", err);
-      return null;
-    }
-  }
- 
+  
   const handleUserLogin = async (login, password) => {
     try {
       await dispatch(logInUser(login, password));
-  
-      const userData = await getFavoritesFromServer();
-      if (userData.favorites.items && userData.favorites.items.length > 0) {
-        const currentFavorites = JSON.parse(localStorage.getItem("Favorites")) || [];
-        const newFavorites = Array.from(new Set([...currentFavorites, ...userData.favorites.items]));
-        localStorage.setItem("Favorites", JSON.stringify(newFavorites));
-        dispatch(addFavorites(newFavorites));
 
-        await updateFavoritesToServer(newFavorites);
-      } else {
-        const currentFavorites = JSON.parse(localStorage.getItem("Favorites")) || [];
-        if (currentFavorites.length > 0) {
-          await updateFavoritesToServer(currentFavorites);
-        }
+      const userFavotites = await getFavoritesFromServer();
+      const userCart = await getCartFromServer();
+      if (userCart !== null) {
+        const productsFromServer = userCart.products.map((item) => item.product);
+        dispatch(initializeCart(productsFromServer));
       }
-
-      const cartData = await getCartFromServer();
-      if (cartData === null) {
-        sendCart();
-      } else {
-        updateCart();
+      if (userFavotites.favorites && userFavotites.favorites.length > 0) {
+        dispatch(initializeFavorites(userFavotites.favorites));
       }
-
-      if (userData.isAdmin === false) {
+      // else {
+      //   console.log("Масив порожній або невизначений");
+      // }
+    
+      if (userFavotites.isAdmin === false) {
         navigate("/account");
-      } else if (userData.isAdmin === true) {
+      } else if (userFavotites.isAdmin === true) {
         navigate("/adm-page");
       }
     } catch (error) {
@@ -115,7 +89,6 @@ function LogIn({ headline, toRegistration }) {
       console.error("Помилка при вході:", error);
     }
   };
-  
 
   return (
     <section className={styles.windowWrapper}>

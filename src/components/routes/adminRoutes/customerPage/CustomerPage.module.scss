@@ -10,9 +10,9 @@
 }
 
 .headline {
+  color: variables.$fc-main;
   font-weight: 700;
   text-transform: uppercase;
-  color: variables.$fc-main;
 }
 
 .favoritesWrapper,

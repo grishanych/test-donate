@@ -8,6 +8,7 @@ import styles from "./Header.module.scss";
 function Navigation() {
   const { isLinkVisible } = useContext(Context);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const isUserLoggedIn = localStorage.getItem("userLogin") || null;
 
   const style = {
     display: isLinkVisible ? "flex" : "none",
@@ -23,9 +24,6 @@ function Navigation() {
 
   return (
     <div className={styles.navWrapper}>
-      {/* ! ??? ! */}
-      <div className={styles.burgerMenuWrapper} />
-      {/* ! ??? ! */}
       <nav style={style} className={styles.nav}>
         <ul className={`${styles.navItem} ${styles.active}`}>
           <ActiveLink label="головна" to="/" className={`${styles.navList} ${styles.navLink}`} />
@@ -50,9 +48,8 @@ function Navigation() {
             </div>
             )}
           </div>
-          <ActiveLink label="блог" to="/blog" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} />
-          <ActiveLink label="контакти" to="/contacts" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} />
-          <ActiveLink label="кабінет" to="/account" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} />
+          <ActiveLink label="новини" to="/blog" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} />
+          { isUserLoggedIn ? <ActiveLink label="кабінет" to="/account" onClick={() => setDropdownVisible(false)} className={`${styles.navList} ${styles.navLink}`} /> : null }
         </ul>
       </nav>
             

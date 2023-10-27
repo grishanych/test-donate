@@ -4,7 +4,10 @@ export const ADD_FAVORITES = "ADD_FAVORITES";
 export const REMOVE_FROM_FAVORITES = "REMOVE_FROM_FAVORITES";
 export const INITIALIZE_CART = "INITIALIZE_CART";
 export const INITIALIZE_FAVORITES = "INITIALIZE_FAVORITES";
-
+export const RESET_CART = "RESET_CART";
+export const RESET_FAVORITES = "RESET_FAVORITES";
+// !
+export const UPDATE_CART_PRODUCT = "UPDATE_CART_PRODUCT";
 
 export const initializeCart = (products) => ({
   type: INITIALIZE_CART,
@@ -32,4 +35,17 @@ export const addFavorites = (product) => ({
 export const removeFavorites = (productId) => ({
   type: REMOVE_FROM_FAVORITES,
   payload: productId,
+});
+
+export const resetCart = () => ({
+  type: RESET_CART,
+});
+export const resetFavorites = () => ({
+  type: RESET_FAVORITES,
+});
+
+// !
+export const updateCartProduct = (product) => ({
+  type: UPDATE_CART_PRODUCT,
+  payload: product,
 });
