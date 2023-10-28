@@ -104,11 +104,11 @@ function BurgerMenu({ toggleBar }) {
           <div className={styles.iconsWrapper}>
             {isUserLoggedIn ? (
               <>
-                <Link to="/favorites" className={styles.icon} onClick={toggleMenu}>
+                <Link to="/favorites" className={`${styles.icon} ${styles.iconMobile}`} onClick={toggleMenu}>
                   <HeartFavorite />
                   {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
                 </Link>
-                <Link to="/cart" className={styles.icon} onClick={toggleMenu}>
+                <Link to="/cart" className={`${styles.icon} ${styles.iconMobile}`} onClick={toggleMenu}>
                   <Cart />
                   {cartCount === 0 ? null : <span>{cartCount}</span>}
                 </Link>

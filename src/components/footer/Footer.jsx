@@ -33,7 +33,7 @@ function Footer() {
       title: "Інформація",
       items: [
         { label: "Політика конфіденційності", link: "/privacy-policy" },
-        { label: "Блог", link: "/blog" },
+        { label: "Новини", link: "/blog" },
       ],
     },
     {
@@ -129,7 +129,7 @@ function Footer() {
                 </li>
                 <li className={styles.bottomListItem}>
                   <Link to="/blog" className={styles.bottomLink}>
-                    Блог
+                    Новини
                   </Link>
                 </li>
               </ul>
@@ -206,7 +206,7 @@ function Footer() {
                 </a>
               </div>
               <div className={styles.bottomPaymentMethods}>
-                <a href="#1">
+                {/* <a href="https://paypal.com/ua/home">
                   <PaypalIcon />
                 </a>
                 <a href="#1">
@@ -217,7 +217,11 @@ function Footer() {
                 </a>
                 <a href="#1">
                   <LiqpayIcon />
-                </a>
+                </a> */}
+                <PaypalIcon />
+                <MastercardIcon />
+                <VisaIcon />
+                <LiqpayIcon />
               </div>
             </div>
           </div>

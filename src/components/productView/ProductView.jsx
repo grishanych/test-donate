@@ -39,7 +39,9 @@ function ProductView() {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
   const params = useParams();
-  const isItemInFavorites = useSelector((state) => state.favorites.items.some((favItem) => favItem.itemNo === params.itemNo));
+  const isItemInFavorites = useSelector((state) => state.favorites.items.some(
+    (favItem) => favItem.itemNo === params.itemNo,
+  ));
 
   // eslint-disable-next-line no-unused-vars
   // const [progress, setProgress] = useState(15);

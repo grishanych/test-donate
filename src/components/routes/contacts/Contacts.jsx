@@ -167,7 +167,7 @@ const containerStyle = {
 
 function Contacts() {
   return (
-    <>
+    <section className={style.sectionWrapper}>
       <DocumentTitle title="Контакти" />
       <h1
         style={{
@@ -287,7 +287,7 @@ function Contacts() {
       <div>
         <ContactMap />
       </div>
-    </>
+    </section>
   );
 }
 
