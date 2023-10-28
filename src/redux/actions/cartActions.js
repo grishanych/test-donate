@@ -9,6 +9,12 @@ export const RESET_FAVORITES = "RESET_FAVORITES";
 // !
 export const UPDATE_CART_PRODUCT = "UPDATE_CART_PRODUCT";
 
+export const CLEAR_FAVORITES = "CLEAR_FAVORITES";
+
+export const clearFavorites = () => ({
+  type: CLEAR_FAVORITES,
+});
+
 export const initializeCart = (products) => ({
   type: INITIALIZE_CART,
   payload: products,

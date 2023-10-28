@@ -1,23 +1,27 @@
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { closeModal } from "../../redux/actionsCreators/modalActionsCreators";
 import styles from "./Modal.module.scss";
+
 
 function Modal(props) {
   const { tittle } = props;
   const dispatch = useDispatch();
-
   const handleKeyDown = (event, action) => {
     if (event.key === "Enter") {
       action();
     }
   };
+
+  const close = () => {
+  dispatch(closeModal());
+  }
   
   return (
     <>
       <div
         className={styles.overlay}
-        onClick={() => { dispatch(closeModal()); }}
-        onKeyDown={(e) => handleKeyDown(e, () => dispatch(closeModal()))}
+        onClick={close}
+        onKeyDown={(e) => handleKeyDown(e, () => close())}
         role="button"
         tabIndex={0}
         aria-label="Закрити модальне вікно за його межами"

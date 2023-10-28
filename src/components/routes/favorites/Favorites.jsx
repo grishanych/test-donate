@@ -11,7 +11,7 @@ import styles from "./Favorites.module.scss";
 function Favorites() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.favorites.items);
-  // const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
+  const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
   const isModalOpen = useSelector((state) => state.modal.isOpen);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function Favorites() {
   // const isFavoriteEmpty = currentProducts.length === 0;
 
   let modalText = "";
-  if (!cartItems) {
+  if (!isFavoriteEmpty) {
     modalText = "Ви успішно замовили товар! Дякуємо за вашу покупку. Незабаром ми з вами зв'яжемось для підтвердження деталей доставки та оплати. Гарного дня!";
   } else {
     modalText = "Здається, ви забули вибрати товар для покупки. Будь ласка, оберіть товар, який вас цікавить, і натисніть 'Купити'.";
@@ -67,4 +67,3 @@ function Favorites() {
 }
 
 export default Favorites;
-
