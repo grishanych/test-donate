@@ -35,16 +35,11 @@ function convertToImgUrl(nameCloudinary) {
   return imageURL;
 }
 
-
 function ProductView() {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
   const params = useParams();
-  const isItemInFavorites = useSelector(
-    (state) => state.favorites.items.some(
-      (favItem) => favItem.itemNo === params.itemNo,
-    ),
-  );
+  const isItemInFavorites = useSelector((state) => state.favorites.items.some((favItem) => favItem.itemNo === params.itemNo));
 
   // eslint-disable-next-line no-unused-vars
   // const [progress, setProgress] = useState(15);
@@ -59,14 +54,17 @@ function ProductView() {
   const [isInCart, setIsInCart] = useState(false);
   const [isButtonClicked, setButtonClicked] = useState(false);
 
-
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/products/${params.itemNo}`);
+        const response = await axios.get(
+          `http://localhost:4000/api/products/${params.itemNo}`,
+        );
         const { data } = response;
         const rawDate = new Date(data.date);
-        const formattedDate = `${rawDate.getDate()}/${rawDate.getMonth() + 1}/${rawDate.getFullYear()}`;
+        const formattedDate = `${rawDate.getDate()}/${
+          rawDate.getMonth() + 1
+        }/${rawDate.getFullYear()}`;
 
         const initialPrice = data.goal;
         dispatch(
@@ -95,7 +93,9 @@ function ProductView() {
 
   const handleBidClick = () => {
     if (parseFloat(newCurrentBid) < parseFloat(product.initialPrice)) {
-      setErrorInput(`Помилка: Запропонована Вами ставка ${newCurrentBid} нижче поточної.`);
+      setErrorInput(
+        `Помилка: Запропонована Вами ставка ${newCurrentBid} нижче поточної.`,
+      );
       return;
     }
     if (parseFloat(newCurrentBid) > parseFloat(product.initialPrice)) {
@@ -105,7 +105,6 @@ function ProductView() {
     }
   };
 
-
   const handleAddFavorites = () => {
     let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
 
@@ -114,15 +113,16 @@ function ProductView() {
       currentProducts.push(product);
       countProducts += 1;
       localStorage.setItem("Favorites", JSON.stringify(currentProducts));
-      localStorage.setItem("CountFavoritesProducts", JSON.stringify(countProducts));
+      localStorage.setItem(
+        "CountFavoritesProducts",
+        JSON.stringify(countProducts),
+      );
 
       dispatch(addFavorites(product));
       dispatch(counterIncrement());
     }
     setButtonClicked(true);
   };
-
-
 
   const handleAddToCart = () => {
     const productWithQuantity = {
@@ -138,7 +138,7 @@ function ProductView() {
   };
 
   return (
-    <>
+    <section style={{ padding: "50px 15px 100px" }}>
       <DocumentTitle title={`${product.shortName} | Донат Перемоги`} />
 
       <div className={styles.productViewCard}>
@@ -154,7 +154,7 @@ function ProductView() {
                   <div className={styles.donateInfoAmount}>
                     <p className={styles.donateInfoResult}>
                       {" "}
-                      {product.goal * progress / 100}
+                      {(product.goal * progress) / 100}
                       {" "}
                       грн
                     </p>
@@ -168,20 +168,21 @@ function ProductView() {
                   </div>
                 </div>
                 <div className={styles.donateInfoTimer}>
-                  <span className={styles.donateInfoDetails}>До кінця збору: </span>
+                  <span className={styles.donateInfoDetails}>
+                    До кінця збору:
+                    {" "}
+                  </span>
                   <span className={styles.timer}>
                     {" "}
                     <CountdownTimer targetDate={product.deadline} />
                   </span>
                 </div>
               </>
-
             ) : null}
             {product.category === "Донат" ? (
               <ProgressBar progress={progress} />
             ) : null}
             {product.category === "Благодійний лот" ? (
-
               <div className={styles.lotDescContainer}>
                 <div className={styles.lotDetails}>
                   <div className={styles.lotInfo}>
@@ -189,14 +190,20 @@ function ProductView() {
                     <span>{product.itemNo}</span>
                   </div>
                   <div className={styles.lotInfo}>
-                    <span className={styles.lotInfoDetails}>До закриття лоту: </span>
+                    <span className={styles.lotInfoDetails}>
+                      До закриття лоту:
+                      {" "}
+                    </span>
                     <span className={styles.timer}>
                       {" "}
                       <CountdownTimer targetDate={product.deadline} />
                     </span>
                   </div>
                   <div className={styles.lotInfo}>
-                    <span className={styles.lotInfoDetails}>Стартова ціна: </span>
+                    <span className={styles.lotInfoDetails}>
+                      Стартова ціна:
+                      {" "}
+                    </span>
                     <span>
                       {product.initialPrice}
                       {" "}
@@ -204,7 +211,10 @@ function ProductView() {
                     </span>
                   </div>
                   <div className={styles.lotInfo}>
-                    <span className={styles.lotInfoDetails}>Поточна ціна: </span>
+                    <span className={styles.lotInfoDetails}>
+                      Поточна ціна:
+                      {" "}
+                    </span>
                     <span>
                       {currentBid}
                       {" "}
@@ -225,92 +235,109 @@ function ProductView() {
                   </p>
                 </div>
               </div>
-            ) : null }
-
+            ) : null}
 
             {(product.category === "Взуття" && (
-            <p className={styles.productPrice}>
-              {product.currentPrice}
-              {" "}
-              грн.
-            </p>
+              <p className={styles.productPrice}>
+                {product.currentPrice}
+                {" "}
+                грн.
+              </p>
             ))
-                || ((product.category === "Комплекти форми"
-                    || product.category === "Одяг верхній") && (
-                    <p className={styles.productPrice}>
-                      {product.currentPrice}
-                      {" "}
-                      грн.
-                    </p>
-                ))
-                || null}
+              || ((product.category === "Комплекти форми"
+                || product.category === "Одяг верхній") && (
+                <p className={styles.productPrice}>
+                  {product.currentPrice}
+                  {" "}
+                  грн.
+                </p>
+              ))
+              || null}
 
-            {["Взуття", "Комплекти форми", "Одяг верхній"].includes(product.category) && (
-            <>
-              <p className={styles.descTitle}>Короткий опис:</p>
-              <p className={styles.descriptionText}>{product.shortDescription}</p>
-            </>
+            {["Взуття", "Комплекти форми", "Одяг верхній"].includes(
+              product.category,
+            ) && (
+              <>
+                <p className={styles.descTitle}>Короткий опис:</p>
+                <p className={styles.descriptionText}>
+                  {product.shortDescription}
+                </p>
+              </>
             )}
 
             {(product.category === "Взуття" && <ShoesSelector />)
-                || ((product.category === "Комплекти форми"
-                    || product.category === "Одяг верхній") && <ClothesSelector />)
-                || null}
+              || ((product.category === "Комплекти форми"
+                || product.category === "Одяг верхній") && <ClothesSelector />)
+              || null}
 
-            {(product.category === "Взуття" && <QuantityCounter quantity={quantity} setQuantity={setQuantity} />)
-                || ((product.category === "Комплекти форми"
-                    || product.category === "Одяг верхній") && <QuantityCounter quantity={quantity} setQuantity={setQuantity} />)
-                || null}
+            {(product.category === "Взуття" && (
+              <QuantityCounter quantity={quantity} setQuantity={setQuantity} />
+            ))
+              || ((product.category === "Комплекти форми"
+                || product.category === "Одяг верхній") && (
+                <QuantityCounter
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                />
+              ))
+              || null}
 
-            {["Взуття", "Комплекти форми", "Одяг верхній"].includes(product.category) && (
-            <div className={styles.buyButtons}>
-              {/* // <button */}
-              {/* //   className={styles.buyNowBtn}
+            {["Взуття", "Комплекти форми", "Одяг верхній"].includes(
+              product.category,
+            ) && (
+              <div className={styles.buyButtons}>
+                {/* // <button */}
+                {/* //   className={styles.buyNowBtn}
               //   onClick={() => { dispatch(openModal()); }}
               // >
               //   Миттєва купівля
               // </button> */}
-              {/* // <Button */}
-              {/* //    text="Додати в кошик"
+                {/* // <Button */}
+                {/* //    text="Додати в кошик"
               // {/*    color="rgba(70, 163, 88, 1)" */}
-              {/* //    toPage="/" */}
-              {/* // /> */}
-              {/* // <button className={styles.addToCartBtn}>Додати в кошик</button> */}
-              {/* // <button className={styles.addToFavorite}> */}
-              {/* //   <img src={heart} alt="add to favorite" /> */}
-              <Button
-                className={styles.addToCartBtn}
-                onClick={handleAddToCart}
-              >
-                {isInCart ? "В Кошику" : "Купити"}
-              </Button>
-              <button className={styles.addToFavorite} onClick={handleAddFavorites}>
-                {isButtonClicked ? (
-                  <img src={heartFilled} alt="heartIcon" />
-                ) : (
-                  <img src={heart} alt="heartIcon" />
-                )}
-              </button>
-            </div>
+                {/* //    toPage="/" */}
+                {/* // /> */}
+                {/* // <button className={styles.addToCartBtn}>Додати в кошик</button> */}
+                {/* // <button className={styles.addToFavorite}> */}
+                {/* //   <img src={heart} alt="add to favorite" /> */}
+                <Button
+                  className={styles.addToCartBtn}
+                  onClick={handleAddToCart}
+                >
+                  {isInCart ? "В Кошику" : "Купити"}
+                </Button>
+                <button
+                  className={styles.addToFavorite}
+                  onClick={handleAddFavorites}
+                >
+                  {isButtonClicked ? (
+                    <img src={heartFilled} alt="heartIcon" />
+                  ) : (
+                    <img src={heart} alt="heartIcon" />
+                  )}
+                </button>
+              </div>
             )}
 
-            {["Взуття", "Комплекти форми", "Одяг верхній"].includes(product.category) && (
-            <>
-              <p className={styles.sku}>
-                <span>Код товару:</span>
-                {" "}
-                {product.itemNo}
-              </p>
-              <p className={styles.categories}>
-                <span>Категорії: </span>
-                {product.category}
-              </p>
-              <p className={styles.productColors}>
-                <span>Колір: </span>
-                {product.color}
-              </p>
-              <ShareProducts />
-            </>
+            {["Взуття", "Комплекти форми", "Одяг верхній"].includes(
+              product.category,
+            ) && (
+              <>
+                <p className={styles.sku}>
+                  <span>Код товару:</span>
+                  {" "}
+                  {product.itemNo}
+                </p>
+                <p className={styles.categories}>
+                  <span>Категорії: </span>
+                  {product.category}
+                </p>
+                <p className={styles.productColors}>
+                  <span>Колір: </span>
+                  {product.color}
+                </p>
+                <ShareProducts />
+              </>
             )}
 
             {product.category === "Донат" ? (
@@ -321,8 +348,7 @@ function ProductView() {
                   {product.description}
                 </p>
               </div>
-
-            ) : null }
+            ) : null}
 
             {product.category === "Благодійний лот" ? (
               <>
@@ -333,48 +359,42 @@ function ProductView() {
                     value={newCurrentBid}
                     onChange={(e) => setNewCurrentBid(e.target.value)}
                   />
-                  {errorInput && <div style={{ color: "red", fontSize: "15px" }}>{errorInput}</div>}
-
+                  {errorInput && (
+                    <div style={{ color: "red", fontSize: "15px" }}>
+                      {errorInput}
+                    </div>
+                  )}
                 </div>
                 <div className={styles.rateUpBtnWrapper}>
-                  <Button
-                    text="Підняти ставку"
-                    onClick={handleBidClick}
-                  />
+                  <Button text="Підняти ставку" onClick={handleBidClick} />
                   <ShareProducts />
                 </div>
-
               </>
-
             ) : null}
-
-
 
             {product.category === "Донат" ? (
               <div className={styles.donateBtnContainer}>
-                <Button
-                  text="Підтримати проект"
-                />
+                <Button text="Підтримати проект" />
                 <ShareProducts />
               </div>
-
-            ) : null }
+            ) : null}
           </div>
-
         </div>
 
-        {["Взуття", "Комплекти форми", "Одяг верхній"].includes(product.category) && (
-        <div className={styles.descriptionContainer}>
-          <TabComponent productDescription={product.description} />
-        </div>
+        {["Взуття", "Комплекти форми", "Одяг верхній"].includes(
+          product.category,
+        ) && (
+          <div className={styles.descriptionContainer}>
+            <TabComponent productDescription={product.description} />
+          </div>
         )}
 
-        {isModalOpen && <Modal tittle="Ми раді повідомити, що ви успішно купили товар" />}
-
+        {isModalOpen && (
+          <Modal tittle="Ми раді повідомити, що ви успішно купили товар" />
+        )}
       </div>
-    </>
+    </section>
   );
 }
-
 
 export default ProductView;

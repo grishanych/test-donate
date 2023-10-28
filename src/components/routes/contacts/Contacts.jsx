@@ -11,7 +11,8 @@ import { Twitter } from "../../footer/icons/twitter/Twitter";
 import { Linkedin } from "../../footer/icons/linkedin/LinkedIn";
 import { Youtube } from "../../footer/icons/youtube/Youtube";
 import style from "./Contacts.module.scss";
-
+import logo from "../../footer/icons/logo.png";
+import Button from "../../button/Button";
 
 export function ContactMap() {
   const mapContainerStyle = {
@@ -25,9 +26,7 @@ export function ContactMap() {
   };
 
   return (
-    <LoadScript
-      googleMapsApiKey="AIzaSyDzYMkwgH4SZybsi_2DWSZjabQAFLskmNE"
-    >
+    <LoadScript googleMapsApiKey="AIzaSyDzYMkwgH4SZybsi_2DWSZjabQAFLskmNE">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
@@ -39,8 +38,6 @@ export function ContactMap() {
   );
 }
 
-
-
 export function ContactForm() {
   const handleSubmit = (values, { resetForm }) => {
     console.log(values);
@@ -49,7 +46,13 @@ export function ContactForm() {
 
   return (
     <div>
-      <h2 style={{ fontSize: "24px", margin: "0 0 24px", textTransform: "uppercase" }}>
+      <h2
+        style={{
+          fontSize: "24px",
+          margin: "0 0 24px",
+          textTransform: "uppercase",
+        }}
+      >
         Форма звернення
       </h2>
       <Formik
@@ -61,7 +64,9 @@ export function ContactForm() {
           }
           if (!values.email) {
             errors.email = "Поле є обов'язковим";
-          } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+          } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+          ) {
             errors.email = "Некоректний емейл";
           }
           if (!values.message) {
@@ -73,31 +78,83 @@ export function ContactForm() {
       >
         <Form>
           <div className={style.contactFieldWrapper}>
-            <p style={{ textTransform: "uppercase", fontWeight: "700", marginBottom: "4px" }}> Ваше Ім&apos;я:</p>
-            <Field type="text" id="name" name="name" className={style.inputForm} />
-            <ErrorMessage name="name" component="div" className={style.errorMessage} />
+            <p
+              style={{
+                textTransform: "uppercase",
+                fontWeight: "700",
+                marginBottom: "4px",
+              }}
+            >
+              {" "}
+              Ваше Ім&apos;я:
+            </p>
+            <Field
+              type="text"
+              id="name"
+              name="name"
+              className={style.inputForm}
+            />
+            <ErrorMessage
+              name="name"
+              component="div"
+              className={style.errorMessage}
+            />
           </div>
 
           <div className={style.contactFieldWrapper}>
-            <p style={{ textTransform: "uppercase", fontWeight: "700", marginBottom: "4px" }}>Ваш Email:</p>
-            <Field type="email" id="email" name="email" className={style.inputForm} />
-            <ErrorMessage name="email" component="div" className={style.errorMessage} />
+            <p
+              style={{
+                textTransform: "uppercase",
+                fontWeight: "700",
+                marginBottom: "4px",
+              }}
+            >
+              Ваш Email:
+            </p>
+            <Field
+              type="email"
+              id="email"
+              name="email"
+              className={style.inputForm}
+            />
+            <ErrorMessage
+              name="email"
+              component="div"
+              className={style.errorMessage}
+            />
           </div>
 
           <div className={style.contactFieldWrapper}>
-            <p style={{ textTransform: "uppercase", fontWeight: "700", marginBottom: "4px" }}>Ваше повідомлення:</p>
-            <Field as="textarea" id="message" name="message" className={style.textareaForm} />
-            <ErrorMessage name="message" component="div" className={style.errorMessage} />
+            <p
+              style={{
+                textTransform: "uppercase",
+                fontWeight: "700",
+                marginBottom: "4px",
+              }}
+            >
+              Ваше повідомлення:
+            </p>
+            <Field
+              as="textarea"
+              id="message"
+              name="message"
+              className={style.textareaForm}
+            />
+            <ErrorMessage
+              name="message"
+              component="div"
+              className={style.errorMessage}
+            />
           </div>
 
-          <button type="submit" className={style.btnForm}>Надіслати</button>
+          <Button>
+            Надіслати
+          </Button>
         </Form>
       </Formik>
     </div>
   );
 }
-
-
 
 const containerStyle = {
   display: "flex",
@@ -112,37 +169,57 @@ function Contacts() {
   return (
     <>
       <DocumentTitle title="Контакти" />
-      <h1 style={{ textTransform: "uppercase", lineHeight: "1.2", marginBottom: "16px" }}>Контакти</h1>
-      <div style={{
-        display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", padding: "0", marginBottom: "24px",
-      }}
+      <h1
+        style={{
+          fontSize: "30px", marginTop: "10px", color: "#7c8d66", textTransform: "uppercase",
+        }}
+      >
+        Контакти
+      </h1>
+      <p style={{ color: "rgb(61 61 61)", marginBottom: "10px" }}>Контактна інформація</p>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "24px",
+          padding: "0",
+          marginBottom: "24px",
+        }}
       >
         <div style={containerStyle}>
           {" "}
           <div style={{ padding: "0", margin: "0 0 40px" }}>
-            <p style={{ fontSize: "28px", color: "#7c8d66" }}>{" Інтернет - магазин \"Донат Перемоги\" "}</p>
-            <p style={{ margin: "0" }}>
-              м.Київ, Україна
-            </p>
+            <a style={{ fontSize: "28px", color: "#7c8d66" }} href="/">
+              <img src={logo} alt="logo" />
+            </a>
+            <p style={{ marginLeft: "10px" }}>м.Київ, Україна</p>
           </div>
-          <div style={{ padding: "0", margin: "0 0 40px" }}>
-            <p style={{ margin: "0" }}>Телефон</p>
+          <div style={{ padding: "0", margin: "0 0 40px 10px" }}>
+            <p>Телефон</p>
             <div>
-              <a href="tel: +38 099 999-19-99" style={{ fontSize: "28px", color: "#7c8d66" }}> +38 099 999-19-99 </a>
+              <a
+                href="tel: +38 099 999-19-99"
+                style={{ fontSize: "28px", color: "#7c8d66" }}
+              >
+                {" "}
+                +38 099 999-19-99
+                {" "}
+              </a>
             </div>
-
           </div>
-          <div style={{ padding: "0", margin: "0 0 40px" }}>
-            <p>
-              Соціальні мережі
-            </p>
+          <div style={{ padding: "0", margin: "0 0 40px 10px" }}>
+            <p>Соціальні мережі</p>
             <li style={{ display: "inline-flex", marginTop: " 16px" }}>
               <a
                 href="https://www.facebook.com/"
                 target="_blank"
                 rel="noreferrer"
                 className={styles.bottomSocialLink}
-                style={{ width: "40px", height: "40px", border: "3px solid #7c8d66" }}
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  border: "3px solid #7c8d66",
+                }}
               >
                 <Facebook />
               </a>
@@ -151,7 +228,11 @@ function Contacts() {
                 target="_blank"
                 rel="noreferrer"
                 className={styles.bottomSocialLink}
-                style={{ width: "40px", height: "40px", border: "3px solid #7c8d66" }}
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  border: "3px solid #7c8d66",
+                }}
               >
                 <Instagram />
               </a>
@@ -160,7 +241,11 @@ function Contacts() {
                 target="_blank"
                 rel="noreferrer"
                 className={styles.bottomSocialLink}
-                style={{ width: "40px", height: "40px", border: "3px solid #7c8d66" }}
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  border: "3px solid #7c8d66",
+                }}
               >
                 <Twitter />
               </a>
@@ -169,7 +254,11 @@ function Contacts() {
                 target="_blank"
                 rel="noreferrer"
                 className={styles.bottomSocialLink}
-                style={{ width: "40px", height: "40px", border: "3px solid #7c8d66" }}
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  border: "3px solid #7c8d66",
+                }}
               >
                 <Linkedin />
               </a>
@@ -178,12 +267,15 @@ function Contacts() {
                 target="_blank"
                 rel="noreferrer"
                 className={styles.bottomSocialLink}
-                style={{ width: "40px", height: "40px", border: "3px solid #7c8d66" }}
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  border: "3px solid #7c8d66",
+                }}
               >
                 <Youtube />
               </a>
             </li>
-
           </div>
         </div>
         <div style={containerStyle}>
