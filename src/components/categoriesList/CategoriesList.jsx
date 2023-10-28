@@ -41,7 +41,6 @@ function Categorys() {
       <div className={styles.buttonWrapper}>
         <Button
           text="Переглянути всі"
-          color="rgba(70, 163, 88, 1)"
           toPage="/categories"
         />
       </div>

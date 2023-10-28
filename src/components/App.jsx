@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import AppRoutes from "./routes/AppRoutes";
 import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
@@ -13,8 +14,10 @@ import { logIn } from "../redux/actions/loggedInActions";
 import { setProducts } from "../redux/actions/productActions";
 import ScrollToTop from "./ScrollToTop";
 import { FormButton } from "./button/Button";
+import { NEW_CART_URL, GET_FAVORITES } from "../endpoints/endpoints";
 import AppArrow from "../images/appArrow/AppArrow";
 import styles from "./App.module.scss";
+
 
 
 function App() {
@@ -23,8 +26,7 @@ function App() {
   const contextData = { isLinkVisible, setIsLinkVisible };
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
-
-  // const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -36,7 +38,6 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    // if (isLoggedIn) {
     const storedCartItems = JSON.parse(localStorage.getItem("Cart")) || [];
     const storedFavoriteItems = JSON.parse(localStorage.getItem("Favorites")) || [];
       
@@ -46,9 +47,70 @@ function App() {
     if (storedFavoriteItems.length > 0) {
       dispatch(initializeFavorites(storedFavoriteItems));
     }
-    // }
   }, [dispatch]);
 
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const getCartFromServer = async () => {
+      if (isLoggedIn) {
+        try {
+          const response = await axios.get(NEW_CART_URL);
+          return response.data;
+        } catch (err) {
+          console.error("Помилка при отриманні даних:", err);
+          return null;
+        }
+      } else {
+        console.log("Користувач не авторизований");
+        return null;
+      }
+    };
+    
+    const fetchData = async () => {
+      const cartData = await getCartFromServer();
+      if (cartData !== null && Array.isArray(cartData.products)) {
+        const productArray = cartData.products.map((item) => item.product);
+        dispatch(initializeCart(productArray));
+      }
+    };
+
+    const getFavoritesFromServer = async () => {
+      if (isLoggedIn) {
+        try {
+          const response = await axios.get(GET_FAVORITES);
+          return response.data;
+        } catch (err) {
+          console.error("Помилка при отриманні обраних товарів:", err);
+          return null;
+        }
+      } else {
+        console.log("Користувач не авторизований");
+        return null;
+      }
+    };
+    
+    const fetchFavoritesData = async () => {
+      const favoritesData = await getFavoritesFromServer();
+      if (favoritesData !== null && Array.isArray(favoritesData.favorites)) {
+        dispatch(initializeFavorites(favoritesData.favorites));
+      }
+    };
+    
+    
+    if (isLoggedIn) {
+      fetchData();
+      fetchFavoritesData();
+    }
+  }, [dispatch, isLoggedIn]);
+
+  
   useEffect(() => {
     getProducts()
       .then((data) => {
@@ -76,6 +138,7 @@ function App() {
     };
   }, []);
 
+
   
   return (
     <div className={styles.container}>
@@ -87,7 +150,6 @@ function App() {
             <AppRoutes />
           </Main>
           <Footer />
-
           {isVisible && (
           <FormButton padding="6px 0px" width="50px" onClick={scrollToTop} className={styles.scrollToTopButton}>
             <AppArrow />

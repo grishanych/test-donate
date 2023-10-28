@@ -6,7 +6,7 @@ function CustomerRegistration() {
   return (
     <>
       <DocumentTitle title="Реєстрація акаунта" />
-      <Registration headline="Реєстрація акаунта" to="/account" isAdmin={false} />
+      <Registration headline="Реєстрація акаунта" to="/log-in" isAdmin={false} />
     </>
   );
 }

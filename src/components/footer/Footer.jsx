@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "./icons/Logo.svg";
+import logo from "./icons/logo.png";
 import { Location } from "./icons/location/Location";
 import { Message } from "./icons/message/Message";
 import { Call } from "./icons/call/Call";
@@ -16,7 +16,6 @@ import { ReactComponent as LiqpayIcon } from "./icons/paymentMethods/liqpay.svg"
 import FooterAccordion from "./FooterAccordion";
 import Subscribe from "./Subscribe";
 import styles from "./Footer.module.scss";
-
 
 function Footer() {
   const menuItems = [
@@ -35,7 +34,6 @@ function Footer() {
       items: [
         { label: "Політика конфіденційності", link: "/privacy-policy" },
         { label: "Блог", link: "/blog" },
-        { label: "Звіти", link: "/reports" },
       ],
     },
     {
@@ -48,10 +46,8 @@ function Footer() {
     },
   ];
   return (
-    <footer data-testid="footer-svg-test">
-
+    <footer data-testid="footer-svg-test" className={styles.footer}>
       <div className={styles.footerContainer}>
-          
         <Subscribe />
 
         <div className={styles.footerContacts}>
@@ -60,13 +56,13 @@ function Footer() {
               <ul className={styles.contactsList}>
                 <li className={styles.contactsItem}>
                   <Link to="/">
-                    <img src={Logo} alt="Logo" />
+                    <img src={logo} alt="Logo" />
                   </Link>
                 </li>
 
                 <li className={styles.contactsItem}>
                   <Location />
-                  <a href="##">Київ, Україна</a>
+                  <a href="/">Київ, Україна</a>
                 </li>
                 <li className={styles.contactsItem}>
                   <Message />
@@ -81,9 +77,13 @@ function Footer() {
           </div>
         </div>
         <div className={styles.accordionMenuMobile}>
-          {menuItems.map((item, index) => (
+          {menuItems.map((item) => (
             // eslint-disable-next-line react/no-array-index-key
-            <FooterAccordion key={index} title={item.title} items={item.items} />
+            <FooterAccordion
+              key={item.id}
+              title={item.title}
+              items={item.items}
+            />
           ))}
         </div>
         <div className={styles.footerNavigationContainer}>
@@ -132,11 +132,6 @@ function Footer() {
                     Блог
                   </Link>
                 </li>
-                <li className={styles.bottomListItem}>
-                  <Link to="/reports" className={styles.bottomLink}>
-                    Звіти
-                  </Link>
-                </li>
               </ul>
             </nav>
 
@@ -144,12 +139,18 @@ function Footer() {
               <h4 className={styles.bottomTitle}>Категорії</h4>
               <ul className={styles.bottomList}>
                 <li className={styles.bottomListItem}>
-                  <Link to="/categories/military-clothing" className={styles.bottomLink}>
+                  <Link
+                    to="/categories/military-clothing"
+                    className={styles.bottomLink}
+                  >
                     Військовий одяг
                   </Link>
                 </li>
                 <li className={styles.bottomListItem}>
-                  <Link to="/categories/charity-auction" className={styles.bottomLink}>
+                  <Link
+                    to="/categories/charity-auction"
+                    className={styles.bottomLink}
+                  >
                     Лоти
                   </Link>
                 </li>
@@ -222,7 +223,7 @@ function Footer() {
           </div>
         </div>
         <p className={styles.rightsReserved}>
-          © 2023 GreenShop. Усі права захищені.
+          © 2023 ДонатПеремоги. Усі права захищені.
         </p>
       </div>
     </footer>
