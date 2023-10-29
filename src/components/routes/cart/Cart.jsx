@@ -109,20 +109,16 @@ function Cart() {
                 <th>Продукти</th>
                 <th>Ціна</th>
                 <th>Кількість</th>
-                <th>
-                  {" "}
-                </th>
               </tr>
             </thead>
-            {/* Sasha */}
-            {/* {currentProducts.map((item) => ( */}
-            {cartItems.map((item) => (
-              <CartItem
+            <tbody>
+              {/* Sasha */}
+              {/* {currentProducts.map((item) => ( */}
+              {cartItems.map((item) => (
                 // eslint-disable-next-line no-underscore-dangle
-                key={item._id ? item._id : item.id}
-                item={item}
-              />
-            ))}
+                <CartItem key={item._id ? item._id : item.id} item={item} />
+              ))}
+            </tbody>
           </table>
         )}
 
@@ -130,7 +126,7 @@ function Cart() {
         <Modal tittle={modalText} />
       )} */}
       {/* // <FormButton text="Купити" padding="10px" onClick={handlePurchase} /> */}
-      <FormButton text="Оформити замовлення" padding="10px" onClick={handlePurchase} />
+      {isCartEmpty ? null : <FormButton text="Оформити замовлення" padding="10px" onClick={handlePurchase} />}
     </div>
   );
 }

@@ -70,30 +70,70 @@ function FavoritesItem({ item }) {
   
    
   return (
+    // <tbody key={item.id} className={styles.cardItemWrapper}>
+    //   <div className={styles.productInfo}>
+    //     <Link to={`/product/${item.itemNo}`}>
+    //       <div className={styles.cardItemImageWrapper}>
+    //         <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
+    //       </div>
+    //     </Link>
+    //     <div className={styles.nameContainer}>
+    //       <p className={styles.name}>{item.name}</p>
+    //       <p className={styles.sku}>
+    //         <span>Код товару:</span>
+    //         {" "}
+    //         {item.itemNo}
+    //       </p>
+    //     </div>
+    //   </div>
+    //   <p className={styles.cardItemPrice}>
+    //     {item.price ? (
+    //       <div>
+    //         {item.price}
+    //         грн
+    //       </div>
+    //     ) : "-"}
+    //   </p>
+    //   <Button style={{ backgroundColor: "none" }} onClick={() => handleRemoveFromFavorites()}>
+    //     <DeleteIcon />
+    //   </Button>
+    // </tbody>
     <tbody key={item.id} className={styles.cardItemWrapper}>
-      <div className={styles.productInfo}>
-        <Link to={`/product/${item.itemNo}`}>
-          <div className={styles.cardItemImageWrapper}>
-            <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
+      <tr>
+        <td>
+          <div className={styles.productInfo}>
+            <Link to={`/product/${item.itemNo}`}>
+              <div className={styles.cardItemImageWrapper}>
+                <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
+              </div>
+            </Link>
+            <div className={styles.nameContainer}>
+              <p className={styles.name}>{item.name}</p>
+              <p className={styles.sku}>
+                <span>Код товару:</span>
+                {" "}
+                {item.itemNo}
+              </p>
+            </div>
           </div>
-        </Link>
-        <div className={styles.nameContainer}>
-          <p className={styles.name}>{item.shortName}</p>
-          <p className={styles.sku}>
-            <span>Код товару:</span>
-            {" "}
-            {item.itemNo}
-          </p>
-        </div>
-      </div>
-      <p className={styles.cardItemPrice}>
-        {item.currentPrice}
-        {" "}
-        грн
-      </p>
-      <Button style={{ backgroundColor: "none" }} onClick={() => handleRemoveFromFavorites()}>
-        <DeleteIcon />
-      </Button>
+        </td>
+        <td>
+          <div className={styles.cardItemPrice}>
+            {item.price || item.currentPrice ? (
+              <div>
+                {item.price || item.currentPrice}
+                {" "}
+                грн
+              </div>
+            ) : "-"}
+          </div>
+        </td>
+        <td>
+          <Button style={{ backgroundColor: "none" }} onClick={() => handleRemoveFromFavorites()}>
+            <DeleteIcon />
+          </Button>
+        </td>
+      </tr>
     </tbody>
   );
 }

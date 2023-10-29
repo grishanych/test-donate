@@ -28,6 +28,7 @@ function Footer() {
         { label: "Обмін та повернення", link: "/returns" },
         { label: "Контакти", link: "/contacts" },
       ],
+      id: 1,
     },
     {
       title: "Інформація",
@@ -35,6 +36,7 @@ function Footer() {
         { label: "Політика конфіденційності", link: "/privacy-policy" },
         { label: "Новини", link: "/blog" },
       ],
+      id: 2,
     },
     {
       title: "Категорії",
@@ -43,6 +45,7 @@ function Footer() {
         { label: "Лоти", link: "/categories/charity-auction" },
         { label: "Донати", link: "/categories/donation" },
       ],
+      id: 3,
     },
   ];
   return (

@@ -21,10 +21,10 @@ export default function sendCart() {
 
   axios
     .post(NEW_CART_URL, newCart)
-    .then((response) => {
-      // ! ?
-      console.log(response);
-    })
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    .then(null)
     .catch((err) => {
       console.log(err);
     });

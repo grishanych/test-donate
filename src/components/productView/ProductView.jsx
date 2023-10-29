@@ -17,7 +17,7 @@ import CountdownTimer from "./CountdownTimer";
 import DocumentTitle from "../routes/DocumentTitle";
 import styles from "./ProductView.module.scss";
 // import { openModal } from "../../redux/actionsCreators/modalActionsCreators";
-import Modal from "../modal/Modal";
+// import Modal from "../modal/Modal";
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
 import heart from "./icons/heart/heart.svg";
@@ -46,7 +46,7 @@ function ProductView() {
   // eslint-disable-next-line no-unused-vars
   // const [progress, setProgress] = useState(15);
   // const [currentBid, setCurrentBid] = useState("");
-  const isModalOpen = useSelector((state) => state.modal.isOpen);
+  // const isModalOpen = useSelector((state) => state.modal.isOpen);
   // eslint-disable-next-line no-unused-vars
   const [progress, setProgress] = useState(27);
   const [currentBid, setCurrentBid] = useState(product?.initialPrice || "");
@@ -119,6 +119,8 @@ function ProductView() {
         "CountFavoritesProducts",
         JSON.stringify(countProducts),
       );
+
+      console.log(product);
 
       dispatch(addFavorites(product));
       dispatch(counterIncrement());
@@ -391,9 +393,9 @@ function ProductView() {
           </div>
         )}
 
-        {isModalOpen && (
+        {/* {isModalOpen && (
           <Modal tittle="Ми раді повідомити, що ви успішно купили товар" />
-        )}
+        )} */}
       </div>
     </section>
   );
