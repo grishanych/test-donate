@@ -140,10 +140,12 @@ function Header() {
 
         {isUserLoggedIn ? (
           <>
-            <Link to="/favorites">
-              <HeartFavorite />
-            </Link>
-            {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
+            <div className={styles.navRightSideMenu}>
+              <Link to="/favorites">
+                <HeartFavorite />
+              </Link>
+              {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
+            </div>
             <div className={styles.navRightSideMenu}>
               <Link to="/cart">
                 <Cart />

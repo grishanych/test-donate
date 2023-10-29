@@ -1,3 +1,15 @@
+@use "../../../styles/mixins";
+@use "../../../styles/variables";
+@import "../../../styles/mediaqueries";
+
+.formHeadline{
+  font-size: 24px;
+  margin: 0 0 24px;
+  text-transform: uppercase;
+  @include devices(mobile) {
+    font-size: 22px;
+  }
+}
 .contactFieldWrapper{
   width: 100%;
   margin: 0 0 24px;
@@ -34,4 +46,52 @@
   border-style: solid;
   border-width: 2px;
   cursor: pointer;
+}
+.contactsWrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 0;
+  margin-bottom: 24px;
+  @include devices(mobile) {
+    grid-template-columns: 1fr;
+  }
+
+}
+.contactsMainInfo{
+display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  background-color: #f3f3f3;
+  padding: 40px;
+}
+.logoContainer{
+  padding: 0;
+  margin: 0 0 40px;
+  width: 100%;
+}
+.infoContainer{
+  padding: 0;
+  margin: 0 0 40px 10px;
+}
+.phoneNumber{
+  font-size: 28px;
+  color: variables.$bgc-main;
+  @include devices(mobile) {
+    font-size: 22px;
+  }
+}
+.listOfSocials{
+  display: inline-flex;
+  margin-top: 16px;
+}
+.socialLink{
+  width: 40px;
+  height: 40px;
+  border: 3px solid variables.$bgc-main;
+  @include devices(mobile) {
+    width: 30px;
+    height: 30px;
+  }
 }

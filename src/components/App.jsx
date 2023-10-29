@@ -150,6 +150,7 @@ function App() {
             <AppRoutes />
           </Main>
           <Footer />
+
           {isVisible && (
           <FormButton padding="6px 0px" width="50px" onClick={scrollToTop} className={styles.scrollToTopButton}>
             <AppArrow />

@@ -3,19 +3,16 @@
 
 
 .cardsListWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     padding-top: 20px;
-    column-gap: 20px;
-    row-gap: 20px;
+    gap: 30px;
 
     @include devices(mobile) {
         column-gap: 30px;
     }
-    @media only screen and (min-width: 1201px) {
-        column-gap: 50px;
-    }
+
 
     & a {
         display: flex;

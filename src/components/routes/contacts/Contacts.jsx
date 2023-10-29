@@ -47,11 +47,7 @@ export function ContactForm() {
   return (
     <div>
       <h2
-        style={{
-          fontSize: "24px",
-          margin: "0 0 24px",
-          textTransform: "uppercase",
-        }}
+        className={style.formHeadline}
       >
         Форма звернення
       </h2>
@@ -156,18 +152,9 @@ export function ContactForm() {
   );
 }
 
-const containerStyle = {
-  display: "flex",
-  flexDirection: "column",
-  height: "100%",
-  margin: "0",
-  background: "#f3f3f3",
-  padding: "40px",
-};
-
 function Contacts() {
   return (
-    <>
+    <section style={{ padding: "50px 15px 100px" }}>
       <DocumentTitle title="Контакти" />
       <h1
         style={{
@@ -177,29 +164,20 @@ function Contacts() {
         Контакти
       </h1>
       <p style={{ color: "rgb(61 61 61)", marginBottom: "10px" }}>Контактна інформація</p>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "24px",
-          padding: "0",
-          marginBottom: "24px",
-        }}
-      >
-        <div style={containerStyle}>
+      <div className={style.contactsWrapper}>
+        <div className={style.contactsMainInfo}>
           {" "}
-          <div style={{ padding: "0", margin: "0 0 40px" }}>
-            <a style={{ fontSize: "28px", color: "#7c8d66" }} href="/">
+          <div className={style.logoContainer}>
+            <a href="/">
               <img src={logo} alt="logo" />
             </a>
             <p style={{ marginLeft: "10px" }}>м.Київ, Україна</p>
           </div>
-          <div style={{ padding: "0", margin: "0 0 40px 10px" }}>
+          <div className={style.infoContainer}>
             <p>Телефон</p>
-            <div>
+            <div className={style.phoneNumber}>
               <a
                 href="tel: +38 099 999-19-99"
-                style={{ fontSize: "28px", color: "#7c8d66" }}
               >
                 {" "}
                 +38 099 999-19-99
@@ -207,19 +185,14 @@ function Contacts() {
               </a>
             </div>
           </div>
-          <div style={{ padding: "0", margin: "0 0 40px 10px" }}>
+          <div className={style.infoContainer}>
             <p>Соціальні мережі</p>
-            <li style={{ display: "inline-flex", marginTop: " 16px" }}>
+            <li className={style.listOfSocials}>
               <a
                 href="https://www.facebook.com/"
                 target="_blank"
                 rel="noreferrer"
-                className={styles.bottomSocialLink}
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  border: "3px solid #7c8d66",
-                }}
+                className={`${styles.bottomSocialLink} ${style.socialLink}`}
               >
                 <Facebook />
               </a>
@@ -227,12 +200,7 @@ function Contacts() {
                 href="https://www.instagram.com/"
                 target="_blank"
                 rel="noreferrer"
-                className={styles.bottomSocialLink}
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  border: "3px solid #7c8d66",
-                }}
+                className={`${styles.bottomSocialLink} ${style.socialLink}`}
               >
                 <Instagram />
               </a>
@@ -240,12 +208,7 @@ function Contacts() {
                 href="https://twitter.com/"
                 target="_blank"
                 rel="noreferrer"
-                className={styles.bottomSocialLink}
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  border: "3px solid #7c8d66",
-                }}
+                className={`${styles.bottomSocialLink} ${style.socialLink}`}
               >
                 <Twitter />
               </a>
@@ -253,12 +216,7 @@ function Contacts() {
                 href="https://www.linkedin.com/"
                 target="_blank"
                 rel="noreferrer"
-                className={styles.bottomSocialLink}
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  border: "3px solid #7c8d66",
-                }}
+                className={`${styles.bottomSocialLink} ${style.socialLink}`}
               >
                 <Linkedin />
               </a>
@@ -266,19 +224,14 @@ function Contacts() {
                 href="https://www.youtube.com/"
                 target="_blank"
                 rel="noreferrer"
-                className={styles.bottomSocialLink}
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  border: "3px solid #7c8d66",
-                }}
+                className={`${styles.bottomSocialLink} ${style.socialLink}`}
               >
                 <Youtube />
               </a>
             </li>
           </div>
         </div>
-        <div style={containerStyle}>
+        <div className={style.contactsMainInfo}>
           <div>
             <ContactForm />
           </div>
@@ -287,7 +240,7 @@ function Contacts() {
       <div>
         <ContactMap />
       </div>
-    </>
+    </section>
   );
 }
 

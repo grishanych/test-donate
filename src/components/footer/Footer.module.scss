@@ -17,18 +17,10 @@
 
 .footerContainer {
   margin-top: 100px;
+  width: 100%;
+  padding: 20px;
 }
 
-.footerContainer::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  width: 100vw;
-  min-height: 100%;
-  background-color: rgba(193, 189, 189, 0.09);
-  transform: translateX(-50%);
-  z-index: -1;
-}
 
 .footerSubscribeWrapper {
   display: flex;

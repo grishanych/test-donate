@@ -17,7 +17,12 @@ function QuantityCounter({ quantity, setQuantity }) {
       <button className={styles.decrease} onClick={handleDecrease} type="button">
         -
       </button>
-      <span className={styles.quantity}>{quantity}</span>
+      <input
+        type="text"
+        value={quantity}
+        onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+        className={styles.quantity}
+      />
       <button className={styles.increase} onClick={handleIncrease} type="button">
         +
       </button>

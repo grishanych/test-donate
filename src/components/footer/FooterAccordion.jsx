@@ -22,9 +22,9 @@ function FooterAccordion({ title, items }) {
       </h4>
       {isOpen && (
       <ul className={styles.bottomList}>
-        {items.map((item, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <li className={styles.bottomListItem} key={index}>
+        {items.map((item) => (
+
+          <li className={styles.bottomListItem} key={item.id}>
             <Link to={item.link} className={styles.bottomLink}>
               {item.label}
             </Link>

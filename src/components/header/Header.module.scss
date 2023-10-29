@@ -184,7 +184,6 @@
 
 .navRightSideMenu {
     display: flex;
-    gap: 20px;
     align-items: center;
     justify-content: space-between;
 
@@ -311,7 +310,7 @@ input:focus {
         height: 3px;
         width: 100%;
         // height: 2px;
-        margin: 5px 0px;
+        margin: 5px 0;
         // background-color: #46A358;
         // transition: background-color .3s;
         transition: 0.3s ease;
@@ -337,7 +336,7 @@ input:focus {
 }
 
 .menuListWrapper {
-    padding: 40px 15px 0px;
+    padding: 40px 15px 0;
     position: fixed;
     z-index: 9;
     top: 0;

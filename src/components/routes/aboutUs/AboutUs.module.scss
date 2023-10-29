@@ -1,0 +1,24 @@
+@use "../../../styles/mixins";
+@use "../../../styles/variables";
+@import "../../../styles/mediaqueries";
+.section{
+  padding: 50px 15px 100px;
+}
+.aboutUsHeadline{
+  font-size: 30px;
+  margin-top: 10px;
+  color: variables.$bgc-main;
+  text-transform: uppercase;
+
+}
+.aboutText{
+  padding-top: 5px;
+  color: rgb(61, 61, 61);
+}
+.headlinesText{
+  padding: 20px 0 5px;
+}
+.mainText{
+  color: #666;
+
+}

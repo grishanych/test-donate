@@ -20,6 +20,7 @@ import styles from "./Footer.module.scss";
 function Footer() {
   const menuItems = [
     {
+      id: 1,
       title: "Клієнтам",
       items: [
         { label: "Вхід до кабінету", link: "/log-in" },
@@ -30,6 +31,7 @@ function Footer() {
       ],
     },
     {
+      id: 2,
       title: "Інформація",
       items: [
         { label: "Політика конфіденційності", link: "/privacy-policy" },
@@ -37,6 +39,7 @@ function Footer() {
       ],
     },
     {
+      id: 3,
       title: "Категорії",
       items: [
         { label: "Військовий одяг", link: "/categories/military-clothing" },
