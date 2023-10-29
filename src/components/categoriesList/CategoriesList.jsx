@@ -8,7 +8,7 @@ import styles from "./CategoriesList.module.scss";
 
 function Categorys() {
   return (
-    <section className={styles.categorysWrapper}>
+    <section data-testid="categories" className={styles.categorysWrapper}>
       <ul className={styles.categorysList}>
         <Link to="/categories/donation" className={styles.categorysIteam}>
           <div className={styles.categorysImageWrapper}>
