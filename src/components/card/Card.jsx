@@ -10,7 +10,7 @@ import { Icons } from "./Icons";
 import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import sendCart from "../../api/sendCart";
-import { NEW_CART_URL, GET_FAVORITES } from "../../endpoints/endpoints";
+import { NEW_CART_URL, GET_FAVORITES, REGISTRATION_URL } from "../../endpoints/endpoints";
 import styles from "./Card.module.scss";
 
 
@@ -93,8 +93,7 @@ export function Card({
         };
         
         axios
-          .put("http://localhost:4000/api/customers", updatedCustomer);
-        // .then((response) => console.log(response));
+          .put(REGISTRATION_URL, updatedCustomer);
       }
     } catch (error) {
       console.error("Помилка при виході:", error);
@@ -183,13 +182,14 @@ export function Card({
             : goal && category === "Благодійний лот"
               ? (
                 <p className={styles.cardItemGoalLot}>
+                  {goal}
                   {" "}
+                  грн
                 </p>
               )
               : goal && category === "Донат"
                 ? (
                   <p className={styles.cardItemGoalDonat}>
-                    Ціль:
                     {" "}
                     {goal}
                     {" "}

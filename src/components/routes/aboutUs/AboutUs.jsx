@@ -10,7 +10,7 @@ function AboutUs() {
       >
         Про нас
       </h1>
-      <p style={{ paddingTop: "5px", color: "rgb(61 61 61)" }}>
+      <p style={{ padding: "5px 0px 50px", color: "rgb(61 61 61)" }}>
         Дізнайтесь більше про нас
       </p>
       <div>

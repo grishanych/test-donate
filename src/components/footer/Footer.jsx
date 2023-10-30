@@ -28,13 +28,15 @@ function Footer() {
         { label: "Обмін та повернення", link: "/returns" },
         { label: "Контакти", link: "/contacts" },
       ],
+      id: 1,
     },
     {
       title: "Інформація",
       items: [
         { label: "Політика конфіденційності", link: "/privacy-policy" },
-        { label: "Блог", link: "/blog" },
+        { label: "Новини", link: "/blog" },
       ],
+      id: 2,
     },
     {
       title: "Категорії",
@@ -43,6 +45,7 @@ function Footer() {
         { label: "Лоти", link: "/categories/charity-auction" },
         { label: "Донати", link: "/categories/donation" },
       ],
+      id: 3,
     },
   ];
   return (
@@ -129,7 +132,7 @@ function Footer() {
                 </li>
                 <li className={styles.bottomListItem}>
                   <Link to="/blog" className={styles.bottomLink}>
-                    Блог
+                    Новини
                   </Link>
                 </li>
               </ul>
@@ -206,7 +209,7 @@ function Footer() {
                 </a>
               </div>
               <div className={styles.bottomPaymentMethods}>
-                <a href="#1">
+                {/* <a href="https://paypal.com/ua/home">
                   <PaypalIcon />
                 </a>
                 <a href="#1">
@@ -217,7 +220,11 @@ function Footer() {
                 </a>
                 <a href="#1">
                   <LiqpayIcon />
-                </a>
+                </a> */}
+                <PaypalIcon />
+                <MastercardIcon />
+                <VisaIcon />
+                <LiqpayIcon />
               </div>
             </div>
           </div>

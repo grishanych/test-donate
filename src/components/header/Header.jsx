@@ -16,6 +16,7 @@ import { IconSearchMobile } from "./icons/search/IconSearch";
 import HeartFavorite from "./icons/favorites/Heart";
 import BurgerMenu from "./BurgerMenu";
 import { REGISTRATION_URL } from "../../endpoints/endpoints";
+import logo from "../footer/icons/logo.png";
 import styles from "./Header.module.scss";
 
 
@@ -134,22 +135,27 @@ function Header() {
       </div>
          
       <div className={styles.headerLaptop}>
+        <Link to="/">
+          <img src={logo} alt="Logo" />
+        </Link>
 
         {showBurgerMenu && <BurgerMenu />}
         <Navigation />
 
         {isUserLoggedIn ? (
           <>
-            <Link to="/favorites">
+            {/* <div className={styles.navRightSideMenu}> */}
+            <Link to="/favorites" className={styles.navRightSideMenu}>
               <HeartFavorite />
+              {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
             </Link>
-            {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
-            <div className={styles.navRightSideMenu}>
-              <Link to="/cart">
-                <Cart />
-              </Link>
+            {/* </div> */}
+            {/* <div className={styles.navRightSideMenu}> */}
+            <Link to="/cart" className={styles.navRightSideMenu}>
+              <Cart />
               {cartCount === 0 ? null : <span>{cartCount}</span>}
-            </div>
+            </Link>
+            {/* </div> */}
           </>
         ) : null}
 

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { GET_FAVORITES } from "../../../endpoints/endpoints";
+import { GET_FAVORITES, REGISTRATION_URL } from "../../../endpoints/endpoints";
 // import QuantityCounter from "../../productView/CounterQuantity";
 import { removeFavorites } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
@@ -41,7 +41,7 @@ function FavoritesItem({ item }) {
         };
         
         axios
-          .put("http://localhost:4000/api/customers", updatedCustomer)
+          .put(REGISTRATION_URL, updatedCustomer)
           // .then((response) => console.log(response))
           .catch((error) => console.error("Помилка при оновленні даних:", error));
       }
@@ -53,10 +53,6 @@ function FavoritesItem({ item }) {
 
   const handleRemoveFromFavorites = () => {
     if (isItemInFavorites) {
-      // let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
-      // countProducts -= 1;
-      // localStorage.setItem("CountFavoritesProducts", JSON.stringify(countProducts));
-      
       const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
       const newProducts = currentProducts.filter((cartItem) => cartItem.itemNo !== item.itemNo);
       localStorage.setItem("Favorites", JSON.stringify(newProducts));
@@ -71,29 +67,41 @@ function FavoritesItem({ item }) {
    
   return (
     <tbody key={item.id} className={styles.cardItemWrapper}>
-      <div className={styles.productInfo}>
-        <Link to={`/product/${item.itemNo}`}>
-          <div className={styles.cardItemImageWrapper}>
-            <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
+      <tr>
+        <td>
+          <div className={styles.productInfo}>
+            <Link to={`/product/${item.itemNo}`}>
+              <div className={styles.cardItemImageWrapper}>
+                <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
+              </div>
+            </Link>
+            <div className={styles.nameContainer}>
+              <p className={styles.name}>{item.name}</p>
+              <p className={styles.sku}>
+                <span>Код товару:</span>
+                {" "}
+                {item.itemNo}
+              </p>
+            </div>
           </div>
-        </Link>
-        <div className={styles.nameContainer}>
-          <p className={styles.name}>{item.shortName}</p>
-          <p className={styles.sku}>
-            <span>Код товару:</span>
-            {" "}
-            {item.itemNo}
-          </p>
-        </div>
-      </div>
-      <p className={styles.cardItemPrice}>
-        {item.currentPrice}
-        {" "}
-        грн
-      </p>
-      <Button style={{ backgroundColor: "none" }} onClick={() => handleRemoveFromFavorites()}>
-        <DeleteIcon />
-      </Button>
+        </td>
+        <td>
+          <div className={styles.cardItemPrice}>
+            {item.price || item.currentPrice ? (
+              <div>
+                {item.price || item.currentPrice}
+                {" "}
+                грн
+              </div>
+            ) : "-"}
+          </div>
+        </td>
+        <td>
+          <Button style={{ backgroundColor: "none" }} onClick={() => handleRemoveFromFavorites()}>
+            <DeleteIcon />
+          </Button>
+        </td>
+      </tr>
     </tbody>
   );
 }

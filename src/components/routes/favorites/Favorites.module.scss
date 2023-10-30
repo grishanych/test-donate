@@ -85,8 +85,10 @@
 }
 
 .cardItemPrice {
+    // text-align: center;
     color: variables.$fc-main;
     font-weight: 700;
+    width: 100px;
 }
 .tableRow{
     display: grid;
@@ -103,6 +105,7 @@
     line-height: 16px;
 }
 .nameContainer{
+    width: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;

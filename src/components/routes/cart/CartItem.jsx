@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import { Cloudinary } from "@cloudinary/url-gen";
+import { Cloudinary } from "@cloudinary/url-gen";
 import axios from "axios";
 import { removeFromCart } from "../../../redux/actions/cartActions";
 // import { removeFromCart, updateCartProduct } from "../../../redux/actions/cartActions";
@@ -17,13 +17,21 @@ function CartItem({ item }) {
   // eslint-disable-next-line max-len
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === item.itemNo));
 
-  // console.log(item);
-  // const cld = new Cloudinary({
-  //   cloud: { cloudName: "dzaxltnel" },
-  //   url: { secure: true },
-  // });
-  // const myImage = cld.image(item.nameCloudinary[0]);
-  // const imageURL = myImage.toURL();
+  const cld = new Cloudinary({
+    cloud: { cloudName: "dzaxltnel" },
+    url: { secure: true },
+  });
+  let imageURL;
+  if (item.nameCloudinary && item.nameCloudinary.length > 0) {
+    const myImage = cld.image(item.nameCloudinary[0]);
+    if (myImage) {
+      imageURL = myImage.toURL();
+    }
+  }
+  
+  if (!imageURL) {
+    imageURL = item.imageURL;
+  }
 
   async function getCartFromServer() {
     try {
@@ -88,16 +96,11 @@ function CartItem({ item }) {
   // };
   
   return (
-  // <li key={item.id} className={styles.cardItemWrapper}>
-  //   <Link to={`/product/${item.itemNo}`}>
-  //     <div className={styles.cardItemImageWrapper}>
-  //       <img alt={item.name} className={styles.cardItemImage} />
-
-    <tbody className={styles.cardItemWrapper}>
-      <div className={styles.productInfo}>
+    <tr className={styles.cardItemWrapper}>
+      <td className={styles.productInfo}>
         <Link to={`/product/${item.itemNo}`}>
           <div className={styles.cardItemImageWrapper}>
-            <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
+            <img src={imageURL || item.imageURL} alt={item.name} className={styles.cardItemImage} />
           </div>
         </Link>
         <div className={styles.nameContainer}>
@@ -108,27 +111,23 @@ function CartItem({ item }) {
             {item.itemNo}
           </p>
         </div>
-      </div>
-
-      <p className={styles.cardItemPrice}>
+      </td>
+      <td className={styles.cardItemPrice}>
         {item.currentPrice}
-        {" "}
         грн
-      </p>
-      <Button
-        className={styles.buttonDelete}
-        onClick={handleRemoveFromCart}
-        text="Видалити"
-      />
-      {/* {/* // </li> */}
-      {/* <div className={styles.quantityCounterWrapper}>
-        <QuantityCounter quantity={itemInCart.quantity} setQuantity={handleChangeQuantity} />
-      </div> */}
-
-      <Button style={{ backgroundColor: "none" }} onClick={() => handleRemoveFromCart()}>
-        <DeleteIcon />
-      </Button>
-    </tbody>
+      </td>
+      <td>
+        <div className={styles.quantityCounterWrapper}>
+          {/* <QuantityCounter quantity={itemInCart.quantity}
+          setQuantity={handleChangeQuantity} /> */}
+        </div>
+      </td>
+      <td>
+        <Button style={{ backgroundColor: "none" }} onClick={() => handleRemoveFromCart()}>
+          <DeleteIcon />
+        </Button>
+      </td>
+    </tr>
   );
 }
 
