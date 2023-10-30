@@ -68,7 +68,7 @@ export function Icons({ itemNo, name, price, imageURL, id }) {
 
 
   return (
-    <div className={styles.cardItemIconsWrapper}>
+    <div className={styles.cardItemIconsWrapper} data-testid = 'icons-testid'>
       <div className={styles.cardItemIconWrapper} onClick={handleAddToCart}>
         { isItemInCart ? <BasketFull /> : <Basket /> }
       </div>
