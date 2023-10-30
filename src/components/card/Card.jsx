@@ -94,7 +94,6 @@ export function Card({
         
         axios
           .put(REGISTRATION_URL, updatedCustomer);
-        // .then((response) => console.log(response));
       }
     } catch (error) {
       console.error("Помилка при виході:", error);
