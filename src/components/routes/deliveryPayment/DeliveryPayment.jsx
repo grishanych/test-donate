@@ -11,7 +11,7 @@ function DeliveryPayment() {
       >
         Доставка та оплата
       </h1>
-      <p style={{ paddingTop: "5px", color: "rgb(61 61 61)" }}>
+      <p style={{ padding: "5px 0px 50px", color: "rgb(61 61 61)" }}>
         Умови оплати та доставки в магазині
       </p>
       <div>

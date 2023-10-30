@@ -14,7 +14,7 @@ function PrivacyPolicy() {
       >
         Політика конфіденційності
       </h1>
-      <p style={{ paddingTop: "5px", color: "rgb(61 61 61)" }}>
+      <p style={{ padding: "5px 0px 50px", color: "rgb(61 61 61)" }}>
         Положення про обробку і захист персональних даних
       </p>
       <div>

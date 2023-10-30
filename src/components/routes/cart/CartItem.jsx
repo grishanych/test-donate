@@ -96,11 +96,6 @@ function CartItem({ item }) {
   // };
   
   return (
-  // <li key={item.id} className={styles.cardItemWrapper}>
-  //   <Link to={`/product/${item.itemNo}`}>
-  //     <div className={styles.cardItemImageWrapper}>
-  //       <img alt={item.name} className={styles.cardItemImage} />
-
     <tr className={styles.cardItemWrapper}>
       <td className={styles.productInfo}>
         <Link to={`/product/${item.itemNo}`}>
@@ -122,12 +117,6 @@ function CartItem({ item }) {
         грн
       </td>
       <td>
-        {/* <Button
-          className={styles.buttonDelete}
-          onClick={handleRemoveFromCart}
-          text="Видалити"
-        /> */}
-        {/* {/* // </li> */}
         <div className={styles.quantityCounterWrapper}>
           {/* <QuantityCounter quantity={itemInCart.quantity}
           setQuantity={handleChangeQuantity} /> */}

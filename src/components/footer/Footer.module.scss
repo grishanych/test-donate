@@ -19,16 +19,16 @@
   margin-top: 100px;
 }
 
-.footerContainer::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  width: 100vw;
-  min-height: 100%;
-  background-color: rgba(193, 189, 189, 0.09);
-  transform: translateX(-50%);
-  z-index: -1;
-}
+// .footerContainer::before {
+//   content: "";
+//   position: absolute;
+//   left: 50%;
+//   width: 100vw;
+//   min-height: 100%;
+//   background-color: rgba(193, 189, 189, 0.09);
+//   transform: translateX(-50%);
+//   z-index: -1;
+// }
 
 .footerSubscribeWrapper {
   display: flex;
@@ -97,10 +97,15 @@
 }
 
 .errorsWrapper {
+  height: 25px;
   padding-top: 18px;
   color: variables.$bgc-attention;
   font-size: variables.$fs-sx;
   text-align: center;
+}
+
+.message {
+  color: variables.$fc-text;
 }
 
 .footerSubscribeInfo {

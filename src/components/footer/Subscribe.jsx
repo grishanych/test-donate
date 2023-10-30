@@ -12,6 +12,8 @@ import styles from "./Footer.module.scss";
 
 export default function Subscribe() {
   const [showError, setShowError] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
 
   const validationSchema = object().shape({
@@ -21,12 +23,21 @@ export default function Subscribe() {
 
   const handleUserSubscribe = (email) => {
     dispatch(subscribeUser(email))
-      // eslint-disable-next-line no-unused-vars
+      .then((response) => {
+        if (response.status === 200) {
+          setShowMessage(true);
+          setTimeout(() => setShowMessage(false), 2000);
+        }
+      })
       .catch((error) => {
         setShowError(true);
+        if (error.response.status === 400) {
+          setErrorMessage("Така електронна адреса вже існує");
+        }
         setTimeout(() => setShowError(false), 2000);
       });
   };
+  
 
 
   return (
@@ -38,7 +49,13 @@ export default function Subscribe() {
       <Formik
         initialValues={{ email: "" }}
         onSubmit={(values, { setSubmitting }) => {
-          handleUserSubscribe(values.email);
+          if (!values.email) {
+            setShowError(true);
+            setErrorMessage("Ви не ввели адресу");
+            setTimeout(() => setShowError(false), 2000);
+          } else {
+            handleUserSubscribe(values.email);
+          }
           setSubmitting(false);
         }}
         validationSchema={validationSchema}
@@ -56,8 +73,9 @@ export default function Subscribe() {
               <FormButton type="submit" className={styles.joinBtn} text="Підписатися" disabled={isSubmitting} />
             </div>
             <div className={styles.errorsWrapper}>
+              {showMessage && <p className={styles.message}>Підписка оформлена</p>}
               <ErrorMessage name="email" component="p" />
-              {showError && <p className={showError && styles.textAttention}>Така електронна адреса вже існує</p>}
+              {showError && <p>{errorMessage}</p>}
             </div>
           </Form>
 

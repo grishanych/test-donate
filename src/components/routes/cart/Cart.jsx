@@ -72,7 +72,7 @@ function Cart() {
             console.log(response);
 
             axios
-              .delete("http://localhost:4000/api/cart")
+              .delete(NEW_CART_URL)
               .then((result) => {
                 console.log(result);
               })
