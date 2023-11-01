@@ -45,7 +45,7 @@ export default function FilteredCardList( {property, value, priceRange} ) {
     
 
     return (
-        <CardList items={items}/>
+      <CardList items={items} data-testid='filteredCardList-test'/>
     );
 }
 

@@ -9,7 +9,7 @@ import Auction from "./icons/lots/Auction"
 const Categorys = () => {
 
 return (
-  <section className={styles.categorysWrapper}>
+  <section className={styles.categorysWrapper} data-testid='categoriesList'>
     <ul className={styles.categorysList}>
       <Link to="/categories/donation" className={styles.categorysIteam} >
           <div className={styles.categorysImageWrapper}>

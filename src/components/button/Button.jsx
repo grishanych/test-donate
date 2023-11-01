@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types"
 
 
-export default function Button({ text="", color="rgba(70, 163, 88, 1)", padding="", width="150px", toPage="", onClick=null, children, ...rest}) {
+export default function Button({ 
+  text="",
+  color="rgba(70, 163, 88, 1)", 
+  padding="", width="150px", 
+  toPage="", 
+  onClick=null, 
+  children, 
+  ...rest  
+  }) {
 
   const buttonStyle = {
     backgroundColor: color,
@@ -13,7 +21,7 @@ export default function Button({ text="", color="rgba(70, 163, 88, 1)", padding=
 
 
   return  (
-    <Link to={toPage} style={buttonStyle} className={styles.buttonStyle} onClick={onClick} {...rest}>
+    <Link to={toPage} style={buttonStyle} className={styles.buttonStyle} onClick={onClick} {...rest}  data-testid='button'>
         {
          text !== ""  ? text : children
         }
