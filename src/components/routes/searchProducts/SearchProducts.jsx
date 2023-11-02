@@ -11,21 +11,30 @@ function ListProducts() {
   const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchTimer, setSearchTimer] = useState(null);
+
 
   useEffect(() => {
+
     setIsLoading(true);
-    getProducts()
-      .then((responseData) => {
-        setData(responseData);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Помилка при отриманні даних з сервера:", error);
-        setIsLoading(false);
-      });
+    if (searchTimer) {
+      clearTimeout(searchTimer);
+    }
+
+    const timer = setTimeout(() => {
+      getProducts()
+        .then((responseData) => {
+          setData(responseData);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Помилка при отриманні даних з сервера:", error);
+          setIsLoading(false);
+        });
+    }, 1000);
+    setSearchTimer(timer);
   }, [inputValueFromRedux]);
 
-  // eslint-disable-next-line max-len
   const filteredData = data.filter((item) => item.name.toLowerCase().includes(inputValueFromRedux.toLowerCase()));
 
     
