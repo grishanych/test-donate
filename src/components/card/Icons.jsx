@@ -20,17 +20,15 @@ export function Icons({
   const showBasketIcon = category !== "Благодійний лот" && category !== "Донат";
   
   return (
-    <div className={styles.cardItemIconsWrapper}>
+    <div className={styles.cardItemIcons}>
       {showBasketIcon && (
         <div className={styles.cardItemIconWrapper} onClick={handleAddToCart}>
           {isItemInCart ? <BasketFull /> : <Basket />}
         </div>
       )}
-      {/* {showHeartIcon && ( */}
       <div className={styles.cardItemIconWrapper} onClick={handleAddFavorites}>
         {isItemInFavorites ? <HeartFull /> : <Heart />}
       </div>
-      {/* )} */}
     </div>
   );
 }

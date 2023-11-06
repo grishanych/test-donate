@@ -2,18 +2,21 @@
 @import "../../styles/mediaqueries";
 
 .cardItemWrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  max-height: 350px;
+  max-height: 360px;
   transition: box-shadow 0.3s ease;
+
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 }
 
 .decorLot,
-.decorDonat {
+.decorDonat,
+.decorGoods {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +33,13 @@
   width: 100px;
   background-color: variables.$bgc-attention;
 }
+
+.decorGoods {
+  width: 120px;
+  color: variables.$border-color-second;
+  background-color: variables.$bgc-main;
+}
+
 .cardContainer {
   display: flex;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -38,6 +48,7 @@
   justify-content: space-between;
   gap: 10px;
 }
+
 .cardItemImageWrapper {
   position: relative;
   display: flex;
@@ -106,26 +117,16 @@
   background-color: variables.$fc-main;
 }
 
+.cardItemIconsWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 16px 0px;
+}
 
-
-//із-за цього коду з'явився горизонтальний скрол! 
-// .cardItemIconsWrapper {
-//   position: absolute;
-//   top: 170px;
-//   display: flex;
-//   justify-content: center;
-//   width: 100%;
-//   height: 40px;
-//   border-radius: 0 0 20px 20px;
-//   opacity: 1;
-//   transition: all 0.3s ease;
-
-//   @include devices(laptop) {
-//     top: 185px;
-//     visibility: hidden;
-//     opacity: 0;
-//   }
-// }
+.cardItemIcons {
+  display: flex;
+  justify-content: center;
+}
 
 .cardItemIconWrapper {
   display: flex;
@@ -140,4 +141,10 @@
 .cardItemIcon {
   width: 25px;
   padding-top: 5px;
+}
+
+.buttonWrapper {
+  margin: 10px 16px 16px;
+  display: flex;
+  justify-content: center;
 }

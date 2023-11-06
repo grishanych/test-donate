@@ -175,12 +175,29 @@ export function Card({
 
   return (
     <li className={styles.cardItemWrapper}>
-      <article className={styles.cardContainer}>
-        {category === "Благодійний лот" ? (
-          <div className={styles.decorLot}>ЛОТ</div>
-        ) : category === "Донат" ? (
-          <div className={styles.decorDonat}>ДОНАТ</div>
-        ) : null}
+      <div className={styles.cardContainer}>
+        <div className={styles.cardItemIconsWrapper}>
+          {category === "Благодійний лот" ? (
+            <div className={styles.decorLot}>ЛОТ</div>
+          ) : category === "Донат" ? (
+            <div className={styles.decorDonat}>ДОНАТ</div>
+          ) : (<div className={styles.decorGoods}>10% на ЗСУ</div>)}
+
+          <Icons
+            imageURL={imageURL}
+            itemNo={itemNo}
+            name={name}
+            price={price}
+            id={id}
+            quantity={1}
+            category={category}
+            handleAddFavorites={handleAddFavorites}
+            handleAddToCart={handleAddToCart}
+            isModalVisible={isModalVisible}
+            isModalVisibleTwo={isModalVisibleTwo}
+          />
+        </div>
+      
         <div className={styles.cardItemImageWrapper}>
           <Link to={`/product/${itemNo}`}>
             <img src={imageURL} className={styles.cardItemImage} alt="My img" />
@@ -215,29 +232,14 @@ export function Card({
           </div>
         </Link>
 
-        <div style={{ margin: "0 16px 16px" }}>
+        <div className={styles.buttonWrapper}>
           {category === "Благодійний лот" ? (
-            <Button text="Підняти ставку" width="100%" />
+            <Button text="Підняти ставку" width="80%" />
           ) : category === "Донат" ? (
-            <Button text="Підтримати проєкт" width="100%" />
-          ) : null}
+            <Button text="Зробити донат" width="80%" />
+          ) : <Button text="Купити" width="80%" />}
         </div>
-      </article>
-
-      <Icons
-        imageURL={imageURL}
-        itemNo={itemNo}
-        name={name}
-        price={price}
-        id={id}
-        quantity={1}
-        category={category}
-        handleAddFavorites={handleAddFavorites}
-        handleAddToCart={handleAddToCart}
-        isModalVisible={isModalVisible}
-        isModalVisibleTwo={isModalVisibleTwo}
-      />
-      <div className={styles.cardItemDecor} />
+      </div>
     </li>
   );
 }
