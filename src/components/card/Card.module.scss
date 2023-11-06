@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   width: 80px;
-  padding: 6px;
+  padding: 10px 0px;
   font-weight: 700;
   line-height: 1;
   background-color: variables.$bgc-hot;
@@ -133,7 +133,6 @@
   align-items: center;
   justify-content: center;
   width: 35px;
-  height: 35px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -147,4 +146,18 @@
   margin: 10px 16px 16px;
   display: flex;
   justify-content: center;
+}
+
+.showLoginModal {
+  display: none;
+}
+
+.loginModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  text-align: center;
+  color: variables.$fc-main;
+  font-size: variables.$fs-sx;
 }

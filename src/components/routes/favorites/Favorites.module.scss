@@ -85,7 +85,6 @@
 }
 
 .cardItemPrice {
-    // text-align: center;
     color: variables.$fc-main;
     font-weight: 700;
     width: 100px;
@@ -96,7 +95,7 @@
     justify-content: space-between;
     justify-items: start;
     align-items: center;
-    border-bottom: 0.3px solid #7c8d66;
+    border-bottom: 1px solid #7c8d66;
     padding-bottom: 11px;
     border-radius: 0;
     color: rgba(61, 61, 61, 1);
@@ -105,10 +104,10 @@
     line-height: 16px;
 }
 .nameContainer{
-    width: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 180px;
     margin: 0 15px;
 }
 .name {

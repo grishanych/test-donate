@@ -24,8 +24,6 @@ function Header() {
   const cartCount = useSelector((state) => state.cart.itemCount);
   const favoriteCount = useSelector((state) => state.favorites.itemCount);
   const isUserLoggedIn = localStorage.getItem("userLogin") || null;
-
-  const isLoggedInFromRedux = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
   
@@ -33,13 +31,6 @@ function Header() {
 
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
   const [showInput, setShowInput] = useState(false);
-
-  // const toggleInput = () => {
-  //   setShowInput(!showInput);
-  //   if (showBurgerMenu) {
-  //     toggleBar();
-  //   }
-  // };
 
   const toggleBar = () => {
     setShowBurgerMenu(showBurgerMenu);
@@ -87,11 +78,6 @@ function Header() {
   
   const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
   const [inputValue, setInputValue] = useState(inputValueFromRedux);
-  // const navigate = useNavigate();
-
-  // const handleSearch = () => {
-  //   navigate(`/products-search?query=${inputValue}`);
-  // };
 
   useEffect(() => {
     setInputValue(inputValueFromRedux);
@@ -106,21 +92,15 @@ function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.mobileHeader}>
-        {/* <button className={styles.buttonMobileHeader} onClick={toggleInput}> */}
-        {/* <button className={styles.buttonMobileHeader} onClick={toggleInput}>
-          <IconSearchMobile />
-        </button> */}
         <Button
           toPage={`/products-search?query=${inputValue}`}
           type="submit"
           className={styles.buttonMobileHeader}
-          // text="Знайти"
           width="45px"
           color=""
         >
           <IconSearchMobile />
         </Button>
-        {/* {showInput && ( */}
         <input
           className={styles.inputMobileHeader}
           type="text"
@@ -128,7 +108,6 @@ function Header() {
           value={inputValue}
           placeholder="Знайти..."
         />
-        {/* )} */}
 
         {isMobileScreen
           && <BurgerMenu toggleBar={toggleBar} />}
@@ -143,24 +122,18 @@ function Header() {
         <Navigation />
 
         {isUserLoggedIn ? (
-          <>
-            {/* <div className={styles.navRightSideMenu}> */}
-            <Link to="/favorites" className={styles.navRightSideMenu}>
-              <HeartFavorite />
-              {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
-            </Link>
-            {/* </div> */}
-            {/* <div className={styles.navRightSideMenu}> */}
-            <Link to="/cart" className={styles.navRightSideMenu}>
-              <Cart />
-              {cartCount === 0 ? null : <span>{cartCount}</span>}
-            </Link>
-            {/* </div> */}
-          </>
+          <Link to="/favorites" className={styles.navRightSideMenu}>
+            <HeartFavorite />
+            {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
+          </Link>
         ) : null}
+        <Link to="/cart" className={styles.navRightSideMenu}>
+          <Cart />
+          {cartCount === 0 ? null : <span>{cartCount}</span>}
+        </Link>
 
-        <Button toPage={isLoggedInFromRedux ? "/" : "/log-in"} width="40px" padding="10px" onClick={isLoggedInFromRedux ? doLogOut : null}>
-          {isLoggedInFromRedux ? <IconOut /> : <IconEnter /> }
+        <Button toPage={isUserLoggedIn ? "/" : "/log-in"} width="40px" padding="10px" onClick={isUserLoggedIn ? doLogOut : null}>
+          {isUserLoggedIn ? <IconOut /> : <IconEnter /> }
         </Button>
       </div>
     </header>

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
-import React, { useState } from "react";
+import React from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,8 +32,11 @@ export function Card({
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === itemNo));
   const isItemInFavorites = useSelector((state) => state.favorites.items.some((favItem) => favItem.itemNo === itemNo));
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isModalVisibleTwo, setIsModalVisibleTwo] = useState(false);
+  const itemsInLSCart = JSON.parse(localStorage.getItem("Cart"));
+  const isItemInLSCart = itemsInLSCart && itemsInLSCart.some((cartItem) => cartItem.itemNo === itemNo);
+  // const itemsInLSFavorites = JSON.parse(localStorage.getItem("Favorites"));
+
+  const isUserLoggedIn = localStorage.getItem("userLogin");
 
   // for working with Cloudinary
   const cld = new Cloudinary({
@@ -117,59 +120,60 @@ export function Card({
   }
 
   const handleAddToCart = () => {
-    let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
+    if (isUserLoggedIn) {
+      // let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
+  
+      if (!isItemInCart) {
+        const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+        currentProducts.push(product);
+        // countProducts += 1;
+        localStorage.setItem("Cart", JSON.stringify(currentProducts));
+        // localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
+  
+        checkCartFromServer();
+  
+        dispatch(addToCart(product));
+        dispatch(counterIncrement());
+      }
+    } else if (!isUserLoggedIn) {
+      if (!isItemInLSCart) {
+        const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+        currentProducts.push(product);
+        localStorage.setItem("Cart", JSON.stringify(currentProducts));
 
-    if (!isItemInCart) {
-      const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-      currentProducts.push(product);
-      countProducts += 1;
-      localStorage.setItem("Cart", JSON.stringify(currentProducts));
-      localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
-
-      checkCartFromServer();
-
-      dispatch(addToCart(product));
-      dispatch(counterIncrement());
-      setIsModalVisible(true);
-      setIsModalVisibleTwo(true);
-
-      setTimeout(() => {
-        setIsModalVisibleTwo(false);
-      }, 1000);
-
-      setTimeout(() => {
-        setIsModalVisible(false);
-      }, 1000);
+        dispatch(addToCart(product));
+        dispatch(counterIncrement());
+      }
     }
   };
 
   const handleAddFavorites = () => {
-    let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
+    if (isUserLoggedIn) {
+      // let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
 
-    if (!isItemInFavorites) {
-      const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
-      currentProducts.push(product);
-      countProducts += 1;
-      localStorage.setItem("Favorites", JSON.stringify(currentProducts));
-      localStorage.setItem(
-        "CountFavoritesProducts",
-        JSON.stringify(countProducts),
-      );
+      if (!isItemInFavorites) {
+        const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
+        currentProducts.push(product);
+        // countProducts += 1;
+        localStorage.setItem("Favorites", JSON.stringify(currentProducts));
+        // localStorage.setItem(
+        //   "CountFavoritesProducts",
+        //   JSON.stringify(countProducts),
+        // );
+        checkFavoritesFromServer();
 
-      checkFavoritesFromServer();
+        dispatch(addFavorites(product));
+        dispatch(counterIncrement());
+      }
+    } else if (!isUserLoggedIn) {
+      // if (!isItemInLSCart) {
+      //   const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+      //   currentProducts.push(product);
+      //   localStorage.setItem("Cart", JSON.stringify(currentProducts));
 
-      dispatch(addFavorites(product));
-      dispatch(counterIncrement());
-      setIsModalVisible(true);
-      setIsModalVisibleTwo(true);
-
-      setTimeout(() => {
-        setIsModalVisibleTwo(false);
-      }, 1000);
-
-      setTimeout(() => {
-        setIsModalVisible(false);
-      }, 1000);
+      //   dispatch(addToCart(product));
+      //   dispatch(counterIncrement());
+      // }
     }
   };
 
@@ -193,8 +197,7 @@ export function Card({
             category={category}
             handleAddFavorites={handleAddFavorites}
             handleAddToCart={handleAddToCart}
-            isModalVisible={isModalVisible}
-            isModalVisibleTwo={isModalVisibleTwo}
+            loggedIn={isUserLoggedIn}
           />
         </div>
       
