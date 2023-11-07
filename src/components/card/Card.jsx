@@ -5,7 +5,7 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { Icons } from "./Icons";
 import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
@@ -17,25 +17,29 @@ import {
 } from "../../endpoints/endpoints";
 import styles from "./Card.module.scss";
 import Button from "../button/Button";
+// import store from "../../redux/store";
+import getCart from "../../api/getCart";
 
-export function Card({
-  itemNo,
-  name,
-  price,
-  goal,
-  nameCloudinary,
-  category,
-  id,
-  quantity,
-}) {
+export function Card({ item }) {
+  const {
+    itemNo,
+    name,
+    price,
+    goal,
+    nameCloudinary,
+    category,
+    _id,
+    quantity,
+  } = item;
+  // Перед використанням 'itemNo' виконайте перевірку
+  // const isItemInCart = useSelector((state) => state.cart.items?.some((cartItem) => cartItem?.itemNo === item?.itemNo));
   const dispatch = useDispatch();
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === itemNo));
+  // console.log(isItemInCart);
   const isItemInFavorites = useSelector((state) => state.favorites.items.some((favItem) => favItem.itemNo === itemNo));
 
   const itemsInLSCart = JSON.parse(localStorage.getItem("Cart"));
   const isItemInLSCart = itemsInLSCart && itemsInLSCart.some((cartItem) => cartItem.itemNo === itemNo);
-  // const itemsInLSFavorites = JSON.parse(localStorage.getItem("Favorites"));
-
   const isUserLoggedIn = localStorage.getItem("userLogin");
 
   // for working with Cloudinary
@@ -43,17 +47,10 @@ export function Card({
     cloud: { cloudName: "dzaxltnel" },
     url: { secure: true },
   });
-  const myImage = cld.image(`${nameCloudinary}`);
+  const myImage = cld.image(`${nameCloudinary[0]}`);
   const imageURL = myImage.toURL();
 
-  const product = {
-    itemNo,
-    name,
-    price,
-    imageURL,
-    id,
-    quantity,
-  };
+  // const product = item;
 
   async function getCartFromServer() {
     try {
@@ -82,7 +79,7 @@ export function Card({
         sendCart();
       } else if (cartData !== null) {
         axios
-          .put(`http://localhost:4000/api/cart/${product.id}`)
+          .put(`http://localhost:4000/api/cart/${_id}`)
           // .then((updatedCart) => {
           //   console.log(updatedCart);
           // })
@@ -104,7 +101,7 @@ export function Card({
         && cartData.favorites
         && Array.isArray(cartData.favorites.items)
       ) {
-        const updatedFavoritesItems = [...cartData.favorites.items, product];
+        const updatedFavoritesItems = [...cartData.favorites.items, item];
 
         const updatedCustomer = {
           favorites: {
@@ -119,29 +116,44 @@ export function Card({
     }
   }
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (isUserLoggedIn) {
       // let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
   
       if (!isItemInCart) {
         const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-        currentProducts.push(product);
+        console.log(currentProducts);
+        const serverCart = await getCart();
+        console.log(serverCart);
+        
+        // currentProducts.push(newCart.products);
+        // console.log(currentProducts);
+        // currentProducts.push(item);
         // countProducts += 1;
-        localStorage.setItem("Cart", JSON.stringify(currentProducts));
+        // localStorage.setItem("Cart", JSON.stringify(serverCart.data.products));
         // localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
   
         checkCartFromServer();
   
-        dispatch(addToCart(product));
+        dispatch(addToCart(item));
         dispatch(counterIncrement());
       }
     } else if (!isUserLoggedIn) {
       if (!isItemInLSCart) {
         const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-        currentProducts.push(product);
+        // const serverCart = await getCart();
+        // console.log(serverCart.data.products);
+        // localStorage.setItem("Cart", JSON.stringify(serverCart.data.products));
+        const transformedCartItem = {
+          // eslint-disable-next-line no-underscore-dangle
+          product: item._id,
+          cartQuantity: item.quantity,
+        };
+
+        currentProducts.push(transformedCartItem);
         localStorage.setItem("Cart", JSON.stringify(currentProducts));
 
-        dispatch(addToCart(product));
+        dispatch(addToCart(item));
         dispatch(counterIncrement());
       }
     }
@@ -153,7 +165,7 @@ export function Card({
 
       if (!isItemInFavorites) {
         const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
-        currentProducts.push(product);
+        currentProducts.push(item);
         // countProducts += 1;
         localStorage.setItem("Favorites", JSON.stringify(currentProducts));
         // localStorage.setItem(
@@ -162,7 +174,7 @@ export function Card({
         // );
         checkFavoritesFromServer();
 
-        dispatch(addFavorites(product));
+        dispatch(addFavorites(item));
         dispatch(counterIncrement());
       }
     } else if (!isUserLoggedIn) {
@@ -192,8 +204,8 @@ export function Card({
             itemNo={itemNo}
             name={name}
             price={price}
-            id={id}
-            quantity={1}
+            id={_id}
+            quantity={quantity}
             category={category}
             handleAddFavorites={handleAddFavorites}
             handleAddToCart={handleAddToCart}
@@ -247,12 +259,12 @@ export function Card({
   );
 }
 
-Card.propTypes = {
-  itemNo: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.number.isRequired,
-  ]),
-  nameCloudinary: PropTypes.string.isRequired,
-};
+// Card.propTypes = {
+//   itemNo: PropTypes.string.isRequired,
+//   name: PropTypes.string.isRequired,
+//   price: PropTypes.oneOfType([
+//     PropTypes.string.isRequired,
+//     PropTypes.number.isRequired,
+//   ]),
+//   nameCloudinary: PropTypes.string.isRequired,
+// };

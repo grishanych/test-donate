@@ -45,7 +45,7 @@ export const resetFavorites = () => ({
 });
 
 // !
-export const updateCartProduct = (product) => ({
+export const updateCart = (product) => ({
   type: UPDATE_CART_PRODUCT,
   payload: product,
 });

@@ -68,17 +68,20 @@ export const cartReducer = (state = initialState.cart, action) => {
       
     //  !
     case UPDATE_CART_PRODUCT: {
-      const items = state.items.map((item) => {
-        if (item.itemNo === action.payload.itemNo) {
-          return { ...item, ...action.payload };
-        }
+      // const items = state.items.map((item) => {
+      //   if (item.itemNo === action.payload.itemNo) {
+      //     return { ...item, ...action.payload };
+      //   }
 
-        return item;
-      });
+      //   return item;
+      // });
       
       return {
+        // ...state,
+        // items,
         ...state,
-        items,
+        items: action.payload,
+        itemCount: action.payload.length,
       };
     }
 

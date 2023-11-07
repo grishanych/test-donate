@@ -16,6 +16,13 @@ function CartItem({ item }) {
   const dispatch = useDispatch();
   // eslint-disable-next-line max-len
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === item.itemNo));
+  const itemsInLSCart = JSON.parse(localStorage.getItem("Cart"));
+  // eslint-disable-next-line max-len
+  const isItemInLSCart = itemsInLSCart && itemsInLSCart.some((cartItem) => cartItem.itemNo === item.itemNo);
+  // eslint-disable-next-line max-len
+  // const isItemInLSCart = itemsInLSCart((cartItem) => cartItem.itemNo === item.itemNo);
+  // console.log(isItemInLSCart);
+  const isUserLoggedIn = localStorage.getItem("userLogin");
 
   const cld = new Cloudinary({
     cloud: { cloudName: "dzaxltnel" },
@@ -66,19 +73,30 @@ function CartItem({ item }) {
   // );
   
   const handleRemoveFromCart = () => {
-    if (isItemInCart) {
-      // let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
-      // countProducts -= 1;
-      // localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
+    if (isUserLoggedIn) {
+      if (isItemInCart) {
+        // let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
+        // countProducts -= 1;
+        // localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
       
-      const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-      const newProducts = currentProducts.filter((cartItem) => cartItem.itemNo !== item.itemNo);
-      localStorage.setItem("Cart", JSON.stringify(newProducts));
+        const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+        const newProducts = currentProducts.filter((cartItem) => cartItem.itemNo !== item.itemNo);
+        localStorage.setItem("Cart", JSON.stringify(newProducts));
 
-      deleteCartFromServer();
+        deleteCartFromServer();
       
-      dispatch(removeFromCart(item.itemNo));
-      dispatch(counterDecrement());
+        dispatch(removeFromCart(item.itemNo));
+        dispatch(counterDecrement());
+      }
+    } else if (!isUserLoggedIn) {
+      if (isItemInLSCart) {
+        const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+        currentProducts.push(item);
+        localStorage.setItem("Cart", JSON.stringify(currentProducts));
+
+        dispatch(removeFromCart(item.itemNo));
+        dispatch(counterDecrement());
+      }
     }
   };
 
