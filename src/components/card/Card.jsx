@@ -18,7 +18,7 @@ import {
 import styles from "./Card.module.scss";
 import Button from "../button/Button";
 // import store from "../../redux/store";
-import getCart from "../../api/getCart";
+// import getCart from "../../api/getCart";
 
 export function Card({ item }) {
   const {
@@ -29,7 +29,7 @@ export function Card({ item }) {
     nameCloudinary,
     category,
     _id,
-    quantity,
+    // quantity,
   } = item;
   // Перед використанням 'itemNo' виконайте перевірку
   // const isItemInCart = useSelector((state) => state.cart.items?.some((cartItem) => cartItem?.itemNo === item?.itemNo));
@@ -38,8 +38,8 @@ export function Card({ item }) {
   // console.log(isItemInCart);
   const isItemInFavorites = useSelector((state) => state.favorites.items.some((favItem) => favItem.itemNo === itemNo));
 
-  const itemsInLSCart = JSON.parse(localStorage.getItem("Cart"));
-  const isItemInLSCart = itemsInLSCart && itemsInLSCart.some((cartItem) => cartItem.itemNo === itemNo);
+  // const itemsInLSCart = JSON.parse(localStorage.getItem("Cart"));
+  // const isItemInLSCart = itemsInLSCart && itemsInLSCart.some((cartItem) => cartItem.itemNo === itemNo);
   const isUserLoggedIn = localStorage.getItem("userLogin");
 
   // for working with Cloudinary
@@ -72,7 +72,7 @@ export function Card({ item }) {
     }
   }
 
-  async function checkCartFromServer() {
+  async function addCartToServer() {
     try {
       const cartData = await getCartFromServer();
       if (cartData === null) {
@@ -118,39 +118,17 @@ export function Card({ item }) {
 
   const handleAddToCart = async () => {
     if (isUserLoggedIn) {
-      // let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
-  
+      // есть ли этот товар в store, если нет - добавляем на сервер - addCartToServer, и в store - addToCart
       if (!isItemInCart) {
-        const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-        console.log(currentProducts);
-        const serverCart = await getCart();
-        console.log(serverCart);
-        
-        // currentProducts.push(newCart.products);
-        // console.log(currentProducts);
-        // currentProducts.push(item);
-        // countProducts += 1;
-        // localStorage.setItem("Cart", JSON.stringify(serverCart.data.products));
-        // localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
-  
-        checkCartFromServer();
-  
+        addCartToServer();
         dispatch(addToCart(item));
         dispatch(counterIncrement());
       }
     } else if (!isUserLoggedIn) {
-      if (!isItemInLSCart) {
-        const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-        // const serverCart = await getCart();
-        // console.log(serverCart.data.products);
-        // localStorage.setItem("Cart", JSON.stringify(serverCart.data.products));
-        const transformedCartItem = {
-          // eslint-disable-next-line no-underscore-dangle
-          product: item._id,
-          cartQuantity: item.quantity,
-        };
-
-        currentProducts.push(transformedCartItem);
+      const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+      const isItemInLSCart = currentProducts && currentProducts.some((cartItem) => cartItem.product === _id);
+      if (!isItemInLSCart && !isItemInCart) {
+        currentProducts.push(item);
         localStorage.setItem("Cart", JSON.stringify(currentProducts));
 
         dispatch(addToCart(item));
@@ -205,7 +183,7 @@ export function Card({ item }) {
             name={name}
             price={price}
             id={_id}
-            quantity={quantity}
+            quantity={1}
             category={category}
             handleAddFavorites={handleAddFavorites}
             handleAddToCart={handleAddToCart}

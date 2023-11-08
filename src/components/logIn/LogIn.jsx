@@ -14,9 +14,15 @@ import EyeClosed from "./eye/EyeClosed";
 import EyeOpen from "./eye/EyeOpen";
 import { FormButton } from "../button/Button";
 import logInUser from "../../api/logInUser";
-import { NEW_CART_URL, GET_FAVORITES } from "../../endpoints/endpoints";
+import {
+  // NEW_CART_URL,
+  GET_FAVORITES,
+} from "../../endpoints/endpoints";
 import styles from "./LogIn.module.scss";
-import { initializeCart, initializeFavorites } from "../../redux/actions/cartActions";
+import {
+  // initializeCart,
+  initializeFavorites,
+} from "../../redux/actions/cartActions";
 
 
 function LogIn({ headline, toRegistration }) {
@@ -52,26 +58,26 @@ function LogIn({ headline, toRegistration }) {
 
   // get Cart
   // ! api
-  async function getCartFromServer() {
-    try {
-      const response = await axios.get(NEW_CART_URL);
-      return response.data;
-    } catch (err) {
-      console.error("Помилка при отриманні даних:", err);
-      return null;
-    }
-  }
+  // async function getCartFromServer() {
+  //   try {
+  //     const response = await axios.get(NEW_CART_URL);
+  //     return response.data;
+  //   } catch (err) {
+  //     console.error("Помилка при отриманні даних:", err);
+  //     return null;
+  //   }
+  // }
   
   const handleUserLogin = async (login, password) => {
     try {
       await dispatch(logInUser(login, password));
 
       const userFavotites = await getFavoritesFromServer();
-      const userCart = await getCartFromServer();
-      if (userCart !== null) {
-        const productsFromServer = userCart.products.map((item) => item.product);
-        dispatch(initializeCart(productsFromServer));
-      }
+      // const userCart = await getCartFromServer();
+      // if (userCart !== null) {
+      //   const productsFromServer = userCart.products.map((item) => item.product);
+      //   dispatch(initializeCart(productsFromServer));
+      // }
       if (userFavotites.favorites && userFavotites.favorites.length > 0) {
         dispatch(initializeFavorites(userFavotites.favorites));
       }
