@@ -20,13 +20,12 @@ export const syncStorageMiddleware = (storeAPI) => (next) => async (action) => {
     if (["ADD_TO_CART", "REMOVE_FROM_CART", "ADD_FAVORITES", "REMOVE_FROM_FAVORITES"].includes(action.type)) {
       const token = localStorage.getItem("token");
       setAuthToken(token);
-  
-      // Використовуємо токен для отримання даних кошика
       try {
         const response = await axios.get(NEW_CART_URL);
         
-        // Оновлюємо localStorage з отриманими даними
-        if (response.status === 200) {
+        if (response.status === 200 && response.data !== null) {
+          console.log(response.data);
+          console.log(response);
           localStorage.setItem("Cart", JSON.stringify(response.data.products));
           localStorage.setItem("Favorites", JSON.stringify(storeAPI.getState().favorites.items));
         }

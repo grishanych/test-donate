@@ -9,7 +9,7 @@ import axios from "axios";
 import { Icons } from "./Icons";
 import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
-import sendCart from "../../api/sendCart";
+import { sendCartToEmptyServer } from "../../api/sendCart";
 import {
   NEW_CART_URL,
   GET_FAVORITES,
@@ -17,8 +17,6 @@ import {
 } from "../../endpoints/endpoints";
 import styles from "./Card.module.scss";
 import Button from "../button/Button";
-// import store from "../../redux/store";
-// import getCart from "../../api/getCart";
 
 export function Card({ item }) {
   const {
@@ -31,15 +29,10 @@ export function Card({ item }) {
     _id,
     // quantity,
   } = item;
-  // Перед використанням 'itemNo' виконайте перевірку
-  // const isItemInCart = useSelector((state) => state.cart.items?.some((cartItem) => cartItem?.itemNo === item?.itemNo));
   const dispatch = useDispatch();
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === itemNo));
-  // console.log(isItemInCart);
   const isItemInFavorites = useSelector((state) => state.favorites.items.some((favItem) => favItem.itemNo === itemNo));
 
-  // const itemsInLSCart = JSON.parse(localStorage.getItem("Cart"));
-  // const isItemInLSCart = itemsInLSCart && itemsInLSCart.some((cartItem) => cartItem.itemNo === itemNo);
   const isUserLoggedIn = localStorage.getItem("userLogin");
 
   // for working with Cloudinary
@@ -49,8 +42,6 @@ export function Card({ item }) {
   });
   const myImage = cld.image(`${nameCloudinary[0]}`);
   const imageURL = myImage.toURL();
-
-  // const product = item;
 
   async function getCartFromServer() {
     try {
@@ -71,18 +62,15 @@ export function Card({ item }) {
       return null;
     }
   }
-
+  
   async function addCartToServer() {
     try {
       const cartData = await getCartFromServer();
       if (cartData === null) {
-        sendCart();
+        sendCartToEmptyServer();
       } else if (cartData !== null) {
         axios
           .put(`http://localhost:4000/api/cart/${_id}`)
-          // .then((updatedCart) => {
-          //   console.log(updatedCart);
-          // })
           .catch((err) => {
             console.log(err);
           });
@@ -118,7 +106,6 @@ export function Card({ item }) {
 
   const handleAddToCart = async () => {
     if (isUserLoggedIn) {
-      // есть ли этот товар в store, если нет - добавляем на сервер - addCartToServer, и в store - addToCart
       if (!isItemInCart) {
         addCartToServer();
         dispatch(addToCart(item));

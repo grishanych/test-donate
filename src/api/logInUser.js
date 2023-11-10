@@ -5,7 +5,6 @@ import { setError } from "../redux/actions/errorActions";
 import { LOGIN_URL, GET_FAVORITES } from "../endpoints/endpoints";
 import { setLoggedInUser } from "../redux/actions/userActions";
 import { initializeCart } from "../redux/actions/cartActions";
-// import { getProducts } from ""
 import sendCart from "./sendCart";
 import getCart from "./getCart";
 import updateCart from "./updateCart";
@@ -39,43 +38,26 @@ const logInUser = (login, password) => async (dispatch) => {
 
       const cartItems = JSON.parse(localStorage.getItem("Cart")) || [];
       const serverCart = await getCart();
-      console.log(serverCart.data.products);
       
       // !
-      if (serverCart.data.products.length > 0) {
+      if (serverCart.data === null && cartItems.length !== 0) {
+        await sendCart(cartItems);
+      } else if (serverCart.data === null && cartItems.length === 0) {
+        // go ahead
+      } else if (serverCart.data.products.length > 0) {
         const serverCartItems = [];
         serverCart.data.products.map((i) => (
           serverCartItems.push(i.product)
-          // quantity: product.cartQuantity,
-          // eslint-disable-next-line no-underscore-dangle
-          // _id: product.product._id,
         ));
         const updatedCartItems = [...cartItems, ...serverCartItems];
         localStorage.setItem("Cart", JSON.stringify(updatedCartItems));
-        console.log(updatedCartItems);
-        // обновляем store
         dispatch(initializeCart(updatedCartItems));
-        // форматируем
-        // обновляем сервер
         await updateCart(updatedCartItems);
       }
-      
-      if (serverCart.data.products > 0) {
-        // Кошик на сервері існує, потрібно оновити його
-        console.log(cartItems);
-        console.log(serverCart.data.products);
-        // await updateCart([...serverCart.data.products, ...cartItems]);
-      } else if (serverCart.data.products === 0 && cartItems.length > 0) {
-        // Кошика на сервері немає, потрібно створити новий
-        await sendCart(cartItems);
-      }
-
-      // Оновлюємо Redux store новими даними кошика з сервера
-      // const prod = [];
-      // serverCart.data.products.forEach((item) => prod.push(item.product));
-      // товар для store
-      // dispatch(initializeCart(...prod));
-      // dispatch(initializeCart(...prod));
+      // else if (serverCart.data.products.length < 0) {
+      //   console.log(serverCart.data.products);
+      //   console.log("0");
+      // }
     }
   } catch (error) {
     if (error.response && error.response.data.loginOrEmail === "Customer not found") {

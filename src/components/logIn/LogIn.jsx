@@ -44,7 +44,6 @@ function LogIn({ headline, toRegistration }) {
       .matches(/[a-zA-Z0-9]/, "Дозволені символи для пароля: a-z, A-Z, 0-9"),
   });
 
-
   // get Favorites
   async function getFavoritesFromServer() {
     try {
@@ -55,35 +54,15 @@ function LogIn({ headline, toRegistration }) {
       return null;
     }
   }
-
-  // get Cart
-  // ! api
-  // async function getCartFromServer() {
-  //   try {
-  //     const response = await axios.get(NEW_CART_URL);
-  //     return response.data;
-  //   } catch (err) {
-  //     console.error("Помилка при отриманні даних:", err);
-  //     return null;
-  //   }
-  // }
   
   const handleUserLogin = async (login, password) => {
     try {
       await dispatch(logInUser(login, password));
 
       const userFavotites = await getFavoritesFromServer();
-      // const userCart = await getCartFromServer();
-      // if (userCart !== null) {
-      //   const productsFromServer = userCart.products.map((item) => item.product);
-      //   dispatch(initializeCart(productsFromServer));
-      // }
       if (userFavotites.favorites && userFavotites.favorites.length > 0) {
         dispatch(initializeFavorites(userFavotites.favorites));
       }
-      // else {
-      //   console.log("Масив порожній або невизначений");
-      // }
     
       if (userFavotites.isAdmin === false) {
         navigate("/account");
