@@ -12,6 +12,7 @@ import { logOut } from "../../redux/actions/loggedInActions";
 import Button from "../button/Button";
 import Navigation from "./Navigation";
 import { resetCart, resetFavorites } from "../../redux/actions/cartActions";
+import { setLoggedOutUser } from "../../redux/actions/userActions";
 import { IconSearchMobile } from "./icons/search/IconSearch";
 import HeartFavorite from "./icons/favorites/Heart";
 import BurgerMenu from "./BurgerMenu";
@@ -23,7 +24,8 @@ import styles from "./Header.module.scss";
 function Header() {
   const cartCount = useSelector((state) => state.cart.itemCount);
   const favoriteCount = useSelector((state) => state.favorites.itemCount);
-  const isUserLoggedIn = localStorage.getItem("userLogin") || null;
+  // const isUserLoggedIn = localStorage.getItem("userLogin") || null;
+  const isUserLoggedIn = useSelector((state) => state.username.username);
   const dispatch = useDispatch();
 
   
@@ -71,6 +73,7 @@ function Header() {
       dispatch(resetCart());
       dispatch(resetFavorites());
       dispatch(logOut());
+      dispatch(setLoggedOutUser());
     } catch (error) {
       console.error("Помилка при виході:", error);
     }

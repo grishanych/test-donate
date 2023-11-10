@@ -2,7 +2,7 @@ import axios from "axios";
 import { setAuthToken } from "../redux/actions/authActions";
 import { logIn } from "../redux/actions/loggedInActions";
 import { setError } from "../redux/actions/errorActions";
-import { LOGIN_URL, GET_FAVORITES } from "../endpoints/endpoints";
+import { LOGIN_URL, GET_CUSTOMER } from "../endpoints/endpoints";
 import { setLoggedInUser } from "../redux/actions/userActions";
 import { initializeCart } from "../redux/actions/cartActions";
 import sendCart from "./sendCart";
@@ -12,7 +12,7 @@ import updateCart from "./updateCart";
 
 async function getFavoritesFromServer() {
   try {
-    const response = await axios.get(GET_FAVORITES);
+    const response = await axios.get(GET_CUSTOMER);
     localStorage.setItem("isAdmin", `${response.data.isAdmin}`);
     return response.data.isAdmin;
   } catch (err) {

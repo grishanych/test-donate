@@ -12,7 +12,7 @@ import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import { sendCartToEmptyServer } from "../../api/sendCart";
 import {
   NEW_CART_URL,
-  GET_FAVORITES,
+  GET_CUSTOMER,
   REGISTRATION_URL,
 } from "../../endpoints/endpoints";
 import styles from "./Card.module.scss";
@@ -53,16 +53,6 @@ export function Card({ item }) {
     }
   }
 
-  async function getFavoritesFromServer() {
-    try {
-      const response = await axios.get(GET_FAVORITES);
-      return response.data;
-    } catch (err) {
-      console.error("Помилка при отриманні даних:", err);
-      return null;
-    }
-  }
-  
   async function addCartToServer() {
     try {
       const cartData = await getCartFromServer();
@@ -74,30 +64,6 @@ export function Card({ item }) {
           .catch((err) => {
             console.log(err);
           });
-      }
-    } catch (error) {
-      console.error("Помилка при виході:", error);
-    }
-  }
-
-  async function checkFavoritesFromServer() {
-    try {
-      const cartData = await getFavoritesFromServer();
-
-      if (
-        cartData
-        && cartData.favorites
-        && Array.isArray(cartData.favorites.items)
-      ) {
-        const updatedFavoritesItems = [...cartData.favorites.items, item];
-
-        const updatedCustomer = {
-          favorites: {
-            items: updatedFavoritesItems,
-          },
-        };
-
-        axios.put(REGISTRATION_URL, updatedCustomer);
       }
     } catch (error) {
       console.error("Помилка при виході:", error);
@@ -123,6 +89,41 @@ export function Card({ item }) {
       }
     }
   };
+
+
+  async function getFavoritesFromServer() {
+    try {
+      const response = await axios.get(GET_CUSTOMER);
+      return response.data;
+    } catch (err) {
+      console.error("Помилка при отриманні даних:", err);
+      return null;
+    }
+  }
+  
+  async function checkFavoritesFromServer() {
+    try {
+      const cartData = await getFavoritesFromServer();
+
+      if (
+        cartData
+        && cartData.favorites
+        && Array.isArray(cartData.favorites.items)
+      ) {
+        const updatedFavoritesItems = [...cartData.favorites.items, item];
+
+        const updatedCustomer = {
+          favorites: {
+            items: updatedFavoritesItems,
+          },
+        };
+
+        axios.put(REGISTRATION_URL, updatedCustomer);
+      }
+    } catch (error) {
+      console.error("Помилка при виході:", error);
+    }
+  }
 
   const handleAddFavorites = () => {
     if (isUserLoggedIn) {

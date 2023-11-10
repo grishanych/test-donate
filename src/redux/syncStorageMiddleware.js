@@ -24,8 +24,6 @@ export const syncStorageMiddleware = (storeAPI) => (next) => async (action) => {
         const response = await axios.get(NEW_CART_URL);
         
         if (response.status === 200 && response.data !== null) {
-          console.log(response.data);
-          console.log(response);
           localStorage.setItem("Cart", JSON.stringify(response.data.products));
           localStorage.setItem("Favorites", JSON.stringify(storeAPI.getState().favorites.items));
         }

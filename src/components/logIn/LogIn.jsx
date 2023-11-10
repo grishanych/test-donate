@@ -16,7 +16,7 @@ import { FormButton } from "../button/Button";
 import logInUser from "../../api/logInUser";
 import {
   // NEW_CART_URL,
-  GET_FAVORITES,
+  GET_CUSTOMER,
 } from "../../endpoints/endpoints";
 import styles from "./LogIn.module.scss";
 import {
@@ -47,7 +47,7 @@ function LogIn({ headline, toRegistration }) {
   // get Favorites
   async function getFavoritesFromServer() {
     try {
-      const response = await axios.get(GET_FAVORITES);
+      const response = await axios.get(GET_CUSTOMER);
       return response.data;
     } catch (err) {
       console.error("Помилка при отриманні даних:", err);

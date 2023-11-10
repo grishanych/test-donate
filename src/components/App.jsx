@@ -14,7 +14,7 @@ import { logIn } from "../redux/actions/loggedInActions";
 import { setProducts } from "../redux/actions/productActions";
 import ScrollToTop from "./ScrollToTop";
 import { FormButton } from "./button/Button";
-import { NEW_CART_URL, GET_FAVORITES } from "../endpoints/endpoints";
+import { NEW_CART_URL, GET_CUSTOMER } from "../endpoints/endpoints";
 import AppArrow from "../images/appArrow/AppArrow";
 import styles from "./App.module.scss";
 
@@ -84,7 +84,7 @@ function App() {
     const getFavoritesFromServer = async () => {
       if (isLoggedIn) {
         try {
-          const response = await axios.get(GET_FAVORITES);
+          const response = await axios.get(GET_CUSTOMER);
           return response.data;
         } catch (err) {
           console.error("Помилка при отриманні обраних товарів:", err);

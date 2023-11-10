@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { GET_FAVORITES, REGISTRATION_URL } from "../../../endpoints/endpoints";
+import { GET_CUSTOMER, REGISTRATION_URL } from "../../../endpoints/endpoints";
 // import QuantityCounter from "../../productView/CounterQuantity";
 import { removeFavorites } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
@@ -18,7 +18,7 @@ function FavoritesItem({ item }) {
 
   async function getFavoritesFromServer() {
     try {
-      const response = await axios.get(GET_FAVORITES);
+      const response = await axios.get(GET_CUSTOMER);
       return response.data;
     } catch (err) {
       console.error("Помилка при отриманні даних:", err);
