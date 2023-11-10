@@ -4,13 +4,16 @@ import { logIn } from "../redux/actions/loggedInActions";
 import { setError } from "../redux/actions/errorActions";
 import { LOGIN_URL, GET_CUSTOMER } from "../endpoints/endpoints";
 import { setLoggedInUser } from "../redux/actions/userActions";
-import { initializeCart } from "../redux/actions/cartActions";
-import sendCart from "./sendCart";
+import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
 import getCart from "./getCart";
+import sendCart from "./sendCart";
+import sendFavorites from "./sendFavorites";
+import getFavorites from "./getFavorites";
 import updateCart from "./updateCart";
+import updateFavorites from "./updateFavorites";
 
 
-async function getFavoritesFromServer() {
+async function getCustomerFromServer() {
   try {
     const response = await axios.get(GET_CUSTOMER);
     localStorage.setItem("isAdmin", `${response.data.isAdmin}`);
@@ -33,11 +36,14 @@ const logInUser = (login, password) => async (dispatch) => {
       localStorage.setItem("userLogin", login);
       localStorage.setItem("token", token);
       dispatch(setAuthToken(token));
-      getFavoritesFromServer();
+      getCustomerFromServer();
       dispatch(logIn());
 
       const cartItems = JSON.parse(localStorage.getItem("Cart")) || [];
       const serverCart = await getCart();
+
+      const favoritesItems = JSON.parse(localStorage.getItem("Favorites")) || [];
+      const serverFavorites = await getFavorites();
       
       // !
       if (serverCart.data === null && cartItems.length !== 0) {
@@ -58,6 +64,21 @@ const logInUser = (login, password) => async (dispatch) => {
       //   console.log(serverCart.data.products);
       //   console.log("0");
       // }
+
+      if (serverFavorites.data === null && favoritesItems.length !== 0) {
+        await sendFavorites(favoritesItems);
+      } else if (serverFavorites.data === null && favoritesItems.length === 0) {
+        // go ahead
+      } else if (serverFavorites.data.products.length > 0) {
+        const serverFavoritesItems = [];
+        serverFavorites.data.products.map((i) => (
+          serverFavoritesItems.push(i.product)
+        ));
+        const updatedFavoritesItems = [...favoritesItems, ...serverFavoritesItems];
+        localStorage.setItem("Favorites", JSON.stringify(updatedFavoritesItems));
+        dispatch(initializeFavorites(updatedFavoritesItems));
+        await updateFavorites(updatedFavoritesItems);
+      }
     }
   } catch (error) {
     if (error.response && error.response.data.loginOrEmail === "Customer not found") {

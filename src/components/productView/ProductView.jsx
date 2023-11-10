@@ -107,6 +107,7 @@ function ProductView() {
     }
   };
 
+  // !
   const handleAddFavorites = () => {
     let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
 
@@ -135,7 +136,6 @@ function ProductView() {
     };
 
     dispatch(addToCart(productWithQuantity));
-    console.log(productWithQuantity);
     setQuantity(1);
 
     setIsInCart(true);

@@ -94,6 +94,27 @@ export const cartReducer = (state = initialState.cart, action) => {
 export const favoritesReducer = (state = initialState.favorites, action) => {
   switch (action.type) {
     case ADD_FAVORITES:
+      // return {
+      //   ...state,
+      //   items: [...state.items, action.payload],
+      //   itemCount: state.itemCount + 1,
+    // };
+      if (state.items.some((item) => item.itemNo === action.payload.itemNo)) {
+        return {
+          ...state,
+          items: state.items.map((item) => {
+            if (item.itemNo === action.payload.itemNo) {
+              return {
+                ...item,
+                ...action.payload,
+                quantity: item.quantity + action.payload.quantity,
+              };
+            }
+    
+            return item;
+          }),
+        };
+      }
       return {
         ...state,
         items: [...state.items, action.payload],
@@ -115,6 +136,13 @@ export const favoritesReducer = (state = initialState.favorites, action) => {
       return {
         ...initialState.favorites,
       };
+    case UPDATE_CART_PRODUCT: {
+      return {
+        ...state,
+        items: action.payload,
+        itemCount: action.payload.length,
+      };
+    }
         
     default:
       return state;

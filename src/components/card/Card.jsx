@@ -10,10 +10,10 @@ import { Icons } from "./Icons";
 import { counterIncrement } from "../../redux/actionsCreators/counterActionsCreators";
 import { addFavorites, addToCart } from "../../redux/actions/cartActions";
 import { sendCartToEmptyServer } from "../../api/sendCart";
+import { sendFavoritesToEmptyServer } from "../../api/sendFavorites";
 import {
   NEW_CART_URL,
-  GET_CUSTOMER,
-  REGISTRATION_URL,
+  NEW_FAVORITES_URL,
 } from "../../endpoints/endpoints";
 import styles from "./Card.module.scss";
 import Button from "../button/Button";
@@ -93,65 +93,64 @@ export function Card({ item }) {
 
   async function getFavoritesFromServer() {
     try {
-      const response = await axios.get(GET_CUSTOMER);
+      const response = await axios.get(NEW_FAVORITES_URL);
       return response.data;
     } catch (err) {
       console.error("Помилка при отриманні даних:", err);
       return null;
     }
   }
-  
-  async function checkFavoritesFromServer() {
+
+  async function addFavoritesToServer() {
     try {
-      const cartData = await getFavoritesFromServer();
-
-      if (
-        cartData
-        && cartData.favorites
-        && Array.isArray(cartData.favorites.items)
-      ) {
-        const updatedFavoritesItems = [...cartData.favorites.items, item];
-
-        const updatedCustomer = {
-          favorites: {
-            items: updatedFavoritesItems,
-          },
-        };
-
-        axios.put(REGISTRATION_URL, updatedCustomer);
+      const favoritesData = await getFavoritesFromServer();
+      if (favoritesData === null) {
+        sendFavoritesToEmptyServer();
+      } else if (favoritesData !== null) {
+        axios
+          .put(`http://localhost:4000/api/wishlist/${_id}`)
+          .catch((err) => {
+            console.log(err);
+          });
       }
     } catch (error) {
       console.error("Помилка при виході:", error);
     }
   }
+  
+  // async function checkFavoritesFromServer() {
+  //   try {
+  //     const cartData = await getFavoritesFromServer();
+
+  //     if (
+  //       cartData
+  //       && cartData.favorites
+  //       && Array.isArray(cartData.favorites.items)
+  //     ) {
+  //       const updatedFavoritesItems = [...cartData.favorites.items, item];
+
+  //       const updatedCustomer = {
+  //         favorites: {
+  //           items: updatedFavoritesItems,
+  //         },
+  //       };
+
+  //       axios.put(REGISTRATION_URL, updatedCustomer);
+  //     }
+  //   } catch (error) {
+  //     console.error("Помилка при виході:", error);
+  //   }
+  // }
 
   const handleAddFavorites = () => {
     if (isUserLoggedIn) {
-      // let countProducts = JSON.parse(localStorage.getItem("CountFavoritesProducts")) || 0;
-
       if (!isItemInFavorites) {
-        const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
-        currentProducts.push(item);
-        // countProducts += 1;
-        localStorage.setItem("Favorites", JSON.stringify(currentProducts));
-        // localStorage.setItem(
-        //   "CountFavoritesProducts",
-        //   JSON.stringify(countProducts),
-        // );
-        checkFavoritesFromServer();
-
+        addFavoritesToServer();
         dispatch(addFavorites(item));
         dispatch(counterIncrement());
       }
     } else if (!isUserLoggedIn) {
-      // if (!isItemInLSCart) {
-      //   const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-      //   currentProducts.push(product);
-      //   localStorage.setItem("Cart", JSON.stringify(currentProducts));
-
-      //   dispatch(addToCart(product));
-      //   dispatch(counterIncrement());
-      // }
+      // do nothing
     }
   };
 

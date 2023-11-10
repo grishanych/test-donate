@@ -10,20 +10,20 @@ import styles from "./Favorites.module.scss";
 
 function Favorites() {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.favorites.items);
+  const favoritesItems = useSelector((state) => state.favorites.items);
   // const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
   // const isModalOpen = useSelector((state) => state.modal.isOpen);
 
   useEffect(() => {
-    if (!cartItems.length) {
+    if (!favoritesItems.length) {
       const localData = JSON.parse(localStorage.getItem("Favorites"));
       if (localData) {
         dispatch(initializeFavorites(localData));
       }
     }
-  }, [cartItems.length, dispatch]);
+  }, [favoritesItems.length, dispatch]);
 
-  const isFavoriteEmpty = cartItems.length === 0; // Тепер перевірка відбувається тут
+  const isFavoriteEmpty = favoritesItems.length === 0; // Тепер перевірка відбувається тут
   // const isFavoriteEmpty = currentProducts.length === 0;
 
   // let modalText = "";
@@ -52,7 +52,7 @@ function Favorites() {
               </tr>
             </thead>
             {/* {currentProducts.map((item) => ( */}
-            {cartItems.map((item) => (
+            {favoritesItems.map((item) => (
               <FavoritesItem
                 key={item.itemNo}
                 item={item}

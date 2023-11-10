@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { GET_CUSTOMER, REGISTRATION_URL } from "../../../endpoints/endpoints";
+import { NEW_FAVORITES_URL } from "../../../endpoints/endpoints";
 // import QuantityCounter from "../../productView/CounterQuantity";
 import { removeFavorites } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
@@ -18,7 +18,7 @@ function FavoritesItem({ item }) {
 
   async function getFavoritesFromServer() {
     try {
-      const response = await axios.get(GET_CUSTOMER);
+      const response = await axios.get(NEW_FAVORITES_URL);
       return response.data;
     } catch (err) {
       console.error("Помилка при отриманні даних:", err);
@@ -30,18 +30,17 @@ function FavoritesItem({ item }) {
     try {
       const cartData = await getFavoritesFromServer();
       
-      if (cartData && Array.isArray(cartData.favorites)) {
+      if (cartData && Array.isArray(cartData.products)) {
       // eslint-disable-next-line max-len
-        const updatedFavorites = cartData.favorites.filter((favItem) => favItem.itemNo !== item.itemNo);
+        const updatedFavorites = cartData.products.filter((favItem) => favItem.itemNo !== item.itemNo);
   
         const updatedCustomer = {
-          favorites: {
-            items: updatedFavorites,
-          },
+        // eslint-disable-next-line no-underscore-dangle
+          products: [updatedFavorites._id],
         };
         
         axios
-          .put(REGISTRATION_URL, updatedCustomer)
+          .put(NEW_FAVORITES_URL, updatedCustomer)
           // .then((response) => console.log(response))
           .catch((error) => console.error("Помилка при оновленні даних:", error));
       }

@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
 import { updateInputValue } from "../../redux/actionsCreators/inputValueActionsCreators";
@@ -16,7 +16,7 @@ import { setLoggedOutUser } from "../../redux/actions/userActions";
 import { IconSearchMobile } from "./icons/search/IconSearch";
 import HeartFavorite from "./icons/favorites/Heart";
 import BurgerMenu from "./BurgerMenu";
-import { REGISTRATION_URL } from "../../endpoints/endpoints";
+// import { REGISTRATION_URL } from "../../endpoints/endpoints";
 import logo from "../footer/icons/logo.png";
 import styles from "./Header.module.scss";
 
@@ -24,11 +24,9 @@ import styles from "./Header.module.scss";
 function Header() {
   const cartCount = useSelector((state) => state.cart.itemCount);
   const favoriteCount = useSelector((state) => state.favorites.itemCount);
-  // const isUserLoggedIn = localStorage.getItem("userLogin") || null;
   const isUserLoggedIn = useSelector((state) => state.username.username);
   const dispatch = useDispatch();
 
-  
   const isMobileScreen = useMediaQuery("(max-width: 767px)");
 
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
@@ -41,26 +39,26 @@ function Header() {
     }
   };
 
-  async function updateFavoritesToServer(newFavorites) {
-    const updatedCustomer = {
-      favorites: newFavorites,
-    };
+  // async function updateFavoritesToServer(newFavorites) {
+  //   const updatedCustomer = {
+  //     favorites: newFavorites,
+  //   };
 
-    try {
-      const response = await axios.put(REGISTRATION_URL, updatedCustomer);
-      return response.data.favorites;
-    } catch (err) {
-      console.error("Помилка при отриманні даних:", err);
-      return null;
-    }
-  }
+  //   try {
+  //     const response = await axios.put(REGISTRATION_URL, updatedCustomer);
+  //     return response.data.favorites;
+  //   } catch (err) {
+  //     console.error("Помилка при отриманні даних:", err);
+  //     return null;
+  //   }
+  // }
 
   async function doLogOut() {
     try {
-      const currentFavorites = JSON.parse(localStorage.getItem("Favorites")) || [];
-      if (currentFavorites.length > 0) {
-        await updateFavoritesToServer(currentFavorites);
-      }
+      // const currentFavorites = JSON.parse(localStorage.getItem("Favorites")) || [];
+      // if (currentFavorites.length > 0) {
+      //   await updateFavoritesToServer(currentFavorites);
+      // }
   
       localStorage.removeItem("userLogin");
       localStorage.removeItem("isAdmin");

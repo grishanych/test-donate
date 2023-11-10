@@ -14,7 +14,7 @@ import { logIn } from "../redux/actions/loggedInActions";
 import { setProducts } from "../redux/actions/productActions";
 import ScrollToTop from "./ScrollToTop";
 import { FormButton } from "./button/Button";
-import { NEW_CART_URL, GET_CUSTOMER } from "../endpoints/endpoints";
+import { NEW_CART_URL, NEW_FAVORITES_URL } from "../endpoints/endpoints";
 import AppArrow from "../images/appArrow/AppArrow";
 import styles from "./App.module.scss";
 
@@ -84,7 +84,7 @@ function App() {
     const getFavoritesFromServer = async () => {
       if (isLoggedIn) {
         try {
-          const response = await axios.get(GET_CUSTOMER);
+          const response = await axios.get(NEW_FAVORITES_URL);
           return response.data;
         } catch (err) {
           console.error("Помилка при отриманні обраних товарів:", err);
@@ -98,8 +98,9 @@ function App() {
     
     const fetchFavoritesData = async () => {
       const favoritesData = await getFavoritesFromServer();
-      if (favoritesData !== null && Array.isArray(favoritesData.favorites)) {
-        dispatch(initializeFavorites(favoritesData.favorites));
+      if (favoritesData !== null && Array.isArray(favoritesData.products)) {
+        const productArray = favoritesData.products.map((item) => item.product);
+        dispatch(initializeFavorites(productArray));
       }
     };
     

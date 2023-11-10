@@ -19,10 +19,7 @@ import {
   GET_CUSTOMER,
 } from "../../endpoints/endpoints";
 import styles from "./LogIn.module.scss";
-import {
-  // initializeCart,
-  initializeFavorites,
-} from "../../redux/actions/cartActions";
+// import { initializeCart, initializeFavorites } from "../../redux/actions/cartActions";
 
 
 function LogIn({ headline, toRegistration }) {
@@ -44,8 +41,7 @@ function LogIn({ headline, toRegistration }) {
       .matches(/[a-zA-Z0-9]/, "Дозволені символи для пароля: a-z, A-Z, 0-9"),
   });
 
-  // get Favorites
-  async function getFavoritesFromServer() {
+  async function getCustomer() {
     try {
       const response = await axios.get(GET_CUSTOMER);
       return response.data;
@@ -59,14 +55,14 @@ function LogIn({ headline, toRegistration }) {
     try {
       await dispatch(logInUser(login, password));
 
-      const userFavotites = await getFavoritesFromServer();
-      if (userFavotites.favorites && userFavotites.favorites.length > 0) {
-        dispatch(initializeFavorites(userFavotites.favorites));
-      }
+      const customer = await getCustomer();
+      // if (userFavotites.favorites && userFavotites.favorites.length > 0) {
+      //   dispatch(initializeFavorites(userFavotites.favorites));
+      // }
     
-      if (userFavotites.isAdmin === false) {
+      if (customer.isAdmin === false) {
         navigate("/account");
-      } else if (userFavotites.isAdmin === true) {
+      } else if (customer.isAdmin === true) {
         navigate("/adm-page");
       }
     } catch (error) {

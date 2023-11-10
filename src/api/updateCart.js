@@ -34,12 +34,12 @@ export default function updateCart(cartItemsFromLocalStorage) {
       cartQuantity: item.quantity,
     })),
   };
-  console.log(updatedCart.products);
 
   // Виконуємо PUT-запит для оновлення кошика
   // return axios.put(NEW_CART_URL, updatedCart);
   // !
   axios.put(NEW_CART_URL, updatedCart);
+  // ! below !
   // })
   //   .catch((error) => {
   //     // Логуємо помилку тут, але також репропагуємо її, щоб можна було обробити ззовні

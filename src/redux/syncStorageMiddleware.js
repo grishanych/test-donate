@@ -10,9 +10,9 @@
 
 import axios from "axios";
 import { setAuthToken } from "./actions/authActions";
-import { NEW_CART_URL } from "../endpoints/endpoints";
+import { NEW_CART_URL, NEW_FAVORITES_URL } from "../endpoints/endpoints";
 
-export const syncStorageMiddleware = (storeAPI) => (next) => async (action) => {
+export const syncStorageMiddleware = () => (next) => async (action) => {
   const result = next(action);
   const isUserLoggedIn = localStorage.getItem("userLogin");
 
@@ -21,11 +21,15 @@ export const syncStorageMiddleware = (storeAPI) => (next) => async (action) => {
       const token = localStorage.getItem("token");
       setAuthToken(token);
       try {
-        const response = await axios.get(NEW_CART_URL);
+        const responseCart = await axios.get(NEW_CART_URL);
+        const responseWishlist = await axios.get(NEW_FAVORITES_URL);
         
-        if (response.status === 200 && response.data !== null) {
-          localStorage.setItem("Cart", JSON.stringify(response.data.products));
-          localStorage.setItem("Favorites", JSON.stringify(storeAPI.getState().favorites.items));
+        if (responseCart.status === 200 && responseCart.data !== null) {
+          localStorage.setItem("Cart", JSON.stringify(responseCart.data.products));
+        }
+        if (responseWishlist.status === 200 && responseWishlist.data !== null) {
+          localStorage.setItem("Favorites", JSON.stringify(responseWishlist.data.products));
+          // localStorage.setItem("Favorites", JSON.stringify(storeAPI.getState().favorites.items));
         }
       } catch (error) {
         console.error("Помилка при оновленні даних з сервера:", error);
