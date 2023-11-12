@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Cloudinary } from "@cloudinary/url-gen";
 import { NEW_FAVORITES_URL } from "../../../endpoints/endpoints";
 // import QuantityCounter from "../../productView/CounterQuantity";
 import { removeFavorites } from "../../../redux/actions/cartActions";
@@ -16,6 +17,18 @@ function FavoritesItem({ item }) {
   // eslint-disable-next-line max-len
   const isItemInFavorites = useSelector((state) => state.favorites.items.some((cartItem) => cartItem.itemNo === item.itemNo));
 
+  const cld = new Cloudinary({
+    cloud: { cloudName: "dzaxltnel" },
+    url: { secure: true },
+  });
+  let imageURL;
+  if (item.nameCloudinary && item.nameCloudinary.length > 0) {
+    const myImage = cld.image(item.nameCloudinary[0]);
+    if (myImage) {
+      imageURL = myImage.toURL();
+    }
+  }
+
   async function getFavoritesFromServer() {
     try {
       const response = await axios.get(NEW_FAVORITES_URL);
@@ -30,19 +43,15 @@ function FavoritesItem({ item }) {
     try {
       const cartData = await getFavoritesFromServer();
       
-      if (cartData && Array.isArray(cartData.products)) {
-      // eslint-disable-next-line max-len
-        const updatedFavorites = cartData.products.filter((favItem) => favItem.itemNo !== item.itemNo);
-  
-        const updatedCustomer = {
+      if (cartData.products.length > 0) {
         // eslint-disable-next-line no-underscore-dangle
-          products: [updatedFavorites._id],
-        };
-        
+        const idToDelete = item._id ? item._id : item.id;
+        // const idToDelete = item._id;
         axios
-          .put(NEW_FAVORITES_URL, updatedCustomer)
-          // .then((response) => console.log(response))
-          .catch((error) => console.error("Помилка при оновленні даних:", error));
+          .delete(`http://localhost:4000/api/wishlist/${idToDelete}`)
+          .catch((err) => {
+            console.log(err);
+          });
       }
     } catch (error) {
       console.error("Помилка при виході:", error);
@@ -71,7 +80,9 @@ function FavoritesItem({ item }) {
           <div className={styles.productInfo}>
             <Link to={`/product/${item.itemNo}`}>
               <div className={styles.cardItemImageWrapper}>
-                <img src={item.imageURL} alt={item.name} className={styles.cardItemImage} />
+                {/* <img src={imageURL} alt={item.name} className={styles.cardItemImage} /> */}
+                {/* eslint-disable-next-line max-len */}
+                <img src={imageURL || item.imageURL} alt={item.name} className={styles.cardItemImage} />
               </div>
             </Link>
             <div className={styles.nameContainer}>

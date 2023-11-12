@@ -9,6 +9,7 @@ import {
   RESET_FAVORITES,
   // !
   UPDATE_CART_PRODUCT,
+  // UPDATE_CART_PRODUCT_QUANTITY,
 } from "../actions/cartActions";
 
 
@@ -66,24 +67,14 @@ export const cartReducer = (state = initialState.cart, action) => {
         ...initialState.cart,
       };
       
-    //  !
-    case UPDATE_CART_PRODUCT: {
-      // const items = state.items.map((item) => {
-      //   if (item.itemNo === action.payload.itemNo) {
-      //     return { ...item, ...action.payload };
-      //   }
-
-      //   return item;
-      // });
-      
-      return {
-        // ...state,
-        // items,
-        ...state,
-        items: action.payload,
-        itemCount: action.payload.length,
-      };
-    }
+      //  !
+      // case UPDATE_CART_PRODUCT: {
+      //   return {
+      //     ...state,
+      //     items: action.payload,
+      //     itemCount: action.payload.length,
+      //   };
+      // }
 
     default:
       return state;
@@ -136,11 +127,24 @@ export const favoritesReducer = (state = initialState.favorites, action) => {
       return {
         ...initialState.favorites,
       };
+    // case UPDATE_CART_PRODUCT: {
+    //   return {
+    //     ...state,
+    //     items: action.payload,
+    //     itemCount: action.payload.length,
+    //   };
+    // }
+    // case UPDATE_CART_PRODUCT_QUANTITY: {
     case UPDATE_CART_PRODUCT: {
       return {
         ...state,
-        items: action.payload,
-        itemCount: action.payload.length,
+        items: state.items.map((item) => {
+          // eslint-disable-next-line no-underscore-dangle
+          if (item._id === action.payload._id) {
+            return { ...item, cartQuantity: item.cartQuantity + action.payload.change };
+          }
+          return item;
+        }),
       };
     }
         

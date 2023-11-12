@@ -7,7 +7,8 @@ import { NEW_CART_URL } from "../endpoints/endpoints";
 const selectCartForApi = (state) => state.cart.items.map((item) => ({
   // eslint-disable-next-line no-underscore-dangle
   product: item._id,
-  cartQuantity: item.quantity,
+  // cartQuantity: item.quantity,
+  cartQuantity: item.cartQuantity,
 }));
 
 export function sendCartToEmptyServer() {
@@ -37,6 +38,7 @@ export default function sendCart(cartItems) {
     products: cartItems.map((item) => ({
     // eslint-disable-next-line no-underscore-dangle
       product: item._id,
+      // !
       cartQuantity: item.quantity,
     })),
   };

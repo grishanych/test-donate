@@ -17,7 +17,6 @@ export function sendFavoritesToEmptyServer() {
   const newFavorites = {
     products: selectFavoritesForApi(state),
   };
-  console.log(newFavorites);
 
   axios
     .post(NEW_FAVORITES_URL, newFavorites)

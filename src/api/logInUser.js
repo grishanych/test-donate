@@ -67,7 +67,7 @@ const logInUser = (login, password) => async (dispatch) => {
       // }
 
       if (serverFavorites.data === null) {
-        console.log(serverFavorites.data);
+        // ! with nothing
         // await sendFavorites(favoritesItems);
       } else if (serverFavorites.data.products.length > 0) {
         const serverFavoritesItems = [];

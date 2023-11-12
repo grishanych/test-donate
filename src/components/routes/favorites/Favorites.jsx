@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 // import { useSelector, useDispatch } from "react-redux";
 // import { initializeFavorites } from "../../../redux/actions/cartActions";
 import FavoritesItem from "./FavoritesItem";
-// import { FormButton } from "../../button/Button";
+import { FormButton } from "../../button/Button";
 // import { openModal } from "../../../redux/actionsCreators/modalActionsCreators";
 // import Modal from "../../modal/Modal";
 import styles from "./Favorites.module.scss";
@@ -13,7 +13,6 @@ import styles from "./Favorites.module.scss";
 function Favorites() {
   // const dispatch = useDispatch();
   const favoritesItems = useSelector((state) => state.favorites.items);
-  console.log(favoritesItems);
   // const currentProducts = JSON.parse(localStorage.getItem("Favorites")) || [];
   // const isModalOpen = useSelector((state) => state.modal.isOpen);
 
@@ -66,7 +65,8 @@ function Favorites() {
       {/* {isModalOpen && (
         <Modal tittle={modalText} />
       )} */}
-      {/* <FormButton text="Купити" padding="10px" onClick={() => { dispatch(openModal()); }} /> */}
+      {/* <FormButton text="Купити" padding="10px" onClick={() =>} /> */}
+      <FormButton text="Купити" padding="10px" />
     </div>
   );
 }

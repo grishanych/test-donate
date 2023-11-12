@@ -2,12 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Cloudinary } from "@cloudinary/url-gen";
 import axios from "axios";
-import { removeFromCart } from "../../../redux/actions/cartActions";
-// import { removeFromCart, updateCartProduct } from "../../../redux/actions/cartActions";
+import { removeFromCart, updateCartProductQuantity } from "../../../redux/actions/cartActions";
+// import { removeFromCart } from "../../../redux/actions/cartActions";
 import { counterDecrement } from "../../../redux/actionsCreators/counterActionsCreators";
 import Button from "../../button/Button";
 import { NEW_CART_URL } from "../../../endpoints/endpoints";
-// import QuantityCounter from "../../productView/CounterQuantity";
+import QuantityCounter from "../../productView/CounterQuantity";
 import styles from "./Cart.module.scss";
 import DeleteIcon from "./DeleteIcon";
 
@@ -16,13 +16,9 @@ function CartItem({ item }) {
   const dispatch = useDispatch();
   // eslint-disable-next-line max-len
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === item.itemNo));
-  // const itemInCart = useSelector((state) => state.cart.itemCount);
   const itemsInLSCart = JSON.parse(localStorage.getItem("Cart"));
   // eslint-disable-next-line max-len
   const isItemInLSCart = itemsInLSCart && itemsInLSCart.some((cartItem) => cartItem.itemNo === item.itemNo);
-  // eslint-disable-next-line max-len
-  // const isItemInLSCart = itemsInLSCart((cartItem) => cartItem.itemNo === item.itemNo);
-  // console.log(isItemInLSCart);
   const isUserLoggedIn = localStorage.getItem("userLogin");
 
   const cld = new Cloudinary({
@@ -35,10 +31,6 @@ function CartItem({ item }) {
     if (myImage) {
       imageURL = myImage.toURL();
     }
-  }
-  
-  if (!imageURL) {
-    imageURL = item.imageURL;
   }
 
   async function getCartFromServer() {
@@ -58,33 +50,18 @@ function CartItem({ item }) {
     if (cartData.products.length !== null) {
       // eslint-disable-next-line no-underscore-dangle
       const idToDelete = item._id ? item._id : item.id;
+      // const idToDelete = item._id;
       axios
         .delete(`http://localhost:4000/api/cart/${idToDelete}`)
-        // .then((updatedCart) => {
-        //   console.log(updatedCart);
-        // })
         .catch((err) => {
           console.log(err);
         });
     }
   }
 
-  // const itemInCart = useSelector(
-  //   (state) => state.cart.items.find((cartItem) => cartItem.itemNo === item.itemNo),
-  // );
-  
   const handleRemoveFromCart = () => {
     if (isUserLoggedIn) {
       if (isItemInCart) {
-        // let countProducts = JSON.parse(localStorage.getItem("CountCartProducts")) || 0;
-        // countProducts -= 1;
-        // localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
-      
-        // const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-        // eslint-disable-next-line max-len
-        // const newProducts = currentProducts.filter((cartItem) => cartItem.itemNo !== item.itemNo);
-        // localStorage.setItem("Cart", JSON.stringify(newProducts));
-
         deleteCartFromServer();
       
         dispatch(removeFromCart(item.itemNo));
@@ -102,24 +79,23 @@ function CartItem({ item }) {
     }
   };
 
-  // const handleChangeQuantity = (quantity) => {
-  //   dispatch(updateCartProduct({ quantity, itemNo: item.itemNo }));
-  //   const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+  // ! replace
+  const handleChangeQuantity = (change) => {
+    const newQuantity = item.cartQuantity + change;
+    if (newQuantity >= 1) {
+      // eslint-disable-next-line no-underscore-dangle
+      dispatch(updateCartProductQuantity({ id: item._id, quantity: newQuantity }));
+    }
+  };
 
-  //   localStorage.setItem("Cart", JSON.stringify(currentProducts.map((product) => {
-  //     if (product.itemNo === item.itemNo) {
-  //       return { ...product, quantity };
-  //     }
 
-  //     return product;
-  //   })));
-  // };
   
   return (
     <tr className={styles.cardItemWrapper}>
       <td className={styles.productInfo}>
         <Link to={`/product/${item.itemNo}`}>
           <div className={styles.cardItemImageWrapper}>
+            {/* <img src={imageURL} alt={item.name} className={styles.cardItemImage} /> */}
             <img src={imageURL || item.imageURL} alt={item.name} className={styles.cardItemImage} />
           </div>
         </Link>
@@ -138,8 +114,10 @@ function CartItem({ item }) {
       </td>
       <td>
         <div className={styles.quantityCounterWrapper}>
-          {/* <QuantityCounter quantity={itemInCart.quantity}
-          setQuantity={handleChangeQuantity} /> */}
+          <QuantityCounter
+            quantity={item.cartQuantity}
+            handleChangeQuantity={handleChangeQuantity}
+          />
         </div>
       </td>
       <td>

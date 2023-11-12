@@ -117,30 +117,6 @@ export function Card({ item }) {
       console.error("Помилка при виході:", error);
     }
   }
-  
-  // async function checkFavoritesFromServer() {
-  //   try {
-  //     const cartData = await getFavoritesFromServer();
-
-  //     if (
-  //       cartData
-  //       && cartData.favorites
-  //       && Array.isArray(cartData.favorites.items)
-  //     ) {
-  //       const updatedFavoritesItems = [...cartData.favorites.items, item];
-
-  //       const updatedCustomer = {
-  //         favorites: {
-  //           items: updatedFavoritesItems,
-  //         },
-  //       };
-
-  //       axios.put(REGISTRATION_URL, updatedCustomer);
-  //     }
-  //   } catch (error) {
-  //     console.error("Помилка при виході:", error);
-  //   }
-  // }
 
   const handleAddFavorites = () => {
     if (isUserLoggedIn) {
@@ -150,6 +126,7 @@ export function Card({ item }) {
         dispatch(counterIncrement());
       }
     } else if (!isUserLoggedIn) {
+      // !
       // do nothing
     }
   };

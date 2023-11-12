@@ -1,14 +1,21 @@
 import styles from "./ProductView.module.scss";
 
-function QuantityCounter({ quantity, setQuantity }) {
+function QuantityCounter({ quantity, handleChangeQuantity }) {
+  // const handleIncrease = () => {
+  //   setQuantity(quantity + 1);
+  // };
+
+  // const handleDecrease = () => {
+  //   if (quantity > 1) {
+  //     setQuantity(quantity - 1);
+  //   }
+  // };
   const handleIncrease = () => {
-    setQuantity(quantity + 1);
+    handleChangeQuantity(1);
   };
 
   const handleDecrease = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
+    handleChangeQuantity(-1);
   };
 
   return (
@@ -23,7 +30,7 @@ function QuantityCounter({ quantity, setQuantity }) {
       <input
         type="text"
         value={quantity}
-        onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+        onChange={(e) => handleChangeQuantity(parseInt(e.target.value, 10))}
         className={styles.quantity}
       />
       <button

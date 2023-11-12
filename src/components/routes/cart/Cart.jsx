@@ -1,10 +1,7 @@
 import React from "react";
-// import React, { useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { resetCart } from "../../../redux/actions/cartActions";
-// import { initializeCart, resetCart } from "../../../redux/actions/cartActions";
-// import { initializeCart } from "../../../redux/actions/cartActions";
 import CartItem from "./CartItem";
 import { FormButton } from "../../button/Button";
 import { NEW_CART_URL, MAKE_ORDERS } from "../../../endpoints/endpoints";
@@ -15,17 +12,10 @@ import { openModal } from "../../../redux/actionsCreators/modalActionsCreators";
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
   const currentDate = new Date();
   const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, "0")}${currentDate.getDate().toString().padStart(2, "0")}`;
   const orderNumber = `52-${formattedDate}`;
-
-  // useEffect(() => {
-  //   const localData = JSON.parse(localStorage.getItem("Cart"));
-  //   if (localData && !cartItems.length) {
-  //     dispatch(initializeCart(localData));
-  //   }
-  // }, [cartItems.length, dispatch]);
-
   const isCartEmpty = cartItems.length === 0;
 
   // ! api
@@ -90,8 +80,6 @@ function Cart() {
 
       {isCartEmpty ? <p className={styles.cartEmpty}>Ваш кошик порожній</p>
         : (
-          // <ul className={styles.cardsListWrapper}>
-          //   {cartItems.map((item) => (
           <table className={styles.cardsListWrapper}>
             <thead>
               <tr className={styles.tableRow}>
@@ -101,20 +89,13 @@ function Cart() {
               </tr>
             </thead>
             <tbody>
-              {/* Sasha */}
-              {/* {currentProducts.map((item) => ( */}
               {cartItems.map((item) => (
                 // eslint-disable-next-line no-underscore-dangle
-                <CartItem key={item._id ? item._id : item.id} item={item} />
+                <CartItem key={item._id} item={item} />
               ))}
             </tbody>
           </table>
         )}
-
-      {/* {isModalOpen && (
-        <Modal tittle={modalText} />
-      )} */}
-      {/* // <FormButton text="Купити" padding="10px" onClick={handlePurchase} /> */}
       {isCartEmpty ? null : <FormButton text="Оформити замовлення" padding="10px" onClick={handlePurchase} />}
     </div>
   );
