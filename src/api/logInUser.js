@@ -72,7 +72,7 @@ const logInUser = (login, password) => async (dispatch) => {
       } else if (serverFavorites.data.products.length > 0) {
         const serverFavoritesItems = [];
         serverFavorites.data.products.map((i) => (
-          serverFavoritesItems.push(i.product)
+          serverFavoritesItems.push(i)
         ));
         const updatedFavoritesItems = [...serverFavoritesItems];
         localStorage.setItem("Favorites", JSON.stringify(updatedFavoritesItems));

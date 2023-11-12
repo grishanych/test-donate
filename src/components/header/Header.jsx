@@ -127,7 +127,7 @@ function Header() {
         {showBurgerMenu && <BurgerMenu />}
         <Navigation />
 
-        {isUserLoggedIn ? (
+        {isUserLoggedInState ? (
           <Link to="/favorites" className={styles.navRightSideMenu}>
             <HeartFavorite />
             {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}

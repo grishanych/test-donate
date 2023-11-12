@@ -75,6 +75,7 @@ function App() {
     
     const fetchData = async () => {
       const cartData = await getCartFromServer();
+      console.log(cartData);
       if (cartData !== null && Array.isArray(cartData.products)) {
         const productArray = cartData.products.map((item) => item.product);
         dispatch(initializeCart(productArray));
@@ -98,8 +99,9 @@ function App() {
     
     const fetchFavoritesData = async () => {
       const favoritesData = await getFavoritesFromServer();
+      console.log(favoritesData);
       if (favoritesData !== null && Array.isArray(favoritesData.products)) {
-        const productArray = favoritesData.products.map((item) => item.product);
+        const productArray = favoritesData.products.map((item) => item);
         dispatch(initializeFavorites(productArray));
       }
     };
