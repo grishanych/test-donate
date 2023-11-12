@@ -25,12 +25,17 @@ function Header() {
   const cartCount = useSelector((state) => state.cart.itemCount);
   const favoriteCount = useSelector((state) => state.favorites.itemCount);
   const isUserLoggedIn = useSelector((state) => state.username.username);
+  const isUserLoggedInLS = localStorage.getItem("userLogin");
+  const [isUserLoggedInState, setIsUserLoggedInState] = useState(!!localStorage.getItem("userLogin"));
   const dispatch = useDispatch();
 
   const isMobileScreen = useMediaQuery("(max-width: 767px)");
 
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
   const [showInput, setShowInput] = useState(false);
+
+  const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
+  const [inputValue, setInputValue] = useState(inputValueFromRedux);
 
   const toggleBar = () => {
     setShowBurgerMenu(showBurgerMenu);
@@ -67,6 +72,8 @@ function Header() {
       localStorage.removeItem("Cart");
       localStorage.removeItem("token");
       localStorage.removeItem("Favorites");
+
+      setIsUserLoggedInState(false);
   
       dispatch(resetCart());
       dispatch(resetFavorites());
@@ -76,13 +83,11 @@ function Header() {
       console.error("Помилка при виході:", error);
     }
   }
-  
-  const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
-  const [inputValue, setInputValue] = useState(inputValueFromRedux);
 
   useEffect(() => {
     setInputValue(inputValueFromRedux);
-  }, [inputValueFromRedux]);
+    setIsUserLoggedInState(!!localStorage.getItem("userLogin"));
+  }, [inputValueFromRedux, isUserLoggedInLS]);
 
   const handleInputChange = (e) => {
     const { value } = e.target;
@@ -132,9 +137,8 @@ function Header() {
           <Cart />
           {cartCount === 0 ? null : <span>{cartCount}</span>}
         </Link>
-
-        <Button toPage={isUserLoggedIn ? "/" : "/log-in"} width="40px" padding="10px" onClick={isUserLoggedIn ? doLogOut : null}>
-          {isUserLoggedIn ? <IconOut /> : <IconEnter /> }
+        <Button toPage={isUserLoggedIn || isUserLoggedInLS ? "/" : "/log-in"} width="40px" padding="10px" onClick={isUserLoggedIn || isUserLoggedInLS ? doLogOut : null}>
+          {isUserLoggedInState ? <IconOut /> : <IconEnter /> }
         </Button>
       </div>
     </header>

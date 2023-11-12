@@ -11,7 +11,7 @@ const selectCartForApi = (state) => state.cart.items.map((item) => ({
 }));
 
 export function sendCartToEmptyServer() {
-  const { token } = store.getState().auth;
+  const token = localStorage.getItem("token");
   store.dispatch(setAuthToken(token));
 
   const state = store.getState();
@@ -29,7 +29,8 @@ export function sendCartToEmptyServer() {
 }
 
 export default function sendCart(cartItems) {
-  const { token } = store.getState().auth;
+  const token = localStorage.getItem("token");
+  // const { token } = store.getState().auth;
   store.dispatch(setAuthToken(token));
 
   const newCart = {

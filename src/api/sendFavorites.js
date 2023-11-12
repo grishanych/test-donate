@@ -4,20 +4,20 @@ import { setAuthToken } from "../redux/actions/authActions";
 import { NEW_FAVORITES_URL } from "../endpoints/endpoints";
 
 
-const selectFavoritesForApi = (state) => state.favorites.items.map((item) => ({
+const selectFavoritesForApi = (state) => state.favorites.items.map((item) => (
   // eslint-disable-next-line no-underscore-dangle
-  product: item._id,
-}));
+  item._id
+));
 
 export function sendFavoritesToEmptyServer() {
-  const { token } = store.getState().auth;
+  const token = localStorage.getItem("token");
   store.dispatch(setAuthToken(token));
-
   const state = store.getState();
 
   const newFavorites = {
     products: selectFavoritesForApi(state),
   };
+  console.log(newFavorites);
 
   axios
     .post(NEW_FAVORITES_URL, newFavorites)
@@ -28,7 +28,7 @@ export function sendFavoritesToEmptyServer() {
 }
 
 export default function sendFavorites(cartItems) {
-  const { token } = store.getState().auth;
+  const token = localStorage.getItem("token");
   store.dispatch(setAuthToken(token));
 
   const newFavorites = {

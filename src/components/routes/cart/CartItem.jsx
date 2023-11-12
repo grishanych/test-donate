@@ -16,6 +16,7 @@ function CartItem({ item }) {
   const dispatch = useDispatch();
   // eslint-disable-next-line max-len
   const isItemInCart = useSelector((state) => state.cart.items.some((cartItem) => cartItem.itemNo === item.itemNo));
+  // const itemInCart = useSelector((state) => state.cart.itemCount);
   const itemsInLSCart = JSON.parse(localStorage.getItem("Cart"));
   // eslint-disable-next-line max-len
   const isItemInLSCart = itemsInLSCart && itemsInLSCart.some((cartItem) => cartItem.itemNo === item.itemNo);
@@ -52,9 +53,9 @@ function CartItem({ item }) {
 
 
   // eslint-disable-next-line no-underscore-dangle
-  function deleteCartFromServer() {
-    const cartData = getCartFromServer();
-    if (cartData !== null) {
+  async function deleteCartFromServer() {
+    const cartData = await getCartFromServer();
+    if (cartData.products.length !== null) {
       // eslint-disable-next-line no-underscore-dangle
       const idToDelete = item._id ? item._id : item.id;
       axios
@@ -79,9 +80,10 @@ function CartItem({ item }) {
         // countProducts -= 1;
         // localStorage.setItem("CountCartProducts", JSON.stringify(countProducts));
       
-        const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-        const newProducts = currentProducts.filter((cartItem) => cartItem.itemNo !== item.itemNo);
-        localStorage.setItem("Cart", JSON.stringify(newProducts));
+        // const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
+        // eslint-disable-next-line max-len
+        // const newProducts = currentProducts.filter((cartItem) => cartItem.itemNo !== item.itemNo);
+        // localStorage.setItem("Cart", JSON.stringify(newProducts));
 
         deleteCartFromServer();
       

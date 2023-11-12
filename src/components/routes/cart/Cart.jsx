@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
+// import React, { useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { initializeCart, resetCart } from "../../../redux/actions/cartActions";
+import { resetCart } from "../../../redux/actions/cartActions";
+// import { initializeCart, resetCart } from "../../../redux/actions/cartActions";
 // import { initializeCart } from "../../../redux/actions/cartActions";
 import CartItem from "./CartItem";
 import { FormButton } from "../../button/Button";
 import { NEW_CART_URL, MAKE_ORDERS } from "../../../endpoints/endpoints";
 import styles from "./Cart.module.scss";
 import { openModal } from "../../../redux/actionsCreators/modalActionsCreators";
-// import Modal from "../../modal/Modal";
 
 
 function Cart() {
@@ -18,26 +19,14 @@ function Cart() {
   const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, "0")}${currentDate.getDate().toString().padStart(2, "0")}`;
   const orderNumber = `52-${formattedDate}`;
 
-  // const currentProducts = JSON.parse(localStorage.getItem("Cart")) || [];
-  // const isModalOpen = useSelector((state) => state.modal.isOpen);
-
-  useEffect(() => {
-    const localData = JSON.parse(localStorage.getItem("Cart"));
-    if (localData && !cartItems.length) {
-      dispatch(initializeCart(localData));
-    }
-  }, [cartItems.length, dispatch]);
+  // useEffect(() => {
+  //   const localData = JSON.parse(localStorage.getItem("Cart"));
+  //   if (localData && !cartItems.length) {
+  //     dispatch(initializeCart(localData));
+  //   }
+  // }, [cartItems.length, dispatch]);
 
   const isCartEmpty = cartItems.length === 0;
-  // let modalText = " ";
-  // if (!isCartEmpty) {
-  //   modalText = "Ви успішно замовили товар! Дякуємо за вашу покупку.
-  // Незабаром ми з вами зв'яжемось для підтвердження деталей доставки та оплати. Гарного дня!";
-  // }
-  // else {
-  //   modalText = "Здається, ви забули вибрати товар для покупки.
-  // Будь ласка, оберіть товар, який вас цікавить, і натисніть 'Купити'.";
-  // }
 
   // ! api
   async function getCartFromServer() {

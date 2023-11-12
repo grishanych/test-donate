@@ -28,7 +28,7 @@ export const syncStorageMiddleware = () => (next) => async (action) => {
           localStorage.setItem("Cart", JSON.stringify(responseCart.data.products));
         }
         if (responseWishlist.status === 200 && responseWishlist.data !== null) {
-          localStorage.setItem("Favorites", JSON.stringify(responseWishlist.data.products));
+          localStorage.setItem("Ffavorites", JSON.stringify(responseWishlist.data.products));
           // localStorage.setItem("Favorites", JSON.stringify(storeAPI.getState().favorites.items));
         }
       } catch (error) {

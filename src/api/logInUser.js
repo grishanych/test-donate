@@ -5,12 +5,13 @@ import { setError } from "../redux/actions/errorActions";
 import { LOGIN_URL, GET_CUSTOMER } from "../endpoints/endpoints";
 import { setLoggedInUser } from "../redux/actions/userActions";
 import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
+// import { initializeCart } from "../redux/actions/cartActions";
 import getCart from "./getCart";
 import sendCart from "./sendCart";
-import sendFavorites from "./sendFavorites";
+// import sendFavorites from "./sendFavorites";
 import getFavorites from "./getFavorites";
 import updateCart from "./updateCart";
-import updateFavorites from "./updateFavorites";
+// import updateFavorites from "./updateFavorites";
 
 
 async function getCustomerFromServer() {
@@ -42,7 +43,7 @@ const logInUser = (login, password) => async (dispatch) => {
       const cartItems = JSON.parse(localStorage.getItem("Cart")) || [];
       const serverCart = await getCart();
 
-      const favoritesItems = JSON.parse(localStorage.getItem("Favorites")) || [];
+      // const favoritesItems = JSON.parse(localStorage.getItem("Favorites")) || [];
       const serverFavorites = await getFavorites();
       
       // !
@@ -65,19 +66,18 @@ const logInUser = (login, password) => async (dispatch) => {
       //   console.log("0");
       // }
 
-      if (serverFavorites.data === null && favoritesItems.length !== 0) {
-        await sendFavorites(favoritesItems);
-      } else if (serverFavorites.data === null && favoritesItems.length === 0) {
-        // go ahead
+      if (serverFavorites.data === null) {
+        console.log(serverFavorites.data);
+        // await sendFavorites(favoritesItems);
       } else if (serverFavorites.data.products.length > 0) {
         const serverFavoritesItems = [];
         serverFavorites.data.products.map((i) => (
           serverFavoritesItems.push(i.product)
         ));
-        const updatedFavoritesItems = [...favoritesItems, ...serverFavoritesItems];
+        const updatedFavoritesItems = [...serverFavoritesItems];
         localStorage.setItem("Favorites", JSON.stringify(updatedFavoritesItems));
         dispatch(initializeFavorites(updatedFavoritesItems));
-        await updateFavorites(updatedFavoritesItems);
+        // await updateFavorites(updatedFavoritesItems);
       }
     }
   } catch (error) {

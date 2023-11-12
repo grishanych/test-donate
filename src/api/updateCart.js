@@ -17,7 +17,8 @@ import { NEW_CART_URL } from "../endpoints/endpoints";
 // console.log(newCart);
 
 export default function updateCart(cartItemsFromLocalStorage) {
-  const { token } = store.getState().auth;
+  // const { token } = store.getState().auth;
+  const token = localStorage.getItem("token");
   store.dispatch(setAuthToken(token));
   
   // return getCart().then((existingCartResponse) => {
