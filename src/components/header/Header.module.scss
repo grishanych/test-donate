@@ -416,3 +416,30 @@ input:focus {
     justify-content: center;
     align-items: center;
 }
+
+.searchResults {
+    position: absolute;
+    width: 60%;
+    top: 12%;
+    left: 20%;
+    border-radius: 15px;
+    background: #eee;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1;
+
+  }
+
+  .searchResultItem {
+    padding: 10px 10px;
+    cursor: pointer; 
+    border-bottom: 1px solid #ddd; 
+    font-family:"CeraProRegular", serif;
+  }
+  
+  .searchResultItem li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Button from "../button/Button";
 import styles from "./Header.module.scss";
 
+
 function SearchForm({
   inputValue, handleInputChange, handleSearch,
 }) {
