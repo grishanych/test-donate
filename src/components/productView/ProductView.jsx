@@ -241,24 +241,16 @@ function ProductView() {
               </div>
             ) : null}
 
-            {(product.category === "Взуття" && (
-              <p className={styles.productPrice}>
-                {product.currentPrice}
-                {" "}
-                грн.
-              </p>
+            {(product.category === "Одяг" && (
+            <p className={styles.productPrice}>
+              {product.currentPrice}
+              {" "}
+              грн.
+            </p>
             ))
-              || ((product.category === "Комплекти форми"
-                || product.category === "Одяг верхній") && (
-                <p className={styles.productPrice}>
-                  {product.currentPrice}
-                  {" "}
-                  грн.
-                </p>
-              ))
               || null}
 
-            {["Взуття", "Комплекти форми", "Одяг верхній"].includes(
+            {["Одяг"].includes(
               product.category,
             ) && (
               <>
@@ -269,24 +261,16 @@ function ProductView() {
               </>
             )}
 
-            {(product.category === "Взуття" && <ShoesSelector />)
-              || ((product.category === "Комплекти форми"
-                || product.category === "Одяг верхній") && <ClothesSelector />)
+            {(product.subcategory === "Взуття" && <ShoesSelector />)
+              || ((product.category === "Одяг") && <ClothesSelector />)
               || null}
 
-            {(product.category === "Взуття" && (
-              <QuantityCounter quantity={quantity} setQuantity={setQuantity} />
+            {(product.category === "Одяг" && (
+            <QuantityCounter quantity={quantity} setQuantity={setQuantity} />
             ))
-              || ((product.category === "Комплекти форми"
-                || product.category === "Одяг верхній") && (
-                <QuantityCounter
-                  quantity={quantity}
-                  setQuantity={setQuantity}
-                />
-              ))
               || null}
 
-            {["Взуття", "Комплекти форми", "Одяг верхній"].includes(
+            {["Одяг"].includes(
               product.category,
             ) && (
               <div className={styles.buyButtons}>
@@ -323,7 +307,7 @@ function ProductView() {
               </div>
             )}
 
-            {["Взуття", "Комплекти форми", "Одяг верхній"].includes(
+            {["Одяг"].includes(
               product.category,
             ) && (
               <>
@@ -385,7 +369,7 @@ function ProductView() {
           </div>
         </div>
 
-        {["Взуття", "Комплекти форми", "Одяг верхній"].includes(
+        {["Одяг"].includes(
           product.category,
         ) && (
           <div className={styles.descriptionContainer}>

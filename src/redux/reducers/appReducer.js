@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { cartReducer, favoritesReducer } from "./cartReducer";
 import { productReducer } from "./productReducer";
 import { productsReducer } from "./productsReducer";
+import { filtersReducer } from "./filtersReducer";
 import inputReducer from "./inputReducer";
 import { authReducer } from "./authReducer";
 import errorReducer from "./errorReducer";
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
   favorites: favoritesReducer,
   product: productReducer,
   products: productsReducer,
+  filters: filtersReducer,
   inputValue: inputReducer,
   auth: authReducer,
   showError: errorReducer,

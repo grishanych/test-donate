@@ -6,12 +6,14 @@ import AppRoutes from "./routes/AppRoutes";
 import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
 import { setAuthToken } from "../redux/actions/authActions";
 import { getProducts } from "../api/getProducts";
+import { getFilters } from "../api/getFilters";
 import Context from "./Context";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Main from "./main/Main";
 import { logIn } from "../redux/actions/loggedInActions";
 import { setProducts } from "../redux/actions/productActions";
+import { setFilters } from "../redux/actions/filterActions";
 import ScrollToTop from "./ScrollToTop";
 import { FormButton } from "./button/Button";
 import { NEW_CART_URL, GET_FAVORITES } from "../endpoints/endpoints";
@@ -30,7 +32,7 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    
+
     if (token) {
       dispatch(setAuthToken(token));
       dispatch(logIn());
@@ -40,7 +42,7 @@ function App() {
   useEffect(() => {
     const storedCartItems = JSON.parse(localStorage.getItem("Cart")) || [];
     const storedFavoriteItems = JSON.parse(localStorage.getItem("Favorites")) || [];
-      
+
     if (storedCartItems.length > 0) {
       dispatch(initializeCart(storedCartItems));
     }
@@ -72,7 +74,7 @@ function App() {
         return null;
       }
     };
-    
+
     const fetchData = async () => {
       const cartData = await getCartFromServer();
       if (cartData !== null && Array.isArray(cartData.products)) {
@@ -95,26 +97,34 @@ function App() {
         return null;
       }
     };
-    
+
     const fetchFavoritesData = async () => {
       const favoritesData = await getFavoritesFromServer();
       if (favoritesData !== null && Array.isArray(favoritesData.favorites)) {
         dispatch(initializeFavorites(favoritesData.favorites));
       }
     };
-    
-    
+
+
     if (isLoggedIn) {
       fetchData();
       fetchFavoritesData();
     }
   }, [dispatch, isLoggedIn]);
 
-  
+
   useEffect(() => {
     getProducts()
       .then((data) => {
         dispatch(setProducts(data));
+      })
+      .catch((error) => {
+        console.error("Помилка при отриманні товарів:", error);
+      });
+
+    getFilters()
+      .then((data) => {
+        dispatch(setFilters(data));
       })
       .catch((error) => {
         console.error("Помилка при отриманні товарів:", error);
@@ -130,16 +140,16 @@ function App() {
       const show = window.scrollY > 50;
       setIsVisible(show);
     };
-  
+
     window.addEventListener("scroll", handleScroll);
-  
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
 
-  
+
   return (
     <div className={styles.container}>
       <BrowserRouter>
@@ -151,9 +161,9 @@ function App() {
           </Main>
           <Footer />
           {isVisible && (
-          <FormButton padding="6px 0px" width="50px" onClick={scrollToTop} className={styles.scrollToTopButton}>
-            <AppArrow />
-          </FormButton>
+            <FormButton padding="6px 0px" width="50px" onClick={scrollToTop} className={styles.scrollToTopButton}>
+              <AppArrow />
+            </FormButton>
           )}
 
         </Context.Provider>

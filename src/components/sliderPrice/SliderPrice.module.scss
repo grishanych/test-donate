@@ -3,9 +3,8 @@
 
 .filtrationSliderSection {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 350px;
+  flex-direction: column;
 
   @include devices(mobile) {
     flex-direction: column;
