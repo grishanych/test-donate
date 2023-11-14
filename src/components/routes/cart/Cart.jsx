@@ -12,7 +12,6 @@ import { openModal } from "../../../redux/actionsCreators/modalActionsCreators";
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems);
   const currentDate = new Date();
   const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, "0")}${currentDate.getDate().toString().padStart(2, "0")}`;
   const orderNumber = `52-${formattedDate}`;
@@ -33,7 +32,6 @@ function Cart() {
     dispatch(openModal());
     try {
       const cartData = await getCartFromServer();
-      console.log(cartData);
       if (cartData !== null) {
         const { email, telephone, _id: customerId } = cartData.customerId;
         const newOrder = {

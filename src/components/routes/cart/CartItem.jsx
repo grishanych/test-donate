@@ -81,10 +81,14 @@ function CartItem({ item }) {
 
   // ! replace
   const handleChangeQuantity = (change) => {
+    console.log(item);
     const newQuantity = item.cartQuantity + change;
+    console.log("newQuantity:", newQuantity, "item.cartQuantity:", item.cartQuantity);
     if (newQuantity >= 1) {
       // eslint-disable-next-line no-underscore-dangle
-      dispatch(updateCartProductQuantity({ id: item._id, quantity: newQuantity }));
+      console.log(item._id);
+      // eslint-disable-next-line no-underscore-dangle
+      dispatch(updateCartProductQuantity(item._id, newQuantity));
     }
   };
 

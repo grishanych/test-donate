@@ -57,8 +57,8 @@ export const updateFavorites = (product) => ({
 //   type: UPDATE_CART_PRODUCT_QUANTITY,
 //   payload: { itemNo, change },
 // });
-export const updateCartProductQuantity = (id, change) => ({
-  type: UPDATE_CART_PRODUCT,
-  payload: { id, change },
+export const updateCartProductQuantity = (id, quantity) => ({
+  type: UPDATE_CART_PRODUCT_QUANTITY,
+  payload: { id, quantity },
 });
 
